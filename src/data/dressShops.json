@@ -1,0 +1,1341 @@
+{
+  "weddingDressShops": [
+    {
+      "id": "ever-after-miami",
+      "name": "Ever After Miami",
+      "description": "Luxury bridal boutique (est. 2002) featuring top designers; by appointment only.",
+      "address": {
+        "street": "2977 McFarlane Road, Suite 100B",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33133",
+        "coordinates": {
+          "lat": 25.73,
+          "lng": -80.24
+        }
+      },
+      "priceRange": {
+        "min": 4000,
+        "max": 15000
+      },
+      "shopType": "boutique",
+      "specialties": [
+        "luxury bridal",
+        "top designers"
+      ],
+      "tags": [
+        "luxury",
+        "high-end",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-444-7300",
+        "website": "https://everaftermiami.com"
+      },
+      "owner": {
+        "id": "owner-ever-after-miami",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "chic-parisien",
+      "name": "Chic Parisien",
+      "description": "Iconic Coral Gables bridal salon (55+ years); carries couture designers (Lazaro, Berta, Monique Lhuillier).",
+      "address": {
+        "street": "3308 Ponce de Leon Blvd",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": {
+        "min": 4000,
+        "max": 15000
+      },
+      "shopType": "boutique",
+      "specialties": [
+        "couture designers"
+      ],
+      "tags": [
+        "iconic",
+        "couture",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-448-5756",
+        "website": "https://cpbride.com"
+      },
+      "owner": {
+        "id": "owner-chic-parisien",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [
+        "Lazaro",
+        "Berta",
+        "Monique Lhuillier"
+      ],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "leggenda-bridal",
+      "name": "Leggenda Bridal",
+      "description": "Full-service salon known for personalized service; walk-ins welcome (fittings by appt). WeddingWire 5⭐ (Winner).",
+      "address": {
+        "street": "34 Miracle Mile",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": null,
+      "shopType": "salon",
+      "specialties": [
+        "full-service",
+        "personalized service"
+      ],
+      "tags": [
+        "walk-ins welcome",
+        "highly rated"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-447-9100",
+        "website": "https://leggendabridal.com"
+      },
+      "owner": {
+        "id": "owner-leggenda-bridal",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "sayes-miami",
+      "name": "SAYES Miami",
+      "description": "Contemporary boutique (tropical/Mediterranean vibe) serving champagne; family-owned with in-house designer.",
+      "address": {
+        "street": "88 Miracle Mile",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "in-house designer",
+        "custom"
+      ],
+      "tags": [
+        "contemporary",
+        "family-owned",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-540-6314",
+        "website": "https://sayesmiami.com"
+      },
+      "owner": {
+        "id": "owner-sayes-miami",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "custom gown design"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "alessa-s-bridal",
+      "name": "Alessa’s Bridal",
+      "description": "Boutique with 19+ years in bridal; Badgley Mischka and Milla Nova among featured designers. By appointment only.",
+      "address": {
+        "street": "73 Merrick Way",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "designer gowns"
+      ],
+      "tags": [
+        "by appointment",
+        "long-standing"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-456-9700",
+        "website": "https://alessasbridalcoralgables.com"
+      },
+      "owner": {
+        "id": "owner-alessa-s-bridal",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [
+        "Badgley Mischka",
+        "Milla Nova"
+      ],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "chernaya-bridal-house",
+      "name": "Chernaya Bridal House",
+      "description": "Miami’s premier luxury bridal salon (Design District); features exclusive international designers. Appointment required.",
+      "address": {
+        "street": "2066 N Bayshore Dr",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33137",
+        "coordinates": {
+          "lat": 25.8,
+          "lng": -80.19
+        }
+      },
+      "priceRange": {
+        "min": 8000,
+        "max": 25000
+      },
+      "shopType": "salon",
+      "specialties": [
+        "luxury bridal",
+        "international designers"
+      ],
+      "tags": [
+        "luxury",
+        "exclusive",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-576-6000",
+        "website": "https://chernayabridalhouse.com"
+      },
+      "owner": {
+        "id": "owner-chernaya-bridal-house",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "j-del-olmo-bridal-gallery",
+      "name": "J. Del Olmo Bridal Gallery",
+      "description": "Family-owned full-service bridal & eveningwear boutique on Bridal Row. In-house custom gown design offered.",
+      "address": {
+        "street": "247 Miracle Mile",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "custom gown design",
+        "eveningwear"
+      ],
+      "tags": [
+        "family-owned",
+        "custom",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-448-3599",
+        "website": "https://jdelolmobridal.com"
+      },
+      "owner": {
+        "id": "owner-j-del-olmo-bridal-gallery",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "custom gown design"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "alegria-s-brides",
+      "name": "Alegria’s Brides",
+      "description": "Well-established Coral Gables bridal boutique known for personalized service. Appointment recommended.",
+      "address": {
+        "street": "120 Miracle Mile",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "personalized service"
+      ],
+      "tags": [
+        "well-established",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-448-0699",
+        "website": "https://alegriasbrides.com"
+      },
+      "owner": {
+        "id": "owner-alegria-s-brides",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "merlili-bridal-boutique",
+      "name": "Merlili Bridal Boutique",
+      "description": "Boutique celebrating all sizes (plus-size collection). Featured on The Knot & WeddingWire (award-winning).",
+      "address": {
+        "street": "356 Miracle Mile",
+        "city": "Coral Gables",
+        "state": "FL",
+        "zipCode": "33134",
+        "coordinates": {
+          "lat": 25.75,
+          "lng": -80.26
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "plus-size bridal"
+      ],
+      "tags": [
+        "plus-size",
+        "award-winning",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-476-1715",
+        "website": "https://merlili.com"
+      },
+      "owner": {
+        "id": "owner-merlili-bridal-boutique",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "lovely-bride-miami",
+      "name": "Lovely Bride Miami",
+      "description": "Wynwood’s chic, modern bridal showroom (part of national Lovely Bride chain). By appointment only; praised for trendy indie designers.",
+      "address": {
+        "street": "175 NW 25th St",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33127",
+        "coordinates": {
+          "lat": 25.8,
+          "lng": -80.2
+        }
+      },
+      "priceRange": null,
+      "shopType": "showroom",
+      "specialties": [
+        "indie designers",
+        "modern bridal"
+      ],
+      "tags": [
+        "chic",
+        "modern",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-392-1149",
+        "website": "https://lovelybride.com/miami"
+      },
+      "owner": {
+        "id": "owner-lovely-bride-miami",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "the-bridal-project",
+      "name": "The Bridal Project",
+      "description": "Vintage & bohemian-inspired boutique in Wynwood; one-of-a-kind modern bride experience. Appointment required.",
+      "address": {
+        "street": "2751 N Miami Ave, Suite 9",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33127",
+        "coordinates": {
+          "lat": 25.8,
+          "lng": -80.2
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "vintage",
+        "bohemian"
+      ],
+      "tags": [
+        "one-of-a-kind",
+        "modern",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-988-9818",
+        "website": "https://thebridalproject.com"
+      },
+      "owner": {
+        "id": "owner-the-bridal-project",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "brides-of-florida",
+      "name": "Brides of Florida",
+      "description": "Large Kendall showroom with 1500+ gowns in stock; specializes in plus-size bridal (largest selection in S. FL). Walk-ins accepted.",
+      "address": {
+        "street": "8530 SW 124 Ave, Suite 105",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33183",
+        "coordinates": {
+          "lat": 25.69,
+          "lng": -80.39
+        }
+      },
+      "priceRange": null,
+      "shopType": "showroom",
+      "specialties": [
+        "plus-size bridal"
+      ],
+      "tags": [
+        "large selection",
+        "plus-size",
+        "walk-ins welcome"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-273-5794",
+        "website": "https://bridesofflorida.net"
+      },
+      "owner": {
+        "id": "owner-brides-of-florida",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "brides-of-america",
+      "name": "Brides of America",
+      "description": "Full-service bridal and bridesmaid salon (Miami Gardens). Offers nationwide online sales. Highly rated for customer service.",
+      "address": {
+        "street": "785 NW 167th St",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33169",
+        "coordinates": {
+          "lat": 25.93,
+          "lng": -80.21
+        }
+      },
+      "priceRange": null,
+      "shopType": "salon",
+      "specialties": [
+        "bridal",
+        "bridesmaids"
+      ],
+      "tags": [
+        "full-service",
+        "highly rated",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-620-6606",
+        "website": "https://bridesofamerica.com"
+      },
+      "owner": {
+        "id": "owner-brides-of-america",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "patricia-south-s-bridal-formal",
+      "name": "Patricia South’s Bridal & Formal",
+      "description": "Family-owned mega-store (since 1982) with bridal gowns, bridesmaids, mothers, prom & tuxedos. Known for friendly service and vast selection.",
+      "address": {
+        "street": "4066 W Broward Blvd",
+        "city": "Plantation",
+        "state": "FL",
+        "zipCode": "33317",
+        "coordinates": {
+          "lat": 26.11,
+          "lng": -80.22
+        }
+      },
+      "priceRange": null,
+      "shopType": "mega-store",
+      "specialties": [
+        "full-service",
+        "bridal",
+        "bridesmaids",
+        "prom",
+        "tuxedos"
+      ],
+      "tags": [
+        "family-owned",
+        "vast selection",
+        "walk-ins welcome"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-791-6007",
+        "website": "https://patriciasouthsbridal.com"
+      },
+      "owner": {
+        "id": "owner-patricia-south-s-bridal-formal",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "zola-keller",
+      "name": "Zola Keller",
+      "description": "Fort Lauderdale couture salon (over 40 years). Renowned for eveningwear and custom gowns; dresses multiple Miss Americas. Bridal department is extensive.",
+      "address": {
+        "street": "818 E Las Olas Blvd",
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "zipCode": "33301",
+        "coordinates": {
+          "lat": 26.12,
+          "lng": -80.13
+        }
+      },
+      "priceRange": null,
+      "shopType": "salon",
+      "specialties": [
+        "couture",
+        "eveningwear",
+        "custom"
+      ],
+      "tags": [
+        "long-standing",
+        "couture",
+        "walk-ins welcome"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-462-3222",
+        "website": "https://zolakeller.com"
+      },
+      "owner": {
+        "id": "owner-zola-keller",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "custom gown design"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "bellissima-bride",
+      "name": "Bellissima Bride",
+      "description": "Large full-service boutique (20+ years) with wide size range (many samples 12–16). 4.9★ WeddingWire (152 reviews).",
+      "address": {
+        "street": "1605 SE 3rd Ct",
+        "city": "Deerfield Beach",
+        "state": "FL",
+        "zipCode": "33441",
+        "coordinates": {
+          "lat": 26.31,
+          "lng": -80.08
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "wide size range",
+        "full-service"
+      ],
+      "tags": [
+        "highly rated",
+        "plus-size friendly",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-426-6116",
+        "website": "https://bellissimabride.com"
+      },
+      "owner": {
+        "id": "owner-bellissima-bride",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "wonderland-bridal",
+      "name": "Wonderland Bridal",
+      "description": "Boutique known for a fun, personalized experience. Curated designer gowns at affordable prices, including plus-size collection.",
+      "address": {
+        "street": "3400 NW 62nd Ave",
+        "city": "Margate",
+        "state": "FL",
+        "zipCode": "33063",
+        "coordinates": {
+          "lat": 26.23,
+          "lng": -80.20
+        }
+      },
+      "priceRange": {
+        "min": 1000,
+        "max": 4000
+      },
+      "shopType": "boutique",
+      "specialties": [
+        "personalized experience",
+        "plus-size collection"
+      ],
+      "tags": [
+        "affordable",
+        "plus-size friendly",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-973-8695",
+        "website": "https://wonderlandbridal.com"
+      },
+      "owner": {
+        "id": "owner-wonderland-bridal",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "savvy-bridal-boutique-ft-lauderdale",
+      "name": "Savvy Bridal Boutique (Ft. Lauderdale)",
+      "description": "Exclusive plus-size bridal shopping experience with private suites. One of the largest curations of plus-size gowns in South FL.",
+      "address": {
+        "street": "2020 E Oakland Park Blvd",
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "zipCode": "33306",
+        "coordinates": {
+          "lat": 26.16,
+          "lng": -80.10
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "plus-size bridal"
+      ],
+      "tags": [
+        "plus-size",
+        "exclusive",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-999-0277",
+        "website": "https://savvybridalboutique.com"
+      },
+      "owner": {
+        "id": "owner-savvy-bridal-boutique-ft-lauderdale",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "luv-bridal",
+      "name": "Luv Bridal",
+      "description": "Fort Lauderdale showroom of international Luv Bridal chain. Modern, luxurious experience with global designer selection. Appointment required.",
+      "address": {
+        "street": "850 NE 13th St Unit B",
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "zipCode": "33304",
+        "coordinates": {
+          "lat": 26.13,
+          "lng": -80.13
+        }
+      },
+      "priceRange": null,
+      "shopType": "showroom",
+      "specialties": [
+        "global designers",
+        "modern bridal"
+      ],
+      "tags": [
+        "luxurious",
+        "modern",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-278-9006",
+        "website": "https://luvbridal.com"
+      },
+      "owner": {
+        "id": "owner-luv-bridal",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "lighthouse-bridal",
+      "name": "Lighthouse Bridal",
+      "description": "Laid-back, no-frills boutique catering to non-traditional brides. Exclusive Made With Love retailer; intimate, creative vibe.",
+      "address": {
+        "street": "1958 E Sunrise Blvd",
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "zipCode": "33304",
+        "coordinates": {
+          "lat": 26.14,
+          "lng": -80.12
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "non-traditional bridal"
+      ],
+      "tags": [
+        "laid-back",
+        "intimate",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-903-3644",
+        "website": "https://lighthousebridal.com"
+      },
+      "owner": {
+        "id": "owner-lighthouse-bridal",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [
+        "Made With Love"
+      ],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "rashawnrose-bridal-prom",
+      "name": "RashawnRose Bridal & Prom",
+      "description": "Black-owned boutique with diverse designer collection. Carries bridal (sizes 8–26) and formal gowns; Miami branch as well. Appointments required.",
+      "address": {
+        "street": "12920 W State Road 84",
+        "city": "Davie",
+        "state": "FL",
+        "zipCode": "33325",
+        "coordinates": {
+          "lat": 26.09,
+          "lng": -80.32
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "bridal",
+        "prom",
+        "diverse collection"
+      ],
+      "tags": [
+        "black-owned",
+        "inclusive sizing",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-577-6943",
+        "website": "https://rashawnrosebridal.com"
+      },
+      "owner": {
+        "id": "owner-rashawnrose-bridal-prom",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "boca-raton-bridal-consultants",
+      "name": "Boca Raton Bridal & Consultants",
+      "description": "South FL’s largest couture collection (20+ designers). VIP and private appointments available; plus-size samples on hand. Highly acclaimed boutique.",
+      "address": {
+        "street": "3698 N Federal Hwy",
+        "city": "Boca Raton",
+        "state": "FL",
+        "zipCode": "33431",
+        "coordinates": {
+          "lat": 26.36,
+          "lng": -80.08
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "couture collection",
+        "plus-size samples"
+      ],
+      "tags": [
+        "highly acclaimed",
+        "couture",
+        "walk-ins welcome"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "561-447-6541",
+        "website": "https://bocaratonbridal.com"
+      },
+      "owner": {
+        "id": "owner-boca-raton-bridal-consultants",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "boca-raton-bridal-south-coral-springs",
+      "name": "Boca Raton Bridal South (Coral Springs)",
+      "description": "Sister location of Boca Raton Bridal focusing on mid-range gowns and plus-size selection. Known for friendly, helpful consultants.",
+      "address": {
+        "street": "1331 N University Dr",
+        "city": "Coral Springs",
+        "state": "FL",
+        "zipCode": "33071",
+        "coordinates": {
+          "lat": 26.25,
+          "lng": -80.25
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "mid-range gowns",
+        "plus-size selection"
+      ],
+      "tags": [
+        "plus-size friendly",
+        "friendly service",
+        "walk-ins welcome"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "954-755-9595",
+        "website": "https://bocaratonbridal.com/south"
+      },
+      "owner": {
+        "id": "owner-boca-raton-bridal-south-coral-springs",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "mariolka-s-bridal-boutique",
+      "name": "Mariolka’s Bridal Boutique",
+      "description": "Huge selection (1000+ gowns) across all budgets. Family-owned boutique providing in-house alterations. Appointment only (strict).",
+      "address": {
+        "street": "1301 W Boynton Beach Blvd, Suite 2",
+        "city": "Boynton Beach",
+        "state": "FL",
+        "zipCode": "33426",
+        "coordinates": {
+          "lat": 26.53,
+          "lng": -80.11
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "large selection",
+        "in-house alterations"
+      ],
+      "tags": [
+        "all budgets",
+        "family-owned",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "561-735-8633",
+        "website": "https://mariolkasbridal.com"
+      },
+      "owner": {
+        "id": "owner-mariolka-s-bridal-boutique",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "in-house alterations"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "bacio-bacio-bridal-boutique",
+      "name": "Bacio Bacio Bridal Boutique",
+      "description": "Award-winning full-service salon (est. 2006). Noted for warm, fun experience and hand-picked gown selection. Appointments required (will try to accommodate walk-ins).",
+      "address": {
+        "street": "9160 Forest Hill Blvd",
+        "city": "Wellington",
+        "state": "FL",
+        "zipCode": "33414",
+        "coordinates": {
+          "lat": 26.63,
+          "lng": -80.19
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "full-service",
+        "hand-picked gowns"
+      ],
+      "tags": [
+        "award-winning",
+        "fun experience",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "561-792-6111",
+        "website": "https://baciobacio.com"
+      },
+      "owner": {
+        "id": "owner-bacio-bacio-bridal-boutique",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "molle-bridals",
+      "name": "Mollé Bridals",
+      "description": "South Florida favorite boutique with private suites and one-on-one stylists. Curated designer collection & inclusive sizing. Stellar customer reviews.",
+      "address": {
+        "street": "3307 Northlake Blvd, Suite 109",
+        "city": "Palm Beach Gardens",
+        "state": "FL",
+        "zipCode": "33403",
+        "coordinates": {
+          "lat": 26.83,
+          "lng": -80.15
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "private suites",
+        "one-on-one stylists",
+        "inclusive sizing"
+      ],
+      "tags": [
+        "highly rated",
+        "inclusive",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "561-775-6111",
+        "website": "https://mollebridals.com"
+      },
+      "owner": {
+        "id": "owner-molle-bridals",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "bridal-couture-of-the-palm-beaches",
+      "name": "Bridal Couture of the Palm Beaches",
+      "description": "Appointment-only boutique offering a warm, tropical vibe. Knot Hall of Fame designee (Best of Weddings) – nearly a decade of awards.",
+      "address": {
+        "street": "10233 Okeechobee Blvd, Suite B4",
+        "city": "Royal Palm Beach",
+        "state": "FL",
+        "zipCode": "33411",
+        "coordinates": {
+          "lat": 26.71,
+          "lng": -80.21
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "tropical vibe",
+        "destination wedding gowns"
+      ],
+      "tags": [
+        "award-winning",
+        "tropical",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "561-793-4633",
+        "website": "https://bridalcouturepalmbeach.com"
+      },
+      "owner": {
+        "id": "owner-bridal-couture-of-the-palm-beaches",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "loretta-bridal-boutique",
+      "name": "Loretta Bridal Boutique",
+      "description": "Southwest Florida’s premier bridal shop (family-operated). Known for personalized attention and a beautiful selection. Rave reviews from Naples/Fort Myers brides.",
+      "address": {
+        "street": "28811 S Tamiami Trail, Suite 8",
+        "city": "Bonita Springs",
+        "state": "FL",
+        "zipCode": "34134",
+        "coordinates": {
+          "lat": 26.32,
+          "lng": -81.8
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "personalized attention"
+      ],
+      "tags": [
+        "family-owned",
+        "highly rated",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "239-948-3998",
+        "website": "https://lorettabridal.com"
+      },
+      "owner": {
+        "id": "owner-loretta-bridal-boutique",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "for-the-bride-boutique",
+      "name": "For The Bride Boutique",
+      "description": "Beachy Southwest FL boutique specializing in destination and plus-size gowns. Offers in-house alterations, cleaning & preservation services. Appointment by request.",
+      "address": {
+        "street": "15200 S Tamiami Trail, Suite 107",
+        "city": "Fort Myers",
+        "state": "FL",
+        "zipCode": "33908",
+        "coordinates": {
+          "lat": 26.52,
+          "lng": -81.87
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "destination gowns",
+        "plus-size gowns",
+        "in-house alterations"
+      ],
+      "tags": [
+        "beachy",
+        "plus-size friendly",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "239-590-9299",
+        "website": "https://forthebrideflorida.com"
+      },
+      "owner": {
+        "id": "owner-for-the-bride-boutique",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "in-house alterations",
+        "cleaning",
+        "preservation"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "beautiful-brides-of-the-florida-keys",
+      "name": "Beautiful Brides of the Florida Keys",
+      "description": "Boutique bridal stylist serving the Florida Keys (Key Largo-based). Personalized, intimate gown shopping by appointment.",
+      "address": {
+        "street": "Mobile boutique service",
+        "city": "Key Largo",
+        "state": "FL",
+        "zipCode": null,
+        "coordinates": {
+          "lat": 25.08,
+          "lng": -80.44
+        }
+      },
+      "priceRange": null,
+      "shopType": "mobile service",
+      "specialties": [
+        "bridal stylist",
+        "mobile service",
+        "personalized service"
+      ],
+      "tags": [
+        "florida keys",
+        "intimate",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-522-1821",
+        "website": "https://beautifulbridesfl.com"
+      },
+      "owner": {
+        "id": "owner-beautiful-brides-of-the-florida-keys",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "bridal stylist"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    },
+    {
+      "id": "jasmine-sky-designs",
+      "name": "Jasmine Sky Designs",
+      "description": "Indie bridal designer boutique in the Lower Keys. Unique silk gowns and custom designs; beloved by destination brides (5★ reviews).",
+      "address": {
+        "street": "29031 Pine Ave",
+        "city": "Big Pine Key",
+        "state": "FL",
+        "zipCode": "33043",
+        "coordinates": {
+          "lat": 24.66,
+          "lng": -81.40
+        }
+      },
+      "priceRange": null,
+      "shopType": "boutique",
+      "specialties": [
+        "indie designer",
+        "silk gowns",
+        "custom designs"
+      ],
+      "tags": [
+        "unique",
+        "destination bridal",
+        "by appointment"
+      ],
+      "images": [],
+      "contact": {
+        "email": null,
+        "phone": "305-923-9589",
+        "website": null
+      },
+      "owner": {
+        "id": "owner-jasmine-sky-designs",
+        "name": null,
+        "isPremium": true
+      },
+      "hours": {},
+      "services": [
+        "custom gown design"
+      ],
+      "brands": [],
+      "createdAt": "2025-09-10T20:02:53Z",
+      "updatedAt": "2025-09-10T20:02:53Z"
+    }
+  ]
+}

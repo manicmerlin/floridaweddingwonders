@@ -1,0 +1,765 @@
+{
+  "weddingVendors": [
+    {
+      "id": "chris-weinberg-events",
+      "name": "Chris Weinberg Events",
+      "businessName": "Chris Weinberg Events",
+      "description": "Premier luxury wedding & event planning firm producing fully customized celebrations across South Florida and destinations.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://chrisweinbergevents.com/",
+        "socialMedia": {
+          "instagram": "@chrisweinbergevents"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "guerdy-design",
+      "name": "Guerdy Design",
+      "businessName": "Guerdy Design",
+      "description": "Destination wedding planner/designer led by Guerdy Abraira; Miami & New York based.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.guerdydesign.com/",
+        "socialMedia": {
+          "instagram": "@guerdydesign"
+        },
+        "phone": "(305) 769-1979",
+        "email": "guerdy@guerdydesign.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "masi-events",
+      "name": "Masi Events",
+      "businessName": "Masi Events",
+      "description": "Husband-and-wife team planning and designing elevated weddings in Miami and Palm Beach since 2008.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://masievents.com/",
+        "socialMedia": {
+          "instagram": "@masievents"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "sara-renee-events",
+      "name": "Sara Renee Events",
+      "businessName": "Sara Renee Events",
+      "description": "Boutique luxury planning studio crafting opulent, detail-forward celebrations.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://sarareneeevents.com/",
+        "socialMedia": {
+          "instagram": "@sarareneeevents"
+        },
+        "email": "sara@sarareneeevents.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "posh-parties",
+      "name": "Posh Parties",
+      "businessName": "Posh Parties",
+      "description": "Award-winning luxury wedding planner delivering concierge-style planning in Palm Beach and destinations.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Palm Beach",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://poshpartiesonline.com/",
+        "socialMedia": {
+          "instagram": "@poshpartygal"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "kt-merry",
+      "name": "KT Merry Photography",
+      "businessName": "KT Merry Photography",
+      "description": "Global luxury destination wedding & editorial photographer based in South Florida.",
+      "category": "photographer",
+      "subcategory": "wedding photographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://ktmerry.com/",
+        "socialMedia": {
+          "instagram": "@ktmerry"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "organic-moments",
+      "name": "Organic Moments Photography",
+      "businessName": "Organic Moments Photography",
+      "description": "Award-winning husband-and-wife team serving South Florida weddings and engagements.",
+      "category": "photographer",
+      "subcategory": "wedding photographer",
+      "address": {
+        "city": "Boca Raton",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.organicmomentsweddings.com/",
+        "socialMedia": {
+          "instagram": "@organicmomentsphotography"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "munoz-photography",
+      "name": "Mu\u00f1oz Photography",
+      "businessName": "Mu\u00f1oz Photography",
+      "description": "Established South Florida studio known for elegant, dramatic wedding imagery.",
+      "category": "photographer",
+      "subcategory": "wedding photographer",
+      "address": {
+        "city": "Hallandale Beach",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.munozphotography.com/",
+        "socialMedia": {
+          "instagram": "@munozphotography"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "poirier-photography",
+      "name": "Poirier Wedding Photography",
+      "businessName": "Poirier Wedding Photography",
+      "description": "Palm Beach wedding photography duo recognized for timeless, elegant portraits.",
+      "category": "photographer",
+      "subcategory": "wedding photographer",
+      "address": {
+        "city": "Palm Beach",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.poirierweddingphotography.com/",
+        "socialMedia": {
+          "instagram": "@poirierwedding"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "carolina-guzik",
+      "name": "Carolina Guzik Photography",
+      "businessName": "Carolina Guzik Photography",
+      "description": "Miami-based photographer specializing in authentic, romantic, candid coverage.",
+      "category": "photographer",
+      "subcategory": "wedding photographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.carolinaguzik.com/",
+        "socialMedia": {
+          "instagram": "@carolina_guzik"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "shutter-and-sound-miami",
+      "name": "Shutter & Sound",
+      "businessName": "Shutter & Sound",
+      "description": "Award-winning wedding videography team crafting story-focused, cinematic films; Miami location.",
+      "category": "videographer",
+      "subcategory": "wedding videographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://shutterandsound.com/locations/miami/",
+        "socialMedia": {
+          "instagram": "@shutterandsound"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "diego-stuart-films",
+      "name": "Diego Stuart Films",
+      "businessName": "Diego Stuart Films",
+      "description": "Luxury wedding filmmaker creating emotional, elegant films across South Florida.",
+      "category": "videographer",
+      "subcategory": "wedding videographer",
+      "address": {
+        "city": "Boca Raton",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.diegostuartfilms.com/",
+        "socialMedia": {
+          "instagram": "@diegostuartfilms"
+        },
+        "phone": "(954) 865-7170"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "nera-photofilms",
+      "name": "Nera Photofilms",
+      "businessName": "Nera Photofilms",
+      "description": "Miami wedding filmmaker producing cinematic wedding stories with a personal touch.",
+      "category": "videographer",
+      "subcategory": "wedding videographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://neraphotofilms.com/",
+        "socialMedia": {
+          "instagram": "@neraphotofilms"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "yes-i-do-production",
+      "name": "YES I DO Production",
+      "businessName": "YES I DO Production",
+      "description": "Wedding photography & videography studio specializing in modern, editorial storytelling.",
+      "category": "videographer",
+      "subcategory": "wedding videographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://yesidoproduction.com/",
+        "socialMedia": {
+          "instagram": "@yesidoproduction"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "feelmakes",
+      "name": "Feelmakes",
+      "businessName": "Feelmakes",
+      "description": "Miami production duo offering cinematic wedding videography and lifestyle photo/video.",
+      "category": "videographer",
+      "subcategory": "wedding videographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.feelmakes.com/pages/wedding",
+        "socialMedia": {
+          "instagram": "@feelmakes"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "shutterbox-south-florida",
+      "name": "Shutterbox South Florida",
+      "businessName": "Shutterbox Photo Entertainment",
+      "description": "Leading provider of professional photo booth rentals and 360 booths across South Florida.",
+      "category": "entertainment",
+      "subcategory": "photo booth",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.shutterboxphotobooth.com/locations/miami/",
+        "socialMedia": {
+          "instagram": "@shutterboxsfl"
+        },
+        "phone": "(786) 237-4075"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "the-photobooth-bros",
+      "name": "The Photobooth Bros",
+      "businessName": "The Photobooth Bros LLC",
+      "description": "South Florida's premier photo booth rental company serving Miami, Fort Lauderdale, Palm Beach & the Keys.",
+      "category": "entertainment",
+      "subcategory": "photo booth",
+      "address": {
+        "city": "Tamarac",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.thephotoboothbrosfl.com/",
+        "socialMedia": {
+          "instagram": "@thephotoboothbros"
+        },
+        "phone": "(305) 879-4112"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "wynd-luxury-photo-booths",
+      "name": "Wynd Luxury Photo Booths",
+      "businessName": "Wynd Luxury Photo Booths",
+      "description": "Miami-based luxury photo booth company with LED color-changing booths and custom designs.",
+      "category": "entertainment",
+      "subcategory": "photo booth",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://wyndbooth.com/",
+        "socialMedia": {
+          "instagram": "@eikonwynd"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "soflo-360-photo-booth",
+      "name": "SOFLO 360 Photo Booth",
+      "businessName": "SOFLO 360 Photo Booth",
+      "description": "Fort Lauderdale 360\u00b0 video booth rentals for weddings and events across Broward and beyond.",
+      "category": "entertainment",
+      "subcategory": "360 photo booth",
+      "address": {
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.soflo360photobooth.com/",
+        "socialMedia": {
+          "instagram": "@soflo360photobooth"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "360-luxe-photo-booth",
+      "name": "360 Luxe Photo Booth",
+      "businessName": "360 Luxe Party Experience",
+      "description": "360 video booth & digital selfie booth rentals serving South Florida.",
+      "category": "entertainment",
+      "subcategory": "360 photo booth",
+      "address": {
+        "city": "Port St. Lucie",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.360luxephotobooth.com/",
+        "socialMedia": {
+          "instagram": "@360luxePartyExperience"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "bill-hansen-catering",
+      "name": "Bill Hansen Catering",
+      "businessName": "Bill Hansen Catering",
+      "description": "Elevated catering for weddings and celebrations across South Florida; 45+ years of experience.",
+      "category": "caterer",
+      "subcategory": "wedding catering",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.billhansencatering.com/",
+        "socialMedia": {
+          "instagram": "@billhansencatering"
+        },
+        "phone": "(305) 858-6660",
+        "email": "info@billhansencatering.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "eggwhites-catering",
+      "name": "Eggwhites Special Event Catering",
+      "businessName": "Eggwhites Catering",
+      "description": "Premiere full-service catering company serving Miami, Fort Lauderdale, Palm Beach and the Keys.",
+      "category": "caterer",
+      "subcategory": "wedding catering",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://eggwhitescatering.com/",
+        "socialMedia": {
+          "instagram": "@eggwhitesmiami"
+        },
+        "email": "events@eggwhitescatering.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "thierry-isambert",
+      "name": "Thierry Isambert Culinary & Event Design",
+      "businessName": "Thierry Isambert Culinary & Event Design",
+      "description": "High-end Miami caterer blending culinary artistry with elegant service and event design.",
+      "category": "caterer",
+      "subcategory": "wedding catering",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://thierryisambert.com/",
+        "socialMedia": {
+          "instagram": "@thierryisambert"
+        },
+        "phone": "(305) 635-6626",
+        "email": "info@thierryisambert.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "exquisite-catering-events",
+      "name": "Exquisite Catering & Events",
+      "businessName": "Exquisite Catering & Events",
+      "description": "Boutique-style luxury catering & events for weddings and social celebrations.",
+      "category": "caterer",
+      "subcategory": "wedding catering",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://exquisitecatering.com/",
+        "socialMedia": {
+          "instagram": "@exquisitecatering"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "a-joy-wallace",
+      "name": "A Joy Wallace Luxury Events & Catering",
+      "businessName": "Joy Wallace Catering",
+      "description": "Premier Miami catering and event design firm creating unforgettable celebrations.",
+      "category": "caterer",
+      "subcategory": "wedding catering",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://ajoywallace.com/",
+        "socialMedia": {
+          "instagram": "@ajoywallace"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "eddas-cake-designs",
+      "name": "Edda's Cake Designs",
+      "businessName": "Edda's Cake Designs",
+      "description": "Miami institution crafting beautiful, delicious custom wedding cakes since 1978.",
+      "category": "baker",
+      "subcategory": "wedding cakes",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://eddascakedesigns.com/",
+        "socialMedia": {
+          "instagram": "@eddascakedesign"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "elegant-temptations",
+      "name": "Elegant Temptations Bakery",
+      "businessName": "Elegant Temptations Bakery",
+      "description": "Luxury cake studio in Miami creating uniquely designed wedding cakes and dessert tables.",
+      "category": "baker",
+      "subcategory": "wedding cakes",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.etcakes.com/",
+        "socialMedia": {
+          "instagram": "@eleganttemptationsbakery"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "earth-and-sugar",
+      "name": "Earth and Sugar",
+      "businessName": "Earth and Sugar",
+      "description": "West Palm Beach cake and dessert studio specializing in modern, artistic designs (including vegan/gluten-free).",
+      "category": "baker",
+      "subcategory": "wedding cakes",
+      "address": {
+        "city": "West Palm Beach",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://earthandsugar.com/",
+        "socialMedia": {
+          "instagram": "@earthandsugar"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "we-take-the-cake",
+      "name": "We Take The Cake",
+      "businessName": "We Take The Cake",
+      "description": "Fort Lauderdale bakery renowned for award-winning cakes and nationwide shipping.",
+      "category": "baker",
+      "subcategory": "wedding cakes",
+      "address": {
+        "city": "Fort Lauderdale",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "https://www.wetakethecake.com/",
+        "socialMedia": {
+          "instagram": "@wetakethecake"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "ana-paz-cakes",
+      "name": "Ana Paz Cakes",
+      "businessName": "Ana Paz Cakes",
+      "description": "Celebrated Miami cake artist creating elaborate custom wedding cakes for South Florida couples.",
+      "category": "baker",
+      "subcategory": "wedding cakes",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": [
+          "Miami-Dade",
+          "Broward",
+          "Palm Beach"
+        ]
+      },
+      "contact": {
+        "website": "http://www.anapazcakes.com/",
+        "socialMedia": {
+          "instagram": "@anapazcakes"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    }
+  ]
+}

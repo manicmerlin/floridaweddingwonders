@@ -1,0 +1,628 @@
+{
+  "totalVenues": 124,
+  "venuesWithImages": 81,
+  "totalImages": 229,
+  "generatedAt": "2025-09-10T13:17:53.095Z",
+  "venues": [
+    {
+      "name": "The Surfcomber Hotel",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "MB Hotel",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Sea Watch on the Ocean",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Emeril Lagasse Foundation Innovation Kitchen",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Atlantic Wedding Chapel",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Coastal Yacht Charters",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Vizcaya Museum & Gardens",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Ancient Spanish Monastery",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "The Cooper Estate",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Curtiss Mansion",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Thalatta Estate",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Deering Estate",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Fairchild Tropical Botanic Garden",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Historic Walton House",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Woman's Club of Coconut Grove",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "The Bath Club",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "The Cruz Building",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Rusty Pelican",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Briza on the Bay",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Penthouse at Riverside Wharf",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Signature Grand",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Jacaranda Country Club",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Deer Creek Country Club",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Bonnet House Museum & Gardens",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Stranahan House",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Secret Gardens Miami",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Villa Woodbine",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Lavan Venue",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Coral Gables Country Club",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Weston Hills Country Club",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Parkland Country Club",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Miami Beach Botanical Garden",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Hollywood's ArtsPark",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Phillip and Patricia Frost Science Museum",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "The M Building",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "The Wharf (Miami/Ft. Lauderdale)",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "The Biltmore Hotel",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Miami Marriott Biscayne Bay",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Diplomat Beach Resort",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Seminole Hard Rock Hotel & Casino",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Hialeah Park Racing & Casino",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Milander Center for Arts & Entertainment",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Pérez Art Museum Miami (PAMM)",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "JW Marriott Turnberry Resort & Spa",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Loews Miami Beach Hotel",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Faena Hotel Miami Beach",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Eau Palm Beach Resort & Spa",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Palm Beach Marriott Singer Island Beach Resort & Spa",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "The Addison",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Lady Jean Ranch",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Out of the Blue Celebrations",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "The Ben, Autograph Collection",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Tideline Ocean Resort & Spa",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "PGA National Resort",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Pelican Club",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "The Wanderers Club",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "The Seagate Hotel & Spa",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Boca Lago Country Club",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "The Club at Ibis",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Canopy by Hilton West Palm Beach",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Jupiter Beach Resort & Spa",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Loggerhead Marinelife Center",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Morikami Museum & Gardens",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Sundy House",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "LaPlaya Beach & Golf Resort",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Naples Bay Resort & Marina",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Vineyards Country Club",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Tiburón Golf Club",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "JW Marriott Marco Island Beach Resort",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Hyatt Regency Coconut Point Resort & Spa",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Sale e Pepe at Marco Beach Ocean Resort",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "Pink Shell Beach Resort & Marina",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Sundial Beach Resort & Spa",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Sanibel Harbour Marriott Resort & Spa",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Westin Cape Coral Resort at Marina Village",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "South Seas Island Resort",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "The Club at Grandezza",
+      "imageCount": 1,
+      "hasImages": true
+    },
+    {
+      "name": "The Colony Golf & Country Club",
+      "imageCount": 4,
+      "hasImages": true
+    },
+    {
+      "name": "Heritage Bay Golf & Country Club",
+      "imageCount": 2,
+      "hasImages": true
+    },
+    {
+      "name": "Lover's Key Adventure & Events",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Corkscrew Sanctuary",
+      "imageCount": 3,
+      "hasImages": true
+    },
+    {
+      "name": "Margaritaville Beach Resort",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Misty Morning Barn",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Naples Princess",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Baker's Cay Resort Key Largo",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Playa Largo Resort & Spa",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Largo Resort",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Dolphin Point Villas",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Islander Resort",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Cheeca Lodge & Spa",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Ocean Oasis",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Three Waters",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "La Siesta Resort & Villas",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Bud N' Mary's Marina 'The Barn'",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Faro Blanco Resort & Yacht Club",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Isla Bella Beach Resort",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "East Sister Rock Island",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Hawks Cay Resort",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Margaritaville Beach House Key West",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Audubon House & Tropical Gardens",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "The Reach Key West, Curio Collection by Hilton",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Southernmost Beach Resort",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Havana Cabana at Key West",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Casa Marina Key West, Curio Collection by Hilton",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Hyatt Centric Key West Resort & Spa",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "The Perry Hotel & Marina Key West",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Oceans Edge Resort & Marina",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "The Garden at the Oldest House Museum",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Sunset Watersports",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Key West Lighthouse & Keeper's Quarters",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Fort East Martello",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Ocean Key Resort & Spa",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Old Town Manor",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Hard Rock Café Key West",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Pier House Resort & Spa",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Sunset Key Cottages",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "First Flight Island Brewery",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Ernest Hemingway Home & Museum",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Fort Zachary Taylor State Park",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Bagatelle Restaurant",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Key West Historic Inns",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "The Blue Room",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Schooner Appledore",
+      "imageCount": 0,
+      "hasImages": false
+    },
+    {
+      "name": "Suite Dreams Inn",
+      "imageCount": 0,
+      "hasImages": false
+    }
+  ]
+}

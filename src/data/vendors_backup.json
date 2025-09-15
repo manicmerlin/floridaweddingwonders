@@ -1,0 +1,113 @@
+{
+  "weddingVendors": [
+    {
+      "id": "chris-weinberg-events",
+      "name": "Chris Weinberg Events",
+      "businessName": "Chris Weinberg Events", 
+      "description": "Premier luxury wedding & event planning firm producing fully customized celebrations across South Florida and destinations.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": ["Miami-Dade", "Broward", "Palm Beach"]
+      },
+      "contact": {
+        "website": "https://chrisweinbergevents.com/",
+        "socialMedia": {
+          "instagram": "@chrisweinbergevents"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "guerdy-design", 
+      "name": "Guerdy Design",
+      "businessName": "Guerdy Design",
+      "description": "Destination wedding planner/designer led by Guerdy Abraira; Miami & New York based.",
+      "category": "planner",
+      "subcategory": "wedding planner",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": ["Miami-Dade", "Broward", "Palm Beach"]
+      },
+      "contact": {
+        "website": "https://www.guerdydesign.com/",
+        "socialMedia": {
+          "instagram": "@guerdydesign"
+        },
+        "phone": "(305) 769-1979",
+        "email": "guerdy@guerdydesign.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "kt-merry",
+      "name": "KT Merry Photography", 
+      "businessName": "KT Merry Photography",
+      "description": "Global luxury destination wedding & editorial photographer based in South Florida.",
+      "category": "photographer",
+      "subcategory": "wedding photographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": ["Miami-Dade", "Broward", "Palm Beach"]
+      },
+      "contact": {
+        "website": "https://ktmerry.com/",
+        "socialMedia": {
+          "instagram": "@ktmerry"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "shutter-and-sound-miami",
+      "name": "Shutter & Sound",
+      "businessName": "Shutter & Sound", 
+      "description": "Award-winning wedding videography team crafting story-focused, cinematic films; Miami location.",
+      "category": "videographer",
+      "subcategory": "wedding videographer",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": ["Miami-Dade", "Broward", "Palm Beach"]
+      },
+      "contact": {
+        "website": "https://shutterandsound.com/locations/miami/",
+        "socialMedia": {
+          "instagram": "@shutterandsound"
+        }
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    },
+    {
+      "id": "bill-hansen-catering",
+      "name": "Bill Hansen Catering",
+      "businessName": "Bill Hansen Catering",
+      "description": "Elevated catering for weddings and celebrations across South Florida; 45+ years of experience.",
+      "category": "caterer", 
+      "subcategory": "wedding catering",
+      "address": {
+        "city": "Miami",
+        "state": "FL",
+        "serviceArea": ["Miami-Dade", "Broward", "Palm Beach"]
+      },
+      "contact": {
+        "website": "https://www.billhansencatering.com/",
+        "socialMedia": {
+          "instagram": "@billhansencatering"
+        },
+        "phone": "(305) 858-6660",
+        "email": "info@billhansencatering.com"
+      },
+      "createdAt": "2025-09-10T20:00:00Z",
+      "updatedAt": "2025-09-10T20:00:00Z"
+    }
+  ]
+}

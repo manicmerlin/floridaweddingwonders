@@ -1,0 +1,23 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "functions": {
+    "app/api/**/*.js": {
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key", 
+    "DATABASE_PASSWORD": "@database-password",
+    "RESEND_API_KEY": "@resend-api-key",
+    "NEXT_PUBLIC_SITE_NAME": "Florida Wedding Wonders"
+  },
+  "regions": ["iad1"],
+  "github": {
+    "autoAlias": false
+  }
+}
