@@ -1,6 +1,58 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
+import PricingSection from '@/components/PricingSection';
 
 export default function ComingSoonPage() {
+  const [emailData, setEmailData] = useState({
+    email: '',
+    userType: 'regular_user' as 'regular_user' | 'venue_owner',
+    venueName: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setEmailData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: emailData.userType,
+          email: emailData.email,
+          venueName: emailData.venueName
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setEmailData({ email: '', userType: 'regular_user', venueName: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Email submission error:', error);
+      setSubmitStatus('error');
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
       {/* Hero Section */}
@@ -48,6 +100,96 @@ export default function ComingSoonPage() {
             </p>
           </div>
 
+          {/* Email Signup Form */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 mb-16 border border-white/50 shadow-xl max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">
+              🎯 Get Early Access & Exclusive Benefits
+            </h3>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    I am a:
+                  </label>
+                  <select
+                    name="userType"
+                    value={emailData.userType}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  >
+                    <option value="regular_user">Future Bride/Groom</option>
+                    <option value="venue_owner">Venue Owner</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={emailData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+
+              {emailData.userType === 'venue_owner' && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Venue Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="venueName"
+                    value={emailData.venueName}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    placeholder="Your venue name"
+                  />
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Submitting...' : emailData.userType === 'venue_owner' ? 'Get Your Free Premium Year!' : 'Notify Me When We Launch!'}
+              </button>
+
+              {submitStatus === 'success' && (
+                <div className="text-center p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-green-800 font-medium">
+                    🎉 Success! Check your email for next steps.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="text-center p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 font-medium">
+                    ❌ Something went wrong. Please try again.
+                  </p>
+                </div>
+              )}
+            </form>
+
+            {emailData.userType === 'venue_owner' && (
+              <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
+                <p className="text-purple-800 font-medium text-center">
+                  🎁 <strong>Early Bird Special:</strong> Venue owners who sign up now get a FREE Premium year (normally $250)!
+                </p>
+              </div>
+            )}
+          </div>
+
           {/* Feature Cards */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -90,30 +232,68 @@ export default function ComingSoonPage() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* CTA Section */}
-          <div className="text-center">
-            <p className="text-lg text-gray-600 mb-8">
-              Be the first to know when we launch and get exclusive early access to Florida's most sought-after wedding venues.
+      {/* Venue Owner Pricing Section */}
+      <div className="bg-white">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              🏛️ For Venue Owners: Choose Your Success Package
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Join Florida's premier wedding venue directory and start booking more weddings
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105">
-                Notify Me When We Launch
-              </button>
-              <button className="bg-white/80 backdrop-blur-sm text-purple-700 px-8 py-4 rounded-full font-semibold text-lg border border-purple-200 hover:bg-white hover:shadow-lg transition-all duration-300">
-                Learn More
-              </button>
-            </div>
           </div>
+          
+          <PricingSection />
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="relative z-10 bg-white/90 backdrop-blur-sm border-t border-gray-200 py-8">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-gray-600">
-            © 2025 Florida Wedding Wonders. Creating unforgettable moments in the Sunshine State.
-          </p>
+      <footer className="relative z-10 bg-gray-900 text-white py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center mb-4">
+                <Image 
+                  src="/images/logo.png" 
+                  alt="Florida Wedding Wonders" 
+                  width={40} 
+                  height={40}
+                  className="mr-3"
+                />
+                <span className="text-xl font-bold">Florida Wedding Wonders</span>
+              </div>
+              <p className="text-gray-400">
+                Creating unforgettable moments in the Sunshine State.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
+              <div className="space-y-2 text-gray-400">
+                <p>📧 hello@floridaweddingwonders.com</p>
+                <p>📱 (555) 123-4567</p>
+                <p>📍 South Florida</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>© 2025 Florida Wedding Wonders. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
