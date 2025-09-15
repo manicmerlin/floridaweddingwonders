@@ -9,6 +9,9 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
+// Force dynamic rendering for pages with useSearchParams
+export const dynamic = 'force-dynamic';
+
 export default function DressShopsPage() {
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');

@@ -8,6 +8,9 @@ import VenueCard from '../../components/VenueCard';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
+// Force dynamic rendering for pages with useSearchParams
+export const dynamic = 'force-dynamic';
+
 export default function VenuesPage() {
   console.log('🏛️ VenuesPage - mockVenues:', mockVenues?.length, 'venues imported');
   
