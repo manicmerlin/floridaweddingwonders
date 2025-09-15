@@ -2,7 +2,7 @@ import localFont from 'next/font/local';
 
 // Custom heading font - Nowra
 export const customHeadingFont = localFont({
-  src: '../../public/fonts/Nowra-Regular.otf',
+  src: './fonts/Nowra-Regular.otf',
   variable: '--font-heading',
   display: 'swap',
 });

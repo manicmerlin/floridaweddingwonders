@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { PhotoUpload } from '@/components/PhotoUpload';
 
 export default function VendorOwnerPage() {
   const [formData, setFormData] = useState({
@@ -69,7 +68,7 @@ export default function VendorOwnerPage() {
       setFormData(prev => ({
         ...prev,
         [parent]: {
-          ...prev[parent as keyof typeof prev],
+          ...(prev[parent as keyof typeof prev] as any),
           [child]: value
         }
       }));
@@ -529,12 +528,49 @@ export default function VendorOwnerPage() {
             {/* Photo Upload */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Portfolio Photos</h3>
-              <PhotoUpload 
-                photos={photos}
-                onPhotosChange={setPhotos}
-                isPremium={isPremium}
-                maxPhotos={isPremium ? undefined : 2}
-              />
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files || []);
+                    const newPhotoUrls = files.map(file => URL.createObjectURL(file));
+                    setPhotos(prev => [...prev, ...newPhotoUrls].slice(0, isPremium ? undefined : 2));
+                  }}
+                  className="hidden"
+                  id="photo-upload"
+                />
+                <label htmlFor="photo-upload" className="cursor-pointer">
+                  <div className="text-gray-500 mb-2">
+                    📸 Click to upload photos
+                  </div>
+                  <p className="text-sm text-gray-400">
+                    {isPremium ? 'Upload unlimited photos' : 'Upload up to 2 photos (upgrade for more)'}
+                  </p>
+                </label>
+                
+                {photos.length > 0 && (
+                  <div className="mt-4 grid grid-cols-2 gap-4">
+                    {photos.map((photo, index) => (
+                      <div key={index} className="relative">
+                        <img
+                          src={photo}
+                          alt={`Portfolio ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setPhotos(prev => prev.filter((_, i) => i !== index))}
+                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Terms Agreement */}
