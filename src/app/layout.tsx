@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { bodyFont, headingFont } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,8 +12,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${headingFont.variable}`}>
-      <body className={bodyFont.className}>{children}</body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   )
 }
