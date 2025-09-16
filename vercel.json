@@ -12,5 +12,10 @@
   "regions": ["iad1"],
   "github": {
     "autoAlias": false
+  },
+  "git": {
+    "deploymentEnabled": {
+      "master": true
+    }
   }
 }
