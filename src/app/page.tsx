@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import PricingSection from '@/components/PricingSection';
 
 export default function ComingSoonPage() {
   const [emailData, setEmailData] = useState({
@@ -64,44 +63,60 @@ export default function ComingSoonPage() {
         
         {/* Main Content */}
         <div className="relative z-10 text-center max-w-6xl mx-auto">
-          {/* Logo */}
+          {/* Logo and Title */}
           <div className="mb-12">
-            <div className="flex items-center justify-center mb-6">
+            <div className="flex items-center justify-center mb-8">
               <Image 
                 src="/images/logo.png" 
                 alt="Florida Wedding Wonders" 
-                width={80} 
-                height={80}
-                className="mr-4"
+                width={100} 
+                height={100}
+                className="mr-6"
               />
               <div className="text-left">
-                <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 bg-clip-text text-transparent leading-tight">
+                <h1 className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 bg-clip-text text-transparent leading-tight">
                   Florida Wedding Wonders
                 </h1>
-                <p className="text-xl lg:text-2xl text-gray-600 mt-2">
+                <p className="text-2xl lg:text-3xl text-gray-600 mt-4 font-light">
                   Your Dream Wedding Awaits in South Florida
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Coming Soon Banner */}
-          <div className="mb-12">
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full border border-purple-200 mb-6">
-              <span className="text-2xl mr-3">🌴</span>
-              <span className="text-lg font-semibold text-purple-800">Coming Soon</span>
-              <span className="text-2xl ml-3">🌴</span>
+          {/* Coming Soon Message */}
+          <div className="mb-16">
+            <div className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full border border-purple-200 mb-8">
+              <span className="text-3xl mr-4">🌴</span>
+              <span className="text-xl font-semibold text-purple-800">Coming Soon - Early 2025</span>
+              <span className="text-3xl ml-4">🌴</span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-8">
               We're Building Something Beautiful
             </h2>
-            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
               Florida Wedding Wonders will be your ultimate destination for discovering the most stunning wedding venues across the Sunshine State. From beachfront ceremonies to elegant ballrooms, we're curating the perfect collection for your special day.
             </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <a 
+                href="#signup-form" 
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                Get Early Access 🎯
+              </a>
+              <a 
+                href="/venue-packages" 
+                className="bg-white text-purple-600 border-2 border-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105"
+              >
+                Venue Owners Click Here 🏛️
+              </a>
+            </div>
           </div>
 
           {/* Email Signup Form */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 mb-16 border border-white/50 shadow-xl max-w-4xl mx-auto">
+          <div id="signup-form" className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 mb-16 border border-white/50 shadow-xl max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               🎯 Get Early Access & Exclusive Benefits
             </h3>
@@ -232,22 +247,6 @@ export default function ComingSoonPage() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Venue Owner Pricing Section */}
-      <div className="bg-white">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              🏛️ For Venue Owners: Choose Your Success Package
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join Florida's premier wedding venue directory and start booking more weddings
-            </p>
-          </div>
-          
-          <PricingSection />
         </div>
       </div>
 

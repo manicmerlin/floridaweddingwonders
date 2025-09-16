@@ -6,9 +6,10 @@ import { pricingPackages, getPackageColors, PricingPackage } from '@/lib/pricing
 interface PricingCardProps {
   package: PricingPackage;
   isRecommended?: boolean;
+  onSelect?: (packageId: string) => void;
 }
 
-const PricingCard: React.FC<PricingCardProps> = ({ package: pkg, isRecommended = false }) => {
+const PricingCard: React.FC<PricingCardProps> = ({ package: pkg, isRecommended = false, onSelect }) => {
   const colors = getPackageColors(pkg.color);
   
   return (
@@ -63,6 +64,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ package: pkg, isRecommended =
       <button 
         className="w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-200 hover:opacity-90"
         style={{ backgroundColor: colors.primary }}
+        onClick={() => onSelect?.(pkg.id)}
       >
         {pkg.ctaText}
       </button>
@@ -70,7 +72,11 @@ const PricingCard: React.FC<PricingCardProps> = ({ package: pkg, isRecommended =
   );
 };
 
-const PricingSection: React.FC = () => {
+interface PricingSectionProps {
+  onPackageSelect?: (packageId: string) => void;
+}
+
+const PricingSection: React.FC<PricingSectionProps> = ({ onPackageSelect }) => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,6 +95,7 @@ const PricingSection: React.FC = () => {
               key={pkg.id} 
               package={pkg} 
               isRecommended={pkg.id === 'growth'}
+              onSelect={onPackageSelect}
             />
           ))}
         </div>
