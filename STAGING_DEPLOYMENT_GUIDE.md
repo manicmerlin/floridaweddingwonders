@@ -1,49 +1,60 @@
-# Deployment & Staging Guide
+# 🚀 Staging & Production Deployment Guide
 
 ## 🎯 Overview
 
-Florida Wedding Wonders uses Vercel for hosting with two environments:
+Florida Wedding Wonders uses Vercel with dedicated staging and production environments:
 
-- **🧪 Staging**: https://floridaweddingwonders-7duarsa04-bennetts-projects-9dec6313.vercel.app
-- **🌐 Production**: https://floridaweddingwonders.com
+- **🧪 Staging**: `staging.floridaweddingwonders.com` (staging branch)
+- **🌐 Production**: `floridaweddingwonders.com` (master branch)
+
+## 🔧 Initial Staging Setup
+
+### 1. Configure Staging Subdomain
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Navigate to `floridaweddingwonders` project
+3. Go to **Settings** → **Domains**
+4. Add domain: `staging.floridaweddingwonders.com`
+5. Point it to staging branch deployment
+
+### 2. DNS Configuration
+Add CNAME record in your domain provider:
+```
+CNAME   staging   cname.vercel-dns.com
+```
 
 ## 🚀 Quick Deployment
 
 ### Using the Deployment Script
 
 ```bash
-# Deploy to staging
+# Deploy to staging (staging branch)
 ./deploy.sh staging
 
-# Deploy to production  
+# Deploy to production (master branch)
 ./deploy.sh production
 
-# Show help
+# Show help and environment info
 ./deploy.sh
 ```
 
 ### Manual Deployment
 
 ```bash
-# Staging
-npm run build && vercel
+# Staging (from staging branch)
+git checkout staging
+npm run build && vercel --prod
 
-# Production
+# Production (from master branch)
+git checkout master
 npm run build && vercel --prod
 ```
 
 ## 🔄 Development Workflow
 
-### 1. Local Development
+### 1. Feature Development (Staging Branch)
 ```bash
-npm run dev
-# Visit http://localhost:3000
-```
-
-### 2. Feature Development
-```bash
-# Create feature branch
-git checkout -b feature/new-feature
+# Switch to staging branch
+git checkout staging
 
 # Make changes
 # ... code changes ...
@@ -55,36 +66,37 @@ npm run dev
 # Commit changes
 git add .
 git commit -m "Add new feature"
+git push origin staging
 ```
 
-### 3. Staging Deployment
+### 2. Deploy to Staging
 ```bash
-# Deploy to staging for testing
+# Deploy to staging environment
 ./deploy.sh staging
 
-# Test staging environment
-# Visit staging URL and verify changes
+# Test at staging.floridaweddingwonders.com
 ```
 
-### 4. Production Deployment
+### 3. Production Release
 ```bash
-# Merge to master
+# Merge staging to master
 git checkout master
-git merge feature/new-feature
+git merge staging
+git push origin master
 
 # Deploy to production
 ./deploy.sh production
 
-# Verify production deployment
+# Verify at floridaweddingwonders.com
 ```
 
 ## 🌍 Environment URLs
 
-| Environment | URL | Purpose |
-|-------------|-----|---------|
-| Local | http://localhost:3000 | Development |
-| Staging | [Staging URL](https://floridaweddingwonders-7duarsa04-bennetts-projects-9dec6313.vercel.app) | Testing |
-| Production | [floridaweddingwonders.com](https://floridaweddingwonders.com) | Live site |
+| Environment | URL | Branch | Purpose |
+|-------------|-----|---------|---------|
+| Local | http://localhost:3000 | Any | Development |
+| **Staging** | **staging.floridaweddingwonders.com** | `staging` | Testing |
+| **Production** | **floridaweddingwonders.com** | `master` | Live site |
 
 ## 🔧 Environment Variables
 
@@ -173,14 +185,20 @@ For deployment issues:
 
 ## 🎉 Recent Updates
 
-### Latest Deployment
+### Latest Deployment Infrastructure
+- ✅ Dedicated staging branch and subdomain
+- ✅ staging.floridaweddingwonders.com configured
 - ✅ Separate venue packages page with Stripe preparation
 - ✅ Enhanced hero section with better CTAs
 - ✅ Improved responsive design
-- ✅ Staging environment configured
+- ✅ Google Analytics integration
+
+### Branch Strategy
+- 📦 `staging` branch → staging.floridaweddingwonders.com
+- 📦 `master` branch → floridaweddingwonders.com
 
 ### Next Steps
 - 💳 Stripe payment integration
 - 📧 Enhanced email automation
-- 📊 Analytics implementation
+- 📊 Advanced analytics implementation
 - 🔍 SEO optimization

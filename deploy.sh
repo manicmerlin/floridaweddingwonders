@@ -5,15 +5,19 @@
 
 if [ "$1" = "staging" ]; then
     echo "🚀 Deploying to STAGING environment..."
-    echo "📋 Running build check..."
+    echo "� Switching to staging branch..."
+    git checkout staging
+    
+    echo "�📋 Running build check..."
     npm run build
     
     if [ $? -eq 0 ]; then
         echo "✅ Build successful, deploying to staging..."
-        vercel
+        vercel --prod
         echo ""
         echo "🎯 Staging deployment complete!"
-        echo "🔗 Staging URL: https://floridaweddingwonders-7duarsa04-bennetts-projects-9dec6313.vercel.app"
+        echo "🔗 Staging URL: https://floridaweddingwonders-coyidrxvb-bennetts-projects-9dec6313.vercel.app"
+        echo "🌐 Configure staging.floridaweddingwonders.com in Vercel dashboard to point to this deployment"
         echo "🔍 Inspect: Check Vercel dashboard for details"
     else
         echo "❌ Build failed, deployment aborted"
@@ -22,7 +26,10 @@ if [ "$1" = "staging" ]; then
     
 elif [ "$1" = "production" ]; then
     echo "🏛️ Deploying to PRODUCTION environment..."
-    echo "📋 Running build check..."
+    echo "� Switching to master branch..."
+    git checkout master
+    
+    echo "�📋 Running build check..."
     npm run build
     
     if [ $? -eq 0 ]; then
@@ -41,11 +48,15 @@ else
     echo "🤖 Florida Wedding Wonders Deployment Script"
     echo ""
     echo "Usage:"
-    echo "  ./deploy.sh staging     - Deploy to staging environment"
-    echo "  ./deploy.sh production  - Deploy to production environment"
+    echo "  ./deploy.sh staging     - Deploy to staging environment (staging branch)"
+    echo "  ./deploy.sh production  - Deploy to production environment (master branch)"
     echo ""
     echo "Available environments:"
-    echo "  🧪 Staging:    https://floridaweddingwonders-7duarsa04-bennetts-projects-9dec6313.vercel.app"
+    echo "  🧪 Staging:    staging.floridaweddingwonders.com (configure in Vercel)"
     echo "  🌐 Production: https://floridaweddingwonders.com"
+    echo ""
+    echo "Branch Configuration:"
+    echo "  📦 staging branch  → staging.floridaweddingwonders.com"
+    echo "  📦 master branch   → floridaweddingwonders.com"
     echo ""
 fi
