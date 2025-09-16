@@ -64,33 +64,47 @@ export default function DressShopsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-pink-50 to-purple-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Find Your Dream Wedding Dress
+      <section className="bg-gradient-to-r from-pink-600/80 via-purple-600/80 to-rose-600/80 backdrop-blur-sm py-16">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+            Bridal Shops in Florida
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Discover South Florida's finest bridal boutiques, from designer showrooms to charming local shops.
+          <p className="text-xl lg:text-2xl text-pink-100 max-w-4xl mx-auto mb-8">
+            Discover 31 premier bridal boutiques across South Florida. From designer gowns to custom creations, find your perfect dress.
           </p>
           
-          {/* Call to Action */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/register"
-              className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition"
-            >
-              Start Your Search
-            </Link>
-            <Link
-              href="/venues"
-              className="bg-white hover:bg-gray-50 text-gray-900 px-8 py-3 rounded-lg font-semibold border border-gray-300 transition"
-            >
-              Browse Venues
-            </Link>
+          {/* Search and Filter Bar */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Search dress shops..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
+                />
+              </div>
+              <div>
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
+                >
+                  <option value="">All Shop Types</option>
+                  <option value="Bridal Boutique">Bridal Boutique</option>
+                  <option value="Designer Showroom">Designer Showroom</option>
+                  <option value="Custom Bridal">Custom Bridal</option>
+                  <option value="Plus Size Specialist">Plus Size Specialist</option>
+                  <option value="Luxury Bridal">Luxury Bridal</option>
+                  <option value="Department Store">Department Store</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -141,9 +155,9 @@ export default function DressShopsPage() {
       </section>
 
       {/* Shop Type Tabs */}
-      <section className="py-6 bg-white">
+      <section className="py-6 bg-gray-900/20 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-b border-gray-200">
+          <div className="border-b border-white/20">
             <nav className="-mb-px flex space-x-8 overflow-x-auto">
               {tabOptions.map((tab) => (
                 <button
@@ -151,12 +165,12 @@ export default function DressShopsPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition ${
                     activeTab === tab.id
-                      ? 'border-pink-500 text-pink-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? 'border-pink-400 text-pink-300'
+                      : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500'
                   }`}
                 >
                   {tab.label}
-                  <span className="ml-2 bg-gray-100 text-gray-600 py-1 px-2 rounded-full text-xs">
+                  <span className="ml-2 bg-white/20 text-white py-1 px-2 rounded-full text-xs">
                     {tab.count}
                   </span>
                 </button>
@@ -167,13 +181,13 @@ export default function DressShopsPage() {
       </section>
 
       {/* Dress Shops Grid */}
-      <section className="py-12">
+      <section className="py-12 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredShops.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-gray-400 text-6xl mb-4">👗</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No dress shops found</h3>
-              <p className="text-gray-600 mb-6">Try adjusting your search or filters</p>
+              <h3 className="text-xl font-semibold text-white mb-2">No dress shops found</h3>
+              <p className="text-gray-300 mb-6">Try adjusting your search or filters</p>
               <button
                 onClick={() => {
                   setSearchTerm('');
@@ -181,7 +195,7 @@ export default function DressShopsPage() {
                   setPriceFilter('');
                   setActiveTab('all');
                 }}
-                className="text-pink-600 hover:text-pink-700 font-medium"
+                className="text-pink-300 hover:text-pink-200 font-medium"
               >
                 Clear all filters
               </button>

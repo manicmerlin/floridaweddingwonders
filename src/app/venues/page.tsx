@@ -119,8 +119,8 @@ export default function VenuesPage() {
   const paginatedVenues = filteredVenues.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   // Get unique regions and types for filters
-  const regions = [...new Set(venues.map(v => v.address.city))].sort();
-  const venueTypes = [...new Set(venues.map(v => v.venueType))].sort();
+  const regions = Array.from(new Set(venues.map(v => v.address.city))).sort();
+  const venueTypes = Array.from(new Set(venues.map(v => v.venueType))).sort();
 
   if (loading) {
     return (
@@ -134,26 +134,66 @@ export default function VenuesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-6">
-            Discover Florida's Premier Wedding Venues
+      <section className="bg-gradient-to-r from-purple-600/80 via-pink-600/80 to-indigo-600/80 backdrop-blur-sm text-white py-20">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+            Wedding Venues in Florida
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            From stunning beachfront resorts to elegant ballrooms, find the perfect setting for your dream wedding in the Sunshine State.
+          <p className="text-xl lg:text-2xl text-purple-100 max-w-4xl mx-auto mb-8">
+            Discover over 130 stunning wedding venues across the Sunshine State. From beachfront ceremonies to elegant ballrooms.
           </p>
-          <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 inline-block">
-            <span className="text-lg font-semibold">{venues.length} Beautiful Venues</span>
+          
+          {/* Search and Filter Bar */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Search venues..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                />
+              </div>
+              <div>
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                >
+                  <option value="">All Venue Types</option>
+                  <option value="beach">Beach</option>
+                  <option value="ballroom">Ballroom</option>
+                  <option value="garden">Garden</option>
+                  <option value="historic">Historic</option>
+                  <option value="modern">Modern</option>
+                </select>
+              </div>
+              <div>
+                <select
+                  value={selectedRegion}
+                  onChange={(e) => setSelectedRegion(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                >
+                  <option value="">All Locations</option>
+                  <option value="Miami">Miami</option>
+                  <option value="Fort Lauderdale">Fort Lauderdale</option>
+                  <option value="Key Largo">Key Largo</option>
+                  <option value="Naples">Naples</option>
+                  <option value="Tampa">Tampa</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Search and Filters */}
-      <section className="py-8 bg-white border-b">
+      <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
@@ -163,7 +203,7 @@ export default function VenuesPage() {
                 placeholder="Search venues, locations, or features..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                className="w-full px-4 py-2 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
               />
             </div>
 
@@ -206,7 +246,7 @@ export default function VenuesPage() {
           </div>
 
           {/* Results Count */}
-          <div className="mt-4 text-gray-600">
+          <div className="mt-4 text-gray-300">
             Showing {paginatedVenues.length} of {filteredVenues.length} venues
             {searchTerm && ` for "${searchTerm}"`}
           </div>
@@ -214,13 +254,13 @@ export default function VenuesPage() {
       </section>
 
       {/* Venues Grid */}
-      <section className="py-12">
+      <section className="py-12 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredVenues.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">No venues found</h3>
-              <p className="text-gray-600 mb-6">Try adjusting your search criteria or filters</p>
+              <h3 className="text-2xl font-semibold text-white mb-2">No venues found</h3>
+              <p className="text-gray-300 mb-6">Try adjusting your search criteria or filters</p>
               <button
                 onClick={() => {
                   setSearchTerm('');
@@ -228,7 +268,7 @@ export default function VenuesPage() {
                   setSelectedType('');
                   setSelectedCapacity('');
                 }}
-                className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Clear All Filters
               </button>
