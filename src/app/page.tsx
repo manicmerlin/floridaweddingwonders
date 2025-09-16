@@ -112,7 +112,7 @@ export default function HomePage() {
               </a>
               <a 
                 href="/venue-packages" 
-                className="bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Venue Owners Click Here 🏛️
               </a>
