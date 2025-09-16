@@ -9,6 +9,7 @@ export interface Venue {
   id: string;
   name: string;
   description: string;
+  venueType: 'beach' | 'garden' | 'ballroom' | 'historic' | 'modern' | 'rustic';
   address: {
     street: string;
     city: string;
@@ -25,28 +26,27 @@ export interface Venue {
   };
   pricing: {
     startingPrice: number;
-    currency: 'USD';
+    packages: any[];
   };
   amenities: string[];
-  venueType: 'beach' | 'garden' | 'ballroom' | 'historic' | 'modern' | 'rustic';
-  tags?: string[];
   images?: VenueImage[];
   contact: {
     email: string;
     phone: string;
     website?: string;
   };
+  availability: any[];
+  reviews: {
+    rating: number;
+    count: number;
+    reviews: any[];
+  };
   owner: {
     id: string;
     name: string;
+    email: string;
     isPremium: boolean;
   };
-  availability: {
-    isAvailable: boolean;
-    blackoutDates: Date[];
-  };
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export interface User {

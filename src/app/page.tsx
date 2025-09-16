@@ -1,9 +1,26 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ComingSoonPage() {
+export default function HomePage() {
+  const [isStaging, setIsStaging] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if we're on staging environment
+    const hostname = window.location.hostname;
+    const isStaginghostname = hostname.includes('staging.floridaweddingwonders.com');
+    setIsStaging(isStaginghostname);
+    
+    // If on staging, redirect to venues directory
+    if (isStaginghostname) {
+      router.replace('/venues');
+    }
+  }, [router]);
+
+  // Rest of the coming soon page component for production
   const [emailData, setEmailData] = useState({
     email: '',
     userType: 'regular_user' as 'regular_user' | 'venue_owner',
