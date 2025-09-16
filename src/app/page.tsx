@@ -92,7 +92,7 @@ export default function HomePage() {
           <div className="mb-16">
             <div className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
               <span className="text-3xl mr-4">🌴</span>
-              <span className="text-xl font-semibold text-white">Coming Soon - Early 2025</span>
+              <span className="text-xl font-semibold text-white">Coming Soon - November 2025</span>
               <span className="text-3xl ml-4">🌴</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
