@@ -1,9 +1,26 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ComingSoonPage() {
+export default function HomePage() {
+  const [isStaging, setIsStaging] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if we're on staging environment
+    const hostname = window.location.hostname;
+    const isStaginghostname = hostname.includes('staging.floridaweddingwonders.com');
+    setIsStaging(isStaginghostname);
+    
+    // If on staging, redirect to venues directory
+    if (isStaginghostname) {
+      router.replace('/venues');
+    }
+  }, [router]);
+
+  // Rest of the coming soon page component for production
   const [emailData, setEmailData] = useState({
     email: '',
     userType: 'regular_user' as 'regular_user' | 'venue_owner',
@@ -53,48 +70,35 @@ export default function ComingSoonPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gray-900">
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center px-6">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5Mjg1RjQiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRhMiAyIDAgMSAxLTQgMCAyIDIgMCAwIDEgNCAweiIvPjwvZz48L2c+PC9zdmc+')] bg-repeat"></div>
-        </div>
-        
+      <div className="relative min-h-screen flex items-center justify-center px-6 bg-gray-900">
         {/* Main Content */}
         <div className="relative z-10 text-center max-w-6xl mx-auto">
-          {/* Logo and Title */}
-          <div className="mb-12">
-            <div className="flex items-center justify-center mb-8">
+          {/* Centered Logo Only */}
+          <div className="mb-16">
+            <div className="flex justify-center mb-12">
               <Image 
                 src="/images/logo.png" 
                 alt="Florida Wedding Wonders" 
-                width={100} 
-                height={100}
-                className="mr-6"
+                width={150} 
+                height={150}
+                className="drop-shadow-lg"
               />
-              <div className="text-left">
-                <h1 className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 bg-clip-text text-transparent leading-tight">
-                  Florida Wedding Wonders
-                </h1>
-                <p className="text-2xl lg:text-3xl text-gray-600 mt-4 font-light">
-                  Your Dream Wedding Awaits in South Florida
-                </p>
-              </div>
             </div>
           </div>
 
           {/* Coming Soon Message */}
           <div className="mb-16">
-            <div className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full border border-purple-200 mb-8">
+            <div className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8">
               <span className="text-3xl mr-4">🌴</span>
-              <span className="text-xl font-semibold text-purple-800">Coming Soon - Early 2025</span>
+              <span className="text-xl font-semibold text-white">Coming Soon - Early 2025</span>
               <span className="text-3xl ml-4">🌴</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-8">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-8">
               We're Building Something Beautiful
             </h2>
-            <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+            <p className="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
               Florida Wedding Wonders will be your ultimate destination for discovering the most stunning wedding venues across the Sunshine State. From beachfront ceremonies to elegant ballrooms, we're curating the perfect collection for your special day.
             </p>
             
@@ -108,7 +112,7 @@ export default function ComingSoonPage() {
               </a>
               <a 
                 href="/venue-packages" 
-                className="bg-white text-purple-600 border-2 border-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105"
+                className="bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition-all duration-300 hover:scale-105"
               >
                 Venue Owners Click Here 🏛️
               </a>
@@ -116,7 +120,7 @@ export default function ComingSoonPage() {
           </div>
 
           {/* Email Signup Form */}
-          <div id="signup-form" className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 mb-16 border border-white/50 shadow-xl max-w-4xl mx-auto">
+          <div id="signup-form" className="bg-white rounded-3xl p-8 mb-16 shadow-2xl max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">
               🎯 Get Early Access & Exclusive Benefits
             </h3>
@@ -207,19 +211,19 @@ export default function ComingSoonPage() {
 
           {/* Feature Cards */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="text-4xl mb-4">🏖️</div>
               <h3 className="text-xl font-bold text-purple-700 mb-3">Stunning Venues</h3>
               <p className="text-gray-600">From oceanfront resorts to historic estates, discover Florida's most breathtaking wedding venues.</p>
             </div>
             
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="text-4xl mb-4">📸</div>
               <h3 className="text-xl font-bold text-pink-700 mb-3">Photo Galleries</h3>
               <p className="text-gray-600">Browse stunning venue photography and get inspired for your perfect wedding day.</p>
             </div>
             
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="text-4xl mb-4">💍</div>
               <h3 className="text-xl font-bold text-rose-700 mb-3">Complete Directory</h3>
               <p className="text-gray-600">Connect with trusted vendors, planners, and everything you need for your dream wedding.</p>
@@ -227,7 +231,7 @@ export default function ComingSoonPage() {
           </div>
 
           {/* Stats Section */}
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 mb-16 border border-white/50">
+          <div className="bg-white rounded-3xl p-8 mb-16 shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">130+</div>
