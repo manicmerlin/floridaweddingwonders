@@ -16,8 +16,8 @@ if [ "$1" = "staging" ]; then
         vercel --prod
         echo ""
         echo "🎯 Staging deployment complete!"
-        echo "🔗 Staging URL: https://floridaweddingwonders-coyidrxvb-bennetts-projects-9dec6313.vercel.app"
-        echo "🌐 Configure staging.floridaweddingwonders.com in Vercel dashboard to point to this deployment"
+        echo "🔗 Staging URL: https://staging.floridaweddingwonders.com"
+        echo "🚀 Site is live and ready for testing!"
         echo "🔍 Inspect: Check Vercel dashboard for details"
     else
         echo "❌ Build failed, deployment aborted"
@@ -52,7 +52,7 @@ else
     echo "  ./deploy.sh production  - Deploy to production environment (master branch)"
     echo ""
     echo "Available environments:"
-    echo "  🧪 Staging:    staging.floridaweddingwonders.com (configure in Vercel)"
+    echo "  🧪 Staging:    https://staging.floridaweddingwonders.com"
     echo "  🌐 Production: https://floridaweddingwonders.com"
     echo ""
     echo "Branch Configuration:"
