@@ -36,7 +36,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Logo size="md" />
+            <Logo size="md" variant="horizontal" />
             {isSuper && (
               <span className="ml-3 px-2 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full">
                 🔑 SUPER ADMIN
