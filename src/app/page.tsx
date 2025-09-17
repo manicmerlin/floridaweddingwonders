@@ -146,7 +146,7 @@ export default function HomePage() {
               </div>
 
               {/* CTA Section */}
-              <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-400/30 rounded-2xl p-8">
+              <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-400/30 rounded-2xl p-8 mb-16">
                 <h3 className="text-2xl font-bold text-white mb-4">Ready to Plan Your Dream Wedding?</h3>
                 <p className="text-gray-300 mb-6">Start exploring Florida's most beautiful venues and connect with trusted wedding professionals.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -166,7 +166,7 @@ export default function HomePage() {
               </div>
 
               {/* Stats Section */}
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-16">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                   <div className="text-center">
                     <div className="text-3xl lg:text-4xl font-bold text-white mb-2">130+</div>

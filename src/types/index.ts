@@ -3,6 +3,7 @@ export interface VenueImage {
   url: string;
   alt: string;
   isPrimary?: boolean;
+  type?: 'image' | 'video'; // Add type to support both images and videos
 }
 
 export interface Venue {

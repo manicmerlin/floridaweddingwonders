@@ -168,11 +168,21 @@ console.log('🔍 Processing venue data:', venueData.length, 'venues');
 // Sort venues by photo status first (venues with uploaded photos at top)
 const sortedVenueData = sortVenuesByPhotos(venueData);
 
+// Helper function to create URL-friendly slugs
+function createSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, '-')         // Replace spaces with hyphens
+    .replace(/-+/g, '-')          // Replace multiple hyphens with single hyphen
+    .replace(/^-|-$/g, '');       // Remove leading/trailing hyphens
+}
+
 export const mockVenues: Venue[] = sortedVenueData
   .filter((venue: any) => venue && typeof venue === 'object' && venue.name)
   .map((venue: any, index: number): Venue => {
     const venueObj = {
-      id: (index + 1).toString(),
+      id: createSlug(venue.name || `venue-${index + 1}`),
       name: venue.name || `Venue ${index + 1}`,
       description: venue.style || venue.description || 'Beautiful wedding venue',
       address: {
@@ -186,7 +196,7 @@ export const mockVenues: Venue[] = sortedVenueData
       capacity: parseCapacity(venue.capacity),
       pricing: {
         startingPrice: parsePrice(venue.pricing),
-        currency: 'USD' as const,
+        packages: [], // Empty packages array for now
       },
       amenities: venue.servicesAmenities || venue.amenities || [],
       venueType: determineVenueType(venue.tags || []),
@@ -197,14 +207,17 @@ export const mockVenues: Venue[] = sortedVenueData
         phone: getVenuePhone(venue.name),
         website: venue.website || undefined,
       },
+      availability: [],
+      reviews: {
+        rating: Math.round((Math.random() * 2 + 3) * 10) / 10, // Random rating between 3.0-5.0
+        count: Math.floor(Math.random() * 50) + 5, // Random review count 5-54
+        reviews: [],
+      },
       owner: {
         id: `owner${index + 1}`,
         name: `Venue Manager ${index + 1}`,
+        email: `manager${index + 1}@${createSlug(venue.name || 'venue')}.com`,
         isPremium: Math.random() > 0.6, // 40% premium
-      },
-      availability: {
-        isAvailable: true,
-        blackoutDates: [],
       },
       createdAt: new Date(2024, 0, index + 1),
       updatedAt: new Date(2024, 0, index + 1),

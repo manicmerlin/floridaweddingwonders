@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import PricingSection from '@/components/PricingSection';
+import Logo from '@/components/Logo';
 
 export default function VenuePackagesPage() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
@@ -70,16 +71,7 @@ export default function VenuePackagesPage() {
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-6xl mx-auto px-6 py-4">
-          <Link href="/" className="flex items-center">
-            <Image 
-              src="/images/logo.png" 
-              alt="Florida Wedding Wonders" 
-              width={40} 
-              height={40}
-              className="mr-3"
-            />
-            <span className="text-xl font-bold text-gray-800">Florida Wedding Wonders</span>
-          </Link>
+          <Logo size="md" variant="horizontal" />
         </div>
       </header>
 
@@ -272,14 +264,7 @@ export default function VenuePackagesPage() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center mb-6">
-            <Image 
-              src="/images/logo.png" 
-              alt="Florida Wedding Wonders" 
-              width={40} 
-              height={40}
-              className="mr-3"
-            />
-            <span className="text-xl font-bold">Florida Wedding Wonders</span>
+            <Logo size="sm" variant="horizontal" showText={false} />
           </div>
           <p className="text-gray-400 mb-4">
             Helping Florida venues connect with couples since 2025
