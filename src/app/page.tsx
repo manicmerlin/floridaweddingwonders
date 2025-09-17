@@ -69,8 +69,30 @@ export default function HomePage() {
       {isStaging ? (
         // Staging Environment - Functional home page with coming soon branding
         <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
+          {/* Navigation Bar */}
+          <nav className="bg-transparent absolute top-0 left-0 right-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-center items-center h-16">
+                <div className="flex items-center space-x-8">
+                  <a href="/venues" className="text-white hover:text-pink-300 font-medium transition">
+                    Browse Venues
+                  </a>
+                  <a href="/dress-shops" className="text-white hover:text-pink-300 font-medium transition">
+                    Dress Shops
+                  </a>
+                  <a href="/vendors" className="text-white hover:text-pink-300 font-medium transition">
+                    Vendors
+                  </a>
+                  <a href="/contact" className="text-white hover:text-pink-300 font-medium transition">
+                    Contact
+                  </a>
+                </div>
+              </div>
+            </div>
+          </nav>
+          
           {/* Hero Section */}
-          <div className="relative min-h-screen flex items-center justify-center px-6">
+          <div className="relative min-h-screen flex items-center justify-center px-6 pt-24">
             <div className="relative z-10 text-center max-w-6xl mx-auto">
               {/* Logo */}
               <div className="mb-12">
@@ -123,28 +145,6 @@ export default function HomePage() {
                 </a>
               </div>
 
-              {/* Stats Section */}
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-16">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                  <div className="text-center">
-                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">130+</div>
-                    <div className="text-gray-300 font-medium">Premium Venues</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">50+</div>
-                    <div className="text-gray-300 font-medium">Trusted Vendors</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">31+</div>
-                    <div className="text-gray-300 font-medium">Bridal Shops</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">5★</div>
-                    <div className="text-gray-300 font-medium">Quality Service</div>
-                  </div>
-                </div>
-              </div>
-
               {/* CTA Section */}
               <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-400/30 rounded-2xl p-8">
                 <h3 className="text-2xl font-bold text-white mb-4">Ready to Plan Your Dream Wedding?</h3>
@@ -162,6 +162,28 @@ export default function HomePage() {
                   >
                     List Your Venue 💼
                   </a>
+                </div>
+              </div>
+
+              {/* Stats Section */}
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                  <div className="text-center">
+                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">130+</div>
+                    <div className="text-gray-300 font-medium">Premium Venues</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">50+</div>
+                    <div className="text-gray-300 font-medium">Trusted Vendors</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">31+</div>
+                    <div className="text-gray-300 font-medium">Bridal Shops</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2">5★</div>
+                    <div className="text-gray-300 font-medium">Quality Service</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -425,7 +447,7 @@ export default function HomePage() {
                 <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="https://staging.floridaweddingwonders.com" className="hover:text-white transition-colors">Terms of Service</a></li>
               </ul>
             </div>
             
