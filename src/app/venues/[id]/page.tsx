@@ -70,7 +70,8 @@ const transformVenueData = (venueData: any, index: number = 0): Venue => {
       name: 'Venue Owner',
       email: 'owner@venue.com',
       isPremium: Math.random() > 0.7
-    }
+    },
+    claimStatus: 'unclaimed' as const
   };
 };
 
@@ -153,7 +154,6 @@ export default function VenueDetailPage() {
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
-    { id: 'gallery', label: 'Photos' },
     { id: 'details', label: 'Details' },
     { id: 'contact', label: 'Contact' }
   ];
@@ -162,30 +162,39 @@ export default function VenueDetailPage() {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
 
-      {/* Hero Section with Main Image */}
-      <section className="relative h-96 bg-gray-900">
+      {/* Hero Gallery Section */}
+      <section className="relative bg-white">
         {venue.images && venue.images.length > 0 ? (
-          <Image
-            src={venue.images[0].url}
-            alt={venue.images[0].alt}
-            fill
-            className="object-cover opacity-80"
+          <PhotoGallery 
+            images={venue.images.map((img, index) => ({
+              id: img.id,
+              url: img.url,
+              alt: img.alt,
+              isPrimary: img.isPrimary || index === 0
+            }))} 
+            venueName={venue.name} 
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center">
-            <span className="text-white text-6xl">🏛️</span>
+          <div className="h-96 bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center">
+            <div className="text-center text-white">
+              <span className="text-6xl mb-4 block">🏛️</span>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4">{venue.name}</h1>
+              <p className="text-xl md:text-2xl mb-2">📍 {venue.address.city}, {venue.address.state}</p>
+              <p className="text-lg opacity-90">{venue.venueType}</p>
+            </div>
           </div>
         )}
         
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">{venue.name}</h1>
-            <p className="text-xl md:text-2xl mb-2">📍 {venue.address.city}, {venue.address.state}</p>
-            <p className="text-lg opacity-90">{venue.venueType}</p>
+        {/* Venue Title Section - Below Gallery */}
+        {venue.images && venue.images.length > 0 && (
+          <div className="bg-white py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">{venue.name}</h1>
+              <p className="text-xl md:text-2xl text-gray-600 mb-2">📍 {venue.address.city}, {venue.address.state}</p>
+              <p className="text-lg text-gray-500 capitalize">{venue.venueType}</p>
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Quick Info Bar */}
@@ -206,13 +215,18 @@ export default function VenueDetailPage() {
             </div>
             <div>
               <div className="text-2xl font-bold text-pink-600">
-                {venue.images ? venue.images.length : 0}
+                {venue.images && venue.images.length > 0 ? venue.images.length : '—'}
               </div>
-              <div className="text-gray-600">Photos</div>
+              <div className="text-gray-600">
+                {venue.images && venue.images.length > 0 ? 
+                  (venue.images.length === 1 ? 'Photo' : 'Photos') : 
+                  'Photos'
+                }
+              </div>
             </div>
             <div>
               {venue.externalReviews?.google ? (
-                <div className="cursor-pointer" onClick={() => window.open(venue.externalReviews.google.url, '_blank')}>
+                <div className="cursor-pointer" onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}>
                   <div className="flex items-center justify-center mb-1">
                     <Image
                       src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
@@ -361,29 +375,6 @@ export default function VenueDetailPage() {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-
-          {activeTab === 'gallery' && (
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Photo Gallery</h2>
-              {venue.images && venue.images.length > 0 ? (
-                <PhotoGallery 
-                  images={venue.images.map((img, index) => ({
-                    id: img.id,
-                    url: img.url,
-                    alt: img.alt,
-                    isPrimary: img.isPrimary || index === 0
-                  }))} 
-                  venueName={venue.name} 
-                />
-              ) : (
-                <div className="text-center py-12">
-                  <div className="text-gray-400 text-6xl mb-4">📸</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No photos available</h3>
-                  <p className="text-gray-600">Photos will be added soon.</p>
-                </div>
-              )}
             </div>
           )}
 

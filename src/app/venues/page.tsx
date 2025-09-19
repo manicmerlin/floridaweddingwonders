@@ -66,7 +66,8 @@ const transformVenueData = (venueData: any, index: number): Venue => {
       name: 'Venue Owner',
       email: 'owner@venue.com',
       isPremium: Math.random() > 0.7
-    }
+    },
+    claimStatus: 'unclaimed' as const
   };
 };
 
@@ -127,6 +128,16 @@ export default function VenuesPage() {
         venue.capacity.max >= min && venue.capacity.min <= max
       );
     }
+
+    // Sort venues with premium venues first
+    filtered = filtered.sort((a, b) => {
+      // Premium venues first
+      if (a.owner.isPremium && !b.owner.isPremium) return -1;
+      if (!a.owner.isPremium && b.owner.isPremium) return 1;
+      
+      // Then by name alphabetically
+      return a.name.localeCompare(b.name);
+    });
 
     setFilteredVenues(filtered);
     setCurrentPage(1); // Reset to first page when filters change
