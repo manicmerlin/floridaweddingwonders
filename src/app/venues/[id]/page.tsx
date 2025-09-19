@@ -7,8 +7,77 @@ import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import PhotoGallery from '../../../components/PhotoGallery';
+import VenueClaimButton from '../../../components/VenueClaimButton';
 import { mockVenues } from '../../../lib/mockData';
+import venuesData from '../../../data/venues.json';
 import { Venue } from '../../../types';
+
+// Function to get external reviews (moved outside component)
+function getExternalReviews(venueName: string, index: number): any {
+  // Generate Google reviews for all venues
+  return {
+    google: {
+      placeId: `ChIJexample${index}`,
+      rating: Number((3.8 + Math.random() * 1.2).toFixed(1)), // Ratings between 3.8-5.0
+      reviewCount: Math.floor(Math.random() * 300) + 25, // Review counts between 25-325
+      url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueName)}`
+    }
+  };
+}
+
+// Transform venue data to match our Venue type (same as in venues page)
+const transformVenueData = (venueData: any, index: number = 0): Venue => {
+  return {
+    id: venueData.id || venueData.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-'),
+    name: venueData.name,
+    description: venueData.style || 'Beautiful wedding venue in South Florida',
+    venueType: venueData.tags?.includes('beach') ? 'beach' :
+                venueData.tags?.includes('garden') ? 'garden' :
+                venueData.tags?.includes('ballroom') ? 'ballroom' :
+                venueData.tags?.includes('historic') ? 'historic' :
+                venueData.tags?.includes('modern') ? 'modern' : 'ballroom',
+    address: {
+      street: venueData.location || '',
+      city: venueData.location?.split(',')[0]?.trim() || 'Miami',
+      state: 'FL',
+      zipCode: venueData.location?.match(/\d{5}$/)?.[0] || '33101'
+    },
+    capacity: {
+      min: 50,
+      max: parseInt(venueData.capacity?.match(/\d+/)?.[0]) || 200
+    },
+    pricing: {
+      startingPrice: venueData.pricing?.match(/\$(\d+)/)?.[1] ? 
+        parseInt(venueData.pricing.match(/\$(\d+)/)[1]) * 100 : 5000,
+      packages: []
+    },
+    amenities: venueData.servicesAmenities || [],
+    images: venueData.images || [],
+    contact: {
+      phone: venueData.phone || '',
+      email: venueData.email || `info@${(venueData.name || 'venue').toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com`,
+      website: venueData.website || ''
+    },
+    availability: [],
+    reviews: {
+      rating: 4.5,
+      count: Math.floor(Math.random() * 50) + 10,
+      reviews: []
+    },
+    externalReviews: getExternalReviews(venueData.name || '', index),
+    owner: {
+      id: 'default',
+      name: 'Venue Owner',
+      email: 'owner@venue.com',
+      isPremium: Math.random() > 0.7
+    }
+  };
+};
+
+// Create combined venue list
+const jsonVenues = venuesData.weddingVenues ? 
+  venuesData.weddingVenues.map((venue, index) => transformVenueData(venue, index)) : [];
+const allVenues = [...mockVenues, ...jsonVenues];
 
 export default function VenueDetailPage() {
   const params = useParams();
@@ -18,8 +87,29 @@ export default function VenueDetailPage() {
 
   useEffect(() => {
     if (params.id) {
-      // Find venue by ID
-      const foundVenue = mockVenues.find(v => v.id === params.id);
+      console.log('Looking for venue with ID:', params.id);
+      console.log('Available venues:', allVenues.map(v => ({ id: v.id, name: v.name })));
+      
+      // Find venue by ID or slug in combined venues list
+      let foundVenue = allVenues.find(v => v.id === params.id);
+      
+      // If not found by exact ID, try to find by name-based slug
+      if (!foundVenue) {
+        foundVenue = allVenues.find(v => 
+          v.name.toLowerCase().replace(/[^a-z0-9]/g, '-') === params.id ||
+          v.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') === params.id
+        );
+      }
+      
+      // If still not found, try partial name matching
+      if (!foundVenue && typeof params.id === 'string') {
+        foundVenue = allVenues.find(v => 
+          v.name.toLowerCase().includes(params.id.toString().replace(/-/g, ' ')) ||
+          params.id.toString().replace(/-/g, ' ').includes(v.name.toLowerCase())
+        );
+      }
+      
+      console.log('Found venue:', foundVenue ? foundVenue.name : 'None');
       setVenue(foundVenue || null);
       setLoading(false);
     }
@@ -101,7 +191,7 @@ export default function VenueDetailPage() {
       {/* Quick Info Bar */}
       <section className="bg-white py-6 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-6 text-center">
+          <div className="grid md:grid-cols-5 gap-6 text-center">
             <div>
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
               <div className="text-gray-600">Capacity</div>
@@ -120,7 +210,40 @@ export default function VenueDetailPage() {
               </div>
               <div className="text-gray-600">Photos</div>
             </div>
+            <div>
+              {venue.externalReviews?.google ? (
+                <div className="cursor-pointer" onClick={() => window.open(venue.externalReviews.google.url, '_blank')}>
+                  <div className="flex items-center justify-center mb-1">
+                    <Image
+                      src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
+                      alt="Google Maps"
+                      width={24}
+                      height={24}
+                      className="mr-2"
+                    />
+                    <div className="text-lg font-bold text-pink-600">
+                      Google Reviews
+                    </div>
+                  </div>
+                  <div className="text-gray-600 text-sm">
+                    View Reviews
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div className="text-2xl font-bold text-gray-400">—</div>
+                  <div className="text-gray-600">Reviews</div>
+                </div>
+              )}
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Venue Claim Button */}
+      <section className="bg-gray-50 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <VenueClaimButton venue={venue} />
         </div>
       </section>
 
@@ -434,11 +557,11 @@ export default function VenueDetailPage() {
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            More Venues in {venue.address.city}
+            More Venues near {venue.address.city}
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {mockVenues
+            {allVenues
               .filter(v => v.address.city === venue.address.city && v.id !== venue.id)
               .slice(0, 3)
               .map((relatedVenue) => (
@@ -485,4 +608,3 @@ export default function VenueDetailPage() {
     </div>
   );
 }
- c

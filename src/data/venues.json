@@ -270,56 +270,6 @@
       "lastImageUpdate": "2025-09-14T20:37:47.246Z"
     },
     {
-      "name": "Atlantic Wedding Chapel",
-      "location": "Pompano Beach, Broward",
-      "region": "Miami-Dade & Broward",
-      "capacity": "Up to 50 guests.",
-      "sizeCategory": "Intimate (Under 75)",
-      "style": "Traditional chapel setting with modest décor.",
-      "tags": [
-        "chapel",
-        "traditional",
-        "intimate",
-        "budget-friendly",
-        "ceremony-only"
-      ],
-      "pricing": "Very affordable, with packages typically under $1,000 for ceremony-only.",
-      "servicesAmenities": [
-        "Officiant and basic décor included in packages",
-        "Short rental time slots"
-      ],
-      "ceremonyAndReception": false,
-      "website": null,
-      "gallery": null,
-      "images": [
-        {
-          "id": "placeholder-primary",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Atlantic Wedding Chapel - Wedding venue placeholder",
-          "isPrimary": true
-        },
-        {
-          "id": "placeholder-1",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Atlantic Wedding Chapel - Ceremony space",
-          "isPrimary": false
-        },
-        {
-          "id": "placeholder-2",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Atlantic Wedding Chapel - Reception area",
-          "isPrimary": false
-        },
-        {
-          "id": "placeholder-3",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Atlantic Wedding Chapel - Venue details",
-          "isPrimary": false
-        }
-      ],
-      "lastImageUpdate": "2025-09-14T20:37:47.246Z"
-    },
-    {
       "name": "Coastal Yacht Charters",
       "location": "Fort Lauderdale, Broward",
       "region": "Miami-Dade & Broward",
@@ -6756,6 +6706,60 @@
         }
       ],
       "lastImageUpdate": "2025-09-14T21:00:00.000Z"
+    },
+    {
+      "name": "Jungle Island",
+      "location": "Miami, Miami-Dade",
+      "region": "Miami-Dade & Broward",
+      "capacity": "Up to 200 guests for private events.",
+      "sizeCategory": "Medium (75-200)",
+      "style": "Tropical zoo and adventure park with unique wildlife backdrop and colorful exotic settings.",
+      "tags": [
+        "unique",
+        "outdoor",
+        "tropical",
+        "wildlife",
+        "family-friendly",
+        "adventure"
+      ],
+      "pricing": "Private event packages from $5,000 for ceremony and reception.",
+      "servicesAmenities": [
+        "Unique photo opportunities with exotic animals",
+        "Multiple tropical ceremony locations",
+        "Reception pavilions with animal exhibits nearby",
+        "Catering and event coordination available",
+        "Parking included"
+      ],
+      "ceremonyAndReception": true,
+      "website": "https://www.jungleisland.com/private-events/",
+      "gallery": "https://www.jungleisland.com/private-events/",
+      "images": [
+        {
+          "id": "placeholder-primary",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "Jungle Island - Wedding venue placeholder",
+          "isPrimary": true
+        },
+        {
+          "id": "placeholder-1",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "Jungle Island - Ceremony space",
+          "isPrimary": false
+        },
+        {
+          "id": "placeholder-2",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "Jungle Island - Reception area",
+          "isPrimary": false
+        },
+        {
+          "id": "placeholder-3",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "Jungle Island - Venue details",
+          "isPrimary": false
+        }
+      ],
+      "lastImageUpdate": "2025-09-18T19:00:00.000Z"
     }
   ]
 }

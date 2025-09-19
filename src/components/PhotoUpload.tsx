@@ -3,20 +3,25 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { ImageUploadManager, processImage, ImageUploadError } from '@/lib/imageUpload';
+import { processVideo, VideoProcessingError, isVideoFile, isImageFile, formatDuration } from '@/lib/videoUtils';
+import { VenueMedia } from '@/types';
 
-interface Photo {
+interface MediaFile {
   id: string;
   url: string;
   alt: string;
   isPrimary: boolean;
+  type: 'image' | 'video';
   file?: File;
+  thumbnailUrl?: string;
+  duration?: number;
 }
 
 interface PhotoUploadProps {
   venueId: string;
-  existingPhotos?: Photo[];
-  onPhotosUpdate: (photos: Photo[]) => void;
-  maxPhotos?: number;
+  existingMedia?: MediaFile[];
+  onMediaUpdate: (media: MediaFile[]) => void;
+  maxFiles?: number;
   isPremium?: boolean;
 }
 
@@ -28,14 +33,14 @@ interface UploadProgress {
 
 export default function PhotoUpload({ 
   venueId, 
-  existingPhotos = [], 
-  onPhotosUpdate, 
-  maxPhotos = 20,
+  existingMedia = [], 
+  onMediaUpdate, 
+  maxFiles = 20,
   isPremium = false
 }: PhotoUploadProps) {
-  // Set photo limit based on premium status
-  const photoLimit = isPremium ? maxPhotos : 2;
-  const [photos, setPhotos] = useState<Photo[]>(existingPhotos);
+  // Set file limit based on premium status
+  const fileLimit = isPremium ? maxFiles : 3; // Increased from 2 to 3 for free users to allow 1 video
+  const [mediaFiles, setMediaFiles] = useState<MediaFile[]>(existingMedia);
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<UploadProgress | null>(null);
@@ -43,12 +48,12 @@ export default function PhotoUpload({
 
   const handleFiles = async (files: FileList) => {
     const newFiles = Array.from(files);
-    const remainingSlots = photoLimit - photos.length;
+    const remainingSlots = fileLimit - mediaFiles.length;
     
     if (newFiles.length > remainingSlots) {
       const message = isPremium 
-        ? `You can only upload ${remainingSlots} more photos. Maximum of ${photoLimit} photos allowed.`
-        : `You can only upload ${remainingSlots} more photos. Free users are limited to 2 photos. Upgrade to Premium for unlimited photos!`;
+        ? `You can only upload ${remainingSlots} more files. Maximum of ${fileLimit} files allowed.`
+        : `You can only upload ${remainingSlots} more files. Free users are limited to 3 files (photos + videos). Upgrade to Premium for unlimited uploads!`;
       alert(message);
       return;
     }
@@ -56,28 +61,56 @@ export default function PhotoUpload({
     for (let i = 0; i < newFiles.length; i++) {
       const file = newFiles[i];
       try {
-        const { preview } = await processImage(file, {
-          maxSize: 10 * 1024 * 1024, // 10MB
-          maxWidth: 2048,
-          maxHeight: 2048,
-          quality: 0.8
-        });
+        if (isImageFile(file)) {
+          // Process image
+          const { preview } = await processImage(file, {
+            maxSize: 10 * 1024 * 1024, // 10MB
+            maxWidth: 2048,
+            maxHeight: 2048,
+            quality: 0.8
+          });
 
-        const newPhoto: Photo = {
-          id: `temp-${Date.now()}-${Math.random()}`,
-          url: preview,
-          alt: file.name.replace(/\.[^/.]+$/, ""), // Remove extension for alt text
-          isPrimary: photos.length === 0 && i === 0, // Only first photo when no existing photos
-          file: file
-        };
-        
-        setPhotos(prev => {
-          const updated = [...prev, newPhoto];
-          onPhotosUpdate(updated);
-          return updated;
-        });
+          const newMediaFile: MediaFile = {
+            id: `temp-${Date.now()}-${Math.random()}`,
+            url: preview,
+            alt: file.name.replace(/\.[^/.]+$/, ""),
+            isPrimary: mediaFiles.length === 0 && i === 0,
+            type: 'image',
+            file: file
+          };
+          
+          setMediaFiles(prev => {
+            const updated = [...prev, newMediaFile];
+            onMediaUpdate(updated);
+            return updated;
+          });
+
+        } else if (isVideoFile(file)) {
+          // Process video
+          const videoData = await processVideo(file);
+
+          const newMediaFile: MediaFile = {
+            id: `temp-${Date.now()}-${Math.random()}`,
+            url: videoData.preview,
+            thumbnailUrl: videoData.thumbnail,
+            alt: file.name.replace(/\.[^/.]+$/, ""),
+            isPrimary: mediaFiles.length === 0 && i === 0,
+            type: 'video',
+            duration: videoData.duration,
+            file: file
+          };
+          
+          setMediaFiles(prev => {
+            const updated = [...prev, newMediaFile];
+            onMediaUpdate(updated);
+            return updated;
+          });
+
+        } else {
+          throw new Error('Unsupported file type. Please upload images or videos only.');
+        }
       } catch (error) {
-        if (error instanceof ImageUploadError) {
+        if (error instanceof ImageUploadError || error instanceof VideoProcessingError) {
           alert(`Error processing ${file.name}: ${error.message}`);
         } else {
           alert(`Failed to process ${file.name}. Please try again.`);
@@ -112,48 +145,48 @@ export default function PhotoUpload({
     }
   };
 
-  const removePhoto = (photoId: string) => {
-    setPhotos(prev => {
-      const updated = prev.filter(photo => photo.id !== photoId);
-      // If we removed the primary photo, make the first remaining photo primary
-      if (updated.length > 0 && !updated.some(photo => photo.isPrimary)) {
+  const removeMedia = (mediaId: string) => {
+    setMediaFiles(prev => {
+      const updated = prev.filter(media => media.id !== mediaId);
+      // If we removed the primary media, make the first remaining media primary
+      if (updated.length > 0 && !updated.some(media => media.isPrimary)) {
         updated[0].isPrimary = true;
       }
-      onPhotosUpdate(updated);
+      onMediaUpdate(updated);
       return updated;
     });
   };
 
-  const setPrimary = (photoId: string) => {
-    setPhotos(prev => {
-      const updated = prev.map(photo => ({
-        ...photo,
-        isPrimary: photo.id === photoId
+  const setPrimary = (mediaId: string) => {
+    setMediaFiles(prev => {
+      const updated = prev.map(media => ({
+        ...media,
+        isPrimary: media.id === mediaId
       }));
-      onPhotosUpdate(updated);
+      onMediaUpdate(updated);
       return updated;
     });
   };
 
-  const updateAltText = (photoId: string, altText: string) => {
-    setPhotos(prev => {
-      const updated = prev.map(photo => 
-        photo.id === photoId ? { ...photo, alt: altText } : photo
+  const updateAltText = (mediaId: string, altText: string) => {
+    setMediaFiles(prev => {
+      const updated = prev.map(media => 
+        media.id === mediaId ? { ...media, alt: altText } : media
       );
-      onPhotosUpdate(updated);
+      onMediaUpdate(updated);
       return updated;
     });
   };
 
-  const uploadPhotos = async () => {
+  const uploadMedia = async () => {
     setUploading(true);
     
     try {
-      const photosWithFiles = photos.filter(photo => photo.file);
-      const filesToUpload = photosWithFiles.map(photo => photo.file!);
+      const mediaWithFiles = mediaFiles.filter(media => media.file);
+      const filesToUpload = mediaWithFiles.map(media => media.file!);
       
       if (filesToUpload.length === 0) {
-        alert('No photos to upload');
+        alert('No files to upload');
         return;
       }
 
@@ -163,25 +196,25 @@ export default function PhotoUpload({
       const { successful, failed } = await uploadManager.uploadImages(filesToUpload);
       
       // Update successful uploads
-      setPhotos(prev => prev.map(photo => {
+      setMediaFiles(prev => prev.map(media => {
         const successfulUpload = successful.find(s => 
-          s.originalName === photo.file?.name
+          s.originalName === media.file?.name
         );
         
         if (successfulUpload) {
           return { 
-            ...photo, 
+            ...media, 
             url: successfulUpload.url, 
             id: successfulUpload.id,
             file: undefined 
           };
         }
-        return photo;
+        return media;
       }));
       
       // Show results
       if (successful.length > 0) {
-        alert(`Successfully uploaded ${successful.length} photo(s)!`);
+        alert(`Successfully uploaded ${successful.length} file(s)!`);
       }
       
       if (failed.length > 0) {
@@ -219,15 +252,15 @@ export default function PhotoUpload({
             </svg>
           </div>
           <div>
-            <p className="text-lg font-medium text-gray-900">Upload venue photos</p>
+            <p className="text-lg font-medium text-gray-900">Upload venue photos & videos</p>
             <p className="text-sm text-gray-500">
               Drag and drop files here, or click to select files
             </p>
             <p className="text-xs text-gray-400 mt-1">
-              {photos.length}/{photoLimit} photos uploaded
+              {mediaFiles.length}/{fileLimit} files uploaded
               {!isPremium && (
                 <span className="text-amber-600 font-medium ml-2">
-                  (Free: 2 photos max - Upgrade for more!)
+                  (Free: 3 files max - Upgrade for more!)
                 </span>
               )}
             </p>
@@ -237,18 +270,18 @@ export default function PhotoUpload({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               className="px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition disabled:opacity-50"
-              disabled={photos.length >= photoLimit}
+              disabled={mediaFiles.length >= fileLimit}
             >
               Select Files
             </button>
-            {photos.some(photo => photo.file) && (
+            {mediaFiles.some(media => media.file) && (
               <button
                 type="button"
-                onClick={uploadPhotos}
+                onClick={uploadMedia}
                 disabled={uploading}
                 className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition disabled:opacity-50"
               >
-                {uploading ? 'Uploading...' : 'Upload Photos'}
+                {uploading ? 'Uploading...' : 'Upload Files'}
               </button>
             )}
           </div>
@@ -286,62 +319,94 @@ export default function PhotoUpload({
           ref={fileInputRef}
           type="file"
           multiple
-          accept="image/*"
+          accept="image/*,video/*"
           onChange={handleFileInput}
           className="hidden"
         />
       </div>
 
-      {/* Photo Grid */}
-      {photos.length > 0 && (
+      {/* Media Grid */}
+      {mediaFiles.length > 0 && (
         <div>
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-gray-900">
-              Venue Photos ({photos.length}/{photoLimit})
+              Venue Media ({mediaFiles.length}/{fileLimit})
             </h3>
-            {!isPremium && photos.length >= 2 && (
+            {!isPremium && mediaFiles.length >= 3 && (
               <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                🔥 Upgrade to Premium for unlimited photos!
+                🔥 Upgrade to Premium for unlimited uploads!
               </div>
             )}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {photos.map((photo) => (
-              <div key={photo.id} className="relative group">
+            {mediaFiles.map((media) => (
+              <div key={media.id} className="relative group">
                 <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                  <Image
-                    src={photo.url}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover"
-                  />
+                  {media.type === 'video' ? (
+                    <>
+                      {/* Video Thumbnail */}
+                      <Image
+                        src={media.thumbnailUrl || media.url}
+                        alt={media.alt}
+                        fill
+                        className="object-cover"
+                      />
+                      {/* Video Play Indicator */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-black bg-opacity-60 rounded-full p-3">
+                          <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                        </div>
+                      </div>
+                      {/* Duration Badge */}
+                      {media.duration && (
+                        <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 text-xs rounded">
+                          {formatDuration(media.duration)}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    /* Image */
+                    <Image
+                      src={media.url}
+                      alt={media.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
                   
-                  {/* Primary Photo Badge */}
-                  {photo.isPrimary && (
+                  {/* Primary Badge */}
+                  {media.isPrimary && (
                     <div className="absolute top-2 left-2 bg-pink-600 text-white px-2 py-1 text-xs font-medium rounded">
                       Primary
                     </div>
                   )}
                   
+                  {/* Media Type Badge */}
+                  <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 text-xs font-medium rounded capitalize">
+                    {media.type}
+                  </div>
+                  
                   {/* Uploading Indicator */}
-                  {photo.file && (
-                    <div className="absolute top-2 right-2 bg-yellow-600 text-white px-2 py-1 text-xs font-medium rounded">
+                  {media.file && (
+                    <div className="absolute top-8 right-2 bg-yellow-600 text-white px-2 py-1 text-xs font-medium rounded">
                       Pending Upload
                     </div>
                   )}
                   
                   {/* Action Buttons */}
                   <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-2">
-                    {!photo.isPrimary && (
+                    {!media.isPrimary && (
                       <button
-                        onClick={() => setPrimary(photo.id)}
+                        onClick={() => setPrimary(media.id)}
                         className="px-3 py-1 bg-pink-600 text-white text-sm rounded hover:bg-pink-700 transition"
                       >
                         Set Primary
                       </button>
                     )}
                     <button
-                      onClick={() => removePhoto(photo.id)}
+                      onClick={() => removeMedia(media.id)}
                       className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition"
                     >
                       Remove
@@ -353,9 +418,9 @@ export default function PhotoUpload({
                 <div className="mt-2">
                   <input
                     type="text"
-                    value={photo.alt}
-                    onChange={(e) => updateAltText(photo.id, e.target.value)}
-                    placeholder="Photo description..."
+                    value={media.alt}
+                    onChange={(e) => updateAltText(media.id, e.target.value)}
+                    placeholder={`${media.type === 'video' ? 'Video' : 'Photo'} description...`}
                     className="w-full text-sm border border-gray-300 rounded px-2 py-1 focus:ring-pink-500 focus:border-pink-500"
                   />
                 </div>
@@ -367,16 +432,19 @@ export default function PhotoUpload({
 
       {/* Guidelines */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h4 className="font-medium text-blue-900 mb-2">Photo Guidelines</h4>
+        <h4 className="font-medium text-blue-900 mb-2">Media Upload Guidelines</h4>
         <ul className="text-sm text-blue-800 space-y-1">
-          <li>• Upload high-quality images (minimum 1200px wide)</li>
+          <li>• <strong>Photos:</strong> Upload high-quality images (minimum 1200px wide)</li>
+          <li>• <strong>Videos:</strong> Upload short clips (max 100MB, MP4/MOV/WebM preferred)</li>
           <li>• Include a variety of spaces: ceremony, reception, bridal suite, etc.</li>
-          <li>• Show your venue in the best light with professional photography</li>
-          <li>• Ensure photos are recent and accurately represent your venue</li>
-          <li>• First photo will be used as the primary image in search results</li>
-          <li>• Accepted formats: JPG, PNG, WebP (max 10MB per file)</li>
+          <li>• Show your venue in the best light with professional photography/videography</li>
+          <li>• Ensure media is recent and accurately represents your venue</li>
+          <li>• <strong>First file will be used as the primary thumbnail in search results</strong></li>
+          <li>• <strong>Videos automatically generate thumbnail from first frame</strong></li>
+          <li>• Photo formats: JPG, PNG, WebP (max 10MB per file)</li>
+          <li>• Video formats: MP4, MOV, WebM, AVI (max 100MB per file)</li>
           {!isPremium && (
-            <li className="text-amber-700 font-medium">• Free accounts: 2 photos maximum. Upgrade to Premium for unlimited photos and priority listing!</li>
+            <li className="text-amber-700 font-medium">• Free accounts: 3 files maximum. Upgrade to Premium for unlimited uploads and priority listing!</li>
           )}
         </ul>
       </div>

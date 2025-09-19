@@ -96,7 +96,6 @@ const venuePhoneNumbers: { [key: string]: string } = {
   'MB Hotel': '(305) 532-2800',
   'Sea Watch on the Ocean': '(954) 781-2200',
   'Emeril Lagasse Foundation Innovation Kitchen': '(954) 377-5425',
-  'Atlantic Wedding Chapel': '(954) 942-1119',
   'Coastal Yacht Charters': '(954) 761-8777',
   'Vizcaya Museum & Gardens': '(305) 250-9133',
   'Ancient Spanish Monastery': '(305) 945-1461',
@@ -127,6 +126,7 @@ const venuePhoneNumbers: { [key: string]: string } = {
   'Conrad Miami': '(305) 503-6500',
   'InterContinental Miami': '(305) 577-1000',
   'Mandarin Oriental Miami': '(305) 913-8288',
+  'Jungle Island': '(305) 400-7000',
   'The Alexander All Suite Oceanfront Resort': '(305) 865-6500',
   'Acqualina Resort & Residences': '(305) 918-8000',
   'The St. Regis Bal Harbour': '(305) 993-3300',
@@ -162,6 +162,19 @@ function getVenuePhone(venueName: string): string {
   return `(${areaCode}) ${exchange}-${number}`;
 }
 
+// Function to generate external reviews data for all venues
+function getExternalReviews(venueName: string, index: number): any {
+  // Generate Google reviews for all venues
+  return {
+    google: {
+      placeId: `ChIJexample${index}`,
+      rating: Number((3.8 + Math.random() * 1.2).toFixed(1)), // Ratings between 3.8-5.0
+      reviewCount: Math.floor(Math.random() * 300) + 25, // Review counts between 25-325
+      url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueName)}`
+    }
+  };
+}
+
 // Convert raw venue data to Venue objects
 console.log('🔍 Processing venue data:', venueData.length, 'venues');
 
@@ -187,6 +200,7 @@ export const mockVenues: Venue[] = sortedVenueData
       pricing: {
         startingPrice: parsePrice(venue.pricing),
         currency: 'USD' as const,
+        packages: []
       },
       amenities: venue.servicesAmenities || venue.amenities || [],
       venueType: determineVenueType(venue.tags || []),
@@ -200,14 +214,18 @@ export const mockVenues: Venue[] = sortedVenueData
       owner: {
         id: `owner${index + 1}`,
         name: `Venue Manager ${index + 1}`,
+        email: `manager${index + 1}@venuemanagement.com`,
         isPremium: Math.random() > 0.6, // 40% premium
       },
-      availability: {
-        isAvailable: true,
-        blackoutDates: [],
-      },
+      availability: [],
       createdAt: new Date(2024, 0, index + 1),
       updatedAt: new Date(2024, 0, index + 1),
+      reviews: {
+        rating: Number((4.0 + Math.random() * 1.0).toFixed(1)), // 4.0 - 5.0
+        count: Math.floor(Math.random() * 50) + 10, // 10-60 reviews
+        reviews: []
+      },
+      externalReviews: getExternalReviews(venue.name, index), // All venues now get Google reviews
     };
 
     // Log which venues have uploaded photos for debugging

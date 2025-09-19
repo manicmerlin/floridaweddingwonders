@@ -5,12 +5,26 @@ import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { mockVenues } from '@/lib/mockData';
 import venuesData from '@/data/venues.json';
 
-// Transform the venues data to match our Venue type
-const transformVenueData = (venueData: any): Venue => {
+// Function to get external reviews (same as in detail page)
+function getExternalReviews(venueName: string, index: number): any {
+  // Generate Google reviews for all venues
   return {
-    id: venueData.id || venueData.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+    google: {
+      placeId: `ChIJexample${index}`,
+      rating: Number((3.8 + Math.random() * 1.2).toFixed(1)), // Ratings between 3.8-5.0
+      reviewCount: Math.floor(Math.random() * 300) + 25, // Review counts between 25-325
+      url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venueName)}`
+    }
+  };
+}
+
+// Transform the venues data to match our Venue type (same as detail page)
+const transformVenueData = (venueData: any, index: number): Venue => {
+  return {
+    id: venueData.id || venueData.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-'),
     name: venueData.name,
     description: venueData.style || 'Beautiful wedding venue in South Florida',
     venueType: venueData.tags?.includes('beach') ? 'beach' :
@@ -20,7 +34,7 @@ const transformVenueData = (venueData: any): Venue => {
                 venueData.tags?.includes('modern') ? 'modern' : 'ballroom',
     address: {
       street: venueData.location || '',
-      city: venueData.region?.split(',')[0] || 'Miami',
+      city: venueData.location?.split(',')[0]?.trim() || 'Miami',
       state: 'FL',
       zipCode: venueData.location?.match(/\d{5}$/)?.[0] || '33101'
     },
@@ -36,24 +50,30 @@ const transformVenueData = (venueData: any): Venue => {
     amenities: venueData.servicesAmenities || [],
     images: venueData.images || [],
     contact: {
-      phone: '',
-      email: '',
+      phone: venueData.phone || '',
+      email: venueData.email || `info@${(venueData.name || 'venue').toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com`,
       website: venueData.website || ''
     },
     availability: [],
     reviews: {
       rating: 4.5,
-      count: 0,
+      count: Math.floor(Math.random() * 50) + 10,
       reviews: []
     },
+    externalReviews: getExternalReviews(venueData.name || '', index),
     owner: {
       id: 'default',
       name: 'Venue Owner',
       email: 'owner@venue.com',
-      isPremium: false
+      isPremium: Math.random() > 0.7
     }
   };
 };
+
+// Create combined venue list (same as detail page)
+const jsonVenues = venuesData.weddingVenues ? 
+  venuesData.weddingVenues.map((venue, index) => transformVenueData(venue, index)) : [];
+const allVenues = [...mockVenues, ...jsonVenues];
 
 const ITEMS_PER_PAGE = 12;
 
@@ -68,10 +88,9 @@ export default function VenuesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    // Transform and load venues data
-    const transformedVenues = venuesData.weddingVenues.map(transformVenueData);
-    setVenues(transformedVenues);
-    setFilteredVenues(transformedVenues);
+    // Use combined venues data (same as detail page)
+    setVenues(allVenues);
+    setFilteredVenues(allVenues);
     setLoading(false);
   }, []);
 
