@@ -1,13 +1,54 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ClaimsManagement from '@/components/admin/ClaimsManagement';
+import { isSuperAdmin, getCurrentUser } from '@/lib/auth';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check authentication status
+    const checkAuth = () => {
+      const { isAuthenticated } = getCurrentUser();
+      const isSuper = isSuperAdmin();
+      
+      if (!isAuthenticated || !isSuper) {
+        // Redirect to login if not authenticated or not super admin
+        router.push('/login');
+        return;
+      }
+      
+      setIsAuthorized(true);
+      setIsLoading(false);
+    };
+
+    checkAuth();
+  }, [router]);
+
+  // Show loading spinner while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render admin content if not authorized
+  if (!isAuthorized) {
+    return null;
+  }
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: '📊' },

@@ -138,6 +138,10 @@ export function loginAsVenueOwner(email: string, venueId?: string): boolean {
     localStorage.setItem('isSuperAdmin', 'true');
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userEmail', email);
+    
+    // Also set cookies for server-side middleware
+    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400';
+    document.cookie = `venue-owner-email=${encodeURIComponent(email)}; path=/; max-age=86400`;
     return true;
   }
 
@@ -149,6 +153,10 @@ export function loginAsVenueOwner(email: string, venueId?: string): boolean {
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userEmail', email);
     localStorage.setItem('isSuperAdmin', 'false');
+    
+    // Also set cookies for server-side middleware
+    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400';
+    document.cookie = `venue-owner-email=${encodeURIComponent(email)}; path=/; max-age=86400`;
     return true;
   }
   
@@ -159,6 +167,10 @@ export function logout(): void {
   localStorage.removeItem('isSuperAdmin');
   localStorage.removeItem('isAuthenticated');
   localStorage.removeItem('userEmail');
+  
+  // Also clear cookies
+  document.cookie = 'venue-owner-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  document.cookie = 'venue-owner-email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
 }
 
 export function upgradeSubscription(venueId: string, newTier: 'premium' | 'enterprise'): boolean {
