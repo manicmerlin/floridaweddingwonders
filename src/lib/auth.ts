@@ -115,6 +115,7 @@ export function getPhotoLimit(venueId: string): number {
 
 export function isSuperAdmin(): boolean {
   if (typeof window === 'undefined') {
+    console.log('isSuperAdmin: window undefined (SSR)');
     return false;
   }
   
@@ -122,11 +123,15 @@ export function isSuperAdmin(): boolean {
   const isSuperAdminFlag = localStorage.getItem('isSuperAdmin') === 'true';
   const userEmail = localStorage.getItem('userEmail');
   
+  console.log('isSuperAdmin check:', { isSuperAdminFlag, userEmail });
+  
   if (isSuperAdminFlag && userEmail) {
     const user = VENUE_OWNERS.find(owner => owner.email === userEmail && owner.role === 'super_admin');
+    console.log('Found user:', user);
     return !!user;
   }
   
+  console.log('isSuperAdmin: returning false');
   return false;
 }
 

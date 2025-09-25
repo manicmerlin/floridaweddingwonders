@@ -17,20 +17,31 @@ export default function AdminDashboard() {
   useEffect(() => {
     // Check authentication status
     const checkAuth = () => {
-      const { isAuthenticated } = getCurrentUser();
-      const isSuper = isSuperAdmin();
-      
-      if (!isAuthenticated || !isSuper) {
-        // Redirect to login if not authenticated or not super admin
+      try {
+        const { isAuthenticated } = getCurrentUser();
+        const isSuper = isSuperAdmin();
+        
+        console.log('Admin auth check:', { isAuthenticated, isSuper });
+        
+        if (!isAuthenticated || !isSuper) {
+          console.log('Not authorized, redirecting to login');
+          // Redirect to login if not authenticated or not super admin
+          router.push('/login');
+          return;
+        }
+        
+        console.log('Authorization successful');
+        setIsAuthorized(true);
+      } catch (error) {
+        console.error('Auth check error:', error);
         router.push('/login');
-        return;
+      } finally {
+        setIsLoading(false);
       }
-      
-      setIsAuthorized(true);
-      setIsLoading(false);
     };
 
-    checkAuth();
+    // Add a small delay to ensure localStorage is available
+    setTimeout(checkAuth, 100);
   }, [router]);
 
   // Show loading spinner while checking authentication
@@ -39,7 +50,7 @@ export default function AdminDashboard() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Checking authentication...</p>
+          <p className="mt-4 text-gray-600">Loading admin dashboard...</p>
         </div>
       </div>
     );
@@ -47,7 +58,21 @@ export default function AdminDashboard() {
 
   // Don't render admin content if not authorized
   if (!isAuthorized) {
-    return null;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-600 text-6xl mb-4">🚫</div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
+          <p className="text-gray-600 mb-6">You don't have permission to access this page.</p>
+          <Link
+            href="/login"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition"
+          >
+            Go to Login
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const tabs = [
@@ -210,7 +235,16 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {activeTab === 'claims' && <ClaimsManagement />}
+        {activeTab === 'claims' && (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Venue Claims Management</h3>
+            <p className="text-gray-600 mb-4">Claims management features coming soon...</p>
+            <div className="text-center py-8 text-gray-500">
+              <span className="text-4xl block mb-2">🏛️</span>
+              <p>No pending claims at this time</p>
+            </div>
+          </div>
+        )}
 
         {activeTab === 'venues' && (
           <div className="bg-white rounded-lg shadow p-6">
