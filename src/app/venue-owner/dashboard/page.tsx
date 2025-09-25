@@ -13,21 +13,56 @@ export default function VenueOwnerDashboard() {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'owned' | 'claim'>('owned');
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // Get user data from localStorage
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      const parsedUser = JSON.parse(userData);
-      setUser(parsedUser);
-      
-      // Load owned venues from localStorage
-      const userVenues = localStorage.getItem(`owned-venues-${parsedUser.id}`) || '[]';
-      setOwnedVenues(JSON.parse(userVenues));
-    }
+    // Import auth functions dynamically to avoid SSR issues
+    const checkAuth = async () => {
+      try {
+        const { getCurrentUser, isSuperAdmin } = await import('@/lib/auth');
+        
+        // Check for super admin first
+        if (isSuperAdmin()) {
+          const { user: authUser } = getCurrentUser();
+          if (authUser) {
+            console.log('Super admin detected, setting user:', authUser);
+            setUser({
+              id: authUser.id,
+              email: authUser.email,
+              role: 'super_admin',
+              isSuperAdmin: true
+            });
+            // Super admin can manage all venues - set all venue IDs as owned
+            const allVenueIds = mockVenues.map(v => v.id);
+            setOwnedVenues(allVenueIds);
+            setVenues(mockVenues);
+            setIsLoading(false);
+            return;
+          }
+        }
+        
+        // Fallback to regular venue owner auth
+        const userData = localStorage.getItem('user');
+        if (userData) {
+          const parsedUser = JSON.parse(userData);
+          setUser(parsedUser);
+          
+          // Load owned venues from localStorage
+          const userVenues = localStorage.getItem(`owned-venues-${parsedUser.id}`) || '[]';
+          setOwnedVenues(JSON.parse(userVenues));
+        }
+        
+        setVenues(mockVenues);
+      } catch (error) {
+        console.error('Auth check error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     
-    setVenues(mockVenues);
+    // Add a small delay to ensure localStorage is ready
+    setTimeout(checkAuth, 100);
   }, []);
 
   const handleLogout = () => {
@@ -60,6 +95,17 @@ export default function VenueOwnerDashboard() {
     );
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading venue dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -67,7 +113,7 @@ export default function VenueOwnerDashboard() {
           <div className="text-6xl text-gray-400 mb-4">🔐</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Authentication Required</h1>
           <p className="text-gray-600 mb-6">Please log in as a venue owner to access your dashboard.</p>
-          <Link href="/login" className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg transition">
+          <Link href="/login" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
             Go to Login
           </Link>
         </div>
