@@ -200,7 +200,7 @@ export default function VenueDetailPage() {
       {/* Quick Info Bar */}
       <section className="bg-white py-6 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-5 gap-6 text-center">
+          <div className="grid md:grid-cols-4 gap-6 text-center">
             <div>
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
               <div className="text-gray-600">Capacity</div>
@@ -212,17 +212,6 @@ export default function VenueDetailPage() {
             <div>
               <div className="text-2xl font-bold text-pink-600">{venue.address.city}</div>
               <div className="text-gray-600">Location</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-pink-600">
-                {venue.images && venue.images.length > 0 ? venue.images.length : '—'}
-              </div>
-              <div className="text-gray-600">
-                {venue.images && venue.images.length > 0 ? 
-                  (venue.images.length === 1 ? 'Photo' : 'Photos') : 
-                  'Photos'
-                }
-              </div>
             </div>
             <div>
               {venue.externalReviews?.google ? (

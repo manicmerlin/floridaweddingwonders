@@ -3,17 +3,27 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { isSuperAdmin } from '@/lib/auth';
+import { isSuperAdmin, getCurrentUser, logout } from '@/lib/auth';
 import Logo from '@/components/Logo';
 
 export default function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSuper, setIsSuper] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     setIsSuper(isSuperAdmin());
+    const { isAuthenticated: authStatus } = getCurrentUser();
+    setIsAuthenticated(authStatus);
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    setIsSuper(false);
+    setIsAuthenticated(false);
+    window.location.href = '/'; // Redirect to home page
+  };
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -26,7 +36,6 @@ export default function Navigation() {
     { href: '/venues', label: 'Browse Venues' },
     { href: '/dress-shops', label: 'Dress Shops' },
     { href: '/vendors', label: 'Vendors' },
-    { href: '/pricing', label: 'Pricing' },
     { href: '/contact', label: 'Contact' },
   ];
 
@@ -52,36 +61,61 @@ export default function Navigation() {
                 href={link.href}
                 className={`font-medium transition ${
                   isActive(link.href)
-                    ? 'text-pink-600 border-b-2 border-pink-600 pb-1'
-                    : 'text-gray-700 hover:text-pink-600'
+                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
+                    : 'text-gray-700 hover:text-blue-600'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/login"
-              className={`font-medium transition ${
-                isActive('/login')
-                  ? 'text-pink-600'
-                  : 'text-gray-700 hover:text-pink-600'
-              }`}
-            >
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-medium transition"
-            >
-              Sign Up
-            </Link>
+            {isAuthenticated ? (
+              <>
+                {isSuper && (
+                  <Link
+                    href="/admin"
+                    className={`font-medium transition ${
+                      isActive('/admin')
+                        ? 'text-blue-600'
+                        : 'text-gray-700 hover:text-blue-600'
+                    }`}
+                  >
+                    Admin
+                  </Link>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="font-medium text-gray-700 hover:text-blue-600 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className={`font-medium transition ${
+                    isActive('/login')
+                      ? 'text-blue-600'
+                      : 'text-gray-700 hover:text-blue-600'
+                  }`}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-pink-600 focus:outline-none focus:text-pink-600"
+              className="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
@@ -104,32 +138,61 @@ export default function Navigation() {
                   href={link.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition ${
                     isActive(link.href)
-                      ? 'text-pink-600 bg-pink-50'
-                      : 'text-gray-700 hover:text-pink-600 hover:bg-gray-50'
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/login"
-                className={`block px-3 py-2 rounded-md text-base font-medium transition ${
-                  isActive('/login')
-                    ? 'text-pink-600 bg-pink-50'
-                    : 'text-gray-700 hover:text-pink-600 hover:bg-gray-50'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="block px-3 py-2 mx-3 mt-2 bg-pink-600 hover:bg-pink-700 text-white rounded-md text-base font-medium text-center transition"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign Up
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  {isSuper && (
+                    <Link
+                      href="/admin"
+                      className={`block px-3 py-2 rounded-md text-base font-medium transition ${
+                        isActive('/admin')
+                          ? 'text-blue-600 bg-blue-50'
+                          : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Admin
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition ${
+                      isActive('/login')
+                        ? 'text-blue-600 bg-blue-50'
+                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="block px-3 py-2 mx-3 mt-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-base font-medium text-center transition"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
