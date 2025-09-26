@@ -6,13 +6,14 @@ import { mockVenues } from '../../../lib/mockData';
 import { Venue } from '../../../types';
 import Image from 'next/image';
 import Link from 'next/link';
+import LeadQualificationForm, { LeadQualificationData } from '../../../components/LeadQualificationForm';
 
 export default function GuestDashboard() {
   const [user, setUser] = useState<any>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [venues, setVenues] = useState<Venue[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'favorites' | 'browse'>('favorites');
+  const [activeTab, setActiveTab] = useState<'favorites' | 'browse' | 'profile'>('favorites');
   const router = useRouter();
 
   useEffect(() => {
@@ -46,6 +47,29 @@ export default function GuestDashboard() {
     // Save to localStorage
     if (user) {
       localStorage.setItem(`favorites-${user.id}`, JSON.stringify(newFavorites));
+    }
+  };
+
+  const handleProfileUpdate = async (leadData: LeadQualificationData) => {
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Update user data with lead qualification
+      const updatedUser = {
+        ...user,
+        leadQualification: leadData,
+        profileComplete: true
+      };
+
+      // Store updated user data
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setUser(updatedUser);
+
+      alert('Profile updated successfully!');
+    } catch (error) {
+      console.error('Failed to update profile:', error);
+      alert('Failed to update profile. Please try again.');
     }
   };
 
@@ -132,7 +156,8 @@ export default function GuestDashboard() {
             <nav className="-mb-px flex space-x-8 px-6">
               {[
                 { id: 'favorites', name: 'My Favorites', icon: '💖', count: favorites.length },
-                { id: 'browse', name: 'Browse Venues', icon: '🔍', count: venues.length }
+                { id: 'browse', name: 'Browse Venues', icon: '🔍', count: venues.length },
+                { id: 'profile', name: 'My Profile', icon: '👤', count: null }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -145,9 +170,11 @@ export default function GuestDashboard() {
                 >
                   <span>{tab.icon}</span>
                   <span>{tab.name}</span>
-                  <span className="bg-gray-100 text-gray-600 py-1 px-2 rounded-full text-xs">
-                    {tab.count}
-                  </span>
+                  {tab.count !== null && (
+                    <span className="bg-gray-100 text-gray-600 py-1 px-2 rounded-full text-xs">
+                      {tab.count}
+                    </span>
+                  )}
                 </button>
               ))}
             </nav>
@@ -226,6 +253,104 @@ export default function GuestDashboard() {
                   >
                     View All Venues ({venues.length} total)
                   </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Profile Tab */}
+            {activeTab === 'profile' && (
+              <div>
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-2">My Wedding Profile</h2>
+                  <p className="text-gray-600">
+                    Keep your wedding details up-to-date to receive the best venue matches and pricing.
+                  </p>
+                </div>
+
+                {/* Profile Status Card */}
+                <div className={`p-4 rounded-lg mb-6 ${
+                  user.leadQualification ? 'bg-green-50 border border-green-200' : 'bg-yellow-50 border border-yellow-200'
+                }`}>
+                  <div className="flex items-center">
+                    <span className="text-2xl mr-3">
+                      {user.leadQualification ? '✅' : '⚠️'}
+                    </span>
+                    <div>
+                      <h3 className={`font-semibold ${
+                        user.leadQualification ? 'text-green-800' : 'text-yellow-800'
+                      }`}>
+                        {user.leadQualification ? 'Profile Complete' : 'Profile Incomplete'}
+                      </h3>
+                      <p className={`text-sm ${
+                        user.leadQualification ? 'text-green-600' : 'text-yellow-600'
+                      }`}>
+                        {user.leadQualification 
+                          ? 'Your profile is complete and venues can provide you with accurate quotes.'
+                          : 'Complete your profile to get better venue matches and faster responses.'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Profile Form */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <LeadQualificationForm
+                    initialData={{
+                      fullName: user.name,
+                      email: user.email,
+                      ...user.leadQualification
+                    }}
+                    onSubmit={handleProfileUpdate}
+                    submitButtonText="Update My Profile"
+                    title="Update Your Wedding Details"
+                    description="Changes to your profile help venues provide more accurate pricing and recommendations."
+                  />
+                </div>
+
+                {/* Profile Benefits */}
+                <div className="mt-8 bg-blue-50 rounded-lg p-6">
+                  <h3 className="text-lg font-semibold text-blue-900 mb-4">
+                    Why Keep Your Profile Updated?
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">🎯</span>
+                      <div>
+                        <h4 className="font-medium text-blue-900">Better Matches</h4>
+                        <p className="text-blue-700 text-sm">
+                          Venues that fit your guest count, budget, and style preferences
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">💰</span>
+                      <div>
+                        <h4 className="font-medium text-blue-900">Accurate Pricing</h4>
+                        <p className="text-blue-700 text-sm">
+                          Get quotes tailored to your specific needs and budget
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">⚡</span>
+                      <div>
+                        <h4 className="font-medium text-blue-900">Faster Responses</h4>
+                        <p className="text-blue-700 text-sm">
+                          Venues can respond quickly with all your details upfront
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">📅</span>
+                      <div>
+                        <h4 className="font-medium text-blue-900">Availability Alerts</h4>
+                        <p className="text-blue-700 text-sm">
+                          Get notified when venues have openings for your dates
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

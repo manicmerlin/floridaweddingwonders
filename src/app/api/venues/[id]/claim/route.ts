@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-
-// In-memory storage for claims (same as in main claims API)
-let venueClaims: any[] = [];
+import { VenueClaim } from '@/types';
+import { hasExistingClaim, addClaim, getClaims } from '@/lib/claimsStorage';
 
 // Initialize Resend for email notifications
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -36,12 +35,9 @@ export async function POST(
     }
 
     // Check if venue is already claimed or has pending claim
-    const existingClaim = venueClaims.find(
-      claim => claim.venueId === venueId && 
-      (claim.status === 'approved' || claim.status === 'pending')
-    );
+    const { exists, claim: existingClaim } = hasExistingClaim(venueId);
 
-    if (existingClaim) {
+    if (exists && existingClaim) {
       return NextResponse.json(
         { 
           success: false, 
@@ -54,7 +50,7 @@ export async function POST(
     }
 
     // Create new claim
-    const newClaim = {
+    const newClaim: VenueClaim = {
       id: `claim_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       venueId,
       venueName: body.venueName || `Venue ${venueId}`,
@@ -71,9 +67,11 @@ export async function POST(
       notes: body.additionalNotes
     };
 
-    venueClaims.push(newClaim);
-
-    console.log('Claim created successfully:', newClaim);
+    // Add claim to shared storage
+    addClaim(newClaim);
+    
+    console.log('🏛️ Claim created successfully:', newClaim);
+    console.log('🏛️ Total claims in memory after adding:', getClaims().length);
 
     // Send email notifications
     try {
@@ -251,7 +249,7 @@ Florida Wedding Wonders - Venue Claim System`,
     return NextResponse.json(
       { 
         success: false, 
-        error: 'Internal server error: ' + error.message 
+        error: 'Internal server error: ' + (error instanceof Error ? error.message : 'Unknown error')
       },
       { status: 500 }
     );

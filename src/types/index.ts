@@ -99,6 +99,17 @@ export interface Venue {
   }>;
 }
 
+export interface LeadQualificationData {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  eventType: string;
+  guestCount: number;
+  preferredDate: string;
+  dateFlexibility: string;
+  venuebudget: string;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -114,6 +125,7 @@ export interface User {
   emailVerified: boolean;
   createdAt: Date;
   lastLogin?: Date;
+  leadQualification?: LeadQualificationData; // Pre-qualifying data for venue seekers
 }
 
 export interface AuthUser {
@@ -205,6 +217,11 @@ export interface VenueClaim {
   userId: string;
   userEmail: string;
   userName: string;
+  businessName?: string;
+  businessType?: string;
+  phoneNumber?: string;
+  businessAddress?: string;
+  relationshipToVenue?: string;
   status: 'pending' | 'approved' | 'denied';
   submittedAt: string;
   reviewedAt?: string;
@@ -227,6 +244,8 @@ export interface ClaimSubmission {
   businessProof?: File;
   additionalNotes?: string;
 }
+
+export interface Vendor {
   id: string;
   name: string;
   businessName?: string; // If different from name

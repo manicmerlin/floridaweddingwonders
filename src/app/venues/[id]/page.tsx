@@ -8,6 +8,7 @@ import Navigation from '../../../components/Navigation';
 import Footer from '../../../components/Footer';
 import PhotoGallery from '../../../components/PhotoGallery';
 import VenueClaimButton from '../../../components/VenueClaimButton';
+import VenueContactForm from '../../../components/VenueContactForm';
 import { mockVenues } from '../../../lib/mockData';
 import { Venue } from '../../../types';
 
@@ -19,6 +20,7 @@ export default function VenueDetailPage() {
   const [venue, setVenue] = useState<Venue | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
+  const [showContactForm, setShowContactForm] = useState(false);
 
   useEffect(() => {
     if (params.id) {
@@ -172,6 +174,38 @@ export default function VenueDetailPage() {
                   <div className="text-gray-600">Reviews</div>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Actions */}
+      <section className="bg-white py-8 border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Interested in This Venue?</h2>
+            <p className="text-gray-600 mb-6">Get personalized pricing and availability for your special day</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={() => setShowContactForm(true)}
+                className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg"
+              >
+                💌 Request Information
+              </button>
+              <div className="flex items-center space-x-4">
+                <a
+                  href={`mailto:${venue.contact.email}?subject=Wedding Inquiry - ${venue.name}`}
+                  className="text-pink-600 hover:text-pink-700 font-medium transition flex items-center"
+                >
+                  ✉️ {venue.contact.email}
+                </a>
+                <a
+                  href={`tel:${venue.contact.phone}`}
+                  className="text-pink-600 hover:text-pink-700 font-medium transition flex items-center"
+                >
+                  📞 {venue.contact.phone}
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -519,6 +553,14 @@ export default function VenueDetailPage() {
       </section>
 
       <Footer />
+      
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <VenueContactForm 
+          venue={venue} 
+          onClose={() => setShowContactForm(false)} 
+        />
+      )}
     </div>
   );
 }

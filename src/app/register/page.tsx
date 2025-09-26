@@ -80,7 +80,8 @@ export default function Register() {
       if (formData.role === 'venue_owner') {
         router.push('/venue-owner/dashboard');
       } else {
-        router.push('/guest/dashboard');
+        // For guests, redirect to profile completion to fill out lead qualification
+        router.push('/guest/complete-profile');
       }
     }
   };

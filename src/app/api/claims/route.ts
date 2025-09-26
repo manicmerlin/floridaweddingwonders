@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { VenueClaim, ClaimSubmission } from '@/types';
-
-// In production, this would connect to your database
-let venueClaims: VenueClaim[] = [];
+import { getClaims, addClaim, hasExistingClaim, updateClaim } from '@/lib/claimsStorage';
 
 export async function GET() {
   try {
+    const claims = getClaims();
+    console.log('📋 Admin fetching claims. Current claims count:', claims.length);
+    console.log('📋 Claims in memory:', claims);
+    
     // Return all venue claims (admin only)
     return NextResponse.json({
       success: true,
-      claims: venueClaims
+      claims: claims
     });
   } catch (error) {
     console.error('Failed to fetch venue claims:', error);
@@ -26,12 +28,9 @@ export async function POST(request: NextRequest) {
     const { venueId, venueName, userId, userEmail, userName, businessName, businessType, additionalNotes } = body;
 
     // Check if venue is already claimed or has pending claim
-    const existingClaim = venueClaims.find(
-      claim => claim.venueId === venueId && 
-      (claim.status === 'approved' || claim.status === 'pending')
-    );
+    const { exists, claim: existingClaim } = hasExistingClaim(venueId);
 
-    if (existingClaim) {
+    if (exists && existingClaim) {
       return NextResponse.json(
         { 
           success: false, 
@@ -56,7 +55,7 @@ export async function POST(request: NextRequest) {
       notes: additionalNotes
     };
 
-    venueClaims.push(newClaim);
+    addClaim(newClaim);
 
     // Send email notifications
     try {
@@ -122,27 +121,24 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json();
     const { claimId, status, reviewedBy, adminNotes } = body;
 
-    const claimIndex = venueClaims.findIndex(claim => claim.id === claimId);
+    // Update claim using shared storage
+    const updatedClaim = updateClaim(claimId, {
+      status,
+      reviewedAt: new Date().toISOString(),
+      reviewedBy,
+      adminNotes
+    });
     
-    if (claimIndex === -1) {
+    if (!updatedClaim) {
       return NextResponse.json(
         { success: false, error: 'Claim not found' },
         { status: 404 }
       );
     }
 
-    // Update claim
-    venueClaims[claimIndex] = {
-      ...venueClaims[claimIndex],
-      status,
-      reviewedAt: new Date().toISOString(),
-      reviewedBy,
-      adminNotes
-    };
-
     return NextResponse.json({
       success: true,
-      claim: venueClaims[claimIndex]
+      claim: updatedClaim
     });
 
   } catch (error) {
