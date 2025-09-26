@@ -12,8 +12,9 @@ export default function VenueOwnerDashboard() {
   const [ownedVenues, setOwnedVenues] = useState<string[]>([]);
   const [venues, setVenues] = useState<Venue[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'owned' | 'claim'>('owned');
+  const [activeTab, setActiveTab] = useState<'owned' | 'claim' | 'claims'>('owned');
   const [isLoading, setIsLoading] = useState(true);
+  const [userClaims, setUserClaims] = useState<any[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -54,16 +55,37 @@ export default function VenueOwnerDashboard() {
         }
         
         setVenues(mockVenues);
+        
+        // Load user claims if authenticated
+        if (userData || user) {
+          loadUserClaims();
+        }
       } catch (error) {
         console.error('Auth check error:', error);
       } finally {
         setIsLoading(false);
       }
     };
+
+    const loadUserClaims = async () => {
+      try {
+        const response = await fetch('/api/claims');
+        if (response.ok) {
+          const result = await response.json();
+          // Filter claims for the current user
+          const userSpecificClaims = result.claims?.filter((claim: any) => 
+            claim.userEmail === user?.email || claim.userId === user?.id
+          ) || [];
+          setUserClaims(userSpecificClaims);
+        }
+      } catch (error) {
+        console.error('Failed to load user claims:', error);
+      }
+    };
     
     // Add a small delay to ensure localStorage is ready
     setTimeout(checkAuth, 100);
-  }, []);
+  }, [user?.email, user?.id]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -188,6 +210,7 @@ export default function VenueOwnerDashboard() {
             <nav className="-mb-px flex space-x-8 px-6">
               {[
                 { id: 'owned', name: 'My Venues', icon: '🏛️', count: ownedVenues.length },
+                { id: 'claims', name: 'My Claims', icon: '📋', count: userClaims.length },
                 { id: 'claim', name: 'Claim Venues', icon: '🔍', count: venues.length - ownedVenues.length }
               ].map((tab) => (
                 <button
@@ -239,6 +262,129 @@ export default function VenueOwnerDashboard() {
                       className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
                     >
                       Claim Your Venue
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* My Claims Tab */}
+            {activeTab === 'claims' && (
+              <div>
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-4">My Venue Claims</h2>
+                  <p className="text-gray-600">
+                    Track the status of your venue claim requests.
+                  </p>
+                </div>
+
+                {userClaims.length > 0 ? (
+                  <div className="space-y-4">
+                    {userClaims.map((claim) => (
+                      <div key={claim.id} className="bg-white border rounded-lg p-6">
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-900">{claim.venueName}</h3>
+                            <p className="text-sm text-gray-600">Claim ID: {claim.id}</p>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                              claim.status === 'pending' 
+                                ? 'bg-yellow-100 text-yellow-800' 
+                                : claim.status === 'approved'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-red-100 text-red-800'
+                            }`}>
+                              {claim.status === 'pending' ? 'Under Review' :
+                               claim.status === 'approved' ? 'Approved' :
+                               'Denied'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                          <div>
+                            <span className="text-gray-500">Submitted:</span>
+                            <div className="font-medium">
+                              {new Date(claim.submittedAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                              })}
+                            </div>
+                          </div>
+                          {claim.reviewedAt && (
+                            <div>
+                              <span className="text-gray-500">Reviewed:</span>
+                              <div className="font-medium">
+                                {new Date(claim.reviewedAt).toLocaleDateString('en-US', {
+                                  year: 'numeric',
+                                  month: 'long',
+                                  day: 'numeric'
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {claim.notes && (
+                          <div className="mb-3">
+                            <span className="text-gray-500 text-sm">Your Notes:</span>
+                            <p className="text-gray-700 text-sm mt-1">{claim.notes}</p>
+                          </div>
+                        )}
+
+                        {claim.adminNotes && (
+                          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <span className="text-blue-700 font-medium text-sm">Admin Response:</span>
+                            <p className="text-blue-700 text-sm mt-1">{claim.adminNotes}</p>
+                          </div>
+                        )}
+
+                        {claim.status === 'pending' && (
+                          <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                            <div className="flex items-center">
+                              <svg className="w-4 h-4 text-yellow-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                              </svg>
+                              <span className="text-yellow-800 text-sm">
+                                Your claim is being reviewed. We'll email you when there's an update.
+                              </span>
+                            </div>
+                          </div>
+                        )}
+
+                        {claim.status === 'approved' && (
+                          <div className="mt-4 flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3">
+                            <div className="flex items-center">
+                              <svg className="w-4 h-4 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                              <span className="text-green-800 text-sm">
+                                Congratulations! Your claim has been approved.
+                              </span>
+                            </div>
+                            <Link
+                              href={`/venues/${claim.venueId}/manage`}
+                              className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm font-medium transition"
+                            >
+                              Manage Venue
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 border-2 border-dashed border-gray-300 rounded-lg">
+                    <div className="text-6xl text-gray-400 mb-4">📋</div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No Claims Submitted</h3>
+                    <p className="text-gray-600 mb-4">You haven't submitted any venue claims yet.</p>
+                    <button
+                      onClick={() => setActiveTab('claim')}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
+                    >
+                      Claim Your First Venue
                     </button>
                   </div>
                 )}

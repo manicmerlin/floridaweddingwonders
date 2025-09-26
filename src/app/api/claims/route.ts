@@ -58,10 +58,49 @@ export async function POST(request: NextRequest) {
 
     venueClaims.push(newClaim);
 
-    // In production, you would:
-    // 1. Save to database
-    // 2. Send email notification to admin
-    // 3. Send confirmation email to user
+    // Send email notifications
+    try {
+      // Send notification to admin
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'admin@floridaweddingwonders.com',
+          subject: `New Venue Claim: ${venueName}`,
+          type: 'venue_claim_admin',
+          data: {
+            claimId: newClaim.id,
+            venueName,
+            userName,
+            userEmail,
+            businessName,
+            businessType,
+            submittedAt: newClaim.submittedAt,
+            additionalNotes
+          }
+        })
+      });
+
+      // Send confirmation to user
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: userEmail,
+          subject: `Your venue claim for ${venueName} has been submitted`,
+          type: 'venue_claim_confirmation',
+          data: {
+            claimId: newClaim.id,
+            venueName,
+            userName,
+            submittedAt: newClaim.submittedAt
+          }
+        })
+      });
+    } catch (emailError) {
+      console.error('Failed to send email notifications:', emailError);
+      // Don't fail the claim submission if emails fail
+    }
 
     return NextResponse.json({
       success: true,

@@ -26,8 +26,33 @@ export default function LoginPage() {
       if (email === 'admin@floridaweddingwonders.com' && password === 'admin123') {
         const success = loginAsVenueOwner(email);
         if (success) {
-          // Redirect to admin dashboard
-          router.push('/admin');
+          // Check for return URL
+          const returnUrl = localStorage.getItem('returnUrl');
+          if (returnUrl) {
+            localStorage.removeItem('returnUrl');
+            router.push(returnUrl);
+          } else {
+            // Redirect to admin dashboard
+            router.push('/admin');
+          }
+          return;
+        }
+      }
+      
+      // For venue owners, check if they have valid credentials
+      // For demo purposes, allow any email with password "demo123"
+      if (password === 'demo123') {
+        const success = loginAsVenueOwner(email);
+        if (success) {
+          // Check for return URL
+          const returnUrl = localStorage.getItem('returnUrl');
+          if (returnUrl) {
+            localStorage.removeItem('returnUrl');
+            router.push(returnUrl);
+          } else {
+            // Redirect to venue owner dashboard
+            router.push('/venue-owner/dashboard');
+          }
           return;
         }
       }
@@ -141,10 +166,17 @@ export default function LoginPage() {
             {/* Demo Credentials Info */}
             <div className="mt-6 p-4 bg-blue-50 rounded-md">
               <h3 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials:</h3>
-              <div className="text-sm text-blue-700">
-                <p><strong>Super Admin:</strong></p>
-                <p>Email: admin@floridaweddingwonders.com</p>
-                <p>Password: admin123</p>
+              <div className="text-sm text-blue-700 space-y-2">
+                <div>
+                  <p><strong>Super Admin:</strong></p>
+                  <p>Email: admin@floridaweddingwonders.com</p>
+                  <p>Password: admin123</p>
+                </div>
+                <div>
+                  <p><strong>Venue Owner:</strong></p>
+                  <p>Email: any@email.com</p>
+                  <p>Password: demo123</p>
+                </div>
               </div>
             </div>
           </form>

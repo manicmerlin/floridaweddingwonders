@@ -47,6 +47,30 @@ export async function PATCH(
 
     const result = await updateResponse.json();
 
+    // Send notification email to the claimant about the decision
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: result.claim.userEmail,
+          subject: `Your venue claim has been ${action === 'approve' ? 'approved' : 'denied'}`,
+          type: `venue_claim_${action === 'approve' ? 'approved' : 'denied'}`,
+          data: {
+            claimId,
+            venueName: result.claim.venueName,
+            userName: result.claim.userName,
+            status: result.claim.status,
+            adminNotes,
+            reviewedAt: result.claim.reviewedAt
+          }
+        })
+      });
+    } catch (emailError) {
+      console.error('Failed to send notification email:', emailError);
+      // Don't fail the claim update if email fails
+    }
+
     return NextResponse.json({
       success: true,
       message: `Venue claim ${action}d successfully`,
