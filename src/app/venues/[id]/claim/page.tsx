@@ -124,11 +124,12 @@ export default function VenueClaimPage() {
         // Redirect to success page
         router.push(`/venues/${venueId}/claim/success?claimId=${result.claimId}`);
       } else {
+        console.error('Claim submission failed:', result);
         alert(result.error || 'Failed to submit claim');
       }
     } catch (error) {
       console.error('Failed to submit claim:', error);
-      alert('Failed to submit claim. Please try again.');
+      alert('Failed to submit claim. Please try again. Error: ' + error.message);
     } finally {
       setIsSubmitting(false);
     }
