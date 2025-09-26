@@ -79,9 +79,33 @@ export async function POST(
     try {
       // Send admin notification email
       const adminEmailResult = await resend.emails.send({
-        from: 'Florida Wedding Wonders <hello@floridaweddingwonders.com>',
+        from: 'Florida Wedding Wonders <onboarding@resend.dev>',
+        reply_to: 'hello@floridaweddingwonders.com',
         to: ['bennett.boundless@gmail.com'], // Admin email
         subject: `🏛️ New Venue Claim Request - ${newClaim.venueName}`,
+        text: `New Venue Claim Request - ${newClaim.venueName}
+
+Claim Details:
+- Venue: ${newClaim.venueName}
+- Venue ID: ${newClaim.venueId}
+- Claimant: ${newClaim.userName}
+- Email: ${newClaim.userEmail}
+- Business: ${newClaim.businessName}
+- Business Type: ${newClaim.businessType}
+- Phone: ${newClaim.phoneNumber || 'Not provided'}
+- Relationship: ${newClaim.relationshipToVenue || 'Not specified'}
+- Submitted: ${new Date(newClaim.submittedAt).toLocaleString()}
+- Claim ID: ${newClaim.id}
+
+${newClaim.notes ? `Additional Notes: ${newClaim.notes}` : ''}
+
+Next Steps:
+1. Review the claim details and verify legitimacy
+2. Contact the claimant to verify ownership/authorization
+3. Access the admin dashboard to approve or deny the claim
+4. Send follow-up email with decision
+
+Review in Admin: https://staging.floridaweddingwonders.com/admin/claims`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); padding: 20px;">
             <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
@@ -132,9 +156,31 @@ export async function POST(
 
       // Send confirmation email to claimant
       const userEmailResult = await resend.emails.send({
-        from: 'Florida Wedding Wonders <hello@floridaweddingwonders.com>',
+        from: 'Florida Wedding Wonders <onboarding@resend.dev>',
+        reply_to: 'hello@floridaweddingwonders.com',
         to: [newClaim.userEmail],
         subject: `✅ Venue Claim Submitted - ${newClaim.venueName}`,
+        text: `Claim Submitted Successfully!
+
+Thank you for submitting your venue claim request for ${newClaim.venueName}.
+
+Your claim details:
+- Venue: ${newClaim.venueName}
+- Claim ID: ${newClaim.id}
+- Your Name: ${newClaim.userName}
+- Email: ${newClaim.userEmail}
+- Business: ${newClaim.businessName}
+- Business Type: ${newClaim.businessType}
+
+What happens next:
+1. Our team will review your claim within 1-2 business days
+2. We may contact you to verify ownership or authorization
+3. Once approved, you'll receive login credentials for your venue dashboard
+4. You'll be able to manage photos, details, and inquiries for your venue
+
+Questions? Contact us at support@floridaweddingwonders.com
+
+Florida Wedding Wonders - Venue Claim System`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 20px;">
             <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
