@@ -79,8 +79,7 @@ export async function POST(
     try {
       // Send admin notification email
       const adminEmailResult = await resend.emails.send({
-        from: 'Florida Wedding Wonders <onboarding@resend.dev>',
-        reply_to: 'hello@floridaweddingwonders.com',
+        from: 'Florida Wedding Wonders <noreply@floridaweddingwonders.com>',
         to: ['bennett.boundless@gmail.com'], // Admin email
         subject: `🏛️ New Venue Claim Request - ${newClaim.venueName}`,
         text: `New Venue Claim Request - ${newClaim.venueName}
@@ -156,8 +155,7 @@ Review in Admin: https://staging.floridaweddingwonders.com/admin/claims`,
 
       // Send confirmation email to claimant
       const userEmailResult = await resend.emails.send({
-        from: 'Florida Wedding Wonders <onboarding@resend.dev>',
-        reply_to: 'hello@floridaweddingwonders.com',
+        from: 'Florida Wedding Wonders <noreply@floridaweddingwonders.com>',
         to: [newClaim.userEmail],
         subject: `✅ Venue Claim Submitted - ${newClaim.venueName}`,
         text: `Claim Submitted Successfully!

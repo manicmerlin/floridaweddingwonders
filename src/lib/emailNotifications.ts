@@ -333,8 +333,7 @@ export async function sendEmailNotification({ type, email, venueName, userType, 
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'Florida Wedding Wonders <onboarding@resend.dev>', // Using Resend's verified domain
-      reply_to: 'hello@floridaweddingwonders.com', // Your custom domain for replies
+      from: 'Florida Wedding Wonders <noreply@floridaweddingwonders.com>', // Using your verified domain
       to: [recipientEmail],
       subject: emailData.subject,
       html: emailData.html,
