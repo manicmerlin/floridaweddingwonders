@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Link from 'next/link';
 import { Venue } from '@/types';
 
 interface ClaimFormData {
@@ -47,9 +48,20 @@ export default function VenueClaimPage() {
       setIsAuthenticated(true);
     };
 
-    // Load venue data
+    // Load venue data and pre-fill user info
     const loadVenue = async () => {
       try {
+        // Load user data from storage to pre-fill form
+        const userData = localStorage.getItem('user');
+        if (userData) {
+          const user = JSON.parse(userData);
+          setFormData(prev => ({
+            ...prev,
+            userName: user.name || '',
+            userEmail: user.email || ''
+          }));
+        }
+
         const response = await fetch(`/api/venues/${venueId}`);
         if (response.ok) {
           const data = await response.json();
@@ -194,15 +206,59 @@ export default function VenueClaimPage() {
         <div className="bg-white rounded-lg shadow">
           {/* Header */}
           <div className="px-6 py-8 border-b border-gray-200">
+            {/* Breadcrumb */}
+            <div className="flex items-center text-sm text-gray-500 mb-4">
+              <Link href="/venues" className="hover:text-gray-700">All Venues</Link>
+              <svg className="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+              <Link href={`/venues/${venueId}`} className="hover:text-gray-700">{venue.name}</Link>
+              <svg className="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+              <span className="text-gray-900">Claim Venue</span>
+            </div>
+
             <h1 className="text-3xl font-bold text-gray-900">Claim Your Venue</h1>
             <p className="mt-2 text-lg text-gray-600">
-              Claim <span className="font-semibold text-blue-600">{venue.name}</span> to manage your listing
+              Submit a claim request for <span className="font-semibold text-blue-600">{venue.name}</span>
             </p>
             <div className="mt-4 flex items-center text-sm text-gray-500">
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
               {typeof venue.address === 'string' ? venue.address : `${venue.address.street}, ${venue.address.city}, ${venue.address.state} ${venue.address.zipCode}`}
+            </div>
+          </div>
+
+          {/* Venue Preview */}
+          <div className="px-6 py-6 bg-gray-50 border-b border-gray-200">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Venue You're Claiming</h2>
+            <div className="bg-white rounded-lg border p-4">
+              <div className="flex items-start space-x-4">
+                {venue.images && venue.images.length > 0 && (
+                  <div className="flex-shrink-0">
+                    <img
+                      src={venue.images[0].url}
+                      alt={venue.images[0].alt}
+                      className="w-20 h-16 object-cover rounded-lg"
+                    />
+                  </div>
+                )}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-semibold text-gray-900 truncate">{venue.name}</h3>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {typeof venue.address === 'string' ? venue.address : `${venue.address.street}, ${venue.address.city}, ${venue.address.state}`}
+                  </p>
+                  <div className="flex items-center mt-2 text-sm text-gray-500">
+                    <span className="capitalize">{venue.venueType}</span>
+                    <span className="mx-2">•</span>
+                    <span>{venue.capacity.min}-{venue.capacity.max} guests</span>
+                    <span className="mx-2">•</span>
+                    <span>Starting at ${venue.pricing.startingPrice.toLocaleString()}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

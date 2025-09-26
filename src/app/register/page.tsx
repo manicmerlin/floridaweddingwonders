@@ -70,11 +70,18 @@ export default function Register() {
 
     setIsLoading(false);
 
-    // Redirect based on role
-    if (formData.role === 'venue_owner') {
-      router.push('/venue-owner/dashboard');
+    // Check for return URL first
+    const returnUrl = localStorage.getItem('returnUrl');
+    if (returnUrl) {
+      localStorage.removeItem('returnUrl');
+      router.push(returnUrl);
     } else {
-      router.push('/guest/dashboard');
+      // Redirect based on role
+      if (formData.role === 'venue_owner') {
+        router.push('/venue-owner/dashboard');
+      } else {
+        router.push('/guest/dashboard');
+      }
     }
   };
 
