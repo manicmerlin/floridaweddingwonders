@@ -215,7 +215,7 @@ export const mockVenues: Venue[] = sortedVenueData
         id: `owner${index + 1}`,
         name: `Venue Manager ${index + 1}`,
         email: `manager${index + 1}@venuemanagement.com`,
-        isPremium: Math.random() > 0.6, // 40% premium
+        isPremium: false, // No premium venues yet
       },
       availability: [],
       createdAt: new Date(2024, 0, index + 1),
