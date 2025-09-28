@@ -36,7 +36,7 @@ export default function Logo({ className = '', size = 'md', showText = true, var
         height={variant === 'horizontal' ? 40 : 40}
         className={`${sizeClasses[size]} filter brightness-0 saturate-100`}
         style={{
-          filter: 'brightness(0) saturate(100%) invert(23%) sepia(99%) saturate(2267%) hue-rotate(210deg) brightness(90%) contrast(101%)'
+          filter: 'brightness(0) saturate(100%) invert(17%) sepia(69%) saturate(2892%) hue-rotate(214deg) brightness(93%) contrast(87%)'
         }}
         priority
       />
