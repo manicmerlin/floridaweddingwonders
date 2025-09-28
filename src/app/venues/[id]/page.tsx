@@ -9,6 +9,7 @@ import Footer from '../../../components/Footer';
 import PhotoGallery from '../../../components/PhotoGallery';
 import VenueClaimButton from '../../../components/VenueClaimButton';
 import VenueContactForm from '../../../components/VenueContactForm';
+import SaveVenueButton from '../../../components/SaveVenueButton';
 import { mockVenues } from '../../../lib/mockData';
 import { Venue } from '../../../types';
 
@@ -192,6 +193,7 @@ export default function VenueDetailPage() {
               >
                 💌 Request Information
               </button>
+              <SaveVenueButton venue={venue} size="lg" showText={true} />
               <div className="flex items-center space-x-4">
                 <a
                   href={`mailto:${venue.contact.email}?subject=Wedding Inquiry - ${venue.name}`}

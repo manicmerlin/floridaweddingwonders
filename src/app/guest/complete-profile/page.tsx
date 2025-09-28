@@ -145,20 +145,12 @@ export default function CompleteProfile() {
             email: user.email
           }}
           onSubmit={handleProfileSubmit}
+          onSkip={handleSkipForNow}
+          showSkipOption={true}
           submitButtonText={isLoading ? "Saving Profile..." : "Complete My Profile"}
           title="Your Wedding Details"
           description="This information helps venues provide you with the most relevant options and accurate pricing."
         />
-
-        {/* Skip Option */}
-        <div className="text-center mt-8">
-          <button
-            onClick={handleSkipForNow}
-            className="text-gray-500 hover:text-gray-700 underline text-sm"
-          >
-            Skip for now (you can complete this later in your profile)
-          </button>
-        </div>
 
         {/* Back to Dashboard */}
         <div className="text-center mt-4">

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { isSuperAdmin } from '@/lib/auth';
+import SaveVenueButton from './SaveVenueButton';
 
 interface VenueCardProps {
   venue: Venue;
@@ -26,37 +27,8 @@ const getVenueColors = (venueType: string) => {
 };
 
 export default function VenueCard({ venue, showFavorites = false }: VenueCardProps) {
-  const [user, setUser] = useState<any>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
   const gradientColors = getVenueColors(venue.venueType);
   const isSuper = isSuperAdmin();
-
-  useEffect(() => {
-    // Check if user is logged in
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      const parsedUser = JSON.parse(userData);
-      setUser(parsedUser);
-      
-      // Check if venue is in favorites
-      if (parsedUser.role === 'guest') {
-        const favorites = JSON.parse(localStorage.getItem(`favorites-${parsedUser.id}`) || '[]');
-        setIsFavorite(favorites.includes(venue.id));
-      }
-    }
-  }, [venue.id]);
-
-  const toggleFavorite = () => {
-    if (!user || user.role !== 'guest') return;
-    
-    const favorites = JSON.parse(localStorage.getItem(`favorites-${user.id}`) || '[]');
-    const newFavorites = isFavorite 
-      ? favorites.filter((id: string) => id !== venue.id)
-      : [...favorites, venue.id];
-    
-    localStorage.setItem(`favorites-${user.id}`, JSON.stringify(newFavorites));
-    setIsFavorite(!isFavorite);
-  };
   
   // Get the primary image or fall back to first image
   const primaryImage = venue.images?.find(img => img.isPrimary) || venue.images?.[0];
@@ -97,22 +69,10 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
           </div>
         )}
         
-        {/* Favorite Button - Only show for guests */}
-        {showFavorites && user?.role === 'guest' && (
-          <button
-            onClick={toggleFavorite}
-            className="absolute top-2 left-2 p-2 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full transition shadow-sm"
-          >
-            <svg 
-              className={`w-5 h-5 ${isFavorite ? 'text-red-500 fill-current' : 'text-gray-400'}`} 
-              fill={isFavorite ? 'currentColor' : 'none'}
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-          </button>
-        )}
+        {/* Save Button */}
+        <div className="absolute top-2 right-2">
+          <SaveVenueButton venue={venue} size="md" />
+        </div>
       </div>
       
       <div className="p-6">

@@ -17,18 +17,22 @@ interface LeadQualificationFormProps {
   initialData?: Partial<LeadQualificationData>;
   onSubmit: (data: LeadQualificationData) => void;
   onCancel?: () => void;
+  onSkip?: () => void;
   submitButtonText?: string;
   title?: string;
   description?: string;
+  showSkipOption?: boolean;
 }
 
 const LeadQualificationForm: React.FC<LeadQualificationFormProps> = ({
   initialData = {},
   onSubmit,
   onCancel,
+  onSkip,
   submitButtonText = "Save Profile",
   title = "Complete Your Wedding Profile",
-  description = "Help us match you with perfect venues by sharing a few details about your special day."
+  description = "Help us match you with perfect venues by sharing a few details about your special day.",
+  showSkipOption = false
 }) => {
   const [formData, setFormData] = useState<LeadQualificationData>({
     fullName: initialData.fullName || '',
@@ -307,6 +311,17 @@ const LeadQualificationForm: React.FC<LeadQualificationFormProps> = ({
               Cancel
             </button>
           )}
+          
+          {showSkipOption && onSkip && (
+            <button
+              type="button"
+              onClick={onSkip}
+              className="flex-1 px-6 py-3 border border-gray-300 text-gray-600 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors"
+            >
+              Skip for Now
+            </button>
+          )}
+          
           <button
             type="submit"
             className="flex-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-md hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-all transform hover:scale-105"

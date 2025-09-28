@@ -7,13 +7,15 @@ import { Venue } from '../../../types';
 import Image from 'next/image';
 import Link from 'next/link';
 import LeadQualificationForm, { LeadQualificationData } from '../../../components/LeadQualificationForm';
+import VenueCard from '../../../components/VenueCard';
+import { FavoritesManager } from '../../../lib/favorites';
 
 export default function GuestDashboard() {
   const [user, setUser] = useState<any>(null);
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [savedVenuesCount, setSavedVenuesCount] = useState(0);
   const [venues, setVenues] = useState<Venue[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'favorites' | 'browse' | 'profile'>('favorites');
+  const [activeTab, setActiveTab] = useState<'saved' | 'browse' | 'profile'>('saved');
   const router = useRouter();
 
   useEffect(() => {
@@ -23,9 +25,8 @@ export default function GuestDashboard() {
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
       
-      // Load favorites from localStorage
-      const userFavorites = localStorage.getItem(`favorites-${parsedUser.id}`) || '[]';
-      setFavorites(JSON.parse(userFavorites));
+      // Load saved venues count
+      setSavedVenuesCount(FavoritesManager.getSavedVenuesCount(parsedUser.email));
     }
     
     setVenues(mockVenues);
@@ -37,18 +38,7 @@ export default function GuestDashboard() {
     router.push('/login');
   };
 
-  const toggleFavorite = (venueId: string) => {
-    const newFavorites = favorites.includes(venueId)
-      ? favorites.filter(id => id !== venueId)
-      : [...favorites, venueId];
-    
-    setFavorites(newFavorites);
-    
-    // Save to localStorage
-    if (user) {
-      localStorage.setItem(`favorites-${user.id}`, JSON.stringify(newFavorites));
-    }
-  };
+
 
   const handleProfileUpdate = async (leadData: LeadQualificationData) => {
     try {
@@ -73,9 +63,7 @@ export default function GuestDashboard() {
     }
   };
 
-  const getFavoriteVenues = () => {
-    return venues.filter(venue => favorites.includes(venue.id));
-  };
+
 
   const getFilteredVenues = () => {
     return venues.filter(venue =>
@@ -137,8 +125,8 @@ export default function GuestDashboard() {
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="text-2xl font-bold text-pink-600">{favorites.length}</div>
-            <div className="text-gray-600">Favorite Venues</div>
+            <div className="text-2xl font-bold text-pink-600">{savedVenuesCount}</div>
+            <div className="text-gray-600">Saved Venues</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <div className="text-2xl font-bold text-blue-600">{venues.filter(v => v.availability.isAvailable).length}</div>
@@ -155,7 +143,7 @@ export default function GuestDashboard() {
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8 px-6">
               {[
-                { id: 'favorites', name: 'My Favorites', icon: '💖', count: favorites.length },
+                { id: 'saved', name: 'Saved Venues', icon: '💖', count: savedVenuesCount },
                 { id: 'browse', name: 'Browse Venues', icon: '🔍', count: venues.length },
                 { id: 'profile', name: 'My Profile', icon: '👤', count: null }
               ].map((tab) => (
@@ -181,43 +169,37 @@ export default function GuestDashboard() {
           </div>
 
           <div className="p-6">
-            {/* Favorites Tab */}
-            {activeTab === 'favorites' && (
+            {/* Saved Venues Tab */}
+            {activeTab === 'saved' && (
               <div>
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">Your Favorite Venues</h2>
-                  <Link 
-                    href="/venues"
-                    className="text-pink-600 hover:text-pink-700 font-medium transition"
-                  >
-                    Discover More →
-                  </Link>
-                </div>
-
-                {favorites.length > 0 ? (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {getFavoriteVenues().map((venue) => (
-                      <VenueCard
-                        key={venue.id}
-                        venue={venue}
-                        isFavorite={true}
-                        onToggleFavorite={toggleFavorite}
-                      />
-                    ))}
+                <div className="text-center py-12">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-pink-100 rounded-full mb-4">
+                    <span className="text-3xl">💖</span>
                   </div>
-                ) : (
-                  <div className="text-center py-12 border-2 border-dashed border-gray-300 rounded-lg">
-                    <div className="text-6xl text-gray-400 mb-4">💝</div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No Favorites Yet</h3>
-                    <p className="text-gray-600 mb-4">Start browsing venues and click the heart to add favorites!</p>
-                    <button
-                      onClick={() => setActiveTab('browse')}
-                      className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg transition"
+                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your Saved Venues</h2>
+                  <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                    {savedVenuesCount > 0 
+                      ? `You have ${savedVenuesCount} venue${savedVenuesCount !== 1 ? 's' : ''} saved. View and manage them all in one place.`
+                      : 'Start saving venues you love by clicking the heart icon. They\'ll appear here for easy comparison.'
+                    }
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link
+                      href="/guest/saved-venues"
+                      className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition"
                     >
-                      Browse Venues
-                    </button>
+                      {savedVenuesCount > 0 ? 'View Saved Venues' : 'Browse Venues to Save'}
+                    </Link>
+                    {savedVenuesCount === 0 && (
+                      <button
+                        onClick={() => setActiveTab('browse')}
+                        className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition"
+                      >
+                        Browse Here
+                      </button>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             )}
 
@@ -240,8 +222,6 @@ export default function GuestDashboard() {
                     <VenueCard
                       key={venue.id}
                       venue={venue}
-                      isFavorite={favorites.includes(venue.id)}
-                      onToggleFavorite={toggleFavorite}
                     />
                   ))}
                 </div>
@@ -361,87 +341,4 @@ export default function GuestDashboard() {
   );
 }
 
-// Venue Card Component
-function VenueCard({ 
-  venue, 
-  isFavorite, 
-  onToggleFavorite 
-}: {
-  venue: Venue;
-  isFavorite: boolean;
-  onToggleFavorite: (venueId: string) => void;
-}) {
-  const primaryImage = venue.images?.find(img => img.isPrimary) || venue.images?.[0];
 
-  return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition group">
-      {/* Image */}
-      <div className="relative aspect-video">
-        {primaryImage ? (
-          <Image
-            src={primaryImage.url}
-            alt={primaryImage.alt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-400 text-4xl">🏛️</span>
-          </div>
-        )}
-        
-        {/* Favorite Button */}
-        <button
-          onClick={() => onToggleFavorite(venue.id)}
-          className="absolute top-3 right-3 p-2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full transition"
-        >
-          <svg 
-            className={`w-5 h-5 ${isFavorite ? 'text-red-500 fill-current' : 'text-gray-400'}`} 
-            fill={isFavorite ? 'currentColor' : 'none'}
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-        </button>
-
-        {/* Availability Badge */}
-        {venue.availability.isAvailable && (
-          <div className="absolute bottom-3 left-3 bg-green-600 text-white px-2 py-1 rounded-md text-xs font-medium">
-            Available
-          </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-1">{venue.name}</h3>
-        <p className="text-sm text-gray-600 mb-2">
-          {venue.address.city}, {venue.address.state}
-        </p>
-        
-        <div className="flex items-center justify-between mb-3">
-          <span className="px-2 py-1 bg-pink-100 text-pink-800 rounded-full text-xs font-medium capitalize">
-            {venue.venueType}
-          </span>
-          <span className="text-sm text-gray-600">
-            {venue.capacity.min}-{venue.capacity.max} guests
-          </span>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <span className="text-lg font-bold text-gray-900">
-            ${venue.pricing.startingPrice.toLocaleString()}+
-          </span>
-          <Link
-            href={`/venues/${venue.id}`}
-            className="text-pink-600 hover:text-pink-700 font-medium text-sm transition"
-          >
-            View Details →
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
