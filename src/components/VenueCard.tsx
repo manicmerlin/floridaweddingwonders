@@ -70,7 +70,7 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
         )}
         
         {/* Save Button */}
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-3 right-3 z-10">
           <SaveVenueButton venue={venue} size="md" />
         </div>
       </div>

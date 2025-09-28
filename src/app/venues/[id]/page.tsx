@@ -193,7 +193,7 @@ export default function VenueDetailPage() {
               >
                 💌 Request Information
               </button>
-              <SaveVenueButton venue={venue} size="lg" showText={true} />
+              <SaveVenueButton venue={venue} size="lg" showText={true} className="bg-white border-2 border-pink-300 text-pink-600 hover:bg-pink-50 px-6 py-3 rounded-lg font-semibold text-lg shadow-lg" />
               <div className="flex items-center space-x-4">
                 <a
                   href={`mailto:${venue.contact.email}?subject=Wedding Inquiry - ${venue.name}`}

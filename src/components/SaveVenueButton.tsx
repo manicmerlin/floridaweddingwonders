@@ -64,16 +64,18 @@ const SaveVenueButton: React.FC<SaveVenueButtonProps> = ({
     lg: 'w-10 h-10 text-lg'
   };
 
-  const buttonClasses = `
-    inline-flex items-center justify-center rounded-full border-2 transition-all duration-200
+  const baseButtonClasses = `
+    inline-flex items-center justify-center transition-all duration-200 shadow-sm
+    ${showText ? 'rounded-lg px-4 py-2 gap-2' : 'rounded-full border-2'}
     ${isSaved 
       ? 'bg-pink-100 border-pink-500 text-pink-600 hover:bg-pink-200' 
-      : 'bg-white border-gray-300 text-gray-400 hover:border-pink-300 hover:text-pink-500'
+      : 'bg-white border-gray-300 text-gray-400 hover:border-pink-300 hover:text-pink-500 hover:bg-pink-50'
     }
-    ${sizeClasses[size]}
-    ${className}
-    ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110 cursor-pointer'}
+    ${!showText ? sizeClasses[size] : ''}
+    ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 cursor-pointer'}
   `;
+  
+  const buttonClasses = className ? `${baseButtonClasses} ${className}` : baseButtonClasses;
 
   return (
     <div className="flex items-center gap-2">
@@ -85,7 +87,7 @@ const SaveVenueButton: React.FC<SaveVenueButtonProps> = ({
         aria-label={isSaved ? 'Remove from saved venues' : 'Save venue to favorites'}
       >
         <svg
-          className={`${size === 'sm' ? 'w-3 h-3' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4'}`}
+          className={`${showText ? 'w-5 h-5' : size === 'sm' ? 'w-3 h-3' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4'}`}
           fill={isSaved ? 'currentColor' : 'none'}
           stroke="currentColor"
           strokeWidth="2"
