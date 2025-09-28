@@ -68,7 +68,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-900">
       {isStaging ? (
         // Staging Environment - Functional home page with coming soon branding
-        <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
+        <div className="bg-gray-900">
           {/* Hero Section */}
           <div className="relative min-h-screen flex items-center justify-center px-6">
             <div className="relative z-10 text-center max-w-6xl mx-auto">
@@ -86,7 +86,7 @@ export default function HomePage() {
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-4xl lg:text-6xl font-bold text-white mb-8">
+              <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-8">
                 Florida Wedding Wonders
               </h1>
               <p className="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">

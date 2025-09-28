@@ -113,12 +113,6 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
             </svg>
           </button>
         )}
-        
-        {venue.owner?.isPremium && (
-          <div className="absolute top-2 right-2 bg-pink-600 text-white px-2 py-1 rounded text-xs font-semibold shadow-sm">
-            PREMIUM
-          </div>
-        )}
       </div>
       
       <div className="p-6">

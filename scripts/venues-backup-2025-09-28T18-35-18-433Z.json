@@ -6651,6 +6651,63 @@
       "lastImageUpdate": "2025-09-14T21:00:00.000Z"
     },
     {
+      "name": "East Sister Rock Island",
+      "location": "Marathon, Florida Keys",
+      "region": "Florida Keys",
+      "capacity": "50-100 guests for an exclusive private island wedding experience.",
+      "sizeCategory": "Small (50-74)",
+      "style": "Private island venue offering the ultimate exclusive wedding experience with complete privacy and luxury accommodations.",
+      "tags": [
+        "private island",
+        "exclusive",
+        "luxury",
+        "waterfront",
+        "unique",
+        "accommodation",
+        "intimate"
+      ],
+      "pricing": "Full private island rental package starting at $29,350. Outside catering allowed (must ferry all vendors).",
+      "servicesAmenities": [
+        "Complete private island rental",
+        "On-site luxury lodging",
+        "Exclusive use of entire island",
+        "Ferry transportation included",
+        "Waterfront ceremony locations",
+        "Multiple accommodation options",
+        "Custom event planning",
+        "Outside vendor ferry service"
+      ],
+      "ceremonyAndReception": true,
+      "website": "https://floridaisland.com/en/groups-events",
+      "images": [
+        {
+          "id": "placeholder-primary",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "East Sister Rock Island - Wedding venue placeholder",
+          "isPrimary": true
+        },
+        {
+          "id": "placeholder-1",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "East Sister Rock Island - Ceremony space",
+          "isPrimary": false
+        },
+        {
+          "id": "placeholder-2",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "East Sister Rock Island - Reception area",
+          "isPrimary": false
+        },
+        {
+          "id": "placeholder-3",
+          "url": "/images/venue-placeholder.svg",
+          "alt": "East Sister Rock Island - Venue details",
+          "isPrimary": false
+        }
+      ],
+      "lastImageUpdate": "2025-09-14T21:00:00.000Z"
+    },
+    {
       "name": "Jungle Island",
       "location": "Miami, Miami-Dade",
       "region": "Miami-Dade & Broward",
