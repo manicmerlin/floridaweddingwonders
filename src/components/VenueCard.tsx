@@ -73,6 +73,9 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
         <div className="absolute top-3 right-3 z-10">
           <SaveVenueButton venue={venue} size="md" />
         </div>
+        
+        {/* Explicitly remove any premium badges - none should show */}
+        {/* NOTE: Premium features not yet implemented */}
       </div>
       
       <div className="p-6">
