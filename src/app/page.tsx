@@ -68,7 +68,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-900">
       {isStaging ? (
         // Staging Environment - Functional home page with coming soon branding
-        <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
+        <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
           {/* Hero Section */}
           <div className="relative min-h-screen flex items-center justify-center px-6">
             <div className="relative z-10 text-center max-w-6xl mx-auto">
