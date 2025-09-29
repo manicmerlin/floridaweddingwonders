@@ -25,16 +25,16 @@
       "gallery": "https://www.theknot.com/marketplace/the-ancient-spanish-monastery-north-miami-beach-fl-378809",
       "images": [
         {
-          "id": "img-scraped-1759162906149-0",
-          "url": "/images/venues/venue-8-ancient-spanish-monastery-1.jpg",
-          "alt": "Ancient Spanish Monastery wedding venue",
+          "id": "ancient-spanish-monastery-1",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Ancient Spanish Monastery - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-8-ancient-spanish-monastery-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.149Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.074Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.157Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.074Z"
     },
     {
       "name": "Hialeah Park Racing & Casino",
@@ -72,16 +72,16 @@
       "gallery": "https://hialeahparkcasino.com/events#gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906159-1",
-          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
-          "alt": "Hialeah Park Racing & Casino wedding venue",
+          "id": "boca-lago-country-club-2",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Hialeah Park Racing & Casino - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.159Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.078Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.159Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.078Z"
     },
     {
       "name": "The Surfcomber Hotel",
@@ -109,16 +109,16 @@
       "gallery": "https://www.theknot.com/marketplace/kimpton-surfcomber-hotel-miami-beach-fl-2035985",
       "images": [
         {
-          "id": "img-scraped-1759162906161-2",
-          "url": "/images/venues/venue-1-the-surfcomber-hotel-2.jpg",
-          "alt": "The Surfcomber Hotel wedding venue",
+          "id": "bonnet-house-museum-gardens-3",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "The Surfcomber Hotel - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-1-the-surfcomber-hotel-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.161Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.078Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.161Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.078Z"
     },
     {
       "name": "MB Hotel",
@@ -144,16 +144,16 @@
       "gallery": "https://www.theknot.com/marketplace/mb-hotel-miami-beach-fl-2051690",
       "images": [
         {
-          "id": "img-scraped-1759162906162-3",
-          "url": "/images/venues/venue-2-mb-hotel-1.jpg",
-          "alt": "MB Hotel wedding venue",
+          "id": "ancient-spanish-monastery-4",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "MB Hotel - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-2-mb-hotel-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.162Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.162Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Sea Watch on the Ocean",
@@ -181,16 +181,16 @@
       "gallery": "https://www.theknot.com/marketplace/sea-watch-on-the-ocean-fort-lauderdale-fl-201524",
       "images": [
         {
-          "id": "img-scraped-1759162906163-4",
-          "url": "/images/venues/venue-3-sea-watch-on-the-ocean-1.jpg",
-          "alt": "Sea Watch on the Ocean wedding venue",
+          "id": "boca-lago-country-club-5",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Sea Watch on the Ocean - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-3-sea-watch-on-the-ocean-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.163Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.163Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Emeril Lagasse Foundation Innovation Kitchen",
@@ -219,16 +219,16 @@
       "gallery": "https://www.arcculinary.com/innovation-kitchen",
       "images": [
         {
-          "id": "img-scraped-1759162906165-5",
-          "url": "/images/venues/venue-4-emeril-lagasse-foundation-innovation-kitchen-1.jpg",
-          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue",
+          "id": "bonnet-house-museum-gardens-6",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-4-emeril-lagasse-foundation-innovation-kitchen-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.165Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.165Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Atlantic Wedding Chapel",
@@ -254,16 +254,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906166-6",
-          "url": "/images/venues/venue-5-atlantic-wedding-chapel-2.jpg",
-          "alt": "Atlantic Wedding Chapel wedding venue",
+          "id": "ancient-spanish-monastery-7",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Atlantic Wedding Chapel - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-5-atlantic-wedding-chapel-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.166Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.166Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Coastal Yacht Charters",
@@ -290,16 +290,16 @@
       "gallery": "https://www.coastalyachtcharters.com/our-yachts",
       "images": [
         {
-          "id": "img-scraped-1759162906167-7",
-          "url": "/images/venues/venue-6-coastal-yacht-charters-1.jpg",
-          "alt": "Coastal Yacht Charters wedding venue",
+          "id": "boca-lago-country-club-8",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Coastal Yacht Charters - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-6-coastal-yacht-charters-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.167Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.167Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Vizcaya Museum & Gardens",
@@ -328,16 +328,16 @@
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/vizcaya",
       "images": [
         {
-          "id": "img-scraped-1759162906167-8",
-          "url": "/images/venues/venue-7-vizcaya-museum-gardens-2.jpg",
-          "alt": "Vizcaya Museum & Gardens wedding venue",
+          "id": "bonnet-house-museum-gardens-9",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Vizcaya Museum & Gardens - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-7-vizcaya-museum-gardens-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.167Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.167Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "The Cooper Estate",
@@ -367,16 +367,16 @@
       "gallery": "https://www.theknot.com/marketplace/the-cooper-estate-miami-fl-548325",
       "images": [
         {
-          "id": "img-scraped-1759162906168-9",
-          "url": "/images/venues/venue-10-the-cooper-estate-1.jpg",
-          "alt": "The Cooper Estate wedding venue",
+          "id": "ancient-spanish-monastery-10",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "The Cooper Estate - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-10-the-cooper-estate-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.168Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.168Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Curtiss Mansion",
@@ -404,16 +404,16 @@
       "gallery": "https://www.theknot.com/marketplace/curtiss-mansion-miami-springs-fl-508629",
       "images": [
         {
-          "id": "img-scraped-1759162906171-10",
-          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
-          "alt": "Curtiss Mansion wedding venue",
+          "id": "boca-lago-country-club-11",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Curtiss Mansion - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-10-curtiss-mansion-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.171Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.171Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.079Z"
     },
     {
       "name": "Thalatta Estate",
@@ -440,16 +440,16 @@
       "gallery": "https://www.palmettobay-fl.gov/571/Photo-Gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906171-11",
-          "url": "/images/venues/venue-11-thalatta-estate-2.jpg",
-          "alt": "Thalatta Estate wedding venue",
+          "id": "bonnet-house-museum-gardens-12",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Thalatta Estate - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-11-thalatta-estate-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.171Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.079Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.171Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Deering Estate",
@@ -478,16 +478,16 @@
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/deering-estate-at-cutler",
       "images": [
         {
-          "id": "img-scraped-1759162906172-12",
-          "url": "/images/venues/venue-12-deering-estate-1.jpg",
-          "alt": "Deering Estate wedding venue",
+          "id": "ancient-spanish-monastery-13",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Deering Estate - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-12-deering-estate-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.172Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.172Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Fairchild Tropical Botanic Garden",
@@ -515,16 +515,16 @@
       "gallery": "https://fairchildgarden.org/private-events-and-weddings/",
       "images": [
         {
-          "id": "img-scraped-1759162906173-13",
-          "url": "/images/venues/venue-13-fairchild-tropical-botanic-garden-2.jpg",
-          "alt": "Fairchild Tropical Botanic Garden wedding venue",
+          "id": "boca-lago-country-club-14",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Fairchild Tropical Botanic Garden - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-13-fairchild-tropical-botanic-garden-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.173Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.173Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Historic Walton House",
@@ -554,16 +554,16 @@
       "gallery": "https://www.instagram.com/historicwaltonhouse/",
       "images": [
         {
-          "id": "img-scraped-1759162906173-14",
-          "url": "/images/venues/venue-14-historic-walton-house-1.jpg",
-          "alt": "Historic Walton House wedding venue",
+          "id": "bonnet-house-museum-gardens-15",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Historic Walton House - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-14-historic-walton-house-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.173Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.173Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Woman's Club of Coconut Grove",
@@ -591,16 +591,16 @@
       "gallery": "https://www.wedding-spot.com/venue/2733/Woman-s-Club-of-Coconut-Grove/",
       "images": [
         {
-          "id": "img-scraped-1759162906174-15",
-          "url": "/images/venues/venue-15-womans-club-of-coconut-grove-1.jpg",
-          "alt": "Woman's Club of Coconut Grove wedding venue",
+          "id": "ancient-spanish-monastery-16",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Woman's Club of Coconut Grove - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-15-womans-club-of-coconut-grove-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.174Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.174Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Bath Club",
@@ -630,16 +630,16 @@
       "gallery": "https://www.thebathclub.com/private-events-gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906175-16",
-          "url": "/images/venues/venue-16-the-bath-club-1.jpg",
-          "alt": "The Bath Club wedding venue",
+          "id": "boca-lago-country-club-17",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Bath Club - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-16-the-bath-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.175Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.175Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Cruz Building",
@@ -666,16 +666,16 @@
       "gallery": "https://www.theknot.com/marketplace/the-cruz-building-miami-fl-549429",
       "images": [
         {
-          "id": "img-scraped-1759162906176-17",
-          "url": "/images/venues/venue-17-the-cruz-building-2.jpg",
-          "alt": "The Cruz Building wedding venue",
+          "id": "bonnet-house-museum-gardens-18",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "The Cruz Building - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-17-the-cruz-building-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.176Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.176Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Rusty Pelican",
@@ -704,16 +704,16 @@
       "gallery": "https://www.therustypelican.com/private-events-miami/",
       "images": [
         {
-          "id": "img-scraped-1759162906177-18",
-          "url": "/images/venues/venue-18-rusty-pelican-1.jpg",
-          "alt": "Rusty Pelican wedding venue",
+          "id": "ancient-spanish-monastery-19",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Rusty Pelican - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-18-rusty-pelican-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.177Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.177Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Briza on the Bay",
@@ -743,16 +743,16 @@
       "gallery": "https://www.brizaonthebay.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906178-19",
-          "url": "/images/venues/venue-19-briza-on-the-bay-2.jpg",
-          "alt": "Briza on the Bay wedding venue",
+          "id": "boca-lago-country-club-20",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Briza on the Bay - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-19-briza-on-the-bay-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.178Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.178Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Penthouse at Riverside Wharf",
@@ -781,16 +781,16 @@
       "gallery": "https://penthouserw.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906179-20",
-          "url": "/images/venues/venue-20-penthouse-at-riverside-wharf-1.jpg",
-          "alt": "Penthouse at Riverside Wharf wedding venue",
+          "id": "bonnet-house-museum-gardens-21",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Penthouse at Riverside Wharf - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-20-penthouse-at-riverside-wharf-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.179Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.179Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Signature Grand",
@@ -815,16 +815,16 @@
       "gallery": "https://www.thesignaturegrand.com/virtual-tours/",
       "images": [
         {
-          "id": "img-scraped-1759162906180-21",
-          "url": "/images/venues/venue-21-signature-grand-1.jpg",
-          "alt": "Signature Grand wedding venue",
+          "id": "ancient-spanish-monastery-22",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Signature Grand - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-21-signature-grand-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.180Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.180Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Jacaranda Country Club",
@@ -851,16 +851,16 @@
       "gallery": "https://www.theknot.com/marketplace/jacaranda-country-club-plantation-fl-213961",
       "images": [
         {
-          "id": "img-scraped-1759162906181-22",
-          "url": "/images/venues/venue-22-jacaranda-country-club-1.jpg",
-          "alt": "Jacaranda Country Club wedding venue",
+          "id": "boca-lago-country-club-23",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Jacaranda Country Club - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-22-jacaranda-country-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.181Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.181Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Deer Creek Country Club",
@@ -887,16 +887,16 @@
       "gallery": "https://deercreekflorida.com/weddings-photo-gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906182-23",
-          "url": "/images/venues/venue-23-deer-creek-country-club-2.jpg",
-          "alt": "Deer Creek Country Club wedding venue",
+          "id": "bonnet-house-museum-gardens-24",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Deer Creek Country Club - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-23-deer-creek-country-club-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.182Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.182Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Bonnet House Museum & Gardens",
@@ -924,16 +924,16 @@
       "gallery": "https://www.theknot.com/marketplace/bonnet-house-museum-and-gardens-fort-lauderdale-fl-639762",
       "images": [
         {
-          "id": "img-scraped-1759162906182-24",
-          "url": "/images/venues/venue-24-bonnet-house-museum-gardens-1.jpg",
-          "alt": "Bonnet House Museum & Gardens wedding venue",
+          "id": "ancient-spanish-monastery-25",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Bonnet House Museum & Gardens - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-24-bonnet-house-museum-gardens-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.182Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.182Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Stranahan House",
@@ -960,16 +960,16 @@
       "gallery": "https://www.partyslate.com/venues/historic-stranahan-house-museum",
       "images": [
         {
-          "id": "img-scraped-1759162906183-25",
-          "url": "/images/venues/venue-25-stranahan-house-2.jpg",
-          "alt": "Stranahan House wedding venue",
+          "id": "boca-lago-country-club-26",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Stranahan House - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-25-stranahan-house-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.183Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.183Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Secret Gardens Miami",
@@ -999,16 +999,16 @@
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/secret-gardens-miami",
       "images": [
         {
-          "id": "img-scraped-1759162906184-26",
-          "url": "/images/venues/venue-26-secret-gardens-miami-1.jpg",
-          "alt": "Secret Gardens Miami wedding venue",
+          "id": "bonnet-house-museum-gardens-27",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Secret Gardens Miami - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-26-secret-gardens-miami-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.184Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.184Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Villa Woodbine",
@@ -1035,16 +1035,16 @@
       "gallery": "https://www.theknot.com/marketplace/villa-woodbine-miami-fl-237330",
       "images": [
         {
-          "id": "img-scraped-1759162906185-27",
-          "url": "/images/venues/venue-27-villa-woodbine-1.jpg",
-          "alt": "Villa Woodbine wedding venue",
+          "id": "ancient-spanish-monastery-28",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Villa Woodbine - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-27-villa-woodbine-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.185Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.185Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Lavan Venue",
@@ -1073,16 +1073,16 @@
       "gallery": "http://lavanvenue.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906186-28",
-          "url": "/images/venues/venue-28-lavan-venue-1.jpg",
-          "alt": "Lavan Venue wedding venue",
+          "id": "boca-lago-country-club-29",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Lavan Venue - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-28-lavan-venue-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.186Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.186Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Coral Gables Country Club",
@@ -1101,16 +1101,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906187-29",
-          "url": "/images/venues/venue-29-coral-gables-country-club-2.jpg",
-          "alt": "Coral Gables Country Club wedding venue",
+          "id": "bonnet-house-museum-gardens-30",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Coral Gables Country Club - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-29-coral-gables-country-club-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.187Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.187Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Weston Hills Country Club",
@@ -1129,16 +1129,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906188-30",
-          "url": "/images/venues/venue-30-weston-hills-country-club-1.jpg",
-          "alt": "Weston Hills Country Club wedding venue",
+          "id": "ancient-spanish-monastery-31",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Weston Hills Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-30-weston-hills-country-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.188Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.188Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Parkland Country Club",
@@ -1157,16 +1157,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906189-31",
-          "url": "/images/venues/venue-31-parkland-country-club-2.jpg",
-          "alt": "Parkland Country Club wedding venue",
+          "id": "boca-lago-country-club-32",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Parkland Country Club - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-31-parkland-country-club-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.189Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.189Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Miami Beach Botanical Garden",
@@ -1188,16 +1188,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906190-32",
-          "url": "/images/venues/venue-32-miami-beach-botanical-garden-1.jpg",
-          "alt": "Miami Beach Botanical Garden wedding venue",
+          "id": "bonnet-house-museum-gardens-33",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Miami Beach Botanical Garden - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-32-miami-beach-botanical-garden-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.190Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.190Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Hollywood's ArtsPark",
@@ -1217,16 +1217,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906190-33",
-          "url": "/images/venues/venue-33-hollywoods-artspark-1.jpg",
-          "alt": "Hollywood's ArtsPark wedding venue",
+          "id": "ancient-spanish-monastery-34",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Hollywood's ArtsPark - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-33-hollywoods-artspark-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.190Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.190Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Phillip and Patricia Frost Science Museum",
@@ -1248,16 +1248,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906191-34",
-          "url": "/images/venues/venue-34-phillip-and-patricia-frost-science-museum-1.jpg",
-          "alt": "Phillip and Patricia Frost Science Museum wedding venue",
+          "id": "boca-lago-country-club-35",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Phillip and Patricia Frost Science Museum - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-34-phillip-and-patricia-frost-science-museum-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.191Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.191Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The M Building",
@@ -1278,16 +1278,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906192-35",
-          "url": "/images/venues/venue-17-the-cruz-building-2.jpg",
-          "alt": "The M Building wedding venue",
+          "id": "bonnet-house-museum-gardens-36",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "The M Building - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-17-the-cruz-building-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.192Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.192Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Wharf (Miami/Ft. Lauderdale)",
@@ -1309,16 +1309,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906192-36",
-          "url": "/images/venues/venue-36-the-wharf-miamift-lauderdale-1.jpg",
-          "alt": "The Wharf (Miami/Ft. Lauderdale) wedding venue",
+          "id": "ancient-spanish-monastery-37",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "The Wharf (Miami/Ft. Lauderdale) - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-36-the-wharf-miamift-lauderdale-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.192Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.192Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Biltmore Hotel",
@@ -1350,16 +1350,16 @@
       "gallery": "https://www.theknot.com/marketplace/the-biltmore-hotel-coral-gables-fl-209219",
       "images": [
         {
-          "id": "img-scraped-1759162906193-37",
-          "url": "/images/venues/venue-37-the-biltmore-hotel-2.jpg",
-          "alt": "The Biltmore Hotel wedding venue",
+          "id": "boca-lago-country-club-38",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Biltmore Hotel - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-37-the-biltmore-hotel-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.193Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.193Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Miami Marriott Biscayne Bay",
@@ -1387,16 +1387,16 @@
       "gallery": "https://www.theknot.com/marketplace/miami-marriott-biscayne-bay-miami-fl-213905",
       "images": [
         {
-          "id": "img-scraped-1759162906194-38",
-          "url": "/images/venues/venue-38-miami-marriott-biscayne-bay-1.jpg",
-          "alt": "Miami Marriott Biscayne Bay wedding venue",
+          "id": "bonnet-house-museum-gardens-39",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Miami Marriott Biscayne Bay - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-38-miami-marriott-biscayne-bay-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.194Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.194Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Diplomat Beach Resort",
@@ -1429,16 +1429,16 @@
       "gallery": "https://www.diplomatresort.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906195-39",
-          "url": "/images/venues/venue-39-diplomat-beach-resort-1.jpg",
-          "alt": "Diplomat Beach Resort wedding venue",
+          "id": "ancient-spanish-monastery-40",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Diplomat Beach Resort - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-39-diplomat-beach-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.195Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.195Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Seminole Hard Rock Hotel & Casino",
@@ -1468,16 +1468,16 @@
       "gallery": "https://www.seminolehardrockhollywood.com/meetings-events/photo-gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906195-40",
-          "url": "/images/venues/venue-40-seminole-hard-rock-hotel-casino-1.jpg",
-          "alt": "Seminole Hard Rock Hotel & Casino wedding venue",
+          "id": "boca-lago-country-club-41",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Seminole Hard Rock Hotel & Casino - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-40-seminole-hard-rock-hotel-casino-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.195Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.195Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Milander Center for Arts & Entertainment",
@@ -1504,16 +1504,16 @@
       "gallery": "https://www.hialeahfl.gov/1041/Photo-Gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906196-41",
-          "url": "/images/venues/venue-42-milander-center-for-arts-entertainment-1.jpg",
-          "alt": "Milander Center for Arts & Entertainment wedding venue",
+          "id": "bonnet-house-museum-gardens-42",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Milander Center for Arts & Entertainment - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-42-milander-center-for-arts-entertainment-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.196Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.196Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Pérez Art Museum Miami (PAMM)",
@@ -1542,16 +1542,16 @@
       "gallery": "https://www.theknot.com/marketplace/perez-art-museum-miami-miami-fl-796593",
       "images": [
         {
-          "id": "img-scraped-1759162906197-42",
-          "url": "/images/venues/venue-43-prez-art-museum-miami-pamm-2.jpg",
-          "alt": "Pérez Art Museum Miami (PAMM) wedding venue",
+          "id": "ancient-spanish-monastery-43",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Pérez Art Museum Miami (PAMM) - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-43-prez-art-museum-miami-pamm-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.197Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.197Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "JW Marriott Turnberry Resort & Spa",
@@ -1582,16 +1582,16 @@
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/jw-marriott-miami-turnberry-resort-spa",
       "images": [
         {
-          "id": "img-scraped-1759162906198-43",
-          "url": "/images/venues/venue-44-jw-marriott-turnberry-resort-spa-1.jpg",
-          "alt": "JW Marriott Turnberry Resort & Spa wedding venue",
+          "id": "boca-lago-country-club-44",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "JW Marriott Turnberry Resort & Spa - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-44-jw-marriott-turnberry-resort-spa-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.198Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.198Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Loews Miami Beach Hotel",
@@ -1623,16 +1623,16 @@
       "gallery": "https://www.theknot.com/marketplace/loews-miami-beach-hotel-miami-beach-fl-213903",
       "images": [
         {
-          "id": "img-scraped-1759162906198-44",
-          "url": "/images/venues/venue-45-loews-miami-beach-hotel-1.jpg",
-          "alt": "Loews Miami Beach Hotel wedding venue",
+          "id": "bonnet-house-museum-gardens-45",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Loews Miami Beach Hotel - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-45-loews-miami-beach-hotel-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.198Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.198Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Faena Hotel Miami Beach",
@@ -1662,16 +1662,16 @@
       "gallery": "https://www.theknot.com/marketplace/faena-hotel-miami-beach-miami-beach-fl-1049257",
       "images": [
         {
-          "id": "img-scraped-1759162906199-45",
-          "url": "/images/venues/venue-46-faena-hotel-miami-beach-1.jpg",
-          "alt": "Faena Hotel Miami Beach wedding venue",
+          "id": "ancient-spanish-monastery-46",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Faena Hotel Miami Beach - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-46-faena-hotel-miami-beach-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.199Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.199Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Eau Palm Beach Resort & Spa",
@@ -1703,16 +1703,16 @@
       "gallery": "https://www.theknot.com/marketplace/eau-palm-beach-resort-and-spa-manalapan-fl-588171",
       "images": [
         {
-          "id": "img-scraped-1759162906200-46",
-          "url": "/images/venues/venue-47-eau-palm-beach-resort-spa-2.jpg",
-          "alt": "Eau Palm Beach Resort & Spa wedding venue",
+          "id": "boca-lago-country-club-47",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Eau Palm Beach Resort & Spa - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-47-eau-palm-beach-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.200Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.200Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Palm Beach Marriott Singer Island Beach Resort & Spa",
@@ -1742,16 +1742,16 @@
       "gallery": "https://www.theknot.com/marketplace/palm-beach-marriott-singer-island-beach-resort-and-spa-singer-island-fl-1089827",
       "images": [
         {
-          "id": "img-scraped-1759162906201-47",
-          "url": "/images/venues/venue-48-palm-beach-marriott-singer-island-beach-resort-spa-1.jpg",
-          "alt": "Palm Beach Marriott Singer Island Beach Resort & Spa wedding venue",
+          "id": "bonnet-house-museum-gardens-48",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Palm Beach Marriott Singer Island Beach Resort & Spa - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-48-palm-beach-marriott-singer-island-beach-resort-spa-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.201Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.201Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Addison",
@@ -1782,16 +1782,16 @@
       "gallery": "https://theaddison.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906201-48",
-          "url": "/images/venues/venue-49-the-addison-2.jpg",
-          "alt": "The Addison wedding venue",
+          "id": "ancient-spanish-monastery-49",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "The Addison - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-49-the-addison-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.201Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.201Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Lady Jean Ranch",
@@ -1820,16 +1820,16 @@
       "gallery": "https://www.theknot.com/marketplace/lady-jean-ranch-jupiter-fl-2016604",
       "images": [
         {
-          "id": "img-scraped-1759162906202-49",
-          "url": "/images/venues/venue-50-lady-jean-ranch-1.jpg",
-          "alt": "Lady Jean Ranch wedding venue",
+          "id": "boca-lago-country-club-50",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Lady Jean Ranch - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-50-lady-jean-ranch-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.202Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.202Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Out of the Blue Celebrations",
@@ -1856,16 +1856,16 @@
       "gallery": "https://www.outofthebluecelebrations.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906203-50",
-          "url": "/images/venues/venue-51-out-of-the-blue-celebrations-1.jpg",
-          "alt": "Out of the Blue Celebrations wedding venue",
+          "id": "bonnet-house-museum-gardens-51",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Out of the Blue Celebrations - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-51-out-of-the-blue-celebrations-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.203Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.203Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Ben, Autograph Collection",
@@ -1896,16 +1896,16 @@
       "gallery": "https://www.thebenwestpalm.com/weddings/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906204-51",
-          "url": "/images/venues/venue-52-the-ben-autograph-collection-1.jpg",
-          "alt": "The Ben, Autograph Collection wedding venue",
+          "id": "ancient-spanish-monastery-52",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "The Ben, Autograph Collection - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-52-the-ben-autograph-collection-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.204Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.204Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Tideline Ocean Resort & Spa",
@@ -1934,16 +1934,16 @@
       "gallery": "https://www.tidelineresort.com/gather/weddings/",
       "images": [
         {
-          "id": "img-scraped-1759162906204-52",
-          "url": "/images/venues/venue-53-tideline-ocean-resort-spa-2.jpg",
-          "alt": "Tideline Ocean Resort & Spa wedding venue",
+          "id": "boca-lago-country-club-53",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Tideline Ocean Resort & Spa - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-53-tideline-ocean-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.204Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.204Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "PGA National Resort",
@@ -1974,16 +1974,16 @@
       "gallery": "https://www.pgaresort.com/weddings/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906205-53",
-          "url": "/images/venues/venue-54-pga-national-resort-1.jpg",
-          "alt": "PGA National Resort wedding venue",
+          "id": "bonnet-house-museum-gardens-54",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "PGA National Resort - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-54-pga-national-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.205Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.205Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Pelican Club",
@@ -2013,16 +2013,16 @@
       "gallery": "https://www.pelicanclubjupiter.com/photo-gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906206-54",
-          "url": "/images/venues/venue-55-pelican-club-2.jpg",
-          "alt": "Pelican Club wedding venue",
+          "id": "ancient-spanish-monastery-55",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Pelican Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-55-pelican-club-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.206Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.206Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Wanderers Club",
@@ -2050,16 +2050,16 @@
       "gallery": "https://www.wanderersclubwellington.com/photo-gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906206-55",
-          "url": "/images/venues/venue-56-the-wanderers-club-1.jpg",
-          "alt": "The Wanderers Club wedding venue",
+          "id": "boca-lago-country-club-56",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Wanderers Club - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-56-the-wanderers-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.206Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.206Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Seagate Hotel & Spa",
@@ -2090,16 +2090,16 @@
       "gallery": "https://www.seagatedelray.com/weddings-gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906207-56",
-          "url": "/images/venues/venue-57-the-seagate-hotel-spa-1.jpg",
-          "alt": "The Seagate Hotel & Spa wedding venue",
+          "id": "bonnet-house-museum-gardens-57",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "The Seagate Hotel & Spa - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-57-the-seagate-hotel-spa-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.207Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.207Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Boca Lago Country Club",
@@ -2127,16 +2127,16 @@
       "gallery": "https://www.bocalago.com/photo-gallery-weddings",
       "images": [
         {
-          "id": "img-scraped-1759162906207-57",
-          "url": "/images/venues/venue-58-boca-lago-country-club-1.jpg",
-          "alt": "Boca Lago Country Club wedding venue",
+          "id": "ancient-spanish-monastery-58",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Boca Lago Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-58-boca-lago-country-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.207Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.207Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Club at Ibis",
@@ -2167,16 +2167,16 @@
       "gallery": "https://www.clubatibis.com/special-events/weddings",
       "images": [
         {
-          "id": "img-scraped-1759162906208-58",
-          "url": "/images/venues/venue-59-the-club-at-ibis-2.jpg",
-          "alt": "The Club at Ibis wedding venue",
+          "id": "boca-lago-country-club-59",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Club at Ibis - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-59-the-club-at-ibis-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.208Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.208Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Canopy by Hilton West Palm Beach",
@@ -2196,16 +2196,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906209-59",
-          "url": "/images/venues/venue-60-canopy-by-hilton-west-palm-beach-1.jpg",
-          "alt": "Canopy by Hilton West Palm Beach wedding venue",
+          "id": "bonnet-house-museum-gardens-60",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Canopy by Hilton West Palm Beach - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-60-canopy-by-hilton-west-palm-beach-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.209Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.209Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Jupiter Beach Resort & Spa",
@@ -2225,16 +2225,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906209-60",
-          "url": "/images/venues/venue-61-jupiter-beach-resort-spa-2.jpg",
-          "alt": "Jupiter Beach Resort & Spa wedding venue",
+          "id": "ancient-spanish-monastery-61",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Jupiter Beach Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-61-jupiter-beach-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.209Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.209Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Loggerhead Marinelife Center",
@@ -2255,16 +2255,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906210-61",
-          "url": "/images/venues/venue-62-loggerhead-marinelife-center-1.jpg",
-          "alt": "Loggerhead Marinelife Center wedding venue",
+          "id": "boca-lago-country-club-62",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Loggerhead Marinelife Center - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-62-loggerhead-marinelife-center-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.210Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.210Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Morikami Museum & Gardens",
@@ -2286,16 +2286,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906211-62",
-          "url": "/images/venues/venue-63-morikami-museum-gardens-1.jpg",
-          "alt": "Morikami Museum & Gardens wedding venue",
+          "id": "bonnet-house-museum-gardens-63",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Morikami Museum & Gardens - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-63-morikami-museum-gardens-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.211Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.211Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Sundy House",
@@ -2315,16 +2315,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906211-63",
-          "url": "/images/venues/venue-64-sundy-house-1.jpg",
-          "alt": "Sundy House wedding venue",
+          "id": "ancient-spanish-monastery-64",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Sundy House - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-64-sundy-house-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.211Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.211Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "LaPlaya Beach & Golf Resort",
@@ -2356,16 +2356,16 @@
       "gallery": "https://www.laplayaresort.com/weddings/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906212-64",
-          "url": "/images/venues/venue-65-laplaya-beach-golf-resort-2.jpg",
-          "alt": "LaPlaya Beach & Golf Resort wedding venue",
+          "id": "boca-lago-country-club-65",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "LaPlaya Beach & Golf Resort - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-65-laplaya-beach-golf-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.212Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.212Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Naples Bay Resort & Marina",
@@ -2395,16 +2395,16 @@
       "gallery": "https://www.naplesbayresort.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906213-65",
-          "url": "/images/venues/venue-66-naples-bay-resort-marina-1.jpg",
-          "alt": "Naples Bay Resort & Marina wedding venue",
+          "id": "bonnet-house-museum-gardens-66",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Naples Bay Resort & Marina - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-66-naples-bay-resort-marina-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.213Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.213Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Vineyards Country Club",
@@ -2434,16 +2434,16 @@
       "gallery": "https://vineyardscountryclubnaples.com/photo-gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906213-66",
-          "url": "/images/venues/venue-67-vineyards-country-club-2.jpg",
-          "alt": "Vineyards Country Club wedding venue",
+          "id": "ancient-spanish-monastery-67",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Vineyards Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-67-vineyards-country-club-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.213Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.213Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Tiburón Golf Club",
@@ -2471,16 +2471,16 @@
       "gallery": "https://www.tiburonnaples.com/weddings",
       "images": [
         {
-          "id": "img-scraped-1759162906214-67",
-          "url": "/images/venues/venue-68-tiburn-golf-club-1.jpg",
-          "alt": "Tiburón Golf Club wedding venue",
+          "id": "boca-lago-country-club-68",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Tiburón Golf Club - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-68-tiburn-golf-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.214Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.214Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "JW Marriott Marco Island Beach Resort",
@@ -2513,16 +2513,16 @@
       "gallery": "https://www.marriott.com/en-us/hotels/mrkfl-jw-marriott-marco-island-beach-resort/events/",
       "images": [
         {
-          "id": "img-scraped-1759162906215-68",
-          "url": "/images/venues/venue-69-jw-marriott-marco-island-beach-resort-1.jpg",
-          "alt": "JW Marriott Marco Island Beach Resort wedding venue",
+          "id": "bonnet-house-museum-gardens-69",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "JW Marriott Marco Island Beach Resort - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-69-jw-marriott-marco-island-beach-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.215Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.215Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Hyatt Regency Coconut Point Resort & Spa",
@@ -2555,16 +2555,16 @@
       "gallery": "https://www.hyatt.com/en-US/hotel/florida/hyatt-regency-coconut-point-resort-and-spa/naprn/photos-reviews",
       "images": [
         {
-          "id": "img-scraped-1759162906215-69",
-          "url": "/images/venues/venue-70-hyatt-regency-coconut-point-resort-spa-1.jpg",
-          "alt": "Hyatt Regency Coconut Point Resort & Spa wedding venue",
+          "id": "ancient-spanish-monastery-70",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Hyatt Regency Coconut Point Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-70-hyatt-regency-coconut-point-resort-spa-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.215Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.215Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Sale e Pepe at Marco Beach Ocean Resort",
@@ -2592,16 +2592,16 @@
       "gallery": "https://sale-e-pepe.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906216-70",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Sale e Pepe at Marco Beach Ocean Resort wedding venue",
+          "id": "boca-lago-country-club-71",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Sale e Pepe at Marco Beach Ocean Resort - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.216Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.216Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Pink Shell Beach Resort & Marina",
@@ -2631,16 +2631,16 @@
       "gallery": "https://www.pinkshell.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906217-71",
-          "url": "/images/venues/venue-72-pink-shell-beach-resort-marina-1.jpg",
-          "alt": "Pink Shell Beach Resort & Marina wedding venue",
+          "id": "bonnet-house-museum-gardens-72",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Pink Shell Beach Resort & Marina - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-72-pink-shell-beach-resort-marina-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.217Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.217Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Sundial Beach Resort & Spa",
@@ -2670,16 +2670,16 @@
       "gallery": "https://sundialresort.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906217-72",
-          "url": "/images/venues/venue-73-sundial-beach-resort-spa-2.jpg",
-          "alt": "Sundial Beach Resort & Spa wedding venue",
+          "id": "ancient-spanish-monastery-73",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Sundial Beach Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-73-sundial-beach-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.217Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.217Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Sanibel Harbour Marriott Resort & Spa",
@@ -2712,16 +2712,16 @@
       "gallery": "https://www.marriott.com/en-us/hotels/rswfs-sanibel-harbour-resort-and-spa/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906218-73",
-          "url": "/images/venues/venue-74-sanibel-harbour-marriott-resort-spa-1.jpg",
-          "alt": "Sanibel Harbour Marriott Resort & Spa wedding venue",
+          "id": "boca-lago-country-club-74",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Sanibel Harbour Marriott Resort & Spa - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-74-sanibel-harbour-marriott-resort-spa-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.218Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.218Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Westin Cape Coral Resort at Marina Village",
@@ -2752,16 +2752,16 @@
       "gallery": "https://www.marriott.com/en-us/hotels/rswwc-the-westin-cape-coral-resort-at-marina-village/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906219-74",
-          "url": "/images/venues/venue-75-westin-cape-coral-resort-at-marina-village-1.jpg",
-          "alt": "Westin Cape Coral Resort at Marina Village wedding venue",
+          "id": "bonnet-house-museum-gardens-75",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Westin Cape Coral Resort at Marina Village - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-75-westin-cape-coral-resort-at-marina-village-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.219Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.219Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "South Seas Island Resort",
@@ -2792,16 +2792,16 @@
       "gallery": "https://www.southseas.com/weddings/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906220-75",
-          "url": "/images/venues/venue-76-south-seas-island-resort-1.jpg",
-          "alt": "South Seas Island Resort wedding venue",
+          "id": "ancient-spanish-monastery-76",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "South Seas Island Resort - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-76-south-seas-island-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.220Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.220Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Club at Grandezza",
@@ -2821,16 +2821,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906220-76",
-          "url": "/images/venues/venue-77-the-club-at-grandezza-2.jpg",
-          "alt": "The Club at Grandezza wedding venue",
+          "id": "boca-lago-country-club-77",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Club at Grandezza - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-77-the-club-at-grandezza-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.220Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.220Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Colony Golf & Country Club",
@@ -2851,16 +2851,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906221-77",
-          "url": "/images/venues/venue-78-the-colony-golf-country-club-1.jpg",
-          "alt": "The Colony Golf & Country Club wedding venue",
+          "id": "bonnet-house-museum-gardens-78",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "The Colony Golf & Country Club - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-78-the-colony-golf-country-club-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.221Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.221Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Heritage Bay Golf & Country Club",
@@ -2881,16 +2881,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906222-78",
-          "url": "/images/venues/venue-79-heritage-bay-golf-country-club-2.jpg",
-          "alt": "Heritage Bay Golf & Country Club wedding venue",
+          "id": "ancient-spanish-monastery-79",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Heritage Bay Golf & Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-79-heritage-bay-golf-country-club-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.222Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.222Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Lover's Key Adventure & Events",
@@ -2911,16 +2911,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906222-79",
-          "url": "/images/venues/venue-80-lovers-key-adventure-events-1.jpg",
-          "alt": "Lover's Key Adventure & Events wedding venue",
+          "id": "boca-lago-country-club-80",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Lover's Key Adventure & Events - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-80-lovers-key-adventure-events-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.222Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.222Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Corkscrew Sanctuary",
@@ -2942,16 +2942,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906223-80",
-          "url": "/images/venues/venue-81-corkscrew-sanctuary-1.jpg",
-          "alt": "Corkscrew Sanctuary wedding venue",
+          "id": "bonnet-house-museum-gardens-81",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Corkscrew Sanctuary - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-81-corkscrew-sanctuary-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.223Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.223Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Margaritaville Beach Resort",
@@ -2972,16 +2972,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906223-81",
-          "url": "/images/venues/venue-39-diplomat-beach-resort-1.jpg",
-          "alt": "Margaritaville Beach Resort wedding venue",
+          "id": "ancient-spanish-monastery-82",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Margaritaville Beach Resort - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-39-diplomat-beach-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.223Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.223Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Misty Morning Barn",
@@ -3001,16 +3001,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906224-82",
-          "url": "/images/venues/venue-35-the-m-building-2.jpg",
-          "alt": "Misty Morning Barn wedding venue",
+          "id": "boca-lago-country-club-83",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Misty Morning Barn - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-35-the-m-building-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.224Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.224Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Naples Princess",
@@ -3032,14 +3032,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-placeholder-83",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Naples Princess wedding venue",
+          "id": "bonnet-house-museum-gardens-84",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Naples Princess - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.251Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Baker's Cay Resort Key Largo",
@@ -3069,16 +3071,16 @@
       "gallery": "https://www.bakerscay.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906225-84",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Baker's Cay Resort Key Largo wedding venue",
+          "id": "ancient-spanish-monastery-85",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Baker's Cay Resort Key Largo - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.225Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.225Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Playa Largo Resort & Spa",
@@ -3109,16 +3111,16 @@
       "gallery": "https://www.playalargoresort.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906226-85",
-          "url": "/images/venues/venue-53-tideline-ocean-resort-spa-2.jpg",
-          "alt": "Playa Largo Resort & Spa wedding venue",
+          "id": "boca-lago-country-club-86",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Playa Largo Resort & Spa - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-53-tideline-ocean-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.226Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.226Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Largo Resort",
@@ -3146,14 +3148,16 @@
       "gallery": "https://www.largoresort.com/gallery/",
       "images": [
         {
-          "id": "img-placeholder-86",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Largo Resort wedding venue",
+          "id": "bonnet-house-museum-gardens-87",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Largo Resort - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.251Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Dolphin Point Villas",
@@ -3182,16 +3186,16 @@
       "gallery": "https://dolphinpointvillas.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906227-87",
-          "url": "/images/venues/venue-27-villa-woodbine-1.jpg",
-          "alt": "Dolphin Point Villas wedding venue",
+          "id": "ancient-spanish-monastery-88",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Dolphin Point Villas - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-27-villa-woodbine-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.227Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.227Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Islander Resort",
@@ -3222,16 +3226,16 @@
       "gallery": "https://www.islanderfloridakeys.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906228-88",
-          "url": "/images/venues/venue-76-south-seas-island-resort-1.jpg",
-          "alt": "Islander Resort wedding venue",
+          "id": "boca-lago-country-club-89",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Islander Resort - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-76-south-seas-island-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.228Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.228Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Cheeca Lodge & Spa",
@@ -3264,16 +3268,16 @@
       "gallery": "https://www.cheeca.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906229-89",
-          "url": "/images/venues/venue-33-hollywoods-artspark-1.jpg",
-          "alt": "Cheeca Lodge & Spa wedding venue",
+          "id": "bonnet-house-museum-gardens-90",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Cheeca Lodge & Spa - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-33-hollywoods-artspark-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.229Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.229Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Ocean Oasis",
@@ -3302,14 +3306,16 @@
       "gallery": "https://www.islamoradabeachhouse.com/gallery",
       "images": [
         {
-          "id": "img-placeholder-90",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Ocean Oasis wedding venue",
+          "id": "ancient-spanish-monastery-91",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Ocean Oasis - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.251Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Three Waters",
@@ -3337,14 +3343,16 @@
       "gallery": "https://www.islamoradaresortcollection.com/photo-gallery",
       "images": [
         {
-          "id": "img-placeholder-91",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Three Waters wedding venue",
+          "id": "boca-lago-country-club-92",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Three Waters - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.251Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "La Siesta Resort & Villas",
@@ -3372,14 +3380,16 @@
       "gallery": "https://www.islamoradaresortcollection.com/photo-gallery",
       "images": [
         {
-          "id": "img-placeholder-92",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "La Siesta Resort & Villas wedding venue",
+          "id": "bonnet-house-museum-gardens-93",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "La Siesta Resort & Villas - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.251Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Bud N' Mary's Marina 'The Barn'",
@@ -3409,16 +3419,16 @@
       "gallery": "https://www.weddingwire.com/biz/bud-n-marys-marina/00833374a540e023.html",
       "images": [
         {
-          "id": "img-scraped-1759162906231-93",
-          "url": "/images/venues/venue-35-the-m-building-2.jpg",
-          "alt": "Bud N' Mary's Marina 'The Barn' wedding venue",
+          "id": "ancient-spanish-monastery-94",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Bud N' Mary's Marina 'The Barn' - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-35-the-m-building-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.231Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.231Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Faro Blanco Resort & Yacht Club",
@@ -3449,14 +3459,16 @@
       "gallery": "https://www.faroblancoresort.com/gallery.htm",
       "images": [
         {
-          "id": "img-placeholder-94",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Faro Blanco Resort & Yacht Club wedding venue",
+          "id": "boca-lago-country-club-95",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Faro Blanco Resort & Yacht Club - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.252Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Isla Bella Beach Resort",
@@ -3487,16 +3499,16 @@
       "gallery": "https://www.islabellabeachresort.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906232-95",
-          "url": "/images/venues/venue-39-diplomat-beach-resort-1.jpg",
-          "alt": "Isla Bella Beach Resort wedding venue",
+          "id": "bonnet-house-museum-gardens-96",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Isla Bella Beach Resort - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-39-diplomat-beach-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.232Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.232Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "East Sister Rock Island",
@@ -3524,14 +3536,16 @@
       "gallery": "https://floridaisland.com/en/groups-events",
       "images": [
         {
-          "id": "img-placeholder-96",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "East Sister Rock Island wedding venue",
+          "id": "ancient-spanish-monastery-97",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "East Sister Rock Island - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.252Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Hawks Cay Resort",
@@ -3561,14 +3575,16 @@
       "gallery": "https://www.hawkscay.com/gallery",
       "images": [
         {
-          "id": "img-placeholder-97",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Hawks Cay Resort wedding venue",
+          "id": "boca-lago-country-club-98",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Hawks Cay Resort - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.252Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Margaritaville Beach House Key West",
@@ -3598,16 +3614,16 @@
       "gallery": "https://www.margaritavillebeachhousekeywest.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906234-98",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Margaritaville Beach House Key West wedding venue",
+          "id": "bonnet-house-museum-gardens-99",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Margaritaville Beach House Key West - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.234Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.234Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Audubon House & Tropical Gardens",
@@ -3637,16 +3653,16 @@
       "gallery": "https://www.audubonhouse.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906235-99",
-          "url": "/images/venues/venue-13-fairchild-tropical-botanic-garden-2.jpg",
-          "alt": "Audubon House & Tropical Gardens wedding venue",
+          "id": "ancient-spanish-monastery-100",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Audubon House & Tropical Gardens - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-13-fairchild-tropical-botanic-garden-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.235Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.235Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Reach Key West, Curio Collection by Hilton",
@@ -3679,16 +3695,16 @@
       "gallery": "https://www.hilton.com/en/hotels/eywthqq-the-reach-key-west/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906236-100",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "The Reach Key West, Curio Collection by Hilton wedding venue",
+          "id": "boca-lago-country-club-101",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Reach Key West, Curio Collection by Hilton - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.236Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.236Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Southernmost Beach Resort",
@@ -3717,16 +3733,16 @@
       "gallery": "https://www.southernmostbeachresort.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906237-101",
-          "url": "/images/venues/venue-39-diplomat-beach-resort-1.jpg",
-          "alt": "Southernmost Beach Resort wedding venue",
+          "id": "bonnet-house-museum-gardens-102",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Southernmost Beach Resort - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-39-diplomat-beach-resort-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.237Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.237Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Havana Cabana at Key West",
@@ -3757,14 +3773,16 @@
       "gallery": "https://www.havanacabanakeywesthotel.com/gallery",
       "images": [
         {
-          "id": "img-placeholder-102",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Havana Cabana at Key West wedding venue",
+          "id": "ancient-spanish-monastery-103",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Havana Cabana at Key West - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.252Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Casa Marina Key West, Curio Collection by Hilton",
@@ -3797,16 +3815,16 @@
       "gallery": "https://www.casamarinaresort.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906238-103",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Casa Marina Key West, Curio Collection by Hilton wedding venue",
+          "id": "boca-lago-country-club-104",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Casa Marina Key West, Curio Collection by Hilton - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.238Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.238Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Hyatt Centric Key West Resort & Spa",
@@ -3835,16 +3853,16 @@
       "gallery": "https://www.hyatt.com/hyatt-centric/en-US/keywh-hyatt-centric-key-west-resort-and-spa/photos-reviews",
       "images": [
         {
-          "id": "img-scraped-1759162906239-104",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Hyatt Centric Key West Resort & Spa wedding venue",
+          "id": "bonnet-house-museum-gardens-105",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Hyatt Centric Key West Resort & Spa - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.239Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.239Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Perry Hotel & Marina Key West",
@@ -3874,16 +3892,16 @@
       "gallery": "https://www.perrykeywest.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906240-105",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "The Perry Hotel & Marina Key West wedding venue",
+          "id": "ancient-spanish-monastery-106",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "The Perry Hotel & Marina Key West - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.240Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.240Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Oceans Edge Resort & Marina",
@@ -3913,16 +3931,16 @@
       "gallery": "https://www.oceansedgekeywest.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906240-106",
-          "url": "/images/venues/venue-53-tideline-ocean-resort-spa-2.jpg",
-          "alt": "Oceans Edge Resort & Marina wedding venue",
+          "id": "boca-lago-country-club-107",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Oceans Edge Resort & Marina - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-53-tideline-ocean-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.240Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.240Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Garden at the Oldest House Museum",
@@ -3950,16 +3968,16 @@
       "gallery": "https://www.oldesthousekeywest.com/photo-gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906241-107",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "The Garden at the Oldest House Museum wedding venue",
+          "id": "bonnet-house-museum-gardens-108",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "The Garden at the Oldest House Museum - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.241Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.241Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Sunset Watersports",
@@ -3987,14 +4005,16 @@
       "gallery": "https://www.facebook.com/SunsetWatersports/photos_albums",
       "images": [
         {
-          "id": "img-placeholder-108",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Sunset Watersports wedding venue",
+          "id": "ancient-spanish-monastery-109",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Sunset Watersports - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.252Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Key West Lighthouse & Keeper's Quarters",
@@ -4023,16 +4043,16 @@
       "gallery": "https://www.kwahs.org/properties/lighthouse",
       "images": [
         {
-          "id": "img-scraped-1759162906242-109",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Key West Lighthouse & Keeper's Quarters wedding venue",
+          "id": "boca-lago-country-club-110",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Key West Lighthouse & Keeper's Quarters - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.242Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.242Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Fort East Martello",
@@ -4065,14 +4085,16 @@
       "gallery": "https://www.kwahs.org/properties/fort-east-martello",
       "images": [
         {
-          "id": "img-placeholder-110",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Fort East Martello wedding venue",
+          "id": "bonnet-house-museum-gardens-111",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Fort East Martello - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.252Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Ocean Key Resort & Spa",
@@ -4103,16 +4125,16 @@
       "gallery": "https://www.oceankey.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906243-111",
-          "url": "/images/venues/venue-53-tideline-ocean-resort-spa-2.jpg",
-          "alt": "Ocean Key Resort & Spa wedding venue",
+          "id": "ancient-spanish-monastery-112",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Ocean Key Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-53-tideline-ocean-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.243Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.243Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Old Town Manor",
@@ -4141,14 +4163,16 @@
       "gallery": "https://www.oldtownmanor.com/gallery/",
       "images": [
         {
-          "id": "img-placeholder-112",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Old Town Manor wedding venue",
+          "id": "boca-lago-country-club-113",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Old Town Manor - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Hard Rock Café Key West",
@@ -4176,16 +4200,16 @@
       "gallery": "https://www.hardrockcafe.com/location/key-west/files/5190/HRC_KeyWest_Venue_Packet_2020.pdf",
       "images": [
         {
-          "id": "img-scraped-1759162906245-113",
-          "url": "/images/venues/venue-40-seminole-hard-rock-hotel-casino-1.jpg",
-          "alt": "Hard Rock Café Key West wedding venue",
+          "id": "bonnet-house-museum-gardens-114",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Hard Rock Café Key West - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-40-seminole-hard-rock-hotel-casino-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.245Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.245Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Pier House Resort & Spa",
@@ -4215,16 +4239,16 @@
       "gallery": "https://www.pierhouse.com/gallery",
       "images": [
         {
-          "id": "img-scraped-1759162906245-114",
-          "url": "/images/venues/venue-53-tideline-ocean-resort-spa-2.jpg",
-          "alt": "Pier House Resort & Spa wedding venue",
+          "id": "ancient-spanish-monastery-115",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Pier House Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-53-tideline-ocean-resort-spa-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.245Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.245Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Sunset Key Cottages",
@@ -4256,16 +4280,16 @@
       "gallery": "https://www.sunsetkeycottages.com/gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906246-115",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Sunset Key Cottages wedding venue",
+          "id": "boca-lago-country-club-116",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Sunset Key Cottages - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.246Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.246Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "First Flight Island Brewery",
@@ -4296,14 +4320,16 @@
       "gallery": "https://www.firstflightkw.com/gallery",
       "images": [
         {
-          "id": "img-placeholder-116",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "First Flight Island Brewery wedding venue",
+          "id": "bonnet-house-museum-gardens-117",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "First Flight Island Brewery - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Ernest Hemingway Home & Museum",
@@ -4331,16 +4357,16 @@
       "gallery": "https://www.hemingwayhome.com/photo-gallery/",
       "images": [
         {
-          "id": "img-scraped-1759162906247-117",
-          "url": "/images/venues/venue-35-the-m-building-2.jpg",
-          "alt": "Ernest Hemingway Home & Museum wedding venue",
+          "id": "ancient-spanish-monastery-118",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Ernest Hemingway Home & Museum - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-35-the-m-building-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.247Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.247Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Fort Zachary Taylor State Park",
@@ -4371,14 +4397,16 @@
       "gallery": "https://www.theknot.com/marketplace/wedding-reception-venues-key-west-fl?location=fort%20zachary%20taylor%20historic%20state%20park",
       "images": [
         {
-          "id": "img-placeholder-118",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Fort Zachary Taylor State Park wedding venue",
+          "id": "boca-lago-country-club-119",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Fort Zachary Taylor State Park - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Bagatelle Restaurant",
@@ -4399,14 +4427,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-placeholder-119",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Bagatelle Restaurant wedding venue",
+          "id": "bonnet-house-museum-gardens-120",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Bagatelle Restaurant - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Key West Historic Inns",
@@ -4427,14 +4457,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-placeholder-120",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Key West Historic Inns wedding venue",
+          "id": "ancient-spanish-monastery-121",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Key West Historic Inns - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "The Blue Room",
@@ -4453,16 +4485,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-scraped-1759162906249-121",
-          "url": "/images/venues/venue-35-the-m-building-2.jpg",
-          "alt": "The Blue Room wedding venue",
+          "id": "boca-lago-country-club-122",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "The Blue Room - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-35-the-m-building-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.249Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.249Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Schooner Appledore",
@@ -4484,14 +4516,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-placeholder-122",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Schooner Appledore wedding venue",
+          "id": "bonnet-house-museum-gardens-123",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Schooner Appledore - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Suite Dreams Inn",
@@ -4511,14 +4545,16 @@
       "gallery": null,
       "images": [
         {
-          "id": "img-placeholder-123",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Suite Dreams Inn wedding venue",
+          "id": "ancient-spanish-monastery-124",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Suite Dreams Inn - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:37:47.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Patch of Heaven Sanctuary",
@@ -4551,14 +4587,16 @@
       "website": "https://patchofheavensanctuary.com/",
       "images": [
         {
-          "id": "img-placeholder-124",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Patch of Heaven Sanctuary wedding venue",
+          "id": "boca-lago-country-club-125",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Patch of Heaven Sanctuary - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:45:00.000Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Redland Koi Gardens",
@@ -4592,14 +4630,16 @@
       "website": "https://redlandkoigardens.com/",
       "images": [
         {
-          "id": "img-placeholder-125",
-          "url": "/images/venue-placeholder.svg",
-          "alt": "Redland Koi Gardens wedding venue",
+          "id": "bonnet-house-museum-gardens-126",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Redland Koi Gardens - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "placeholder"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-14T20:45:00.000Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Schnebly Redland Winery",
@@ -4631,16 +4671,16 @@
       "website": "https://www.schneblyredlandswinery.com/",
       "images": [
         {
-          "id": "img-scraped-1759162906252-126",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Schnebly Redland Winery wedding venue",
+          "id": "ancient-spanish-monastery-127",
+          "url": "/images/ancient-spanish-monastery.jpg",
+          "alt": "Schnebly Redland Winery - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.253Z"
+          "source": "curated-rotation",
+          "filename": "ancient-spanish-monastery.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Ever After Farms Tropical Grove Barn",
@@ -4672,16 +4712,16 @@
       "website": "https://www.everafterfarms.com/tropical-grove-barn/",
       "images": [
         {
-          "id": "img-scraped-1759162906253-127",
-          "url": "/images/venues/venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "alt": "Ever After Farms Tropical Grove Barn wedding venue",
+          "id": "boca-lago-country-club-128",
+          "url": "/images/boca-lago-country-club.jpg",
+          "alt": "Ever After Farms Tropical Grove Barn - Boca Lago Country Club - Country club with banquet hall offering golf course views",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-71-sale-e-pepe-at-marco-beach-ocean-resort-2.jpg",
-          "addedAt": "2025-09-29T16:21:46.253Z"
+          "source": "curated-rotation",
+          "filename": "boca-lago-country-club.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.253Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     },
     {
       "name": "Villa Toscana Miami",
@@ -4714,21 +4754,22 @@
       "website": "https://www.vtmiami.com/weddings",
       "images": [
         {
-          "id": "img-scraped-1759162906254-128",
-          "url": "/images/venues/venue-27-villa-woodbine-1.jpg",
-          "alt": "Villa Toscana Miami wedding venue",
+          "id": "bonnet-house-museum-gardens-129",
+          "url": "/images/bonnet-house-museum-gardens.jpg",
+          "alt": "Villa Toscana Miami - Bonnet House Museum & Gardens - 1920s historic Southern plantation style home on 35 lush acres",
           "isPrimary": true,
-          "source": "google-maps-scraped",
-          "filename": "venue-27-villa-woodbine-1.jpg",
-          "addedAt": "2025-09-29T16:21:46.254Z"
+          "source": "curated-rotation",
+          "filename": "bonnet-house-museum-gardens.jpg",
+          "addedAt": "2025-09-29T22:03:24.080Z"
         }
       ],
-      "lastImageUpdate": "2025-09-29T16:21:46.254Z"
+      "lastImageUpdate": "2025-09-29T22:03:24.080Z"
     }
   ],
   "lastUpdated": "2025-09-29T16:21:46.254Z",
   "imageSource": "google-maps-scraped-1-per-venue",
   "imageIntegrationDate": "2025-09-29T16:21:46.254Z",
   "venuesWithImages": 109,
-  "totalImages": 109
+  "totalImages": 109,
+  "testWrite": "2025-09-29T22:04:38.676Z"
 }
