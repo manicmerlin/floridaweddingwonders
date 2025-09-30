@@ -74,9 +74,6 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
           <span className="text-sm text-gray-500">
             {venue.address.city}, {venue.address.state}
           </span>
-          <span className="text-lg font-bold text-pink-600">
-            ${venue.pricing.startingPrice.toLocaleString()}+
-          </span>
         </div>
         
         <div className="flex justify-between items-center mb-3">

@@ -165,8 +165,28 @@ export default function VenueDetailPage() {
               <div className="text-gray-600 text-sm">Guest Capacity</div>
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <div className="text-2xl font-bold text-pink-600">${venue.pricing.startingPrice.toLocaleString()}+</div>
-              <div className="text-gray-600 text-sm">Starting Price</div>
+              {venue.externalReviews?.google ? (
+                <div 
+                  className="cursor-pointer flex flex-col items-center justify-center h-full"
+                  onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
+                >
+                  <div className="w-8 h-8 mb-1">
+                    <Image
+                      src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
+                      alt="Google Maps"
+                      width={32}
+                      height={32}
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <div className="text-gray-600 text-xs text-center">View on Maps</div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="text-lg text-gray-400">📍</div>
+                  <div className="text-gray-600 text-xs">Location</div>
+                </div>
+              )}
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <div className="text-lg font-bold text-pink-600">{venue.address.city}</div>
@@ -180,15 +200,34 @@ export default function VenueDetailPage() {
             </div>
           </div>
 
-          {/* Desktop: Horizontal layout */}
           <div className="hidden lg:grid lg:grid-cols-4 gap-6 text-center">
             <div>
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
               <div className="text-gray-600">Capacity</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-pink-600">${venue.pricing.startingPrice.toLocaleString()}+</div>
-              <div className="text-gray-600">Starting Price</div>
+              {venue.externalReviews?.google ? (
+                <div 
+                  className="cursor-pointer flex flex-col items-center justify-center"
+                  onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
+                >
+                  <div className="w-10 h-10 mb-2">
+                    <Image
+                      src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
+                      alt="Google Maps"
+                      width={40}
+                      height={40}
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <div className="text-gray-600">View on Maps</div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center">
+                  <div className="text-2xl text-gray-400">📍</div>
+                  <div className="text-gray-600">Location</div>
+                </div>
+              )}
             </div>
             <div>
               <div className="text-2xl font-bold text-pink-600">{venue.address.city}</div>
@@ -307,8 +346,26 @@ export default function VenueDetailPage() {
                   <span className="font-medium text-gray-900">{venue.capacity.min}-{venue.capacity.max} guests</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Starting Price</span>
-                  <span className="font-medium text-gray-900">${venue.pricing.startingPrice.toLocaleString()}</span>
+                  <span className="text-gray-600">Google Maps</span>
+                  {venue.externalReviews?.google ? (
+                    <a 
+                      href={venue.externalReviews.google.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center text-blue-600 hover:text-blue-700"
+                    >
+                      <Image
+                        src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
+                        alt="Google Maps"
+                        width={20}
+                        height={20}
+                        className="mr-2"
+                      />
+                      View Location
+                    </a>
+                  ) : (
+                    <span className="font-medium text-gray-400">Not Available</span>
+                  )}
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Location</span>
