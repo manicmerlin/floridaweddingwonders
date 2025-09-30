@@ -124,20 +124,64 @@ export default function VenueDetailPage() {
         
         {/* Venue Title Section - Below Gallery */}
         {venue.images && venue.images.length > 0 && (
-          <div className="bg-white py-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">{venue.name}</h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-2">📍 {venue.address.city}, {venue.address.state}</p>
-              <p className="text-lg text-gray-500 capitalize">{venue.venueType}</p>
+          <div className="bg-white px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-7xl mx-auto">
+              {/* Mobile-first design like AllTrails */}
+              <div className="lg:text-center">
+                <h1 className="text-2xl lg:text-4xl xl:text-6xl font-bold text-gray-900 mb-2">{venue.name}</h1>
+                <div className="flex items-center justify-start lg:justify-center text-gray-600 mb-4">
+                  <svg className="w-5 h-5 mr-2 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-lg lg:text-xl">{venue.address.city}, {venue.address.state}</span>
+                </div>
+                <div className="flex items-center justify-start lg:justify-center text-gray-500 mb-6">
+                  <span className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium capitalize">{venue.venueType}</span>
+                  {venue.externalReviews?.google && (
+                    <button
+                      onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
+                      className="ml-3 flex items-center text-sm text-blue-600 hover:text-blue-700"
+                    >
+                      <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      Reviews
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         )}
       </section>
 
-      {/* Quick Info Bar */}
-      <section className="bg-white py-6 border-b">
+      {/* Mobile Stats Cards / Desktop Quick Info Bar */}
+      <section className="bg-gray-50 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-6 text-center">
+          {/* Mobile: Cards in 2x2 grid */}
+          <div className="grid grid-cols-2 gap-4 lg:hidden">
+            <div className="bg-white rounded-lg p-4 shadow-sm">
+              <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
+              <div className="text-gray-600 text-sm">Guest Capacity</div>
+            </div>
+            <div className="bg-white rounded-lg p-4 shadow-sm">
+              <div className="text-2xl font-bold text-pink-600">${venue.pricing.startingPrice.toLocaleString()}+</div>
+              <div className="text-gray-600 text-sm">Starting Price</div>
+            </div>
+            <div className="bg-white rounded-lg p-4 shadow-sm">
+              <div className="text-lg font-bold text-pink-600">{venue.address.city}</div>
+              <div className="text-gray-600 text-sm">Location</div>
+            </div>
+            <div className="bg-white rounded-lg p-4 shadow-sm">
+              <div className="text-lg font-bold text-pink-600">
+                {venue.capacity.max >= 150 ? 'Large' : venue.capacity.max >= 100 ? 'Medium' : 'Intimate'}
+              </div>
+              <div className="text-gray-600 text-sm">Event Size</div>
+            </div>
+          </div>
+
+          {/* Desktop: Horizontal layout */}
+          <div className="hidden lg:grid lg:grid-cols-4 gap-6 text-center">
             <div>
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
               <div className="text-gray-600">Capacity</div>
@@ -180,8 +224,32 @@ export default function VenueDetailPage() {
         </div>
       </section>
 
-      {/* Contact Actions */}
-      <section className="bg-white py-8 border-b">
+      {/* Mobile Action Buttons */}
+      <section className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 sticky bottom-0 z-10 shadow-lg">
+        <div className="flex gap-3">
+          <button
+            onClick={() => setShowContactForm(true)}
+            className="flex-1 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-all"
+          >
+            💌 Contact
+          </button>
+          <SaveVenueButton 
+            venue={venue} 
+            size="lg" 
+            showText={false} 
+            className="bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-3 rounded-lg transition-all" 
+          />
+          <a
+            href={`tel:${venue.contact.phone}`}
+            className="bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-3 rounded-lg transition-all"
+          >
+            📞
+          </a>
+        </div>
+      </section>
+
+      {/* Desktop Contact Actions */}
+      <section className="hidden lg:block bg-white py-8 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Interested in This Venue?</h2>
@@ -213,124 +281,396 @@ export default function VenueDetailPage() {
         </div>
       </section>
 
-      {/* Venue Claim Button */}
-      <section className="bg-gray-50 py-6">
+      {/* Mobile Content Sections */}
+      <section className="bg-white lg:bg-gray-50 py-6 lg:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <VenueClaimButton venue={venue} />
-        </div>
-      </section>
+          {/* Mobile: Card-based layout */}
+          <div className="lg:hidden space-y-6">
+            {/* Description Card */}
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">About {venue.name}</h2>
+              <p className="text-gray-600 leading-relaxed">
+                {venue.description}
+              </p>
+            </div>
 
-      {/* Tabs Navigation */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm transition ${
-                    activeTab === tab.id
-                      ? 'border-pink-500 text-pink-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </nav>
+            {/* Quick Facts Card */}
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Details</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Venue Type</span>
+                  <span className="font-medium text-gray-900 capitalize">{venue.venueType}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Capacity</span>
+                  <span className="font-medium text-gray-900">{venue.capacity.min}-{venue.capacity.max} guests</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Starting Price</span>
+                  <span className="font-medium text-gray-900">${venue.pricing.startingPrice.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Location</span>
+                  <span className="font-medium text-gray-900">{venue.address.city}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Amenities Card */}
+            {venue.amenities && venue.amenities.length > 0 && (
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Amenities & Services</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {venue.amenities.slice(0, 6).map((amenity, index) => (
+                    <div key={index} className="flex items-center">
+                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700">{amenity}</span>
+                    </div>
+                  ))}
+                  {venue.amenities.length > 6 && (
+                    <button className="text-left text-pink-600 text-sm font-medium mt-2">
+                      View all {venue.amenities.length} amenities
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Contact Card */}
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-pink-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                  </svg>
+                  <a href={`mailto:${venue.contact.email}`} className="text-gray-700 hover:text-pink-600">
+                    {venue.contact.email}
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-pink-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                  </svg>
+                  <a href={`tel:${venue.contact.phone}`} className="text-gray-700 hover:text-pink-600">
+                    {venue.contact.phone}
+                  </a>
+                </div>
+                {venue.contact.website && (
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 text-pink-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.148.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.029 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
+                    </svg>
+                    <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-600">
+                      Visit Website
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Address Card */}
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Address</h3>
+              <div className="flex items-start">
+                <svg className="w-5 h-5 text-pink-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+                <div>
+                  <p className="text-gray-700">{venue.address.street}</p>
+                  <p className="text-gray-700">{venue.address.city}, {venue.address.state} {venue.address.zipCode}</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Tab Content */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {activeTab === 'overview' && (
-            <div className="grid lg:grid-cols-3 gap-12">
-              <div className="lg:col-span-2">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">About {venue.name}</h2>
-                <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                  {venue.description}
-                </p>
+          {/* Desktop: Traditional layout with tabs */}
+          <div className="hidden lg:block">
+            <div className="border-b border-gray-200 mb-8">
+              <nav className="-mb-px flex space-x-8">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`py-4 px-1 border-b-2 font-medium text-sm transition ${
+                      activeTab === tab.id
+                        ? 'border-pink-500 text-pink-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+            {/* Desktop Tab Content */}
+            {activeTab === 'overview' && (
+              <div className="grid lg:grid-cols-3 gap-12">
+                <div className="lg:col-span-2">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6">About {venue.name}</h2>
+                  <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                    {venue.description}
+                  </p>
 
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Amenities & Services</h3>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Amenities & Services</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {venue.amenities && venue.amenities.map((amenity, index) => (
+                        <div key={index} className="flex items-center">
+                          <span className="text-green-500 mr-2">✓</span>
+                          <span className="text-gray-700">{amenity}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Facts</h3>
+                    <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <span className="font-medium text-gray-900">Venue Type:</span>
+                          <span className="ml-2 text-gray-600">{venue.venueType}</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-gray-900">City:</span>
+                          <span className="ml-2 text-gray-600">{venue.address.city}</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-gray-900">Capacity:</span>
+                          <span className="ml-2 text-gray-600">{venue.capacity.min}-{venue.capacity.max} guests</span>
+                        </div>
+                        <div>
+                          <span className="font-medium text-gray-900">Starting Price:</span>
+                          <span className="ml-2 text-gray-600">${venue.pricing.startingPrice.toLocaleString()}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Contact {venue.name}</h3>
+                    
+                    <div className="space-y-4 mb-6">
+                      <div>
+                        <span className="text-gray-600">📧 Email:</span>
+                        <a href={`mailto:${venue.contact.email}`} className="block text-pink-600 hover:text-pink-700">
+                          {venue.contact.email}
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">📞 Phone:</span>
+                        <a href={`tel:${venue.contact.phone}`} className="block text-pink-600 hover:text-pink-700">
+                          {venue.contact.phone}
+                        </a>
+                      </div>
+                      {venue.contact.website && (
+                        <div>
+                          <span className="text-gray-600">🌐 Website:</span>
+                          <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="block text-pink-600 hover:text-pink-700">
+                            Visit Website
+                          </a>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-3">
+                      <a
+                        href={`mailto:${venue.contact.email}?subject=Wedding Inquiry for ${venue.name}`}
+                        className="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold text-center block transition"
+                      >
+                        Send Inquiry
+                      </a>
+                      <a
+                        href={`tel:${venue.contact.phone}`}
+                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-semibold text-center block transition"
+                      >
+                        Call Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'details' && (
+              <div className="grid lg:grid-cols-2 gap-12">
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6">Venue Details</h2>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Address</h3>
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <p className="text-gray-700">{venue.address.street}</p>
+                        <p className="text-gray-700">{venue.address.city}, {venue.address.state} {venue.address.zipCode}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Capacity Details</h3>
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <p className="text-gray-700">Guest Capacity: {venue.capacity.min}-{venue.capacity.max} guests</p>
+                        <p className="text-gray-700 text-sm mt-1">
+                          Perfect for {venue.capacity.max >= 150 ? 'large' : venue.capacity.max >= 100 ? 'medium' : 'intimate'} celebrations
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Pricing Information</h3>
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <p className="text-gray-700">Starting Price: ${venue.pricing.startingPrice.toLocaleString()}</p>
+                        <p className="text-gray-700 text-sm mt-1">
+                          Contact venue for detailed pricing and package information
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-6">Amenities & Services</h3>
+                  <div className="grid gap-3">
                     {venue.amenities && venue.amenities.map((amenity, index) => (
-                      <div key={index} className="flex items-center">
-                        <span className="text-green-500 mr-2">✓</span>
+                      <div key={index} className="flex items-center bg-white rounded-lg p-3 shadow-sm">
+                        <span className="text-green-500 mr-3">✓</span>
                         <span className="text-gray-700">{amenity}</span>
                       </div>
                     ))}
                   </div>
                 </div>
+              </div>
+            )}
 
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Facts</h3>
-                  <div className="bg-gray-50 rounded-lg p-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <span className="font-medium text-gray-900">Venue Type:</span>
-                        <span className="ml-2 text-gray-600">{venue.venueType}</span>
+            {activeTab === 'contact' && (
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Get In Touch</h2>
+                
+                <div className="grid lg:grid-cols-2 gap-12">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+                    
+                    <div className="space-y-6">
+                      <div className="flex items-start">
+                        <span className="text-pink-600 text-xl mr-4">📧</span>
+                        <div>
+                          <h4 className="font-medium text-gray-900">Email</h4>
+                          <a href={`mailto:${venue.contact.email}`} className="text-pink-600 hover:text-pink-700">
+                            {venue.contact.email}
+                          </a>
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-medium text-gray-900">City:</span>
-                        <span className="ml-2 text-gray-600">{venue.address.city}</span>
+
+                      <div className="flex items-start">
+                        <span className="text-pink-600 text-xl mr-4">📞</span>
+                        <div>
+                          <h4 className="font-medium text-gray-900">Phone</h4>
+                          <a href={`tel:${venue.contact.phone}`} className="text-pink-600 hover:text-pink-700">
+                            {venue.contact.phone}
+                          </a>
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-medium text-gray-900">Capacity:</span>
-                        <span className="ml-2 text-gray-600">{venue.capacity.min}-{venue.capacity.max} guests</span>
+
+                      <div className="flex items-start">
+                        <span className="text-pink-600 text-xl mr-4">📍</span>
+                        <div>
+                          <h4 className="font-medium text-gray-900">Address</h4>
+                          <p className="text-gray-600">
+                            {venue.address.street}<br />
+                            {venue.address.city}, {venue.address.state} {venue.address.zipCode}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-medium text-gray-900">Starting Price:</span>
-                        <span className="ml-2 text-gray-600">${venue.pricing.startingPrice.toLocaleString()}</span>
-                      </div>
+
+                      {venue.contact.website && (
+                        <div className="flex items-start">
+                          <span className="text-pink-600 text-xl mr-4">🌐</span>
+                          <div>
+                            <h4 className="font-medium text-gray-900">Website</h4>
+                            <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700">
+                              Visit Website
+                            </a>
+                          </div>
+                        </div>
+                      )}
                     </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-6">Send a Message</h3>
+                    
+                    <form className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Your Name
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                            placeholder="Your full name"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                            placeholder="your@email.com"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Wedding Date
+                        </label>
+                        <input
+                          type="date"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Message
+                        </label>
+                        <textarea
+                          rows={4}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                          placeholder="Tell us about your wedding plans..."
+                        />
+                      </div>
+                      
+                      <button
+                        type="submit"
+                        className="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition"
+                      >
+                        Send Inquiry
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>
+            )}
+          </div>
+        </div>
+      </section>
 
-              <div>
-                <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Contact {venue.name}</h3>
-                  
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <span className="text-gray-600">📧 Email:</span>
-                      <a href={`mailto:${venue.contact.email}`} className="block text-pink-600 hover:text-pink-700">
-                        {venue.contact.email}
-                      </a>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">📞 Phone:</span>
-                      <a href={`tel:${venue.contact.phone}`} className="block text-pink-600 hover:text-pink-700">
-                        {venue.contact.phone}
-                      </a>
-                    </div>
-                    {venue.contact.website && (
-                      <div>
-                        <span className="text-gray-600">🌐 Website:</span>
-                        <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="block text-pink-600 hover:text-pink-700">
-                          Visit Website
-                        </a>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="space-y-3">
-                    <a
-                      href={`mailto:${venue.contact.email}?subject=Wedding Inquiry for ${venue.name}`}
-                      className="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold text-center block transition"
-                    >
-                      Send Inquiry
-                    </a>
-                    <a
-                      href={`tel:${venue.contact.phone}`}
-                      className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-semibold text-center block transition"
-                    >
-                      Call Now
-                    </a>
+      {/* Venue Claim Button - Desktop only */}
+      <section className="hidden lg:block bg-gray-50 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <VenueClaimButton venue={venue} />
+        </div>
                   </div>
                 </div>
               </div>
