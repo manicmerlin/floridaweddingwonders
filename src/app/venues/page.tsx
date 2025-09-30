@@ -239,7 +239,7 @@ export default function VenuesPage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {paginatedVenues.map((venue) => (
                   <VenueCard key={venue.id} venue={venue} showFavorites />
                 ))}
