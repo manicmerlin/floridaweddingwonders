@@ -100,17 +100,21 @@ export default function VenueDetailPage() {
       <Navigation />
 
       {/* Hero Gallery Section */}
-      <section className="relative bg-white">
+      <section className="bg-white">
         {venue.images && venue.images.length > 0 ? (
-          <PhotoGallery 
-            images={venue.images.map((img, index) => ({
-              id: img.id,
-              url: img.url,
-              alt: img.alt,
-              isPrimary: img.isPrimary || index === 0
-            }))} 
-            venueName={venue.name} 
-          />
+          <div className="px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-7xl mx-auto">
+              <PhotoGallery 
+                images={venue.images.map((img, index) => ({
+                  id: img.id,
+                  url: img.url,
+                  alt: img.alt,
+                  isPrimary: img.isPrimary || index === 0
+                }))} 
+                venueName={venue.name} 
+              />
+            </div>
+          </div>
         ) : (
           <div className="h-96 bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center">
             <div className="text-center text-white">
@@ -124,7 +128,7 @@ export default function VenueDetailPage() {
         
         {/* Venue Title Section - Below Gallery */}
         {venue.images && venue.images.length > 0 && (
-          <div className="bg-white px-4 sm:px-6 lg:px-8 py-6">
+          <div className="bg-white border-t border-gray-100 px-4 sm:px-6 lg:px-8 py-6">
             <div className="max-w-7xl mx-auto">
               {/* Mobile-first design like AllTrails */}
               <div className="lg:text-center">
