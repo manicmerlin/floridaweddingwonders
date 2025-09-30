@@ -99,7 +99,7 @@ export default function VenueDetailPage() {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
 
-      {/* Hero Gallery Section */}
+      {/* Photo Gallery Section - Standalone */}
       <section className="bg-white">
         {venue.images && venue.images.length > 0 ? (
           <div className="px-4 sm:px-6 lg:px-8 py-6">
@@ -125,12 +125,13 @@ export default function VenueDetailPage() {
             </div>
           </div>
         )}
-        
-        {/* Venue Title Section - Below Gallery */}
-        {venue.images && venue.images.length > 0 && (
-          <div className="bg-white border-t border-gray-100 px-4 sm:px-6 lg:px-8 py-6">
+      </section>
+
+      {/* Venue Title Section - Completely Separate */}
+      {venue.images && venue.images.length > 0 && (
+        <section className="bg-white border-t border-gray-200">
+          <div className="px-4 sm:px-6 lg:px-8 py-8">
             <div className="max-w-7xl mx-auto">
-              {/* Mobile-first design like AllTrails */}
               <div className="lg:text-center">
                 <h1 className="text-2xl lg:text-4xl xl:text-6xl font-bold text-gray-900 mb-2">{venue.name}</h1>
                 <div className="flex items-center justify-start lg:justify-center text-gray-600 mb-4">
@@ -156,8 +157,8 @@ export default function VenueDetailPage() {
               </div>
             </div>
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* Mobile Stats Cards / Desktop Quick Info Bar */}
       <section className="bg-gray-50 py-6">
