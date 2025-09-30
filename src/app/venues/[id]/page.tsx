@@ -206,6 +206,16 @@ export default function VenueDetailPage() {
               <div className="text-gray-600">Capacity</div>
             </div>
             <div>
+              <div className="text-2xl font-bold text-pink-600">{venue.address.city}</div>
+              <div className="text-gray-600">Location</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-pink-600">
+                {venue.capacity.max >= 150 ? 'Large' : venue.capacity.max >= 100 ? 'Medium' : 'Intimate'}
+              </div>
+              <div className="text-gray-600">Event Size</div>
+            </div>
+            <div>
               {venue.externalReviews?.google ? (
                 <div 
                   className="cursor-pointer flex flex-col items-center justify-center"
@@ -226,36 +236,6 @@ export default function VenueDetailPage() {
                 <div className="flex flex-col items-center justify-center">
                   <div className="text-2xl text-gray-400">📍</div>
                   <div className="text-gray-600">Location</div>
-                </div>
-              )}
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-pink-600">{venue.address.city}</div>
-              <div className="text-gray-600">Location</div>
-            </div>
-            <div>
-              {venue.externalReviews?.google ? (
-                <div className="cursor-pointer" onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}>
-                  <div className="flex items-center justify-center mb-1">
-                    <Image
-                      src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
-                      alt="Google Maps"
-                      width={24}
-                      height={24}
-                      className="mr-2"
-                    />
-                    <div className="text-lg font-bold text-pink-600">
-                      Google Reviews
-                    </div>
-                  </div>
-                  <div className="text-gray-600 text-sm">
-                    View Reviews
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <div className="text-2xl font-bold text-gray-400">—</div>
-                  <div className="text-gray-600">Reviews</div>
                 </div>
               )}
             </div>
@@ -502,8 +482,26 @@ export default function VenueDetailPage() {
                           <span className="ml-2 text-gray-600">{venue.capacity.min}-{venue.capacity.max} guests</span>
                         </div>
                         <div>
-                          <span className="font-medium text-gray-900">Starting Price:</span>
-                          <span className="ml-2 text-gray-600">${venue.pricing.startingPrice.toLocaleString()}</span>
+                          <span className="font-medium text-gray-900">Google Maps:</span>
+                          {venue.externalReviews?.google ? (
+                            <a 
+                              href={venue.externalReviews.google.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="ml-2 text-blue-600 hover:text-blue-700 flex items-center"
+                            >
+                              <Image
+                                src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
+                                alt="Google Maps"
+                                width={16}
+                                height={16}
+                                className="mr-1"
+                              />
+                              View Location
+                            </a>
+                          ) : (
+                            <span className="ml-2 text-gray-400">Not Available</span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -581,12 +579,27 @@ export default function VenueDetailPage() {
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Pricing Information</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Google Maps</h3>
                       <div className="bg-gray-50 rounded-lg p-4">
-                        <p className="text-gray-700">Starting Price: ${venue.pricing.startingPrice.toLocaleString()}</p>
-                        <p className="text-gray-700 text-sm mt-1">
-                          Contact venue for detailed pricing and package information
-                        </p>
+                        {venue.externalReviews?.google ? (
+                          <a 
+                            href={venue.externalReviews.google.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center text-blue-600 hover:text-blue-700"
+                          >
+                            <Image
+                              src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
+                              alt="Google Maps"
+                              width={24}
+                              height={24}
+                              className="mr-2"
+                            />
+                            View on Google Maps
+                          </a>
+                        ) : (
+                          <p className="text-gray-500">Location not available on Google Maps</p>
+                        )}
                       </div>
                     </div>
                   </div>
