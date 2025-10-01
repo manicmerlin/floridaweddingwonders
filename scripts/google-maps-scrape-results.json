@@ -1,0 +1,1040 @@
+{
+  "checkDate": "2025-09-28T18:41:04.646Z",
+  "totalVenues": 129,
+  "closedVenues": 0,
+  "remainingVenues": 129,
+  "venueChecks": [
+    {
+      "name": "Historic Walton House",
+      "location": "Redland, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Historic%20Walton%20House%20Redland%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Historic%20Walton%20House\" \"permanently closed\""
+    },
+    {
+      "name": "Woman's Club of Coconut Grove",
+      "location": "Coconut Grove, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Woman's%20Club%20of%20Coconut%20Grove%20Coconut%20Grove%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Woman's%20Club%20of%20Coconut%20Grove\" \"permanently closed\""
+    },
+    {
+      "name": "The Cruz Building",
+      "location": "Coconut Grove, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Cruz%20Building%20Coconut%20Grove%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Cruz%20Building\" \"permanently closed\""
+    },
+    {
+      "name": "Secret Gardens Miami",
+      "location": "Homestead, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Secret%20Gardens%20Miami%20Homestead%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Secret%20Gardens%20Miami\" \"permanently closed\""
+    },
+    {
+      "name": "Villa Woodbine",
+      "location": "Coconut Grove, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Villa%20Woodbine%20Coconut%20Grove%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Villa%20Woodbine\" \"permanently closed\""
+    },
+    {
+      "name": "The M Building",
+      "location": "Wynwood, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20M%20Building%20Wynwood%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"The%20M%20Building\" \"permanently closed\""
+    },
+    {
+      "name": "Out of the Blue Celebrations",
+      "location": "Jupiter, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Out%20of%20the%20Blue%20Celebrations%20Jupiter%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Out%20of%20the%20Blue%20Celebrations\" \"permanently closed\""
+    },
+    {
+      "name": "The Blue Room",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Blue%20Room%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Blue%20Room\" \"permanently closed\""
+    },
+    {
+      "name": "Hialeah Park Racing & Casino",
+      "location": "100 E 32nd St, Hialeah, FL 33013",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Hialeah%20Park%20Racing%20%26%20Casino%20100%20E%2032nd%20St%2C%20Hialeah%2C%20FL%2033013",
+      "searchUrl": "https://www.google.com/search?q=\"Hialeah%20Park%20Racing%20%26%20Casino\" \"permanently closed\""
+    },
+    {
+      "name": "The Surfcomber Hotel",
+      "location": "Miami Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Surfcomber%20Hotel%20Miami%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Surfcomber%20Hotel\" \"permanently closed\""
+    },
+    {
+      "name": "MB Hotel",
+      "location": "Miami Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=MB%20Hotel%20Miami%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"MB%20Hotel\" \"permanently closed\""
+    },
+    {
+      "name": "Sea Watch on the Ocean",
+      "location": "Fort Lauderdale, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sea%20Watch%20on%20the%20Ocean%20Fort%20Lauderdale%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Sea%20Watch%20on%20the%20Ocean\" \"permanently closed\""
+    },
+    {
+      "name": "Emeril Lagasse Foundation Innovation Kitchen",
+      "location": "Sunrise, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Emeril%20Lagasse%20Foundation%20Innovation%20Kitchen%20Sunrise%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Emeril%20Lagasse%20Foundation%20Innovation%20Kitchen\" \"permanently closed\""
+    },
+    {
+      "name": "Coastal Yacht Charters",
+      "location": "Fort Lauderdale, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Coastal%20Yacht%20Charters%20Fort%20Lauderdale%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Coastal%20Yacht%20Charters\" \"permanently closed\""
+    },
+    {
+      "name": "Vizcaya Museum & Gardens",
+      "location": "Coconut Grove, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Vizcaya%20Museum%20%26%20Gardens%20Coconut%20Grove%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Vizcaya%20Museum%20%26%20Gardens\" \"permanently closed\""
+    },
+    {
+      "name": "Ancient Spanish Monastery",
+      "location": "North Miami Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Ancient%20Spanish%20Monastery%20North%20Miami%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Ancient%20Spanish%20Monastery\" \"permanently closed\""
+    },
+    {
+      "name": "The Cooper Estate",
+      "location": "Redland, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Cooper%20Estate%20Redland%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Cooper%20Estate\" \"permanently closed\""
+    },
+    {
+      "name": "Curtiss Mansion",
+      "location": "Miami Springs, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Curtiss%20Mansion%20Miami%20Springs%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Curtiss%20Mansion\" \"permanently closed\""
+    },
+    {
+      "name": "Thalatta Estate",
+      "location": "Palmetto Bay, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Thalatta%20Estate%20Palmetto%20Bay%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Thalatta%20Estate\" \"permanently closed\""
+    },
+    {
+      "name": "Deering Estate",
+      "location": "Cutler Bay, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Deering%20Estate%20Cutler%20Bay%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Deering%20Estate\" \"permanently closed\""
+    },
+    {
+      "name": "Fairchild Tropical Botanic Garden",
+      "location": "Coral Gables, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Fairchild%20Tropical%20Botanic%20Garden%20Coral%20Gables%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Fairchild%20Tropical%20Botanic%20Garden\" \"permanently closed\""
+    },
+    {
+      "name": "The Bath Club",
+      "location": "Miami Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Bath%20Club%20Miami%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Bath%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Rusty Pelican",
+      "location": "Key Biscayne, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Rusty%20Pelican%20Key%20Biscayne%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Rusty%20Pelican\" \"permanently closed\""
+    },
+    {
+      "name": "Briza on the Bay",
+      "location": "Downtown Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Briza%20on%20the%20Bay%20Downtown%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Briza%20on%20the%20Bay\" \"permanently closed\""
+    },
+    {
+      "name": "Penthouse at Riverside Wharf",
+      "location": "Downtown Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Penthouse%20at%20Riverside%20Wharf%20Downtown%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Penthouse%20at%20Riverside%20Wharf\" \"permanently closed\""
+    },
+    {
+      "name": "Signature Grand",
+      "location": "Davie, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Signature%20Grand%20Davie%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Signature%20Grand\" \"permanently closed\""
+    },
+    {
+      "name": "Jacaranda Country Club",
+      "location": "Plantation, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Jacaranda%20Country%20Club%20Plantation%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Jacaranda%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Deer Creek Country Club",
+      "location": "Deerfield Beach, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Deer%20Creek%20Country%20Club%20Deerfield%20Beach%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Deer%20Creek%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Bonnet House Museum & Gardens",
+      "location": "Fort Lauderdale, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Bonnet%20House%20Museum%20%26%20Gardens%20Fort%20Lauderdale%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Bonnet%20House%20Museum%20%26%20Gardens\" \"permanently closed\""
+    },
+    {
+      "name": "Stranahan House",
+      "location": "Fort Lauderdale, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Stranahan%20House%20Fort%20Lauderdale%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Stranahan%20House\" \"permanently closed\""
+    },
+    {
+      "name": "Lavan Venue",
+      "location": "Hollywood, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Lavan%20Venue%20Hollywood%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Lavan%20Venue\" \"permanently closed\""
+    },
+    {
+      "name": "Coral Gables Country Club",
+      "location": "Coral Gables, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Coral%20Gables%20Country%20Club%20Coral%20Gables%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Coral%20Gables%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Weston Hills Country Club",
+      "location": "Weston, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Weston%20Hills%20Country%20Club%20Weston%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Weston%20Hills%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Parkland Country Club",
+      "location": "Parkland, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Parkland%20Country%20Club%20Parkland%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Parkland%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Miami Beach Botanical Garden",
+      "location": "Miami Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Miami%20Beach%20Botanical%20Garden%20Miami%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Miami%20Beach%20Botanical%20Garden\" \"permanently closed\""
+    },
+    {
+      "name": "Hollywood's ArtsPark",
+      "location": "Hollywood, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Hollywood's%20ArtsPark%20Hollywood%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Hollywood's%20ArtsPark\" \"permanently closed\""
+    },
+    {
+      "name": "Phillip and Patricia Frost Science Museum",
+      "location": "Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Phillip%20and%20Patricia%20Frost%20Science%20Museum%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Phillip%20and%20Patricia%20Frost%20Science%20Museum\" \"permanently closed\""
+    },
+    {
+      "name": "The Wharf (Miami/Ft. Lauderdale)",
+      "location": "Miami/Fort Lauderdale",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Wharf%20(Miami%2FFt.%20Lauderdale)%20Miami%2FFort%20Lauderdale",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Wharf%20(Miami%2FFt.%20Lauderdale)\" \"permanently closed\""
+    },
+    {
+      "name": "The Biltmore Hotel",
+      "location": "Coral Gables, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Biltmore%20Hotel%20Coral%20Gables%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Biltmore%20Hotel\" \"permanently closed\""
+    },
+    {
+      "name": "Miami Marriott Biscayne Bay",
+      "location": "Downtown Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Miami%20Marriott%20Biscayne%20Bay%20Downtown%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Miami%20Marriott%20Biscayne%20Bay\" \"permanently closed\""
+    },
+    {
+      "name": "Diplomat Beach Resort",
+      "location": "Hollywood, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Diplomat%20Beach%20Resort%20Hollywood%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Diplomat%20Beach%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Seminole Hard Rock Hotel & Casino",
+      "location": "Hollywood, Broward",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Seminole%20Hard%20Rock%20Hotel%20%26%20Casino%20Hollywood%2C%20Broward",
+      "searchUrl": "https://www.google.com/search?q=\"Seminole%20Hard%20Rock%20Hotel%20%26%20Casino\" \"permanently closed\""
+    },
+    {
+      "name": "Milander Center for Arts & Entertainment",
+      "location": "Hialeah, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Milander%20Center%20for%20Arts%20%26%20Entertainment%20Hialeah%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Milander%20Center%20for%20Arts%20%26%20Entertainment\" \"permanently closed\""
+    },
+    {
+      "name": "Pérez Art Museum Miami (PAMM)",
+      "location": "Downtown Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=P%C3%A9rez%20Art%20Museum%20Miami%20(PAMM)%20Downtown%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"P%C3%A9rez%20Art%20Museum%20Miami%20(PAMM)\" \"permanently closed\""
+    },
+    {
+      "name": "JW Marriott Turnberry Resort & Spa",
+      "location": "Aventura, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=JW%20Marriott%20Turnberry%20Resort%20%26%20Spa%20Aventura%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"JW%20Marriott%20Turnberry%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Loews Miami Beach Hotel",
+      "location": "South Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Loews%20Miami%20Beach%20Hotel%20South%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Loews%20Miami%20Beach%20Hotel\" \"permanently closed\""
+    },
+    {
+      "name": "Faena Hotel Miami Beach",
+      "location": "Miami Beach, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Faena%20Hotel%20Miami%20Beach%20Miami%20Beach%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Faena%20Hotel%20Miami%20Beach\" \"permanently closed\""
+    },
+    {
+      "name": "Eau Palm Beach Resort & Spa",
+      "location": "Manalapan, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Eau%20Palm%20Beach%20Resort%20%26%20Spa%20Manalapan%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Eau%20Palm%20Beach%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Palm Beach Marriott Singer Island Beach Resort & Spa",
+      "location": "Riviera Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Palm%20Beach%20Marriott%20Singer%20Island%20Beach%20Resort%20%26%20Spa%20Riviera%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Palm%20Beach%20Marriott%20Singer%20Island%20Beach%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "The Addison",
+      "location": "Boca Raton, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Addison%20Boca%20Raton%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Addison\" \"permanently closed\""
+    },
+    {
+      "name": "Lady Jean Ranch",
+      "location": "Jupiter, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Lady%20Jean%20Ranch%20Jupiter%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Lady%20Jean%20Ranch\" \"permanently closed\""
+    },
+    {
+      "name": "The Ben, Autograph Collection",
+      "location": "West Palm Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Ben%2C%20Autograph%20Collection%20West%20Palm%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Ben%2C%20Autograph%20Collection\" \"permanently closed\""
+    },
+    {
+      "name": "Tideline Ocean Resort & Spa",
+      "location": "Palm Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Tideline%20Ocean%20Resort%20%26%20Spa%20Palm%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Tideline%20Ocean%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "PGA National Resort",
+      "location": "Palm Beach Gardens, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=PGA%20National%20Resort%20Palm%20Beach%20Gardens%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"PGA%20National%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Pelican Club",
+      "location": "Jupiter, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Pelican%20Club%20Jupiter%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Pelican%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "The Wanderers Club",
+      "location": "Wellington, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Wanderers%20Club%20Wellington%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Wanderers%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "The Seagate Hotel & Spa",
+      "location": "Delray Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Seagate%20Hotel%20%26%20Spa%20Delray%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Seagate%20Hotel%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Boca Lago Country Club",
+      "location": "Boca Raton, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Boca%20Lago%20Country%20Club%20Boca%20Raton%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Boca%20Lago%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "The Club at Ibis",
+      "location": "West Palm Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Club%20at%20Ibis%20West%20Palm%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Club%20at%20Ibis\" \"permanently closed\""
+    },
+    {
+      "name": "Canopy by Hilton West Palm Beach",
+      "location": "West Palm Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Canopy%20by%20Hilton%20West%20Palm%20Beach%20West%20Palm%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Canopy%20by%20Hilton%20West%20Palm%20Beach\" \"permanently closed\""
+    },
+    {
+      "name": "Jupiter Beach Resort & Spa",
+      "location": "Jupiter, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Jupiter%20Beach%20Resort%20%26%20Spa%20Jupiter%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Jupiter%20Beach%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Loggerhead Marinelife Center",
+      "location": "Palm Beach County",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Loggerhead%20Marinelife%20Center%20Palm%20Beach%20County",
+      "searchUrl": "https://www.google.com/search?q=\"Loggerhead%20Marinelife%20Center\" \"permanently closed\""
+    },
+    {
+      "name": "Morikami Museum & Gardens",
+      "location": "Delray Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Morikami%20Museum%20%26%20Gardens%20Delray%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Morikami%20Museum%20%26%20Gardens\" \"permanently closed\""
+    },
+    {
+      "name": "Sundy House",
+      "location": "Delray Beach, Palm Beach",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sundy%20House%20Delray%20Beach%2C%20Palm%20Beach",
+      "searchUrl": "https://www.google.com/search?q=\"Sundy%20House\" \"permanently closed\""
+    },
+    {
+      "name": "LaPlaya Beach & Golf Resort",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=LaPlaya%20Beach%20%26%20Golf%20Resort%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"LaPlaya%20Beach%20%26%20Golf%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Naples Bay Resort & Marina",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Naples%20Bay%20Resort%20%26%20Marina%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Naples%20Bay%20Resort%20%26%20Marina\" \"permanently closed\""
+    },
+    {
+      "name": "Vineyards Country Club",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Vineyards%20Country%20Club%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Vineyards%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Tiburón Golf Club",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Tibur%C3%B3n%20Golf%20Club%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Tibur%C3%B3n%20Golf%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "JW Marriott Marco Island Beach Resort",
+      "location": "Marco Island, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=JW%20Marriott%20Marco%20Island%20Beach%20Resort%20Marco%20Island%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"JW%20Marriott%20Marco%20Island%20Beach%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Hyatt Regency Coconut Point Resort & Spa",
+      "location": "Bonita Springs, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Hyatt%20Regency%20Coconut%20Point%20Resort%20%26%20Spa%20Bonita%20Springs%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Hyatt%20Regency%20Coconut%20Point%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Sale e Pepe at Marco Beach Ocean Resort",
+      "location": "Marco Island, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sale%20e%20Pepe%20at%20Marco%20Beach%20Ocean%20Resort%20Marco%20Island%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Sale%20e%20Pepe%20at%20Marco%20Beach%20Ocean%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Pink Shell Beach Resort & Marina",
+      "location": "Fort Myers Beach, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Pink%20Shell%20Beach%20Resort%20%26%20Marina%20Fort%20Myers%20Beach%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Pink%20Shell%20Beach%20Resort%20%26%20Marina\" \"permanently closed\""
+    },
+    {
+      "name": "Sundial Beach Resort & Spa",
+      "location": "Sanibel Island, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sundial%20Beach%20Resort%20%26%20Spa%20Sanibel%20Island%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Sundial%20Beach%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Sanibel Harbour Marriott Resort & Spa",
+      "location": "Fort Myers, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sanibel%20Harbour%20Marriott%20Resort%20%26%20Spa%20Fort%20Myers%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Sanibel%20Harbour%20Marriott%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Westin Cape Coral Resort at Marina Village",
+      "location": "Cape Coral, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Westin%20Cape%20Coral%20Resort%20at%20Marina%20Village%20Cape%20Coral%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Westin%20Cape%20Coral%20Resort%20at%20Marina%20Village\" \"permanently closed\""
+    },
+    {
+      "name": "South Seas Island Resort",
+      "location": "Captiva Island, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=South%20Seas%20Island%20Resort%20Captiva%20Island%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"South%20Seas%20Island%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "The Club at Grandezza",
+      "location": "Estero, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Club%20at%20Grandezza%20Estero%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Club%20at%20Grandezza\" \"permanently closed\""
+    },
+    {
+      "name": "The Colony Golf & Country Club",
+      "location": "Bonita Springs, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Colony%20Golf%20%26%20Country%20Club%20Bonita%20Springs%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Colony%20Golf%20%26%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Heritage Bay Golf & Country Club",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Heritage%20Bay%20Golf%20%26%20Country%20Club%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Heritage%20Bay%20Golf%20%26%20Country%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Lover's Key Adventure & Events",
+      "location": "Fort Myers Beach, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Lover's%20Key%20Adventure%20%26%20Events%20Fort%20Myers%20Beach%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Lover's%20Key%20Adventure%20%26%20Events\" \"permanently closed\""
+    },
+    {
+      "name": "Corkscrew Sanctuary",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Corkscrew%20Sanctuary%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Corkscrew%20Sanctuary\" \"permanently closed\""
+    },
+    {
+      "name": "Margaritaville Beach Resort",
+      "location": "Fort Myers Beach, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Margaritaville%20Beach%20Resort%20Fort%20Myers%20Beach%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Margaritaville%20Beach%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Misty Morning Barn",
+      "location": "Fort Myers, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Misty%20Morning%20Barn%20Fort%20Myers%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Misty%20Morning%20Barn\" \"permanently closed\""
+    },
+    {
+      "name": "Naples Princess",
+      "location": "Naples, Southwest Florida",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Naples%20Princess%20Naples%2C%20Southwest%20Florida",
+      "searchUrl": "https://www.google.com/search?q=\"Naples%20Princess\" \"permanently closed\""
+    },
+    {
+      "name": "Baker's Cay Resort Key Largo",
+      "location": "Key Largo, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Baker's%20Cay%20Resort%20Key%20Largo%20Key%20Largo%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Baker's%20Cay%20Resort%20Key%20Largo\" \"permanently closed\""
+    },
+    {
+      "name": "Playa Largo Resort & Spa",
+      "location": "Key Largo, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Playa%20Largo%20Resort%20%26%20Spa%20Key%20Largo%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Playa%20Largo%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Largo Resort",
+      "location": "Key Largo, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Largo%20Resort%20Key%20Largo%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Largo%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Dolphin Point Villas",
+      "location": "Key Largo, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Dolphin%20Point%20Villas%20Key%20Largo%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Dolphin%20Point%20Villas\" \"permanently closed\""
+    },
+    {
+      "name": "Islander Resort",
+      "location": "Islamorada, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Islander%20Resort%20Islamorada%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Islander%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Cheeca Lodge & Spa",
+      "location": "Islamorada, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Cheeca%20Lodge%20%26%20Spa%20Islamorada%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Cheeca%20Lodge%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Ocean Oasis",
+      "location": "Islamorada, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Ocean%20Oasis%20Islamorada%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Ocean%20Oasis\" \"permanently closed\""
+    },
+    {
+      "name": "Three Waters",
+      "location": "Islamorada, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Three%20Waters%20Islamorada%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Three%20Waters\" \"permanently closed\""
+    },
+    {
+      "name": "La Siesta Resort & Villas",
+      "location": "Islamorada, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=La%20Siesta%20Resort%20%26%20Villas%20Islamorada%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"La%20Siesta%20Resort%20%26%20Villas\" \"permanently closed\""
+    },
+    {
+      "name": "Bud N' Mary's Marina 'The Barn'",
+      "location": "Islamorada, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Bud%20N'%20Mary's%20Marina%20'The%20Barn'%20Islamorada%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Bud%20N'%20Mary's%20Marina%20'The%20Barn'\" \"permanently closed\""
+    },
+    {
+      "name": "Faro Blanco Resort & Yacht Club",
+      "location": "Marathon, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Faro%20Blanco%20Resort%20%26%20Yacht%20Club%20Marathon%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Faro%20Blanco%20Resort%20%26%20Yacht%20Club\" \"permanently closed\""
+    },
+    {
+      "name": "Isla Bella Beach Resort",
+      "location": "Marathon, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Isla%20Bella%20Beach%20Resort%20Marathon%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Isla%20Bella%20Beach%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "East Sister Rock Island",
+      "location": "Marathon, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=East%20Sister%20Rock%20Island%20Marathon%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"East%20Sister%20Rock%20Island\" \"permanently closed\""
+    },
+    {
+      "name": "Hawks Cay Resort",
+      "location": "Duck Key, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Hawks%20Cay%20Resort%20Duck%20Key%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Hawks%20Cay%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Margaritaville Beach House Key West",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Margaritaville%20Beach%20House%20Key%20West%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Margaritaville%20Beach%20House%20Key%20West\" \"permanently closed\""
+    },
+    {
+      "name": "Audubon House & Tropical Gardens",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Audubon%20House%20%26%20Tropical%20Gardens%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Audubon%20House%20%26%20Tropical%20Gardens\" \"permanently closed\""
+    },
+    {
+      "name": "The Reach Key West, Curio Collection by Hilton",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Reach%20Key%20West%2C%20Curio%20Collection%20by%20Hilton%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Reach%20Key%20West%2C%20Curio%20Collection%20by%20Hilton\" \"permanently closed\""
+    },
+    {
+      "name": "Southernmost Beach Resort",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Southernmost%20Beach%20Resort%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Southernmost%20Beach%20Resort\" \"permanently closed\""
+    },
+    {
+      "name": "Havana Cabana at Key West",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Havana%20Cabana%20at%20Key%20West%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Havana%20Cabana%20at%20Key%20West\" \"permanently closed\""
+    },
+    {
+      "name": "Casa Marina Key West, Curio Collection by Hilton",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Casa%20Marina%20Key%20West%2C%20Curio%20Collection%20by%20Hilton%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Casa%20Marina%20Key%20West%2C%20Curio%20Collection%20by%20Hilton\" \"permanently closed\""
+    },
+    {
+      "name": "Hyatt Centric Key West Resort & Spa",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Hyatt%20Centric%20Key%20West%20Resort%20%26%20Spa%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Hyatt%20Centric%20Key%20West%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "The Perry Hotel & Marina Key West",
+      "location": "Stock Island, Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Perry%20Hotel%20%26%20Marina%20Key%20West%20Stock%20Island%2C%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Perry%20Hotel%20%26%20Marina%20Key%20West\" \"permanently closed\""
+    },
+    {
+      "name": "Oceans Edge Resort & Marina",
+      "location": "Stock Island, Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Oceans%20Edge%20Resort%20%26%20Marina%20Stock%20Island%2C%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Oceans%20Edge%20Resort%20%26%20Marina\" \"permanently closed\""
+    },
+    {
+      "name": "The Garden at the Oldest House Museum",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=The%20Garden%20at%20the%20Oldest%20House%20Museum%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"The%20Garden%20at%20the%20Oldest%20House%20Museum\" \"permanently closed\""
+    },
+    {
+      "name": "Sunset Watersports",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sunset%20Watersports%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Sunset%20Watersports\" \"permanently closed\""
+    },
+    {
+      "name": "Key West Lighthouse & Keeper's Quarters",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Key%20West%20Lighthouse%20%26%20Keeper's%20Quarters%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Key%20West%20Lighthouse%20%26%20Keeper's%20Quarters\" \"permanently closed\""
+    },
+    {
+      "name": "Fort East Martello",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Fort%20East%20Martello%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Fort%20East%20Martello\" \"permanently closed\""
+    },
+    {
+      "name": "Ocean Key Resort & Spa",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Ocean%20Key%20Resort%20%26%20Spa%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Ocean%20Key%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Old Town Manor",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Old%20Town%20Manor%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Old%20Town%20Manor\" \"permanently closed\""
+    },
+    {
+      "name": "Hard Rock Café Key West",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Hard%20Rock%20Caf%C3%A9%20Key%20West%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Hard%20Rock%20Caf%C3%A9%20Key%20West\" \"permanently closed\""
+    },
+    {
+      "name": "Pier House Resort & Spa",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Pier%20House%20Resort%20%26%20Spa%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Pier%20House%20Resort%20%26%20Spa\" \"permanently closed\""
+    },
+    {
+      "name": "Sunset Key Cottages",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Sunset%20Key%20Cottages%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Sunset%20Key%20Cottages\" \"permanently closed\""
+    },
+    {
+      "name": "First Flight Island Brewery",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=First%20Flight%20Island%20Brewery%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"First%20Flight%20Island%20Brewery\" \"permanently closed\""
+    },
+    {
+      "name": "Ernest Hemingway Home & Museum",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Ernest%20Hemingway%20Home%20%26%20Museum%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Ernest%20Hemingway%20Home%20%26%20Museum\" \"permanently closed\""
+    },
+    {
+      "name": "Fort Zachary Taylor State Park",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Fort%20Zachary%20Taylor%20State%20Park%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Fort%20Zachary%20Taylor%20State%20Park\" \"permanently closed\""
+    },
+    {
+      "name": "Bagatelle Restaurant",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Bagatelle%20Restaurant%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Bagatelle%20Restaurant\" \"permanently closed\""
+    },
+    {
+      "name": "Key West Historic Inns",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Key%20West%20Historic%20Inns%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Key%20West%20Historic%20Inns\" \"permanently closed\""
+    },
+    {
+      "name": "Schooner Appledore",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Schooner%20Appledore%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Schooner%20Appledore\" \"permanently closed\""
+    },
+    {
+      "name": "Suite Dreams Inn",
+      "location": "Key West, Florida Keys",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Suite%20Dreams%20Inn%20Key%20West%2C%20Florida%20Keys",
+      "searchUrl": "https://www.google.com/search?q=\"Suite%20Dreams%20Inn\" \"permanently closed\""
+    },
+    {
+      "name": "Patch of Heaven Sanctuary",
+      "location": "Homestead, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Patch%20of%20Heaven%20Sanctuary%20Homestead%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Patch%20of%20Heaven%20Sanctuary\" \"permanently closed\""
+    },
+    {
+      "name": "Redland Koi Gardens",
+      "location": "Redland, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Redland%20Koi%20Gardens%20Redland%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Redland%20Koi%20Gardens\" \"permanently closed\""
+    },
+    {
+      "name": "Schnebly Redland Winery",
+      "location": "Homestead, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Schnebly%20Redland%20Winery%20Homestead%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Schnebly%20Redland%20Winery\" \"permanently closed\""
+    },
+    {
+      "name": "Ever After Farms Tropical Grove Barn",
+      "location": "Homestead, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Ever%20After%20Farms%20Tropical%20Grove%20Barn%20Homestead%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Ever%20After%20Farms%20Tropical%20Grove%20Barn\" \"permanently closed\""
+    },
+    {
+      "name": "Villa Toscana Miami",
+      "location": "Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Villa%20Toscana%20Miami%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Villa%20Toscana%20Miami\" \"permanently closed\""
+    },
+    {
+      "name": "Jungle Island",
+      "location": "Miami, Miami-Dade",
+      "status": "UNKNOWN",
+      "reason": "Needs manual verification",
+      "mapsUrl": "https://maps.google.com/maps?q=Jungle%20Island%20Miami%2C%20Miami-Dade",
+      "searchUrl": "https://www.google.com/search?q=\"Jungle%20Island\" \"permanently closed\""
+    }
+  ]
+}

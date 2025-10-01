@@ -5,55 +5,10 @@ import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import venuesData from '@/data/venues.json';
+import { mockVenues } from '@/lib/mockData';
 
-// Transform the venues data to match our Venue type
-const transformVenueData = (venueData: any): Venue => {
-  return {
-    id: venueData.id || venueData.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-    name: venueData.name,
-    description: venueData.style || 'Beautiful wedding venue in South Florida',
-    venueType: venueData.tags?.includes('beach') ? 'beach' :
-                venueData.tags?.includes('garden') ? 'garden' :
-                venueData.tags?.includes('ballroom') ? 'ballroom' :
-                venueData.tags?.includes('historic') ? 'historic' :
-                venueData.tags?.includes('modern') ? 'modern' : 'ballroom',
-    address: {
-      street: venueData.location || '',
-      city: venueData.region?.split(',')[0] || 'Miami',
-      state: 'FL',
-      zipCode: venueData.location?.match(/\d{5}$/)?.[0] || '33101'
-    },
-    capacity: {
-      min: 50,
-      max: parseInt(venueData.capacity?.match(/\d+/)?.[0]) || 200
-    },
-    pricing: {
-      startingPrice: venueData.pricing?.match(/\$(\d+)/)?.[1] ? 
-        parseInt(venueData.pricing.match(/\$(\d+)/)[1]) * 100 : 5000,
-      packages: []
-    },
-    amenities: venueData.servicesAmenities || [],
-    images: venueData.images || [],
-    contact: {
-      phone: '',
-      email: '',
-      website: venueData.website || ''
-    },
-    availability: [],
-    reviews: {
-      rating: 4.5,
-      count: 0,
-      reviews: []
-    },
-    owner: {
-      id: 'default',
-      name: 'Venue Owner',
-      email: 'owner@venue.com',
-      isPremium: false
-    }
-  };
-};
+// Use mockVenues which already includes the JSON data to avoid duplicates
+const allVenues = mockVenues;
 
 const ITEMS_PER_PAGE = 12;
 
@@ -68,10 +23,9 @@ export default function VenuesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    // Transform and load venues data
-    const transformedVenues = venuesData.weddingVenues.map(transformVenueData);
-    setVenues(transformedVenues);
-    setFilteredVenues(transformedVenues);
+    // Use combined venues data (same as detail page)
+    setVenues(allVenues);
+    setFilteredVenues(allVenues);
     setLoading(false);
   }, []);
 
@@ -108,6 +62,16 @@ export default function VenuesPage() {
         venue.capacity.max >= min && venue.capacity.min <= max
       );
     }
+
+    // Sort venues with premium venues first
+    filtered = filtered.sort((a, b) => {
+      // Premium venues first
+      if (a.owner.isPremium && !b.owner.isPremium) return -1;
+      if (!a.owner.isPremium && b.owner.isPremium) return 1;
+      
+      // Then by name alphabetically
+      return a.name.localeCompare(b.name);
+    });
 
     setFilteredVenues(filtered);
     setCurrentPage(1); // Reset to first page when filters change
@@ -275,7 +239,7 @@ export default function VenuesPage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {paginatedVenues.map((venue) => (
                   <VenueCard key={venue.id} venue={venue} showFavorites />
                 ))}

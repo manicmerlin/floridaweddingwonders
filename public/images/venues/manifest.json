@@ -1,6 +1,6 @@
 {
   "totalVenues": 124,
-  "venuesWithImages": 81,
+  "venuesWithImages": 80,
   "totalImages": 229,
   "generatedAt": "2025-09-10T13:17:53.095Z",
   "venues": [
@@ -22,11 +22,6 @@
     {
       "name": "Emeril Lagasse Foundation Innovation Kitchen",
       "imageCount": 4,
-      "hasImages": true
-    },
-    {
-      "name": "Atlantic Wedding Chapel",
-      "imageCount": 1,
       "hasImages": true
     },
     {

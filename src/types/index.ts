@@ -1,9 +1,16 @@
-export interface VenueImage {
+export interface VenueMedia {
   id: string;
   url: string;
   alt: string;
   isPrimary?: boolean;
-  type?: 'image' | 'video'; // Add type to support both images and videos
+  type: 'image' | 'video';
+  thumbnailUrl?: string; // For videos, this is the generated thumbnail
+  duration?: number; // For videos, duration in seconds
+}
+
+// Legacy interface for backward compatibility
+export interface VenueImage extends VenueMedia {
+  type: 'image';
 }
 
 export interface Venue {
@@ -30,7 +37,8 @@ export interface Venue {
     packages: any[];
   };
   amenities: string[];
-  images?: VenueImage[];
+  images?: VenueImage[]; // Legacy field for images only
+  media?: VenueMedia[]; // New field for mixed media (images + videos)
   contact: {
     email: string;
     phone: string;
@@ -42,12 +50,64 @@ export interface Venue {
     count: number;
     reviews: any[];
   };
+  externalReviews?: {
+    google?: {
+      placeId?: string;
+      rating?: number;
+      reviewCount?: number;
+      url?: string;
+    };
+    yelp?: {
+      businessId?: string;
+      rating?: number;
+      reviewCount?: number;
+      url?: string;
+    };
+    theKnot?: {
+      rating?: number;
+      reviewCount?: number;
+      url?: string;
+    };
+    weddingWire?: {
+      rating?: number;
+      reviewCount?: number;
+      url?: string;
+    };
+  };
   owner: {
     id: string;
     name: string;
     email: string;
     isPremium: boolean;
   };
+  claimStatus: 'unclaimed' | 'pending' | 'claimed' | 'rejected';
+  claimedBy?: {
+    userId: string;
+    email: string;
+    claimedAt: string;
+    approvedAt?: string;
+    approvedBy?: string;
+  };
+  claimHistory?: Array<{
+    userId: string;
+    email: string;
+    claimedAt: string;
+    status: 'pending' | 'approved' | 'rejected';
+    processedAt?: string;
+    processedBy?: string;
+    notes?: string;
+  }>;
+}
+
+export interface LeadQualificationData {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  eventType: string;
+  guestCount: number;
+  preferredDate: string;
+  dateFlexibility: string;
+  venuebudget: string;
 }
 
 export interface User {
@@ -65,6 +125,7 @@ export interface User {
   emailVerified: boolean;
   createdAt: Date;
   lastLogin?: Date;
+  leadQualification?: LeadQualificationData; // Pre-qualifying data for venue seekers
 }
 
 export interface AuthUser {
@@ -146,6 +207,42 @@ export interface VendorImage {
   url: string;
   alt: string;
   isPrimary?: boolean;
+}
+
+// Venue claiming interfaces
+export interface VenueClaim {
+  id: string;
+  venueId: string;
+  venueName: string;
+  userId: string;
+  userEmail: string;
+  userName: string;
+  businessName?: string;
+  businessType?: string;
+  phoneNumber?: string;
+  businessAddress?: string;
+  relationshipToVenue?: string;
+  status: 'pending' | 'approved' | 'denied';
+  submittedAt: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  notes?: string;
+  adminNotes?: string;
+  businessProof?: {
+    document: string;
+    documentType: 'business_license' | 'tax_id' | 'lease_agreement' | 'other';
+    uploadedAt: string;
+  };
+}
+
+export interface ClaimSubmission {
+  venueId: string;
+  userEmail: string;
+  userName: string;
+  businessName: string;
+  businessType: string;
+  businessProof?: File;
+  additionalNotes?: string;
 }
 
 export interface Vendor {

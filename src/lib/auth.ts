@@ -56,32 +56,18 @@ export function getCurrentUser(): AuthSession {
   }
 
   try {
-    // Check for venue owner authentication cookie
-    const cookies = document.cookie.split(';');
-    const authCookie = cookies.find(cookie => 
-      cookie.trim().startsWith('venue-owner-auth=')
-    );
+    // Check localStorage for authentication
+    const isAuthenticated = localStorage.getItem('isSuperAdmin') === 'true' || localStorage.getItem('isAuthenticated') === 'true';
+    const userEmail = localStorage.getItem('userEmail');
 
-    if (!authCookie) {
+    if (!isAuthenticated || !userEmail) {
       return { user: null, isAuthenticated: false };
     }
 
-    // Extract user ID from cookie (in production, this would be a JWT)
-    const authValue = authCookie.split('=')[1];
-    if (authValue === 'authenticated') {
-      // For demo purposes, get user from email stored in another cookie
-      const emailCookie = cookies.find(cookie => 
-        cookie.trim().startsWith('venue-owner-email=')
-      );
-      
-      if (emailCookie) {
-        const email = decodeURIComponent(emailCookie.split('=')[1]);
-        const user = VENUE_OWNERS.find(owner => owner.email === email);
-        
-        if (user) {
-          return { user, isAuthenticated: true };
-        }
-      }
+    const user = VENUE_OWNERS.find(owner => owner.email === userEmail);
+    
+    if (user) {
+      return { user, isAuthenticated: true };
     }
 
     return { user: null, isAuthenticated: false };
@@ -128,26 +114,53 @@ export function getPhotoLimit(venueId: string): number {
 }
 
 export function isSuperAdmin(): boolean {
-  const { user, isAuthenticated } = getCurrentUser();
-  return isAuthenticated && user?.role === 'super_admin' && user?.venueId === 'all';
+  if (typeof window === 'undefined') {
+    console.log('isSuperAdmin: window undefined (SSR)');
+    return false;
+  }
+  
+  // Check localStorage directly for super admin status
+  const isSuperAdminFlag = localStorage.getItem('isSuperAdmin') === 'true';
+  const userEmail = localStorage.getItem('userEmail');
+  
+  console.log('isSuperAdmin check:', { isSuperAdminFlag, userEmail });
+  
+  if (isSuperAdminFlag && userEmail) {
+    const user = VENUE_OWNERS.find(owner => owner.email === userEmail && owner.role === 'super_admin');
+    console.log('Found user:', user);
+    return !!user;
+  }
+  
+  console.log('isSuperAdmin: returning false');
+  return false;
 }
 
-export function loginAsVenueOwner(email: string, venueId: string): boolean {
+export function loginAsVenueOwner(email: string, venueId?: string): boolean {
   // Check for super admin first
   const superAdmin = VENUE_OWNERS.find(o => o.email === email && o.role === 'super_admin');
   if (superAdmin) {
-    // Set authentication cookies for super admin
-    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400'; // 24 hours
+    // Set localStorage for super admin
+    localStorage.setItem('isSuperAdmin', 'true');
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userEmail', email);
+    
+    // Also set cookies for server-side middleware
+    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400';
     document.cookie = `venue-owner-email=${encodeURIComponent(email)}; path=/; max-age=86400`;
     return true;
   }
 
   // Check for specific venue owner
-  const owner = VENUE_OWNERS.find(o => o.email === email && o.venueId === venueId);
+  const owner = VENUE_OWNERS.find(o => o.email === email && (venueId ? o.venueId === venueId : true));
   
   if (owner) {
-    // Set authentication cookies
-    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400'; // 24 hours
+    // Set localStorage for regular venue owner
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('isSuperAdmin', 'false');
+    
+    // Also set cookies for server-side middleware
+    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400';
     document.cookie = `venue-owner-email=${encodeURIComponent(email)}; path=/; max-age=86400`;
     return true;
   }
@@ -156,6 +169,11 @@ export function loginAsVenueOwner(email: string, venueId: string): boolean {
 }
 
 export function logout(): void {
+  localStorage.removeItem('isSuperAdmin');
+  localStorage.removeItem('isAuthenticated');
+  localStorage.removeItem('userEmail');
+  
+  // Also clear cookies
   document.cookie = 'venue-owner-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
   document.cookie = 'venue-owner-email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
 }

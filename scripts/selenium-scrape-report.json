@@ -1,0 +1,11 @@
+{
+  "totalVenues": 3,
+  "successful": 0,
+  "skipped": 3,
+  "failed": 0,
+  "successRate": "0.0%",
+  "completedAt": "2025-09-29T01:13:43.536Z",
+  "venuesWithImages": 381,
+  "proxiesUsed": 3,
+  "batchesProcessed": 1
+}

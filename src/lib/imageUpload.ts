@@ -1,4 +1,6 @@
-// Image upload utilities
+// Image and video upload utilities
+
+import { isVideoFile, processVideo, VideoProcessingError } from './videoUtils';
 
 export interface ImageFile {
   file: File;
@@ -15,11 +17,22 @@ export interface ImageUploadOptions {
 }
 
 const DEFAULT_OPTIONS: Required<ImageUploadOptions> = {
-  maxSize: 10 * 1024 * 1024, // 10MB
+  maxSize: 10 * 1024 * 1024, // 10MB for images
   maxWidth: 2048,
   maxHeight: 2048,
   allowedTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
   quality: 0.8
+};
+
+// Video upload options
+export interface VideoUploadOptions {
+  maxSize?: number; // in bytes  
+  allowedTypes?: string[];
+}
+
+const DEFAULT_VIDEO_OPTIONS: Required<VideoUploadOptions> = {
+  maxSize: 100 * 1024 * 1024, // 100MB for videos
+  allowedTypes: ['video/mp4', 'video/webm', 'video/mov', 'video/quicktime', 'video/avi', 'video/x-msvideo']
 };
 
 export class ImageUploadError extends Error {
@@ -29,6 +42,44 @@ export class ImageUploadError extends Error {
   }
 }
 
+export function validateFile(file: File, options: ImageUploadOptions | VideoUploadOptions = {}): void {
+  if (isVideoFile(file)) {
+    const videoOpts = { ...DEFAULT_VIDEO_OPTIONS, ...options } as Required<VideoUploadOptions>;
+    
+    // Check file type
+    if (!videoOpts.allowedTypes.includes(file.type)) {
+      throw new ImageUploadError(
+        `Invalid video type. Allowed types: ${videoOpts.allowedTypes.join(', ')}`
+      );
+    }
+
+    // Check file size
+    if (file.size > videoOpts.maxSize) {
+      throw new ImageUploadError(
+        `Video file too large. Maximum size: ${(videoOpts.maxSize / (1024 * 1024)).toFixed(0)}MB`
+      );
+    }
+  } else {
+    // Handle as image
+    const imageOpts = { ...DEFAULT_OPTIONS, ...options } as Required<ImageUploadOptions>;
+    
+    // Check file type
+    if (!imageOpts.allowedTypes.includes(file.type)) {
+      throw new ImageUploadError(
+        `Invalid image type. Allowed types: ${imageOpts.allowedTypes.join(', ')}`
+      );
+    }
+
+    // Check file size
+    if (file.size > imageOpts.maxSize) {
+      throw new ImageUploadError(
+        `Image file too large. Maximum size: ${(imageOpts.maxSize / (1024 * 1024)).toFixed(1)}MB`
+      );
+    }
+  }
+}
+
+// Legacy function for backward compatibility
 export function validateImage(file: File, options: ImageUploadOptions = {}): void {
   const opts = { ...DEFAULT_OPTIONS, ...options };
 
@@ -184,36 +235,66 @@ export async function uploadToCloudStorage(
   }
 }
 
-export class ImageUploadManager {
+// Mixed media upload manager
+export class MediaUploadManager {
   private venueId: string;
-  private options: Required<ImageUploadOptions>;
+  private imageOptions: Required<ImageUploadOptions>;
+  private videoOptions: Required<VideoUploadOptions>;
 
-  constructor(venueId: string, options: ImageUploadOptions = {}) {
+  constructor(
+    venueId: string, 
+    imageOptions: ImageUploadOptions = {},
+    videoOptions: VideoUploadOptions = {}
+  ) {
     this.venueId = venueId;
-    this.options = { ...DEFAULT_OPTIONS, ...options };
+    this.imageOptions = { ...DEFAULT_OPTIONS, ...imageOptions };
+    this.videoOptions = { ...DEFAULT_VIDEO_OPTIONS, ...videoOptions };
   }
 
-  async uploadImages(files: File[]): Promise<{
-    successful: Array<{ id: string; url: string; originalName: string }>;
+  async uploadFiles(files: File[]): Promise<{
+    successful: Array<{ id: string; url: string; originalName: string; type: 'image' | 'video'; thumbnailUrl?: string }>;
     failed: Array<{ file: File; error: string }>;
   }> {
-    const successful: Array<{ id: string; url: string; originalName: string }> = [];
+    const successful: Array<{ id: string; url: string; originalName: string; type: 'image' | 'video'; thumbnailUrl?: string }> = [];
     const failed: Array<{ file: File; error: string }> = [];
 
     for (const file of files) {
       try {
-        const imageId = generateImageId();
-        const { processedBlob } = await processImage(file, this.options);
+        const fileId = generateImageId();
         
-        // Upload the processed image (or original if no processing needed)
-        const blobToUpload = processedBlob || file;
-        const url = await uploadToCloudStorage(blobToUpload, this.venueId, imageId);
-        
-        successful.push({
-          id: imageId,
-          url,
-          originalName: file.name
-        });
+        if (isVideoFile(file)) {
+          // Process video and generate thumbnail
+          const videoData = await processVideo(file);
+          
+          // Upload video file
+          const videoUrl = await uploadToCloudStorage(file, this.venueId, fileId);
+          
+          // Upload thumbnail separately (optional, could be generated on-demand)
+          // const thumbnailBlob = await fetch(videoData.thumbnail).then(r => r.blob());
+          // const thumbnailUrl = await uploadToCloudStorage(thumbnailBlob, this.venueId, `${fileId}_thumb`);
+          
+          successful.push({
+            id: fileId,
+            url: videoUrl,
+            originalName: file.name,
+            type: 'video',
+            thumbnailUrl: videoData.thumbnail // Using data URL for now
+          });
+        } else {
+          // Process image
+          const { processedBlob } = await processImage(file, this.imageOptions);
+          
+          // Upload the processed image (or original if no processing needed)
+          const blobToUpload = processedBlob || file;
+          const url = await uploadToCloudStorage(blobToUpload, this.venueId, fileId);
+          
+          successful.push({
+            id: fileId,
+            url,
+            originalName: file.name,
+            type: 'image'
+          });
+        }
       } catch (error) {
         failed.push({
           file,
@@ -223,5 +304,23 @@ export class ImageUploadManager {
     }
 
     return { successful, failed };
+  }
+}
+
+// Legacy class for backward compatibility
+export class ImageUploadManager extends MediaUploadManager {
+  constructor(venueId: string, options: ImageUploadOptions = {}) {
+    super(venueId, options, {});
+  }
+
+  async uploadImages(files: File[]): Promise<{
+    successful: Array<{ id: string; url: string; originalName: string }>;
+    failed: Array<{ file: File; error: string }>;
+  }> {
+    const result = await this.uploadFiles(files);
+    return {
+      successful: result.successful.map(({ id, url, originalName }) => ({ id, url, originalName })),
+      failed: result.failed
+    };
   }
 }

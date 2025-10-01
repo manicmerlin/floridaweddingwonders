@@ -33,15 +33,17 @@ export default function Logo({ className = '', size = 'md', showText = true, var
         src={logoSrc}
         alt="Florida Wedding Wonders"
         width={variant === 'horizontal' ? 200 : 40}
-        height={variant === 'horizontal' ? 50 : 40}
-        className={`${sizeClasses[size]} brightness-0 invert-0`}
-        style={{ filter: 'brightness(0) saturate(100%) invert(11%) sepia(7%) saturate(1354%) hue-rotate(183deg) brightness(98%) contrast(88%)' }}
+        height={variant === 'horizontal' ? 40 : 40}
+        className={`${sizeClasses[size]} filter brightness-0 saturate-100`}
+        style={{
+          filter: 'brightness(0) saturate(100%) invert(17%) sepia(69%) saturate(2892%) hue-rotate(214deg) brightness(93%) contrast(87%)'
+        }}
         priority
       />
       
       {/* Text Logo - Hide when using horizontal logo since it likely includes text */}
       {showText && variant === 'square' && (
-        <span className={`font-bold font-heading text-pink-600 hover:text-pink-700 transition ${textSizeClasses[size]}`}>
+        <span className={`font-bold font-heading text-blue-600 hover:text-blue-700 transition ${textSizeClasses[size]}`}>
           Florida Wedding Wonders
         </span>
       )}

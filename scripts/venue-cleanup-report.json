@@ -1,0 +1,57 @@
+{
+  "cleanupDate": "2025-09-28T18:35:18.447Z",
+  "originalCount": 130,
+  "finalCount": 129,
+  "duplicatesRemoved": 1,
+  "problemVenuesRemoved": 0,
+  "venuesNeedingVerification": [
+    {
+      "name": "Historic Walton House",
+      "city": "Miami-Dade",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Redland, Miami-Dade"
+    },
+    {
+      "name": "Woman's Club of Coconut Grove",
+      "city": "Miami-Dade",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Coconut Grove, Miami-Dade"
+    },
+    {
+      "name": "The Cruz Building",
+      "city": "Miami-Dade",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Coconut Grove, Miami-Dade"
+    },
+    {
+      "name": "The M Building",
+      "city": "Miami-Dade",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Wynwood, Miami-Dade"
+    },
+    {
+      "name": "Out of the Blue Celebrations",
+      "city": "Palm Beach",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Jupiter, Palm Beach"
+    },
+    {
+      "name": "Out of the Blue Celebrations",
+      "city": "Palm Beach",
+      "reason": "Might be event planner, not venue",
+      "location": "Jupiter, Palm Beach"
+    },
+    {
+      "name": "East Sister Rock Island",
+      "city": "Florida Keys",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Marathon, Florida Keys"
+    },
+    {
+      "name": "The Blue Room",
+      "city": "Florida Keys",
+      "reason": "Suspicious venue name or potential closure risk",
+      "location": "Key West, Florida Keys"
+    }
+  ]
+}

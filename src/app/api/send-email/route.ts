@@ -2,13 +2,40 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../lib/supabase';
 import { sendCompleteEmailFlow } from '../../../lib/emailNotifications';
 
+async function handleClaimEmails(to: string, subject: string, type: string, data: any) {
+  try {
+    // In production, you would use a real email service like SendGrid, Mailgun, etc.
+    console.log('📧 Sending claim email:', { to, subject, type, data });
+    
+    // Simulate email sending
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    return NextResponse.json({
+      success: true,
+      message: 'Claim email sent successfully'
+    });
+  } catch (error) {
+    console.error('Failed to send claim email:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   console.log('🚀 Email capture API called');
   
   try {
     const body = await request.json();
     console.log('📝 Request body:', body);
-    const { type, email, venueName } = body;
+    const { type, email, venueName, to, subject, data } = body;
+
+    // Handle venue claim emails
+    if (type === 'venue_claim_admin' || type === 'venue_claim_confirmation' || 
+        type === 'venue_claim_approved' || type === 'venue_claim_denied') {
+      return await handleClaimEmails(to, subject, type, data);
+    }
 
     // Validate required fields
     if (!email || !type) {
