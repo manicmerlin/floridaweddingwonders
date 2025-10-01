@@ -6,6 +6,7 @@ export interface StoredPhoto {
   url: string;
   alt: string;
   isPrimary: boolean;
+  type: 'image';
   uploadedAt: string;
   uploadedBy: string; // user ID
 }
@@ -18,6 +19,7 @@ let VENUE_PHOTOS: StoredPhoto[] = [
     url: '/images/venues/venue-11-curtiss-mansion-2.jpg',
     alt: 'Curtiss Mansion Exterior',
     isPrimary: true,
+    type: 'image',
     uploadedAt: '2025-09-10T10:00:00Z',
     uploadedBy: 'owner-1'
   }
@@ -32,14 +34,17 @@ export function saveVenuePhotos(venueId: string, photos: Array<{
   url: string;
   alt: string;
   isPrimary: boolean;
+  type: 'image' | 'video';
 }>, uploadedBy: string): boolean {
   try {
     // Remove existing photos for this venue
     VENUE_PHOTOS = VENUE_PHOTOS.filter(photo => photo.venueId !== venueId);
     
-    // Add new photos
-    const newPhotos: StoredPhoto[] = photos.map(photo => ({
+    // Add new photos (filter to only images for legacy support)
+    const imagePhotos = photos.filter(p => p.type === 'image');
+    const newPhotos: StoredPhoto[] = imagePhotos.map(photo => ({
       ...photo,
+      type: 'image' as const,
       venueId,
       uploadedAt: new Date().toISOString(),
       uploadedBy
@@ -66,6 +71,7 @@ export function updateVenuesJsonWithPhotos(venueId: string, photos: Array<{
   url: string;
   alt: string;
   isPrimary: boolean;
+  type: 'image' | 'video';
 }>) {
   try {
     // This would normally update the database
@@ -93,6 +99,7 @@ export function updateVenueInMockData(venueId: string, photos: Array<{
   url: string;
   alt: string;
   isPrimary: boolean;
+  type: 'image' | 'video';
 }>) {
   // In a real application, this would update the database
   // For now, we'll store in localStorage as a simulation
@@ -125,6 +132,7 @@ export function loadVenuePhotosFromStorage(venueId: string): Array<{
   url: string;
   alt: string;
   isPrimary: boolean;
+  type: 'image';
 }> {
   try {
     if (typeof window === 'undefined') return [];
@@ -152,7 +160,8 @@ export function deleteVenuePhoto(venueId: string, photoId: string, userId: strin
         id: photo.id,
         url: photo.url,
         alt: photo.alt,
-        isPrimary: photo.isPrimary
+        isPrimary: photo.isPrimary,
+        type: 'image' as const
       }));
       
       updateVenueInMockData(venueId, photoData);
@@ -185,7 +194,8 @@ export function setPrimaryPhoto(venueId: string, photoId: string, userId: string
         id: photo.id,
         url: photo.url,
         alt: photo.alt,
-        isPrimary: photo.isPrimary
+        isPrimary: photo.isPrimary,
+        type: 'image' as const
       }));
       
       updateVenueInMockData(venueId, photoData);
@@ -214,7 +224,8 @@ export function initializeVenuePhotos() {
             id: 'curtiss-default-1',
             url: '/images/venues/venue-11-curtiss-mansion-2.jpg',
             alt: 'Curtiss Mansion Exterior',
-            isPrimary: true
+            isPrimary: true,
+            type: 'image' as const
           }
         ],
         '1': [
@@ -222,7 +233,8 @@ export function initializeVenuePhotos() {
             id: 'hialeah-default-1',
             url: '/images/venues/venue-1-hialeah-park-racing-casino-2.jpg',
             alt: 'Hialeah Park Racing & Casino',
-            isPrimary: true
+            isPrimary: true,
+            type: 'image' as const
           }
         ]
       };

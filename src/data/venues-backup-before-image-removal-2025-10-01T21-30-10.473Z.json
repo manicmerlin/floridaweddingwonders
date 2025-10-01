@@ -23,6 +23,35 @@
       "ceremonyAndReception": true,
       "website": "https://www.spanishmonastery.com/",
       "gallery": "https://www.theknot.com/marketplace/the-ancient-spanish-monastery-north-miami-beach-fl-378809",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Ancient Spanish Monastery wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.234Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Ancient Spanish Monastery wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Ancient Spanish Monastery wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.728Z"
     },
     {
@@ -59,6 +88,62 @@
       "ceremonyAndReception": true,
       "website": "https://hialeahparkcasino.com/events",
       "gallery": "https://hialeahparkcasino.com/events#gallery",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Hialeah Park Racing & Casino wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Hialeah Park Racing & Casino wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Hialeah Park Racing & Casino wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Hialeah Park Racing & Casino wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-5",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Hialeah Park Racing & Casino wedding venue - Photo 5",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-6",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Hialeah Park Racing & Casino wedding venue - Photo 6",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.731Z"
     },
     {
@@ -85,6 +170,53 @@
       "ceremonyAndReception": true,
       "website": "https://www.kimptonsurfcomber.com/",
       "gallery": "https://www.theknot.com/marketplace/kimpton-surfcomber-hotel-miami-beach-fl-2035985",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Surfcomber Hotel wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Surfcomber Hotel wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Surfcomber Hotel wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Surfcomber Hotel wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-5",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Surfcomber Hotel wedding venue - Photo 5",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.731Z"
     },
     {
@@ -109,6 +241,44 @@
       "ceremonyAndReception": true,
       "website": "https://www.wyndhamhotels.com/trademark/miami-beach-florida/mb-hotel-trademark-collection/overview",
       "gallery": "https://www.theknot.com/marketplace/mb-hotel-miami-beach-fl-2051690",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "MB Hotel wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "MB Hotel wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "MB Hotel wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "MB Hotel wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.731Z"
     },
     {
@@ -135,6 +305,53 @@
       "ceremonyAndReception": true,
       "website": "https://www.seawatchontheocean.com/",
       "gallery": "https://www.theknot.com/marketplace/sea-watch-on-the-ocean-fort-lauderdale-fl-201524",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Sea Watch on the Ocean wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Sea Watch on the Ocean wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Sea Watch on the Ocean wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Sea Watch on the Ocean wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-5",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Sea Watch on the Ocean wedding venue - Photo 5",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.732Z"
     },
     {
@@ -162,6 +379,62 @@
       "ceremonyAndReception": true,
       "website": "https://www.arcculinary.com/innovation-kitchen",
       "gallery": "https://www.arcculinary.com/innovation-kitchen",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-5",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue - Photo 5",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-6",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Emeril Lagasse Foundation Innovation Kitchen wedding venue - Photo 6",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.732Z"
     },
     {
@@ -186,6 +459,35 @@
       "ceremonyAndReception": false,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Atlantic Wedding Chapel wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Atlantic Wedding Chapel wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Atlantic Wedding Chapel wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.243Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.732Z"
     },
     {
@@ -211,6 +513,44 @@
       "ceremonyAndReception": true,
       "website": "https://www.coastalyachtcharters.com/",
       "gallery": "https://www.coastalyachtcharters.com/our-yachts",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Coastal Yacht Charters wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Coastal Yacht Charters wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Coastal Yacht Charters wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Coastal Yacht Charters wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.732Z"
     },
     {
@@ -238,6 +578,35 @@
       "ceremonyAndReception": true,
       "website": "https://vizcaya.org/weddings-celebrations/",
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/vizcaya",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Vizcaya Museum & Gardens wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Vizcaya Museum & Gardens wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Vizcaya Museum & Gardens wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -266,6 +635,62 @@
       "ceremonyAndReception": true,
       "website": "https://www.thecooperestate.com/",
       "gallery": "https://www.theknot.com/marketplace/the-cooper-estate-miami-fl-548325",
+      "images": [
+        {
+          "id": "img-gallery-test-undefined-1",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Cooper Estate wedding venue - Photo 1",
+          "isPrimary": true,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-2",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Cooper Estate wedding venue - Photo 2",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-3",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Cooper Estate wedding venue - Photo 3",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-4",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Cooper Estate wedding venue - Photo 4",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-5",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Cooper Estate wedding venue - Photo 5",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        },
+        {
+          "id": "img-gallery-test-undefined-6",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Cooper Estate wedding venue - Photo 6",
+          "isPrimary": false,
+          "source": "gallery-test",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:47:34.244Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -292,6 +717,17 @@
       "ceremonyAndReception": true,
       "website": "https://curtissmansion.org/",
       "gallery": "https://www.theknot.com/marketplace/curtiss-mansion-miami-springs-fl-508629",
+      "images": [
+        {
+          "id": "boca-lago-country-club-11",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Curtiss Mansion - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -317,6 +753,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.palmettobay-fl.gov/457/Thalatta-Estate",
       "gallery": "https://www.palmettobay-fl.gov/571/Photo-Gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-12",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Thalatta Estate - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -344,6 +791,17 @@
       "ceremonyAndReception": true,
       "website": "https://deeringestate.org/event-rentals/",
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/deering-estate-at-cutler",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-13",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Deering Estate - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -370,6 +828,17 @@
       "ceremonyAndReception": true,
       "website": "https://fairchildgarden.org/private-events-and-weddings/",
       "gallery": "https://fairchildgarden.org/private-events-and-weddings/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-14",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Fairchild Tropical Botanic Garden - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -398,6 +867,17 @@
       "ceremonyAndReception": true,
       "website": "https://waltonhouse.com/",
       "gallery": "https://www.instagram.com/historicwaltonhouse/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-15",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Historic Walton House - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -424,6 +904,17 @@
       "ceremonyAndReception": true,
       "website": "https://womansclubofcoconutgrove.com/",
       "gallery": "https://www.wedding-spot.com/venue/2733/Woman-s-Club-of-Coconut-Grove/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-16",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Woman's Club of Coconut Grove - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -452,6 +943,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.thebathclub.com/",
       "gallery": "https://www.thebathclub.com/private-events-gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-17",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Bath Club - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -477,6 +979,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.cruzbuildings.com/",
       "gallery": "https://www.theknot.com/marketplace/the-cruz-building-miami-fl-549429",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-18",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Cruz Building - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -504,6 +1017,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.therustypelican.com/private-events-miami/",
       "gallery": "https://www.therustypelican.com/private-events-miami/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-19",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Rusty Pelican - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -532,6 +1056,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.brizaonthebay.com/",
       "gallery": "https://www.brizaonthebay.com/gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-20",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Briza on the Bay - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -559,6 +1094,17 @@
       "ceremonyAndReception": true,
       "website": "https://penthouserw.com/",
       "gallery": "https://penthouserw.com/gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-21",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Penthouse at Riverside Wharf - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -582,6 +1128,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.thesignaturegrand.com/",
       "gallery": "https://www.thesignaturegrand.com/virtual-tours/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-22",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Signature Grand - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -607,6 +1164,17 @@
       "ceremonyAndReception": true,
       "website": "https://jacarandacountryclub.com/weddings-events/",
       "gallery": "https://www.theknot.com/marketplace/jacaranda-country-club-plantation-fl-213961",
+      "images": [
+        {
+          "id": "boca-lago-country-club-23",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Jacaranda Country Club - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -632,6 +1200,17 @@
       "ceremonyAndReception": true,
       "website": "https://deercreekflorida.com/weddings/",
       "gallery": "https://deercreekflorida.com/weddings-photo-gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-24",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Deer Creek Country Club - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -658,6 +1237,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.bonnethouse.org/weddings/",
       "gallery": "https://www.theknot.com/marketplace/bonnet-house-museum-and-gardens-fort-lauderdale-fl-639762",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-25",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Bonnet House Museum & Gardens - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -683,6 +1273,17 @@
       "ceremonyAndReception": true,
       "website": "https://stranahanhouse.org/rentals/",
       "gallery": "https://www.partyslate.com/venues/historic-stranahan-house-museum",
+      "images": [
+        {
+          "id": "boca-lago-country-club-26",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Stranahan House - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -711,6 +1312,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.secretgardensmiami.com/",
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/secret-gardens-miami",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-27",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Secret Gardens Miami - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -736,6 +1348,17 @@
       "ceremonyAndReception": true,
       "website": "https://villa-woodbine.com/",
       "gallery": "https://www.theknot.com/marketplace/villa-woodbine-miami-fl-237330",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-28",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Villa Woodbine - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -763,6 +1386,17 @@
       "ceremonyAndReception": true,
       "website": "http://lavanvenue.com/",
       "gallery": "http://lavanvenue.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-29",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Lavan Venue - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -780,6 +1414,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-30",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Coral Gables Country Club - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -797,6 +1442,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-31",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Weston Hills Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -814,6 +1470,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-32",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Parkland Country Club - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -834,6 +1501,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-33",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Miami Beach Botanical Garden - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -852,6 +1530,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-34",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Hollywood's ArtsPark - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -872,6 +1561,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-35",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Phillip and Patricia Frost Science Museum - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -891,6 +1591,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-36",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The M Building - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -911,6 +1622,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-37",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Wharf (Miami/Ft. Lauderdale) - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -941,6 +1663,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.biltmorehotel.com/weddings/",
       "gallery": "https://www.theknot.com/marketplace/the-biltmore-hotel-coral-gables-fl-209219",
+      "images": [
+        {
+          "id": "boca-lago-country-club-38",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Biltmore Hotel - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -967,6 +1700,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.marriott.com/en-us/hotels/miabb-miami-marriott-biscayne-bay/events/",
       "gallery": "https://www.theknot.com/marketplace/miami-marriott-biscayne-bay-miami-fl-213905",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-39",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Miami Marriott Biscayne Bay - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -998,6 +1742,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.diplomatresort.com/weddings/",
       "gallery": "https://www.diplomatresort.com/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-40",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Diplomat Beach Resort - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1026,6 +1781,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.seminolehardrockhollywood.com/meetings-events",
       "gallery": "https://www.seminolehardrockhollywood.com/meetings-events/photo-gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-41",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Seminole Hard Rock Hotel & Casino - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1051,6 +1817,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hialeahfl.gov/1029/Milander-Center",
       "gallery": "https://www.hialeahfl.gov/1041/Photo-Gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-42",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Milander Center for Arts & Entertainment - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1078,6 +1855,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.pamm.org/entertaining",
       "gallery": "https://www.theknot.com/marketplace/perez-art-museum-miami-miami-fl-796593",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-43",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Pérez Art Museum Miami (PAMM) - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1107,6 +1895,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.marriott.com/en-us/hotels/miajt-jw-marriott-miami-turnberry-resort-and-spa/events/",
       "gallery": "https://www.herecomestheguide.com/wedding-venues/florida/jw-marriott-miami-turnberry-resort-spa",
+      "images": [
+        {
+          "id": "boca-lago-country-club-44",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "JW Marriott Turnberry Resort & Spa - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1137,6 +1936,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.loewshotels.com/miami-beach/weddings",
       "gallery": "https://www.theknot.com/marketplace/loews-miami-beach-hotel-miami-beach-fl-213903",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-45",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Loews Miami Beach Hotel - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1165,6 +1975,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.faena.com/miami-beach/gatherings/weddings",
       "gallery": "https://www.theknot.com/marketplace/faena-hotel-miami-beach-miami-beach-fl-1049257",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-46",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Faena Hotel Miami Beach - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1195,6 +2016,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.eaupalmbeach.com/",
       "gallery": "https://www.theknot.com/marketplace/eau-palm-beach-resort-and-spa-manalapan-fl-588171",
+      "images": [
+        {
+          "id": "boca-lago-country-club-47",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Eau Palm Beach Resort & Spa - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1223,6 +2055,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.marriott.com/en-us/hotels/pbisi-palm-beach-marriott-singer-island-beach-resort-and-spa/events/",
       "gallery": "https://www.theknot.com/marketplace/palm-beach-marriott-singer-island-beach-resort-and-spa-singer-island-fl-1089827",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-48",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Palm Beach Marriott Singer Island Beach Resort & Spa - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1252,6 +2095,17 @@
       "ceremonyAndReception": true,
       "website": "https://theaddison.com/",
       "gallery": "https://theaddison.com/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-49",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Addison - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1279,6 +2133,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.ladyjeanranch.com/",
       "gallery": "https://www.theknot.com/marketplace/lady-jean-ranch-jupiter-fl-2016604",
+      "images": [
+        {
+          "id": "boca-lago-country-club-50",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Lady Jean Ranch - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1304,6 +2169,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.outofthebluecelebrations.com/",
       "gallery": "https://www.outofthebluecelebrations.com/gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-51",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Out of the Blue Celebrations - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1333,6 +2209,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.thebenwestpalm.com/weddings/",
       "gallery": "https://www.thebenwestpalm.com/weddings/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-52",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Ben, Autograph Collection - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1360,6 +2247,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.tidelineresort.com/",
       "gallery": "https://www.tidelineresort.com/gather/weddings/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-53",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Tideline Ocean Resort & Spa - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1389,6 +2287,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.pgaresort.com/weddings/",
       "gallery": "https://www.pgaresort.com/weddings/gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-54",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "PGA National Resort - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1417,6 +2326,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.pelicanclubjupiter.com/",
       "gallery": "https://www.pelicanclubjupiter.com/photo-gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-55",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Pelican Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1443,6 +2363,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.wanderersclubwellington.com/weddings",
       "gallery": "https://www.wanderersclubwellington.com/photo-gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-56",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Wanderers Club - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1472,6 +2403,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.seagatedelray.com/weddings/",
       "gallery": "https://www.seagatedelray.com/weddings-gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-57",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Seagate Hotel & Spa - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1498,6 +2440,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.bocalago.com/weddings",
       "gallery": "https://www.bocalago.com/photo-gallery-weddings",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-58",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Boca Lago Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1527,6 +2480,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.clubatibis.com/",
       "gallery": "https://www.clubatibis.com/special-events/weddings",
+      "images": [
+        {
+          "id": "boca-lago-country-club-59",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Club at Ibis - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1545,6 +2509,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-60",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Canopy by Hilton West Palm Beach - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1563,6 +2538,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-61",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Jupiter Beach Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1582,6 +2568,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-62",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Loggerhead Marinelife Center - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1602,6 +2599,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-63",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Morikami Museum & Gardens - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1620,6 +2628,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-64",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Sundy House - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1650,6 +2669,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.laplayaresort.com/weddings",
       "gallery": "https://www.laplayaresort.com/weddings/gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-65",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "LaPlaya Beach & Golf Resort - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1678,6 +2708,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.naplesbayresort.com/",
       "gallery": "https://www.naplesbayresort.com/gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-66",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Naples Bay Resort & Marina - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1706,6 +2747,17 @@
       "ceremonyAndReception": true,
       "website": "https://vineyardscountryclubnaples.com/",
       "gallery": "https://vineyardscountryclubnaples.com/photo-gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-67",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Vineyards Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1732,6 +2784,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.tiburonnaples.com/",
       "gallery": "https://www.tiburonnaples.com/weddings",
+      "images": [
+        {
+          "id": "boca-lago-country-club-68",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Tiburón Golf Club - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1763,6 +2826,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.marriott.com/en-us/hotels/mrkfl-jw-marriott-marco-island-beach-resort/events/",
       "gallery": "https://www.marriott.com/en-us/hotels/mrkfl-jw-marriott-marco-island-beach-resort/events/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-69",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "JW Marriott Marco Island Beach Resort - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1794,6 +2868,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hyatt.com/en-US/hotel/florida/hyatt-regency-coconut-point-resort-and-spa/naprn/special-events/weddings",
       "gallery": "https://www.hyatt.com/en-US/hotel/florida/hyatt-regency-coconut-point-resort-and-spa/naprn/photos-reviews",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-70",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Hyatt Regency Coconut Point Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1820,6 +2905,17 @@
       "ceremonyAndReception": true,
       "website": "https://sale-e-pepe.com/",
       "gallery": "https://sale-e-pepe.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-71",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Sale e Pepe at Marco Beach Ocean Resort - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1848,6 +2944,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.pinkshell.com/weddings",
       "gallery": "https://www.pinkshell.com/gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-72",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Pink Shell Beach Resort & Marina - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1876,6 +2983,17 @@
       "ceremonyAndReception": true,
       "website": "https://sundialresort.com/weddings/",
       "gallery": "https://sundialresort.com/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-73",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Sundial Beach Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1907,6 +3025,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.marriott.com/en-us/hotels/rswfs-sanibel-harbour-resort-and-spa/events/",
       "gallery": "https://www.marriott.com/en-us/hotels/rswfs-sanibel-harbour-resort-and-spa/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-74",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Sanibel Harbour Marriott Resort & Spa - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1936,6 +3065,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.marriott.com/en-us/hotels/rswwc-the-westin-cape-coral-resort-at-marina-village/events/",
       "gallery": "https://www.marriott.com/en-us/hotels/rswwc-the-westin-cape-coral-resort-at-marina-village/gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-75",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Westin Cape Coral Resort at Marina Village - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1965,6 +3105,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.southseas.com/weddings",
       "gallery": "https://www.southseas.com/weddings/gallery",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-76",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "South Seas Island Resort - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -1983,6 +3134,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-77",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Club at Grandezza - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2002,6 +3164,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-78",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Colony Golf & Country Club - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2021,6 +3194,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-79",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Heritage Bay Golf & Country Club - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2040,6 +3224,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-80",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Lover's Key Adventure & Events - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2060,6 +3255,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-81",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Corkscrew Sanctuary - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2079,6 +3285,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-82",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Margaritaville Beach Resort - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2097,6 +3314,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-83",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Misty Morning Barn - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2117,6 +3345,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-84",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Naples Princess - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2145,6 +3384,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.bakerscay.com/weddings/",
       "gallery": "https://www.bakerscay.com/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-85",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Baker's Cay Resort Key Largo - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2174,6 +3424,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.playalargoresort.com/weddings/",
       "gallery": "https://www.playalargoresort.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-86",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Playa Largo Resort & Spa - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2200,6 +3461,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.largoresort.com/",
       "gallery": "https://www.largoresort.com/gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-87",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Largo Resort - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2227,6 +3499,17 @@
       "ceremonyAndReception": true,
       "website": "https://dolphinpointvillas.com/",
       "gallery": "https://dolphinpointvillas.com/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-88",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Dolphin Point Villas - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2256,6 +3539,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.islanderfloridakeys.com/weddings",
       "gallery": "https://www.islanderfloridakeys.com/gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-89",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Islander Resort - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2287,6 +3581,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.cheeca.com/weddings/",
       "gallery": "https://www.cheeca.com/gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-90",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Cheeca Lodge & Spa - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2314,6 +3619,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.islamoradabeachhouse.com/",
       "gallery": "https://www.islamoradabeachhouse.com/gallery",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-91",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Ocean Oasis - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2340,6 +3656,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.islamoradaresortcollection.com/weddings",
       "gallery": "https://www.islamoradaresortcollection.com/photo-gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-92",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Three Waters - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2366,6 +3693,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.islamoradaresortcollection.com/la-siesta-resort-villas",
       "gallery": "https://www.islamoradaresortcollection.com/photo-gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-93",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "La Siesta Resort & Villas - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2394,6 +3732,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.budnmarys.com/",
       "gallery": "https://www.weddingwire.com/biz/bud-n-marys-marina/00833374a540e023.html",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-94",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Bud N' Mary's Marina 'The Barn' - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2423,6 +3772,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.faroblancoresort.com/weddings.htm",
       "gallery": "https://www.faroblancoresort.com/gallery.htm",
+      "images": [
+        {
+          "id": "boca-lago-country-club-95",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Faro Blanco Resort & Yacht Club - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2452,6 +3812,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.islabellabeachresort.com/weddings/",
       "gallery": "https://www.islabellabeachresort.com/gallery/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-96",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Isla Bella Beach Resort - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2478,6 +3849,17 @@
       "ceremonyAndReception": true,
       "website": "https://floridaisland.com/en/east-sister-rock",
       "gallery": "https://floridaisland.com/en/groups-events",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-97",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "East Sister Rock Island - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2506,6 +3888,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hawkscay.com/weddings",
       "gallery": "https://www.hawkscay.com/gallery",
+      "images": [
+        {
+          "id": "boca-lago-country-club-98",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Hawks Cay Resort - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2534,6 +3927,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.margaritavillebeachhousekeywest.com/",
       "gallery": "https://www.margaritavillebeachhousekeywest.com/gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-99",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Margaritaville Beach House Key West - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2562,6 +3966,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.audubonhouse.com/weddings",
       "gallery": "https://www.audubonhouse.com/gallery",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-100",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Audubon House & Tropical Gardens - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2593,6 +4008,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hilton.com/en/hotels/eywthqq-the-reach-key-west/events/",
       "gallery": "https://www.hilton.com/en/hotels/eywthqq-the-reach-key-west/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-101",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Reach Key West, Curio Collection by Hilton - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2620,6 +4046,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.southernmostbeachresort.com/weddings",
       "gallery": "https://www.southernmostbeachresort.com/gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-102",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Southernmost Beach Resort - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2649,6 +4086,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.havanacabanakeywesthotel.com/",
       "gallery": "https://www.havanacabanakeywesthotel.com/gallery",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-103",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Havana Cabana at Key West - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2680,6 +4128,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.casamarinaresort.com/weddings/",
       "gallery": "https://www.casamarinaresort.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-104",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Casa Marina Key West, Curio Collection by Hilton - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2707,6 +4166,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hyatt.com/hyatt-centric/en-US/keywh-hyatt-centric-key-west-resort-and-spa/special-events/weddings",
       "gallery": "https://www.hyatt.com/hyatt-centric/en-US/keywh-hyatt-centric-key-west-resort-and-spa/photos-reviews",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-105",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Hyatt Centric Key West Resort & Spa - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2735,6 +4205,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.perrykeywest.com/key-west-weddings/",
       "gallery": "https://www.perrykeywest.com/gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-106",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "The Perry Hotel & Marina Key West - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2763,6 +4244,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.oceansedgekeywest.com/weddings/",
       "gallery": "https://www.oceansedgekeywest.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-107",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Oceans Edge Resort & Marina - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2789,6 +4281,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.oldesthousekeywest.com/",
       "gallery": "https://www.oldesthousekeywest.com/photo-gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-108",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "The Garden at the Oldest House Museum - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2815,6 +4318,17 @@
       "ceremonyAndReception": true,
       "website": "https://sunsetwatersportskeywest.com/key-west-weddings/",
       "gallery": "https://www.facebook.com/SunsetWatersports/photos_albums",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-109",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Sunset Watersports - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2842,6 +4356,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.kwahs.org/properties/lighthouse",
       "gallery": "https://www.kwahs.org/properties/lighthouse",
+      "images": [
+        {
+          "id": "boca-lago-country-club-110",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Key West Lighthouse & Keeper's Quarters - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2873,6 +4398,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.kwahs.org/properties/fort-east-martello",
       "gallery": "https://www.kwahs.org/properties/fort-east-martello",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-111",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Fort East Martello - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2902,6 +4438,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.oceankey.com/key-west-weddings",
       "gallery": "https://www.oceankey.com/gallery",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-112",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Ocean Key Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2929,6 +4476,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.oldtownmanor.com/key-west-weddings/",
       "gallery": "https://www.oldtownmanor.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-113",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Old Town Manor - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2955,6 +4513,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hardrockcafe.com/location/key-west/",
       "gallery": "https://www.hardrockcafe.com/location/key-west/files/5190/HRC_KeyWest_Venue_Packet_2020.pdf",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-114",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Hard Rock Café Key West - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -2983,6 +4552,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.pierhouse.com/weddings",
       "gallery": "https://www.pierhouse.com/gallery",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-115",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Pier House Resort & Spa - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -3013,6 +4593,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.sunsetkeycottages.com/key-west-weddings/",
       "gallery": "https://www.sunsetkeycottages.com/gallery/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-116",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Sunset Key Cottages - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -3042,6 +4633,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.firstflightkw.com/",
       "gallery": "https://www.firstflightkw.com/gallery",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-117",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "First Flight Island Brewery - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -3068,6 +4670,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.hemingwayhome.com/weddings/",
       "gallery": "https://www.hemingwayhome.com/photo-gallery/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-118",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Ernest Hemingway Home & Museum - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.733Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.733Z"
     },
     {
@@ -3097,6 +4710,17 @@
       "ceremonyAndReception": true,
       "website": "https://www.floridastateparks.org/parks-and-trails/fort-zachary-taylor-historic-state-park",
       "gallery": "https://www.theknot.com/marketplace/wedding-reception-venues-key-west-fl?location=fort%20zachary%20taylor%20historic%20state%20park",
+      "images": [
+        {
+          "id": "boca-lago-country-club-119",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Fort Zachary Taylor State Park - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3116,6 +4740,17 @@
       "ceremonyAndReception": true,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-120",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Bagatelle Restaurant - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3135,6 +4770,17 @@
       "ceremonyAndReception": true,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-121",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Key West Historic Inns - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3152,6 +4798,17 @@
       "ceremonyAndReception": null,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "boca-lago-country-club-122",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "The Blue Room - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3172,6 +4829,17 @@
       "ceremonyAndReception": true,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "bonnet-house-gardens-123",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Schooner Appledore - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3190,6 +4858,17 @@
       "ceremonyAndReception": true,
       "website": null,
       "gallery": null,
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-124",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Suite Dreams Inn - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3221,6 +4900,17 @@
       ],
       "ceremonyAndReception": true,
       "website": "https://patchofheavensanctuary.com/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-125",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Patch of Heaven Sanctuary - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3253,6 +4943,17 @@
       ],
       "ceremonyAndReception": true,
       "website": "https://redlandkoigardens.com/",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-126",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Redland Koi Gardens - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3283,6 +4984,17 @@
       ],
       "ceremonyAndReception": true,
       "website": "https://www.schneblyredlandswinery.com/",
+      "images": [
+        {
+          "id": "ancient-spanish-monastery-127",
+          "url": "/images/venues/venue-9-ancient-spanish-monastery-1.jpg",
+          "alt": "Schnebly Redland Winery - Ancient Spanish Monastery - 12th-century Spanish stone monastery with castle-like architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-9-ancient-spanish-monastery-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3313,6 +5025,17 @@
       ],
       "ceremonyAndReception": true,
       "website": "https://www.everafterfarms.com/tropical-grove-barn/",
+      "images": [
+        {
+          "id": "boca-lago-country-club-128",
+          "url": "/images/venues/venue-10-curtiss-mansion-1.jpg",
+          "alt": "Ever After Farms Tropical Grove Barn - Elegant historic wedding venue with classic architecture",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-10-curtiss-mansion-1.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     },
     {
@@ -3344,6 +5067,17 @@
       ],
       "ceremonyAndReception": true,
       "website": "https://www.vtmiami.com/weddings",
+      "images": [
+        {
+          "id": "bonnet-house-gardens-129",
+          "url": "/images/venues/venue-1-hialeah-park-racing-casino-2.jpg",
+          "alt": "Villa Toscana Miami - Beautiful outdoor wedding venue with garden setting",
+          "isPrimary": true,
+          "source": "curated-real-photos",
+          "filename": "venue-1-hialeah-park-racing-casino-2.jpg",
+          "addedAt": "2025-09-30T00:33:27.734Z"
+        }
+      ],
       "lastImageUpdate": "2025-09-30T00:33:27.734Z"
     }
   ]

@@ -6,6 +6,7 @@ import VenueCard from '@/components/VenueCard';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { mockVenues } from '@/lib/mockData';
+import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 
 // Use mockVenues which already includes the JSON data to avoid duplicates
 const allVenues = mockVenues;
@@ -24,8 +25,20 @@ export default function VenuesPage() {
 
   useEffect(() => {
     // Use combined venues data (same as detail page)
-    setVenues(allVenues);
-    setFilteredVenues(allVenues);
+    // Load stored photos for each venue
+    const venuesWithStoredPhotos = allVenues.map(venue => {
+      const storedPhotos = loadVenuePhotosFromStorage(venue.id);
+      if (storedPhotos.length > 0) {
+        return {
+          ...venue,
+          images: storedPhotos
+        };
+      }
+      return venue;
+    });
+    
+    setVenues(venuesWithStoredPhotos);
+    setFilteredVenues(venuesWithStoredPhotos);
     setLoading(false);
   }, []);
 

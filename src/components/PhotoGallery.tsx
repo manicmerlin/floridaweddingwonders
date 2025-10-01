@@ -18,8 +18,11 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full h-64 bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center rounded-lg">
-        <span className="text-6xl">🏛️</span>
+      <div className="w-full h-64 bg-gray-100 flex items-center justify-center rounded-lg">
+        <div className="text-center">
+          <span className="text-7xl block mb-2">👰🤵</span>
+          <span className="text-sm text-gray-500">No photos yet</span>
+        </div>
       </div>
     );
   }

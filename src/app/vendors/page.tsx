@@ -219,8 +219,8 @@ export default function VendorsPage() {
                           className="w-full h-48 object-cover"
                         />
                       ) : (
-                        <div className="w-full h-48 bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center">
-                          <span className="text-4xl">📸</span>
+                        <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
+                          <span className="text-6xl">�🤵</span>
                         </div>
                       )}
                     </div>

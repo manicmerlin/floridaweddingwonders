@@ -405,14 +405,15 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
               <div>
                 <PhotoUpload
                   venueId={venueId}
-                  existingPhotos={venue.images?.map(img => ({
+                  existingMedia={venue.images?.map(img => ({
                     id: img.id,
                     url: img.url,
                     alt: img.alt,
-                    isPrimary: img.isPrimary || false
+                    isPrimary: img.isPrimary || false,
+                    type: 'image' as const
                   })) || []}
-                  onPhotosUpdate={handlePhotosUpdate}
-                  maxPhotos={photoLimit}
+                  onMediaUpdate={handlePhotosUpdate}
+                  maxFiles={photoLimit}
                   isPremium={isPremium}
                 />
               </div>

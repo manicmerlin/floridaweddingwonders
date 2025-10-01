@@ -11,6 +11,7 @@ import VenueClaimButton from '../../../components/VenueClaimButton';
 import VenueContactForm from '../../../components/VenueContactForm';
 import SaveVenueButton from '../../../components/SaveVenueButton';
 import { mockVenues } from '../../../lib/mockData';
+import { loadVenuePhotosFromStorage } from '../../../lib/photoStorage';
 import { Venue } from '../../../types';
 
 // Use mockVenues which already includes the JSON data to avoid duplicates
@@ -45,6 +46,18 @@ export default function VenueDetailPage() {
           v.name.toLowerCase().includes(params.id.toString().replace(/-/g, ' ')) ||
           params.id.toString().replace(/-/g, ' ').includes(v.name.toLowerCase())
         );
+      }
+      
+      // Load stored photos for this venue if found
+      if (foundVenue) {
+        const storedPhotos = loadVenuePhotosFromStorage(foundVenue.id);
+        if (storedPhotos.length > 0) {
+          console.log('Loading stored photos for venue:', foundVenue.name, storedPhotos);
+          foundVenue = {
+            ...foundVenue,
+            images: storedPhotos
+          };
+        }
       }
       
       console.log('Found venue:', foundVenue ? foundVenue.name : 'None');
@@ -116,12 +129,13 @@ export default function VenueDetailPage() {
             </div>
           </div>
         ) : (
-          <div className="h-96 bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center">
-            <div className="text-center text-white">
-              <span className="text-6xl mb-4 block">🏛️</span>
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">{venue.name}</h1>
+          <div className="h-96 bg-gray-100 flex items-center justify-center">
+            <div className="text-center text-gray-600">
+              <span className="text-8xl mb-4 block">👰🤵</span>
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-800">{venue.name}</h1>
               <p className="text-xl md:text-2xl mb-2">📍 {venue.address.city}, {venue.address.state}</p>
-              <p className="text-lg opacity-90">{venue.venueType}</p>
+              <p className="text-lg opacity-75 capitalize">{venue.venueType}</p>
+              <p className="text-sm mt-4 text-gray-500">No photos uploaded yet</p>
             </div>
           </div>
         )}
@@ -773,8 +787,8 @@ export default function VenueDetailPage() {
                         />
                       </div>
                     ) : (
-                      <div className="w-full h-48 bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center">
-                        <span className="text-4xl">🏛️</span>
+                      <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
+                        <span className="text-6xl">👰🤵</span>
                       </div>
                     )}
                     

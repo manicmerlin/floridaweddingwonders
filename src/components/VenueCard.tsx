@@ -45,17 +45,13 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          // Fallback to gradient if no image available
-          <div className={`h-full bg-gradient-to-br ${gradientColors} flex items-center justify-center`}>
-            <div className="text-center text-white p-4">
-              <div className="text-2xl mb-2">
-                {venue.venueType === 'beach' ? '🏖️' : 
-                 venue.venueType === 'garden' ? '🌿' :
-                 venue.venueType === 'ballroom' ? '🏛️' :
-                 venue.venueType === 'historic' ? '🏰' :
-                 venue.venueType === 'modern' ? '🏢' : '🌾'}
+          // Fallback to bride and groom emoji if no image available
+          <div className="h-full bg-gray-100 flex items-center justify-center">
+            <div className="text-center text-gray-600 p-4">
+              <div className="text-6xl mb-2">
+                👰🤵
               </div>
-              <div className="text-lg font-semibold leading-tight">{venue.name}</div>
+              <div className="text-sm font-medium leading-tight text-gray-500">No Photo Yet</div>
             </div>
           </div>
         )}
