@@ -198,63 +198,101 @@ export default function PhotoUpload({
     
     try {
       const mediaWithFiles = mediaFiles.filter(media => media.file);
-      const filesToUpload = mediaWithFiles.map(media => media.file!);
       
-      if (filesToUpload.length === 0) {
+      if (mediaWithFiles.length === 0) {
         alert('No files to upload');
         setUploading(false);
         return;
       }
 
-      console.log('📤 Starting upload of', filesToUpload.length, 'file(s)...');
-      setUploadProgress({ current: 0, total: filesToUpload.length });
+      console.log('📤 Starting upload of', mediaWithFiles.length, 'file(s)...');
+      setUploadProgress({ current: 0, total: mediaWithFiles.length });
       
-      const uploadManager = new ImageUploadManager(venueId);
-      const { successful, failed } = await uploadManager.uploadImages(filesToUpload);
+      // In development mode, convert blob URLs to data URLs for persistence
+      const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
       
-      console.log('✅ Upload complete. Success:', successful.length, 'Failed:', failed.length);
-      
-      // Update successful uploads with data URLs from the server
-      setMediaFiles(prev => {
-        const updated = prev.map(media => {
-          const successfulUpload = successful.find(s => 
-            s.originalName === media.file?.name
-          );
+      if (isDevelopment) {
+        console.log('🔄 Converting preview blob URLs to data URLs for persistence...');
+        
+        // Convert each media file's blob URL to a data URL
+        for (let i = 0; i < mediaWithFiles.length; i++) {
+          const media = mediaWithFiles[i];
+          setUploadProgress({ current: i + 1, total: mediaWithFiles.length, fileName: media.file?.name });
           
-          if (successfulUpload) {
-            console.log('✅ Updated media file:', media.file?.name);
-            console.log('   Current preview URL type:', media.url.substring(0, 20) + '...');
-            console.log('   New URL type:', successfulUpload.url.substring(0, 20) + '...');
+          try {
+            // Fetch the blob from the blob URL
+            const response = await fetch(media.url);
+            const blob = await response.blob();
             
-            // Use the new URL from upload (data URL in dev, CDN URL in production)
-            // Data URLs work across page navigations, unlike blob URLs
-            return { 
-              ...media, 
-              url: successfulUpload.url, // Use the uploaded URL (data URL in dev mode)
-              id: successfulUpload.id,
-              file: undefined // Clear the file object after successful upload
-            };
+            // Convert to data URL
+            const dataUrl = await new Promise<string>((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result as string);
+              reader.onerror = () => reject(new Error('Failed to read blob'));
+              reader.readAsDataURL(blob);
+            });
+            
+            console.log('✅ Converted to data URL:', media.file?.name, 'Size:', dataUrl.length);
+            
+            // Update the media with data URL
+            setMediaFiles(prev => {
+              const updated = prev.map(m => 
+                m.id === media.id 
+                  ? { ...m, url: dataUrl, file: undefined } // Replace with data URL and clear file
+                  : m
+              );
+              onMediaUpdate(updated);
+              return updated;
+            });
+          } catch (error) {
+            console.error('❌ Failed to convert', media.file?.name, error);
+            throw error;
           }
-          return media;
+        }
+        
+        alert(`✅ Successfully uploaded ${mediaWithFiles.length} file(s)!`);
+      } else {
+        // Production mode - actual cloud upload
+        const filesToUpload = mediaWithFiles.map(media => media.file!);
+        const uploadManager = new ImageUploadManager(venueId);
+        const { successful, failed } = await uploadManager.uploadImages(filesToUpload);
+        
+        console.log('✅ Upload complete. Success:', successful.length, 'Failed:', failed.length);
+        
+        // Update successful uploads with CDN URLs
+        setMediaFiles(prev => {
+          const updated = prev.map(media => {
+            const successfulUpload = successful.find(s => 
+              s.originalName === media.file?.name
+            );
+            
+            if (successfulUpload) {
+              console.log('✅ Updated media file:', media.file?.name, '→', successfulUpload.url);
+              return { 
+                ...media, 
+                url: successfulUpload.url,
+                id: successfulUpload.id,
+                file: undefined
+              };
+            }
+            return media;
+          });
+          
+          onMediaUpdate(updated);
+          return updated;
         });
         
-        console.log('✅ Updated media files, triggering parent update');
+        // Show results
+        if (successful.length > 0) {
+          alert(`✅ Successfully uploaded ${successful.length} file(s)!`);
+        }
         
-        // Trigger the parent update
-        onMediaUpdate(updated);
-        return updated;
-      });
-      
-      // Show results
-      if (successful.length > 0) {
-        alert(`✅ Successfully uploaded ${successful.length} file(s)!`);
-      }
-      
-      if (failed.length > 0) {
-        const failedNames = failed.map(f => f.file.name).join(', ');
-        const failedErrors = failed.map(f => `${f.file.name}: ${f.error}`).join('\n');
-        console.error('❌ Failed uploads:', failedErrors);
-        alert(`❌ Failed to upload: ${failedNames}\n\nErrors:\n${failedErrors}`);
+        if (failed.length > 0) {
+          const failedNames = failed.map(f => f.file.name).join(', ');
+          const failedErrors = failed.map(f => `${f.file.name}: ${f.error}`).join('\n');
+          console.error('❌ Failed uploads:', failedErrors);
+          alert(`❌ Failed to upload: ${failedNames}\n\nErrors:\n${failedErrors}`);
+        }
       }
       
     } catch (error) {
