@@ -214,7 +214,7 @@ export default function PhotoUpload({
       
       console.log('✅ Upload complete. Success:', successful.length, 'Failed:', failed.length);
       
-      // Update successful uploads
+      // Update successful uploads - keep the existing preview URLs in development
       setMediaFiles(prev => {
         const updated = prev.map(media => {
           const successfulUpload = successful.find(s => 
@@ -222,10 +222,18 @@ export default function PhotoUpload({
           );
           
           if (successfulUpload) {
-            console.log('✅ Updated media file:', media.file?.name, '→', successfulUpload.url);
+            console.log('✅ Updated media file:', media.file?.name);
+            console.log('   Old URL:', media.url);
+            console.log('   New URL:', successfulUpload.url);
+            
+            // In development, both URLs will be blob URLs
+            // Keep the original preview URL since it's already displayed correctly
+            // Only replace if we get a real server URL (not a blob URL)
+            const useNewUrl = !successfulUpload.url.startsWith('blob:');
+            
             return { 
               ...media, 
-              url: successfulUpload.url, 
+              url: useNewUrl ? successfulUpload.url : media.url, // Keep existing preview in dev mode
               id: successfulUpload.id,
               file: undefined // Clear the file object after successful upload
             };

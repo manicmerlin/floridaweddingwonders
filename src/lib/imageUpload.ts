@@ -291,11 +291,15 @@ export class MediaUploadManager {
           });
         } else {
           // Process image
-          const { processedBlob } = await processImage(file, this.imageOptions);
+          const { processedBlob, originalFile } = await processImage(file, this.imageOptions);
           
           // Upload the processed image (or original if no processing needed)
-          const blobToUpload = processedBlob || file;
+          // Important: Use the original file if no processing was done to preserve quality
+          const blobToUpload = processedBlob || originalFile;
+          
+          console.log('📤 Uploading image:', file.name, 'Size:', blobToUpload.size, 'bytes');
           const url = await uploadToCloudStorage(blobToUpload, this.venueId, fileId);
+          console.log('✅ Upload successful, URL:', url);
           
           successful.push({
             id: fileId,
