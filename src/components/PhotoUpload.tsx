@@ -223,23 +223,25 @@ export default function PhotoUpload({
           
           if (successfulUpload) {
             console.log('✅ Updated media file:', media.file?.name);
-            console.log('   Old URL:', media.url);
-            console.log('   New URL:', successfulUpload.url);
+            console.log('   Current preview URL:', media.url);
+            console.log('   Upload response URL:', successfulUpload.url);
             
-            // In development, both URLs will be blob URLs
-            // Keep the original preview URL since it's already displayed correctly
-            // Only replace if we get a real server URL (not a blob URL)
-            const useNewUrl = !successfulUpload.url.startsWith('blob:');
+            // In development, the upload returns 'dev-upload-success:imageId'
+            // In production, it returns a real CDN URL
+            const isDevUpload = successfulUpload.url.startsWith('dev-upload-success:');
             
             return { 
               ...media, 
-              url: useNewUrl ? successfulUpload.url : media.url, // Keep existing preview in dev mode
+              // Keep existing preview URL in dev mode, use new URL in production
+              url: isDevUpload ? media.url : successfulUpload.url,
               id: successfulUpload.id,
               file: undefined // Clear the file object after successful upload
             };
           }
           return media;
         });
+        
+        console.log('✅ Updated media files, triggering parent update');
         
         // Trigger the parent update
         onMediaUpdate(updated);

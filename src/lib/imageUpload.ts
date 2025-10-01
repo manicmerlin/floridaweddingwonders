@@ -220,7 +220,7 @@ export async function uploadToCloudStorage(
 ): Promise<string> {
   try {
     // Simulate upload delay
-    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+    await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
     
     // In a real implementation, you would upload to AWS S3, Cloudinary, etc.
     // For development, use local URLs; for production, use your CDN domain
@@ -228,9 +228,11 @@ export async function uploadToCloudStorage(
     const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
     
     if (isDevelopment) {
-      // Create a local blob URL for development
-      const url = URL.createObjectURL(blob);
-      console.log('✅ Image uploaded successfully (development mode):', url);
+      // In development mode, return a special marker that tells the component
+      // to keep using its existing preview URL instead of creating a new blob URL
+      // This prevents the image from breaking after upload
+      const url = `dev-upload-success:${imageId}`;
+      console.log('✅ Image uploaded successfully (development mode):', imageId);
       return url;
     } else {
       // Production URL structure
