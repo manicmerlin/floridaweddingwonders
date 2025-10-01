@@ -5,10 +5,8 @@ import Image from 'next/image';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-900">
-      {/* Full Functional Homepage */}
-      <div className="bg-gray-900">
-          {/* Hero Section */}
-          <div className="relative min-h-screen flex items-center justify-center px-6">
+      {/* Hero Section */}
+      <div className="relative min-h-screen flex items-center justify-center px-6">
             <div className="relative z-10 text-center max-w-6xl mx-auto">
               {/* Logo */}
               <div className="mb-12">
@@ -150,8 +148,7 @@ export default function HomePage() {
               </div>
             </div>
           </footer>
-        </div>
       </div>
     </div>
-  )
+  );
 }
