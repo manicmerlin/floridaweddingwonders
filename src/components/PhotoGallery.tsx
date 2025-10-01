@@ -69,21 +69,21 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:block">
-        <div className="grid grid-cols-4 gap-4 h-96">
+      <div className="hidden lg:block mb-8">
+        <div className="grid grid-cols-4 gap-4 h-[500px]">
           {/* Main Image - Takes 3/4 width */}
-          <div className="col-span-3">
+          <div className="col-span-3 h-full">
             <Image
               src={images[selectedImage].url}
               alt={images[selectedImage].alt}
               width={800}
-              height={400}
+              height={500}
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
 
           {/* Thumbnail Column - Takes 1/4 width */}
-          <div className="col-span-1 flex flex-col gap-4 overflow-y-auto">
+          <div className="col-span-1 flex flex-col gap-4 overflow-y-auto h-full">
             {images.slice(0, 4).map((image, index) => (
               <button
                 key={index}

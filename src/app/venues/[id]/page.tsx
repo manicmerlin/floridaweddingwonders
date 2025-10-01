@@ -100,9 +100,9 @@ export default function VenueDetailPage() {
       <Navigation />
 
       {/* Photo Gallery Section - Standalone */}
-      <section className="bg-white relative z-10">
+      <section className="bg-white relative z-0">
         {venue.images && venue.images.length > 0 ? (
-          <div className="px-4 sm:px-6 lg:px-8 py-6">
+          <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-8 lg:pb-20">
             <div className="max-w-7xl mx-auto">
               <PhotoGallery 
                 images={venue.images.map((img, index) => ({
@@ -129,8 +129,8 @@ export default function VenueDetailPage() {
 
       {/* Venue Title Section - Completely Separate */}
       {venue.images && venue.images.length > 0 && (
-        <section className="bg-white border-t border-gray-200 relative z-20">
-          <div className="px-4 sm:px-6 lg:px-8 py-8">
+        <section className="bg-white border-t border-gray-200 relative z-10 clear-both">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 lg:pt-16">
             <div className="max-w-7xl mx-auto">
               <div className="lg:text-center">
                 <h1 className="text-2xl lg:text-4xl xl:text-6xl font-bold text-gray-900 mb-2">{venue.name}</h1>
@@ -745,21 +745,6 @@ export default function VenueDetailPage() {
       <section className="hidden lg:block bg-gray-50 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <VenueClaimButton venue={venue} />
-        </div>
-      </section>
-
-      {/* Venue Claim Text - Mobile and Desktop */}
-      <section className="bg-gray-50 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm text-gray-500 italic">
-            Is this your venue?{' '}
-            <Link 
-              href={`/venues/${venue.id}/claim`}
-              className="text-pink-600 hover:text-pink-700 underline font-medium"
-            >
-              Click here to claim
-            </Link>
-          </p>
         </div>
       </section>
 
