@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test localStorage</title>
+</head>
+<body>
+    <h1>Test Venue Photo Storage</h1>
+    <button onclick="checkStorage()">Check Storage</button>
+    <button onclick="clearStorage()">Clear Storage</button>
+    <pre id="output"></pre>
+    
+    <script>
+        function checkStorage() {
+            const venuePhotos = localStorage.getItem('venue-photos');
+            const venuesData = localStorage.getItem('venues-data');
+            const photoUpdates = localStorage.getItem('venue-photo-updates');
+            
+            const output = document.getElementById('output');
+            output.textContent = 'venue-photos:\n' + JSON.stringify(JSON.parse(venuePhotos || '{}'), null, 2) + '\n\n' +
+                                 'venues-data:\n' + JSON.stringify(JSON.parse(venuesData || '{}'), null, 2) + '\n\n' +
+                                 'venue-photo-updates:\n' + JSON.stringify(JSON.parse(photoUpdates || '{}'), null, 2);
+        }
+        
+        function clearStorage() {
+            localStorage.removeItem('venue-photos');
+            localStorage.removeItem('venues-data');
+            localStorage.removeItem('venue-photo-updates');
+            alert('Storage cleared!');
+        }
+        
+        // Auto-check on load
+        window.onload = checkStorage;
+    </script>
+</body>
+</html>

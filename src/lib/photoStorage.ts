@@ -104,9 +104,15 @@ export function updateVenueInMockData(venueId: string, photos: Array<{
   // In a real application, this would update the database
   // For now, we'll store in localStorage as a simulation
   try {
+    console.log('💾 updateVenueInMockData for venue:', venueId);
+    console.log('   Saving', photos.length, 'photos');
+    console.log('   Photo URLs:', photos.map(p => p.url));
+    
     const venuePhotosData = JSON.parse(localStorage.getItem('venue-photos') || '{}');
     venuePhotosData[venueId] = photos;
     localStorage.setItem('venue-photos', JSON.stringify(venuePhotosData));
+    
+    console.log('✅ Photos saved to localStorage venue-photos');
     
     // Also update the venues.json data structure
     const venuesData = JSON.parse(localStorage.getItem('venues-data') || '{}');
@@ -119,11 +125,15 @@ export function updateVenueInMockData(venueId: string, photos: Array<{
     const venueIndex = venuesData.weddingVenues.findIndex((v: any) => v.id === venueId);
     if (venueIndex !== -1) {
       venuesData.weddingVenues[venueIndex].images = photos;
+      console.log('✅ Updated existing venue in venues-data');
+    } else {
+      console.log('ℹ️  Venue not found in venues-data, skipping that update');
     }
     
     localStorage.setItem('venues-data', JSON.stringify(venuesData));
+    console.log('✅ updateVenueInMockData completed successfully');
   } catch (error) {
-    console.error('Failed to update venue data:', error);
+    console.error('❌ Failed to update venue data:', error);
   }
 }
 
@@ -135,12 +145,23 @@ export function loadVenuePhotosFromStorage(venueId: string): Array<{
   type: 'image';
 }> {
   try {
-    if (typeof window === 'undefined') return [];
+    if (typeof window === 'undefined') {
+      console.log('🔍 loadVenuePhotosFromStorage: Server-side, returning empty array');
+      return [];
+    }
     
     const venuePhotosData = JSON.parse(localStorage.getItem('venue-photos') || '{}');
-    return venuePhotosData[venueId] || [];
+    const photos = venuePhotosData[venueId] || [];
+    
+    console.log('🔍 loadVenuePhotosFromStorage for venue:', venueId);
+    console.log('   Found photos:', photos.length);
+    if (photos.length > 0) {
+      console.log('   Photo URLs:', photos.map((p: any) => p.url));
+    }
+    
+    return photos;
   } catch (error) {
-    console.error('Failed to load venue photos from storage:', error);
+    console.error('❌ Failed to load venue photos from storage:', error);
     return [];
   }
 }
