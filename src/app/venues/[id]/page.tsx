@@ -100,7 +100,7 @@ export default function VenueDetailPage() {
       <Navigation />
 
       {/* Photo Gallery Section - Standalone */}
-      <section className="bg-white">
+      <section className="bg-white relative z-10">
         {venue.images && venue.images.length > 0 ? (
           <div className="px-4 sm:px-6 lg:px-8 py-6">
             <div className="max-w-7xl mx-auto">
@@ -129,7 +129,7 @@ export default function VenueDetailPage() {
 
       {/* Venue Title Section - Completely Separate */}
       {venue.images && venue.images.length > 0 && (
-        <section className="bg-white border-t border-gray-200">
+        <section className="bg-white border-t border-gray-200 relative z-20">
           <div className="px-4 sm:px-6 lg:px-8 py-8">
             <div className="max-w-7xl mx-auto">
               <div className="lg:text-center">
