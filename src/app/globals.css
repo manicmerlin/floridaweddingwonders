@@ -10,14 +10,3 @@
 .font-body {
   font-family: var(--font-body);
 }
-
-/* Hide scrollbars */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-/* Force redeploy Mon Sep 29 14:07:15 EDT 2025 */
