@@ -2,6 +2,14 @@
 
 ## Recent Changes (October 1, 2025)
 
+**Latest Update**: Fixed image preview corruption after upload. The system now properly preserves the original preview when uploading in development mode.
+
+### What Was Fixed:
+- ✅ Images no longer disappear or become corrupted after clicking "Upload"
+- ✅ Preview URLs are preserved in development mode (blob URLs)
+- ✅ Better logging to track URL changes during upload
+- ✅ Proper handling of blob URLs vs server URLs
+
 We've added comprehensive error handling and logging to the image upload system to help identify issues.
 
 ## How to Debug Image Upload Errors
@@ -66,11 +74,13 @@ Failed to process image.jpg. Please try again.
 1. Click "Upload Files" button
 2. Watch console for upload progress
 3. Should see: `✅ Successfully uploaded X file(s)!`
+4. **Image should remain visible** (not disappear or become corrupted)
 
 ### Step 4: Verify
 - "Pending Upload" badge should disappear
-- Image should remain visible in the gallery
+- Image should remain visible in the gallery with the same preview
 - Can now set as primary or remove
+- Image persists in localStorage for development
 
 ## File Requirements
 
@@ -98,10 +108,17 @@ Failed to process image.jpg. Please try again.
 4. Verify file meets size/type requirements
 
 ### If Image Appears Broken After Upload
+**This should now be fixed!** But if you still see issues:
 1. Check console for the uploaded URL
-2. Verify the blob URL is valid (starts with `blob:`)
-3. Try refreshing the page
-4. Check localStorage for saved photos
+2. Look for these logs:
+   ```
+   ✅ Updated media file: image.jpg
+      Old URL: blob:http://localhost:3000/...
+      New URL: blob:http://localhost:3000/...
+   ```
+3. Verify both URLs are valid blob URLs
+4. Try refreshing the page - images should load from localStorage
+5. If problem persists, clear cache and try again
 
 ### Clear Cached Data
 If things seem stuck:
