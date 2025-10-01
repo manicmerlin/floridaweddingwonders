@@ -161,15 +161,15 @@ export default function VenueDetailPage() {
       )}
 
       {/* Mobile Stats Cards / Desktop Quick Info Bar */}
-      <section className="bg-gray-50 py-6">
+      <section className="bg-gradient-to-r from-pink-500 to-purple-600 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Mobile: Cards in 2x2 grid */}
           <div className="grid grid-cols-2 gap-4 lg:hidden">
-            <div className="bg-white rounded-lg p-4 shadow-sm">
+            <div className="bg-white/95 backdrop-blur rounded-lg p-4 shadow-sm">
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
-              <div className="text-gray-600 text-sm">Guest Capacity</div>
+              <div className="text-gray-700 text-sm font-medium">Guest Capacity</div>
             </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
+            <div className="bg-white/95 backdrop-blur rounded-lg p-4 shadow-sm">
               {venue.externalReviews?.google ? (
                 <div 
                   className="cursor-pointer flex flex-col items-center justify-center h-full"
@@ -184,63 +184,63 @@ export default function VenueDetailPage() {
                       className="w-full h-full"
                     />
                   </div>
-                  <div className="text-gray-600 text-xs text-center">View on Maps</div>
+                  <div className="text-gray-700 text-xs text-center font-medium">View on Maps</div>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="text-lg text-gray-400">📍</div>
-                  <div className="text-gray-600 text-xs">Location</div>
+                  <div className="text-gray-700 text-xs font-medium">Location</div>
                 </div>
               )}
             </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
+            <div className="bg-white/95 backdrop-blur rounded-lg p-4 shadow-sm">
               <div className="text-lg font-bold text-pink-600">{venue.address.city}</div>
-              <div className="text-gray-600 text-sm">Location</div>
+              <div className="text-gray-700 text-sm font-medium">Location</div>
             </div>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
+            <div className="bg-white/95 backdrop-blur rounded-lg p-4 shadow-sm">
               <div className="text-lg font-bold text-pink-600">
                 {venue.capacity.max >= 150 ? 'Large' : venue.capacity.max >= 100 ? 'Medium' : 'Intimate'}
               </div>
-              <div className="text-gray-600 text-sm">Event Size</div>
+              <div className="text-gray-700 text-sm font-medium">Event Size</div>
             </div>
           </div>
 
           <div className="hidden lg:grid lg:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
-              <div className="text-gray-600">Capacity</div>
+            <div className="bg-white/95 backdrop-blur rounded-lg p-6 shadow-lg">
+              <div className="text-3xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
+              <div className="text-gray-700 font-medium mt-2">Capacity</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-pink-600">{venue.address.city}</div>
-              <div className="text-gray-600">Location</div>
+            <div className="bg-white/95 backdrop-blur rounded-lg p-6 shadow-lg">
+              <div className="text-3xl font-bold text-pink-600">{venue.address.city}</div>
+              <div className="text-gray-700 font-medium mt-2">Location</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-pink-600">
+            <div className="bg-white/95 backdrop-blur rounded-lg p-6 shadow-lg">
+              <div className="text-3xl font-bold text-pink-600">
                 {venue.capacity.max >= 150 ? 'Large' : venue.capacity.max >= 100 ? 'Medium' : 'Intimate'}
               </div>
-              <div className="text-gray-600">Event Size</div>
+              <div className="text-gray-700 font-medium mt-2">Event Size</div>
             </div>
-            <div>
+            <div className="bg-white/95 backdrop-blur rounded-lg p-6 shadow-lg">
               {venue.externalReviews?.google ? (
                 <div 
-                  className="cursor-pointer flex flex-col items-center justify-center"
+                  className="cursor-pointer flex flex-col items-center justify-center h-full"
                   onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
                 >
-                  <div className="w-10 h-10 mb-2">
+                  <div className="w-12 h-12 mb-2">
                     <Image
                       src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Maps_icon_%282015-2020%29.svg"
                       alt="Google Maps"
-                      width={40}
-                      height={40}
+                      width={48}
+                      height={48}
                       className="w-full h-full"
                     />
                   </div>
-                  <div className="text-gray-600">View on Maps</div>
+                  <div className="text-gray-700 font-medium">View on Maps</div>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center">
-                  <div className="text-2xl text-gray-400">📍</div>
-                  <div className="text-gray-600">Location</div>
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="text-3xl text-gray-400">📍</div>
+                  <div className="text-gray-700 font-medium mt-2">Location</div>
                 </div>
               )}
             </div>
