@@ -748,6 +748,21 @@ export default function VenueDetailPage() {
         </div>
       </section>
 
+      {/* Venue Claim Text - Mobile and Desktop */}
+      <section className="bg-gray-50 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm text-gray-500 italic">
+            Is this your venue?{' '}
+            <Link 
+              href={`/venues/${venue.id}/claim`}
+              className="text-pink-600 hover:text-pink-700 underline font-medium"
+            >
+              Click here to claim
+            </Link>
+          </p>
+        </div>
+      </section>
+
       {/* Related Venues */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
