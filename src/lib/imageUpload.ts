@@ -223,17 +223,24 @@ export async function uploadToCloudStorage(
     await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
     
     // In a real implementation, you would upload to AWS S3, Cloudinary, etc.
-    // For development, use local URLs; for production, use your CDN domain
+    // For development, use data URLs; for production, use your CDN domain
     const timestamp = Date.now();
     const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
     
     if (isDevelopment) {
-      // In development mode, return a special marker that tells the component
-      // to keep using its existing preview URL instead of creating a new blob URL
-      // This prevents the image from breaking after upload
-      const url = `dev-upload-success:${imageId}`;
-      console.log('✅ Image uploaded successfully (development mode):', imageId);
-      return url;
+      // Convert to data URL for cross-page persistence in development
+      // Blob URLs don't work across page navigations, but data URLs do!
+      console.log('📤 Converting image to data URL for development persistence...');
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = () => reject(new Error('Failed to read blob'));
+        reader.readAsDataURL(blob);
+      });
+      
+      console.log('✅ Image converted to data URL (development mode):', imageId);
+      console.log('   Data URL length:', dataUrl.length, 'characters');
+      return dataUrl;
     } else {
       // Production URL structure
       const url = `https://images.sofloweddingvenues.com/venues/${venueId}/${imageId}_${timestamp}.jpg`;

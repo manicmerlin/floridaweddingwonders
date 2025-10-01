@@ -214,7 +214,7 @@ export default function PhotoUpload({
       
       console.log('✅ Upload complete. Success:', successful.length, 'Failed:', failed.length);
       
-      // Update successful uploads - keep the existing preview URLs in development
+      // Update successful uploads with data URLs from the server
       setMediaFiles(prev => {
         const updated = prev.map(media => {
           const successfulUpload = successful.find(s => 
@@ -223,17 +223,14 @@ export default function PhotoUpload({
           
           if (successfulUpload) {
             console.log('✅ Updated media file:', media.file?.name);
-            console.log('   Current preview URL:', media.url);
-            console.log('   Upload response URL:', successfulUpload.url);
+            console.log('   Current preview URL type:', media.url.substring(0, 20) + '...');
+            console.log('   New URL type:', successfulUpload.url.substring(0, 20) + '...');
             
-            // In development, the upload returns 'dev-upload-success:imageId'
-            // In production, it returns a real CDN URL
-            const isDevUpload = successfulUpload.url.startsWith('dev-upload-success:');
-            
+            // Use the new URL from upload (data URL in dev, CDN URL in production)
+            // Data URLs work across page navigations, unlike blob URLs
             return { 
               ...media, 
-              // Keep existing preview URL in dev mode, use new URL in production
-              url: isDevUpload ? media.url : successfulUpload.url,
+              url: successfulUpload.url, // Use the uploaded URL (data URL in dev mode)
               id: successfulUpload.id,
               file: undefined // Clear the file object after successful upload
             };
