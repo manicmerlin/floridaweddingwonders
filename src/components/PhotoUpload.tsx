@@ -58,10 +58,15 @@ export default function PhotoUpload({
       return;
     }
 
+    console.log('📁 Processing', newFiles.length, 'file(s)...');
+
     for (let i = 0; i < newFiles.length; i++) {
       const file = newFiles[i];
+      console.log(`📁 Processing file ${i + 1}/${newFiles.length}:`, file.name, file.type, file.size, 'bytes');
+      
       try {
         if (isImageFile(file)) {
+          console.log('🖼️  Processing as image...');
           // Process image
           const { preview } = await processImage(file, {
             maxSize: 10 * 1024 * 1024, // 10MB
@@ -79,6 +84,8 @@ export default function PhotoUpload({
             file: file
           };
           
+          console.log('✅ Image processed successfully:', newMediaFile.id);
+          
           setMediaFiles(prev => {
             const updated = [...prev, newMediaFile];
             onMediaUpdate(updated);
@@ -86,6 +93,7 @@ export default function PhotoUpload({
           });
 
         } else if (isVideoFile(file)) {
+          console.log('🎥 Processing as video...');
           // Process video
           const videoData = await processVideo(file);
 
@@ -100,6 +108,8 @@ export default function PhotoUpload({
             file: file
           };
           
+          console.log('✅ Video processed successfully:', newMediaFile.id);
+          
           setMediaFiles(prev => {
             const updated = [...prev, newMediaFile];
             onMediaUpdate(updated);
@@ -110,13 +120,18 @@ export default function PhotoUpload({
           throw new Error('Unsupported file type. Please upload images or videos only.');
         }
       } catch (error) {
+        console.error('❌ Error processing file:', file.name, error);
         if (error instanceof ImageUploadError || error instanceof VideoProcessingError) {
-          alert(`Error processing ${file.name}: ${error.message}`);
+          alert(`❌ Error processing ${file.name}: ${error.message}`);
+        } else if (error instanceof Error) {
+          alert(`❌ Failed to process ${file.name}: ${error.message}`);
         } else {
-          alert(`Failed to process ${file.name}. Please try again.`);
+          alert(`❌ Failed to process ${file.name}. Please try again.`);
         }
       }
     }
+    
+    console.log('✅ All files processed');
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -187,44 +202,58 @@ export default function PhotoUpload({
       
       if (filesToUpload.length === 0) {
         alert('No files to upload');
+        setUploading(false);
         return;
       }
 
+      console.log('📤 Starting upload of', filesToUpload.length, 'file(s)...');
       setUploadProgress({ current: 0, total: filesToUpload.length });
       
       const uploadManager = new ImageUploadManager(venueId);
       const { successful, failed } = await uploadManager.uploadImages(filesToUpload);
       
+      console.log('✅ Upload complete. Success:', successful.length, 'Failed:', failed.length);
+      
       // Update successful uploads
-      setMediaFiles(prev => prev.map(media => {
-        const successfulUpload = successful.find(s => 
-          s.originalName === media.file?.name
-        );
+      setMediaFiles(prev => {
+        const updated = prev.map(media => {
+          const successfulUpload = successful.find(s => 
+            s.originalName === media.file?.name
+          );
+          
+          if (successfulUpload) {
+            console.log('✅ Updated media file:', media.file?.name, '→', successfulUpload.url);
+            return { 
+              ...media, 
+              url: successfulUpload.url, 
+              id: successfulUpload.id,
+              file: undefined // Clear the file object after successful upload
+            };
+          }
+          return media;
+        });
         
-        if (successfulUpload) {
-          return { 
-            ...media, 
-            url: successfulUpload.url, 
-            id: successfulUpload.id,
-            file: undefined 
-          };
-        }
-        return media;
-      }));
+        // Trigger the parent update
+        onMediaUpdate(updated);
+        return updated;
+      });
       
       // Show results
       if (successful.length > 0) {
-        alert(`Successfully uploaded ${successful.length} file(s)!`);
+        alert(`✅ Successfully uploaded ${successful.length} file(s)!`);
       }
       
       if (failed.length > 0) {
         const failedNames = failed.map(f => f.file.name).join(', ');
-        alert(`Failed to upload: ${failedNames}`);
+        const failedErrors = failed.map(f => `${f.file.name}: ${f.error}`).join('\n');
+        console.error('❌ Failed uploads:', failedErrors);
+        alert(`❌ Failed to upload: ${failedNames}\n\nErrors:\n${failedErrors}`);
       }
       
     } catch (error) {
-      console.error('Upload failed:', error);
-      alert('Upload failed. Please try again.');
+      console.error('❌ Upload failed with error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`❌ Upload failed: ${errorMessage}\n\nPlease check the console for more details.`);
     } finally {
       setUploading(false);
       setUploadProgress(null);

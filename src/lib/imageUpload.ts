@@ -218,20 +218,29 @@ export async function uploadToCloudStorage(
   venueId: string, 
   imageId: string
 ): Promise<string> {
-  // Simulate upload delay
-  await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
-  
-  // In a real implementation, you would upload to AWS S3, Cloudinary, etc.
-  // For development, use local URLs; for production, use your CDN domain
-  const timestamp = Date.now();
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  
-  if (isDevelopment) {
-    // Create a local blob URL for development
-    return URL.createObjectURL(blob);
-  } else {
-    // Production URL structure
-    return `https://images.sofloweddingvenues.com/venues/${venueId}/${imageId}_${timestamp}.jpg`;
+  try {
+    // Simulate upload delay
+    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+    
+    // In a real implementation, you would upload to AWS S3, Cloudinary, etc.
+    // For development, use local URLs; for production, use your CDN domain
+    const timestamp = Date.now();
+    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
+    
+    if (isDevelopment) {
+      // Create a local blob URL for development
+      const url = URL.createObjectURL(blob);
+      console.log('✅ Image uploaded successfully (development mode):', url);
+      return url;
+    } else {
+      // Production URL structure
+      const url = `https://images.sofloweddingvenues.com/venues/${venueId}/${imageId}_${timestamp}.jpg`;
+      console.log('✅ Image uploaded successfully (production):', url);
+      return url;
+    }
+  } catch (error) {
+    console.error('❌ Upload to cloud storage failed:', error);
+    throw new ImageUploadError('Failed to upload image to storage');
   }
 }
 
