@@ -9,6 +9,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    // Allow data URLs for development mode uploaded images
+    dangerouslyAllowSVG: true,
+    unoptimized: process.env.NODE_ENV === 'development', // Skip optimization for dev mode
     remotePatterns: [
       {
         protocol: 'https',

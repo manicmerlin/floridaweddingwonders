@@ -27,19 +27,47 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
     );
   }
 
+  // Helper to check if URL is a data URL
+  const isDataURL = (url: string) => url.startsWith('data:');
+
+  // Helper to render image - use img tag for data URLs, Image component for regular URLs
+  const renderImage = (url: string, alt: string, className: string, priority?: boolean) => {
+    if (isDataURL(url)) {
+      // Use regular img tag for data URLs (Next.js Image doesn't support them well)
+      return (
+        <img
+          src={url}
+          alt={alt}
+          className={className}
+        />
+      );
+    } else {
+      // Use Next.js Image component for regular URLs
+      return (
+        <Image
+          src={url}
+          alt={alt}
+          width={800}
+          height={500}
+          className={className}
+          priority={priority}
+        />
+      );
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Mobile Layout */}
       <div className="lg:hidden">
         {/* Main Image */}
         <div className="w-full aspect-w-16 aspect-h-10 mb-4">
-          <Image
-            src={images[selectedImage].url}
-            alt={images[selectedImage].alt}
-            width={800}
-            height={500}
-            className="w-full h-64 sm:h-80 object-cover rounded-lg"
-          />
+          {renderImage(
+            images[selectedImage].url,
+            images[selectedImage].alt,
+            "w-full h-64 sm:h-80 object-cover rounded-lg",
+            true
+          )}
         </div>
         
         {/* Thumbnail Strip */}
@@ -54,13 +82,21 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
                   : 'border-gray-200 hover:border-gray-300'
               }`}
             >
-              <Image
-                src={image.url}
-                alt={image.alt}
-                width={64}
-                height={64}
-                className="w-full h-full object-cover"
-              />
+              {isDataURL(image.url) ? (
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={image.url}
+                  alt={image.alt}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </button>
           ))}
           {images.length > 5 && (
@@ -76,13 +112,12 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
         <div className="grid grid-cols-4 gap-4 h-[500px]">
           {/* Main Image - Takes 3/4 width */}
           <div className="col-span-3 h-full">
-            <Image
-              src={images[selectedImage].url}
-              alt={images[selectedImage].alt}
-              width={800}
-              height={500}
-              className="w-full h-full object-cover rounded-lg"
-            />
+            {renderImage(
+              images[selectedImage].url,
+              images[selectedImage].alt,
+              "w-full h-full object-cover rounded-lg",
+              true
+            )}
           </div>
 
           {/* Thumbnail Column - Takes 1/4 width */}
@@ -97,13 +132,21 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
-                <Image
-                  src={image.url}
-                  alt={image.alt}
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover"
-                />
+                {isDataURL(image.url) ? (
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    width={200}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </button>
             ))}
             
