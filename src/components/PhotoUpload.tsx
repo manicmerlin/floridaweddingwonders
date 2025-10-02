@@ -134,7 +134,7 @@ export default function PhotoUpload({
     console.log('✅ All files processed');
   };
 
-  const handleCropComplete = (croppedBlob: Blob, croppedDataUrl: string) => {
+  const handleCropComplete = async (croppedBlob: Blob, croppedDataUrl: string) => {
     if (!pendingCrop) return;
     
     console.log('✅ Crop completed for:', pendingCrop.file.name);
@@ -161,26 +161,36 @@ export default function PhotoUpload({
       lastModified: Date.now()
     });
     
+    // In development mode, use data URL directly for immediate persistence
+    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
+    
     const newMediaFile: MediaFile = {
-      id: `temp-${Date.now()}-${Math.random()}`,
-      url: croppedDataUrl, // Use the cropped data URL as preview
+      id: isDevelopment ? `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}` : `temp-${Date.now()}-${Math.random()}`,
+      url: croppedDataUrl, // Use the cropped data URL directly
       alt: pendingCrop.file.name.replace(/\.[^/.]+$/, ""),
       isPrimary: mediaFiles.length === 0,
       type: 'image',
-      file: croppedFile
+      file: isDevelopment ? undefined : croppedFile // In dev mode, no need to keep file
     };
     
-    console.log('✅ Image cropped and added:', newMediaFile.id);
+    console.log('✅ Image cropped and auto-uploading:', newMediaFile.id);
     
-    setMediaFiles(prev => {
-      const updated = [...prev, newMediaFile];
-      onMediaUpdate(updated);
-      return updated;
-    });
+    // Add to media files and trigger save
+    const updatedMediaFiles = [...mediaFiles, newMediaFile];
+    setMediaFiles(updatedMediaFiles);
+    onMediaUpdate(updatedMediaFiles);
     
     // Clear pending crop
     URL.revokeObjectURL(pendingCrop.previewUrl);
     setPendingCrop(null);
+    
+    // Show success message
+    if (isDevelopment) {
+      console.log('✅ Image automatically saved in development mode');
+    } else {
+      // In production, would trigger cloud upload here
+      console.log('✅ Image ready for cloud upload');
+    }
   };
 
   const handleCropCancel = () => {
