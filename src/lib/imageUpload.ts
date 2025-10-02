@@ -219,18 +219,22 @@ export async function uploadToCloudStorage(
   imageId: string
 ): Promise<string> {
   try {
-    // Simulate upload delay
-    await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
+    console.log('📤 Uploading image to Supabase Storage...');
     
-    // In a real implementation, you would upload to AWS S3, Cloudinary, etc.
-    // For development, use data URLs; for production, use your CDN domain
-    const timestamp = Date.now();
-    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
+    // Import Supabase storage functions dynamically
+    const { uploadImageToSupabase, checkSupabaseStorageConfig } = await import('./supabaseStorage');
     
-    if (isDevelopment) {
-      // Convert to data URL for cross-page persistence in development
-      // Blob URLs don't work across page navigations, but data URLs do!
-      console.log('📤 Converting image to data URL for development persistence...');
+    // Check if Supabase is configured
+    const isConfigured = await checkSupabaseStorageConfig();
+    
+    if (isConfigured) {
+      // Upload to Supabase Storage
+      const url = await uploadImageToSupabase(blob, venueId, imageId);
+      console.log('✅ Image uploaded to Supabase:', url);
+      return url;
+    } else {
+      console.warn('⚠️ Supabase Storage not configured, falling back to data URL');
+      // Fallback to data URL if Supabase is not configured
       const dataUrl = await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
         reader.onloadend = () => resolve(reader.result as string);
@@ -238,18 +242,22 @@ export async function uploadToCloudStorage(
         reader.readAsDataURL(blob);
       });
       
-      console.log('✅ Image converted to data URL (development mode):', imageId);
-      console.log('   Data URL length:', dataUrl.length, 'characters');
+      console.log('✅ Image converted to data URL (fallback)');
       return dataUrl;
-    } else {
-      // Production URL structure
-      const url = `https://images.sofloweddingvenues.com/venues/${venueId}/${imageId}_${timestamp}.jpg`;
-      console.log('✅ Image uploaded successfully (production):', url);
-      return url;
     }
   } catch (error) {
-    console.error('❌ Upload to cloud storage failed:', error);
-    throw new ImageUploadError('Failed to upload image to storage');
+    console.error('❌ Upload to Supabase failed, falling back to data URL:', error);
+    
+    // Fallback to data URL on error
+    const dataUrl = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = () => reject(new Error('Failed to read blob'));
+      reader.readAsDataURL(blob);
+    });
+    
+    console.log('✅ Image converted to data URL (fallback after error)');
+    return dataUrl;
   }
 }
 
