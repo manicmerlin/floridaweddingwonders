@@ -30,43 +30,47 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
   });
 
   useEffect(() => {
-    // Initialize photo storage
-    initializeVenuePhotos();
-    
-    // Check authentication
-    const auth = getCurrentUser();
-    setAuthState(auth);
-    
-    // Check if user can manage this venue
-    if (!canManageVenue(venueId)) {
-      setAccessDenied(true);
-      return;
-    }
-
-    // Find the venue by ID
-    const foundVenue = mockVenues.find(v => v.id === venueId);
-    if (foundVenue) {
-      // Load stored photos for this venue
-      const storedPhotos = loadVenuePhotosFromStorage(venueId);
-      const venueWithStoredPhotos = {
-        ...foundVenue,
-        images: storedPhotos.length > 0 ? storedPhotos : foundVenue.images
-      };
+    async function loadVenueData() {
+      // Initialize photo storage
+      initializeVenuePhotos();
       
-      setVenue(venueWithStoredPhotos);
-      setFormData({
-        name: venueWithStoredPhotos.name,
-        description: venueWithStoredPhotos.description,
-        capacity: venueWithStoredPhotos.capacity,
-        pricing: venueWithStoredPhotos.pricing,
-        amenities: venueWithStoredPhotos.amenities,
-        contact: {
-          email: venueWithStoredPhotos.contact.email,
-          phone: venueWithStoredPhotos.contact.phone,
-          website: venueWithStoredPhotos.contact.website || ''
-        }
-      });
+      // Check authentication
+      const auth = getCurrentUser();
+      setAuthState(auth);
+      
+      // Check if user can manage this venue
+      if (!canManageVenue(venueId)) {
+        setAccessDenied(true);
+        return;
+      }
+
+      // Find the venue by ID
+      const foundVenue = mockVenues.find(v => v.id === venueId);
+      if (foundVenue) {
+        // Load stored photos for this venue
+        const storedPhotos = await loadVenuePhotosFromStorage(venueId);
+        const venueWithStoredPhotos = {
+          ...foundVenue,
+          images: storedPhotos.length > 0 ? storedPhotos : foundVenue.images
+        };
+        
+        setVenue(venueWithStoredPhotos);
+        setFormData({
+          name: venueWithStoredPhotos.name,
+          description: venueWithStoredPhotos.description,
+          capacity: venueWithStoredPhotos.capacity,
+          pricing: venueWithStoredPhotos.pricing,
+          amenities: venueWithStoredPhotos.amenities,
+          contact: {
+            email: venueWithStoredPhotos.contact.email,
+            phone: venueWithStoredPhotos.contact.phone,
+            website: venueWithStoredPhotos.contact.website || ''
+          }
+        });
+      }
     }
+    
+    loadVenueData();
   }, [venueId]);
 
   const handleInputChange = (field: string, value: any) => {

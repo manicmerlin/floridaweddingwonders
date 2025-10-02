@@ -37,24 +37,30 @@ export default function VenuesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    // Use combined venues data (same as detail page)
-    // Load stored photos for each venue and filter out deleted venues
-    const venuesWithStoredPhotos = allVenues
-      .filter(venue => !isVenueDeleted(venue.id)) // Filter out deleted venues
-      .map(venue => {
-        const storedPhotos = loadVenuePhotosFromStorage(venue.id);
-        if (storedPhotos.length > 0) {
-          return {
-            ...venue,
-            images: storedPhotos
-          };
-        }
-        return venue;
-      });
+    async function loadVenues() {
+      // Use combined venues data (same as detail page)
+      // Load stored photos for each venue and filter out deleted venues
+      const venuesWithStoredPhotos = await Promise.all(
+        allVenues
+          .filter(venue => !isVenueDeleted(venue.id)) // Filter out deleted venues
+          .map(async (venue) => {
+            const storedPhotos = await loadVenuePhotosFromStorage(venue.id);
+            if (storedPhotos.length > 0) {
+              return {
+                ...venue,
+                images: storedPhotos
+              };
+            }
+            return venue;
+          })
+      );
+      
+      setVenues(venuesWithStoredPhotos);
+      setFilteredVenues(venuesWithStoredPhotos);
+      setLoading(false);
+    }
     
-    setVenues(venuesWithStoredPhotos);
-    setFilteredVenues(venuesWithStoredPhotos);
-    setLoading(false);
+    loadVenues();
   }, []);
 
   useEffect(() => {
