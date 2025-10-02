@@ -219,34 +219,21 @@ export async function uploadToCloudStorage(
   imageId: string
 ): Promise<string> {
   try {
-    console.log('📤 Uploading image to Supabase Storage...');
+    console.log('📤 Starting image upload...', { venueId, imageId, blobSize: blob.size, blobType: blob.type });
     
     // Import Supabase storage functions dynamically
-    const { uploadImageToSupabase, checkSupabaseStorageConfig } = await import('./supabaseStorage');
+    const { uploadImageToSupabase } = await import('./supabaseStorage');
     
-    // Check if Supabase is configured
-    const isConfigured = await checkSupabaseStorageConfig();
+    // Try to upload to Supabase Storage
+    console.log('📤 Attempting Supabase upload...');
+    const url = await uploadImageToSupabase(blob, venueId, imageId);
+    console.log('✅ SUCCESS! Image uploaded to Supabase:', url);
+    console.log('   This URL should work on all devices!');
+    return url;
     
-    if (isConfigured) {
-      // Upload to Supabase Storage
-      const url = await uploadImageToSupabase(blob, venueId, imageId);
-      console.log('✅ Image uploaded to Supabase:', url);
-      return url;
-    } else {
-      console.warn('⚠️ Supabase Storage not configured, falling back to data URL');
-      // Fallback to data URL if Supabase is not configured
-      const dataUrl = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = () => reject(new Error('Failed to read blob'));
-        reader.readAsDataURL(blob);
-      });
-      
-      console.log('✅ Image converted to data URL (fallback)');
-      return dataUrl;
-    }
   } catch (error) {
     console.error('❌ Upload to Supabase failed, falling back to data URL:', error);
+    console.error('   Error details:', error);
     
     // Fallback to data URL on error
     const dataUrl = await new Promise<string>((resolve, reject) => {
@@ -256,7 +243,7 @@ export async function uploadToCloudStorage(
       reader.readAsDataURL(blob);
     });
     
-    console.log('✅ Image converted to data URL (fallback after error)');
+    console.log('⚠️ Image converted to data URL (fallback - will only work on this device)');
     return dataUrl;
   }
 }
