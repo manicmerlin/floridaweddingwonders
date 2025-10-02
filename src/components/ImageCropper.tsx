@@ -26,6 +26,7 @@ export default function ImageCropper({
   const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(null);
   const [imageScale, setImageScale] = useState(1);
   const [cropBoxSize, setCropBoxSize] = useState({ width: 600, height: 450 });
+  const [originalFile, setOriginalFile] = useState<File | null>(null);
 
   useEffect(() => {
     const img = new window.Image();
@@ -103,6 +104,20 @@ export default function ImageCropper({
     const sourceWidth = cropBoxSize.width / imageScale;
     const sourceHeight = cropBoxSize.height / imageScale;
     
+    // Detect image format from URL or default to JPEG
+    let mimeType = 'image/jpeg';
+    let quality = 0.9;
+    
+    if (imageUrl.includes('data:image/png') || imageName.toLowerCase().endsWith('.png')) {
+      mimeType = 'image/png';
+      quality = 1.0; // PNG doesn't use quality parameter but set to max
+    } else if (imageUrl.includes('data:image/webp') || imageName.toLowerCase().endsWith('.webp')) {
+      mimeType = 'image/webp';
+      quality = 0.9;
+    }
+    
+    console.log('🖼️ Cropping image as:', mimeType);
+    
     // Draw the visible portion of the image
     ctx.drawImage(
       originalImage,
@@ -118,10 +133,10 @@ export default function ImageCropper({
     
     canvas.toBlob((blob) => {
       if (blob) {
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+        const dataUrl = canvas.toDataURL(mimeType, quality);
         onCropComplete(blob, dataUrl);
       }
-    }, 'image/jpeg', 0.9);
+    }, mimeType, quality);
   };
 
   if (!imageLoaded || !originalImage) {

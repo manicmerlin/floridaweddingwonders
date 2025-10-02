@@ -139,9 +139,25 @@ export default function PhotoUpload({
     
     console.log('✅ Crop completed for:', pendingCrop.file.name);
     
-    // Create a new File from the cropped blob
+    // Determine the correct MIME type based on original file
+    let mimeType = pendingCrop.file.type;
+    if (!mimeType || mimeType === 'application/octet-stream') {
+      // Fallback to detecting from filename
+      const fileName = pendingCrop.file.name.toLowerCase();
+      if (fileName.endsWith('.png')) {
+        mimeType = 'image/png';
+      } else if (fileName.endsWith('.webp')) {
+        mimeType = 'image/webp';
+      } else {
+        mimeType = 'image/jpeg';
+      }
+    }
+    
+    console.log('📝 Using MIME type:', mimeType, 'for cropped file');
+    
+    // Create a new File from the cropped blob with correct type
     const croppedFile = new File([croppedBlob], pendingCrop.file.name, {
-      type: 'image/jpeg',
+      type: mimeType,
       lastModified: Date.now()
     });
     
