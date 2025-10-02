@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '../../../components/Navigation';
@@ -14,11 +14,25 @@ import { mockVenues } from '../../../lib/mockData';
 import { loadVenuePhotosFromStorage } from '../../../lib/photoStorage';
 import { Venue } from '../../../types';
 
+// Helper function to check if a venue has been deleted
+function isVenueDeleted(venueId: string): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  try {
+    const deletedVenuesKey = 'deleted-venues';
+    const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
+    return deletedVenues.includes(venueId);
+  } catch {
+    return false;
+  }
+}
+
 // Use mockVenues which already includes the JSON data to avoid duplicates
 const allVenues = mockVenues;
 
 export default function VenueDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const [venue, setVenue] = useState<Venue | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
@@ -50,6 +64,13 @@ export default function VenueDetailPage() {
       
       // Load stored photos for this venue if found
       if (foundVenue) {
+        // Check if venue has been deleted
+        if (isVenueDeleted(foundVenue.id)) {
+          console.log('Venue has been deleted, redirecting...');
+          router.push('/venues');
+          return;
+        }
+        
         const storedPhotos = loadVenuePhotosFromStorage(foundVenue.id);
         if (storedPhotos.length > 0) {
           console.log('Loading stored photos for venue:', foundVenue.name, storedPhotos);

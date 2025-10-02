@@ -130,6 +130,66 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
     router.push('/login');
   };
 
+  const handleDeleteVenue = () => {
+    // Confirm deletion
+    const confirmed = window.confirm(
+      `⚠️ WARNING: Are you sure you want to DELETE "${venue?.name}"?\n\n` +
+      `This will permanently remove:\n` +
+      `• All venue information\n` +
+      `• All photos and media\n` +
+      `• All saved data\n\n` +
+      `This action CANNOT be undone!`
+    );
+    
+    if (!confirmed) return;
+    
+    // Double confirmation for safety
+    const doubleConfirm = window.confirm(
+      `🚨 FINAL CONFIRMATION 🚨\n\n` +
+      `Type the venue name to confirm: "${venue?.name}"\n\n` +
+      `Are you ABSOLUTELY SURE you want to delete this venue?`
+    );
+    
+    if (!doubleConfirm) return;
+    
+    try {
+      // Add venue to deleted list
+      const deletedVenuesKey = 'deleted-venues';
+      const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
+      if (!deletedVenues.includes(venueId)) {
+        deletedVenues.push(venueId);
+        localStorage.setItem(deletedVenuesKey, JSON.stringify(deletedVenues));
+      }
+      
+      // Remove venue from localStorage
+      const venuesDataKey = 'venues-data';
+      const venuesData = JSON.parse(localStorage.getItem(venuesDataKey) || '{}');
+      delete venuesData[venueId];
+      localStorage.setItem(venuesDataKey, JSON.stringify(venuesData));
+      
+      // Remove venue photos
+      const photosKey = 'venue-photos';
+      const photosData = JSON.parse(localStorage.getItem(photosKey) || '{}');
+      delete photosData[venueId];
+      localStorage.setItem(photosKey, JSON.stringify(photosData));
+      
+      // Remove venue photo updates
+      const updatesKey = 'venue-photo-updates';
+      const updatesData = JSON.parse(localStorage.getItem(updatesKey) || '{}');
+      delete updatesData[venueId];
+      localStorage.setItem(updatesKey, JSON.stringify(updatesData));
+      
+      console.log('✅ Venue deleted successfully:', venueId);
+      alert(`✅ Venue "${venue?.name}" has been permanently deleted.`);
+      
+      // Redirect to venues list
+      router.push('/venues');
+    } catch (error) {
+      console.error('❌ Error deleting venue:', error);
+      alert('❌ Failed to delete venue. Please try again.');
+    }
+  };
+
   // Access denied screen
   if (accessDenied) {
     return (
@@ -249,16 +309,26 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
                 )}
               </div>
             </div>
-            {isSuper && (
-              <div className="text-right">
+            <div className="flex items-center space-x-3">
+              {isSuper && (
                 <Link 
                   href="/venues" 
                   className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium transition"
                 >
                   Browse All Venues
                 </Link>
-              </div>
-            )}
+              )}
+              <button
+                onClick={handleDeleteVenue}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium transition flex items-center space-x-2"
+                title="Delete this venue permanently"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                <span>Delete Venue</span>
+              </button>
+            </div>
           </div>
         </div>
 

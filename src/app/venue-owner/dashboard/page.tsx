@@ -7,6 +7,19 @@ import { Venue } from '../../../types';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Helper function to check if a venue has been deleted
+function isVenueDeleted(venueId: string): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  try {
+    const deletedVenuesKey = 'deleted-venues';
+    const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
+    return deletedVenues.includes(venueId);
+  } catch {
+    return false;
+  }
+}
+
 export default function VenueOwnerDashboard() {
   const [user, setUser] = useState<any>(null);
   const [ownedVenues, setOwnedVenues] = useState<string[]>([]);
@@ -34,10 +47,11 @@ export default function VenueOwnerDashboard() {
               role: 'super_admin',
               isSuperAdmin: true
             });
-            // Super admin can manage all venues - set all venue IDs as owned
-            const allVenueIds = mockVenues.map(v => v.id);
+            // Super admin can manage all venues - filter out deleted venues
+            const activeVenues = mockVenues.filter(v => !isVenueDeleted(v.id));
+            const allVenueIds = activeVenues.map(v => v.id);
             setOwnedVenues(allVenueIds);
-            setVenues(mockVenues);
+            setVenues(activeVenues);
             setIsLoading(false);
             return;
           }
@@ -49,12 +63,16 @@ export default function VenueOwnerDashboard() {
           const parsedUser = JSON.parse(userData);
           setUser(parsedUser);
           
-          // Load owned venues from localStorage
+          // Load owned venues from localStorage and filter out deleted ones
           const userVenues = localStorage.getItem(`owned-venues-${parsedUser.id}`) || '[]';
-          setOwnedVenues(JSON.parse(userVenues));
+          const ownedIds = JSON.parse(userVenues);
+          const activeOwnedIds = ownedIds.filter((id: string) => !isVenueDeleted(id));
+          setOwnedVenues(activeOwnedIds);
         }
         
-        setVenues(mockVenues);
+        // Filter out deleted venues from all venues
+        const activeVenues = mockVenues.filter(v => !isVenueDeleted(v.id));
+        setVenues(activeVenues);
         
         // Load user claims if authenticated
         if (userData || user) {

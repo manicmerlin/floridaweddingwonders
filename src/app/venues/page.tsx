@@ -8,6 +8,19 @@ import Footer from '@/components/Footer';
 import { mockVenues } from '@/lib/mockData';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 
+// Helper function to check if a venue has been deleted
+function isVenueDeleted(venueId: string): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  try {
+    const deletedVenuesKey = 'deleted-venues';
+    const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
+    return deletedVenues.includes(venueId);
+  } catch {
+    return false;
+  }
+}
+
 // Use mockVenues which already includes the JSON data to avoid duplicates
 const allVenues = mockVenues;
 
@@ -25,17 +38,19 @@ export default function VenuesPage() {
 
   useEffect(() => {
     // Use combined venues data (same as detail page)
-    // Load stored photos for each venue
-    const venuesWithStoredPhotos = allVenues.map(venue => {
-      const storedPhotos = loadVenuePhotosFromStorage(venue.id);
-      if (storedPhotos.length > 0) {
-        return {
-          ...venue,
-          images: storedPhotos
-        };
-      }
-      return venue;
-    });
+    // Load stored photos for each venue and filter out deleted venues
+    const venuesWithStoredPhotos = allVenues
+      .filter(venue => !isVenueDeleted(venue.id)) // Filter out deleted venues
+      .map(venue => {
+        const storedPhotos = loadVenuePhotosFromStorage(venue.id);
+        if (storedPhotos.length > 0) {
+          return {
+            ...venue,
+            images: storedPhotos
+          };
+        }
+        return venue;
+      });
     
     setVenues(venuesWithStoredPhotos);
     setFilteredVenues(venuesWithStoredPhotos);
