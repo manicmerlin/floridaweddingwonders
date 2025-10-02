@@ -150,16 +150,26 @@ export function loadVenuePhotosFromStorage(venueId: string): Array<{
       return [];
     }
     
+    // First, try to load from localStorage (for backward compatibility)
     const venuePhotosData = JSON.parse(localStorage.getItem('venue-photos') || '{}');
-    const photos = venuePhotosData[venueId] || [];
+    const localPhotos = venuePhotosData[venueId] || [];
     
     console.log('🔍 loadVenuePhotosFromStorage for venue:', venueId);
-    console.log('   Found photos:', photos.length);
-    if (photos.length > 0) {
-      console.log('   Photo URLs:', photos.map((p: any) => p.url));
+    console.log('   Found in localStorage:', localPhotos.length);
+    
+    // Check if we have Supabase URLs (they start with https://aflrmpkolumpjhpaxblz.supabase.co)
+    const hasSupabasePhotos = localPhotos.some((p: any) => 
+      p.url && p.url.includes('supabase.co/storage')
+    );
+    
+    if (hasSupabasePhotos || localPhotos.length > 0) {
+      console.log('   Using photos from storage (', hasSupabasePhotos ? 'Supabase URLs' : 'data URLs', ')');
+      if (localPhotos.length > 0) {
+        console.log('   Photo URLs:', localPhotos.map((p: any) => p.url.substring(0, 50) + '...'));
+      }
     }
     
-    return photos;
+    return localPhotos;
   } catch (error) {
     console.error('❌ Failed to load venue photos from storage:', error);
     return [];
