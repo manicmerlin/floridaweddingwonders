@@ -62,11 +62,13 @@ export default function PhotoUpload({
 
     for (let i = 0; i < newFiles.length; i++) {
       const file = newFiles[i];
-      console.log(`📁 Processing file ${i + 1}/${newFiles.length}:`, file.name, file.type, file.size, 'bytes');
+      console.log(`📁 Processing file ${i + 1}/${newFiles.length}:`, file.name);
+      console.log(`   File type: ${file.type}`);
+      console.log(`   File size: ${file.size} bytes (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
       
       try {
         if (isImageFile(file)) {
-          console.log('🖼️  Processing as image...');
+          console.log('🖼️  Detected as IMAGE file');
           // Process image
           const { preview } = await processImage(file, {
             maxSize: 10 * 1024 * 1024, // 10MB
@@ -93,7 +95,7 @@ export default function PhotoUpload({
           });
 
         } else if (isVideoFile(file)) {
-          console.log('🎥 Processing as video...');
+          console.log('🎥 Detected as VIDEO file');
           // Process video
           const videoData = await processVideo(file);
 
@@ -117,7 +119,8 @@ export default function PhotoUpload({
           });
 
         } else {
-          throw new Error('Unsupported file type. Please upload images or videos only.');
+          console.error('❌ File type not recognized:', file.type);
+          throw new Error(`Unsupported file type: ${file.type}. Please upload images (JPG, PNG, WebP) or videos only.`);
         }
       } catch (error) {
         console.error('❌ Error processing file:', file.name, error);
@@ -393,7 +396,7 @@ export default function PhotoUpload({
           ref={fileInputRef}
           type="file"
           multiple
-          accept="image/*,video/*"
+          accept="image/jpeg,image/jpg,image/png,image/webp,video/mp4,video/webm,video/mov,video/quicktime"
           onChange={handleFileInput}
           className="hidden"
         />
