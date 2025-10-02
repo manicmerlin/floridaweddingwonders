@@ -161,35 +161,45 @@ export default function PhotoUpload({
       lastModified: Date.now()
     });
     
-    // In development mode, use data URL directly for immediate persistence
-    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
+    // Upload to Supabase immediately after cropping
+    console.log('📤 Uploading cropped image to Supabase...');
+    setUploading(true);
     
-    const newMediaFile: MediaFile = {
-      id: isDevelopment ? `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}` : `temp-${Date.now()}-${Math.random()}`,
-      url: croppedDataUrl, // Use the cropped data URL directly
-      alt: pendingCrop.file.name.replace(/\.[^/.]+$/, ""),
-      isPrimary: mediaFiles.length === 0,
-      type: 'image',
-      file: isDevelopment ? undefined : croppedFile // In dev mode, no need to keep file
-    };
-    
-    console.log('✅ Image cropped and auto-uploading:', newMediaFile.id);
-    
-    // Add to media files and trigger save
-    const updatedMediaFiles = [...mediaFiles, newMediaFile];
-    setMediaFiles(updatedMediaFiles);
-    onMediaUpdate(updatedMediaFiles);
-    
-    // Clear pending crop
-    URL.revokeObjectURL(pendingCrop.previewUrl);
-    setPendingCrop(null);
-    
-    // Show success message
-    if (isDevelopment) {
-      console.log('✅ Image automatically saved in development mode');
-    } else {
-      // In production, would trigger cloud upload here
-      console.log('✅ Image ready for cloud upload');
+    try {
+      // Import upload function
+      const { uploadToCloudStorage } = await import('@/lib/imageUpload');
+      const imageId = `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      
+      // Upload and get the Supabase URL
+      const uploadedUrl = await uploadToCloudStorage(croppedBlob, venueId, imageId);
+      
+      console.log('✅ Image uploaded successfully:', uploadedUrl);
+      
+      const newMediaFile: MediaFile = {
+        id: imageId,
+        url: uploadedUrl, // Use Supabase URL instead of data URL
+        alt: pendingCrop.file.name.replace(/\.[^/.]+$/, ""),
+        isPrimary: mediaFiles.length === 0,
+        type: 'image',
+        file: undefined // No file needed, already uploaded
+      };
+      
+      console.log('✅ Adding uploaded image to gallery:', newMediaFile.id);
+      
+      // Add to media files and trigger save
+      const updatedMediaFiles = [...mediaFiles, newMediaFile];
+      setMediaFiles(updatedMediaFiles);
+      onMediaUpdate(updatedMediaFiles);
+      
+    } catch (error) {
+      console.error('❌ Upload failed:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setUploading(false);
+      
+      // Clear pending crop
+      URL.revokeObjectURL(pendingCrop.previewUrl);
+      setPendingCrop(null);
     }
   };
 

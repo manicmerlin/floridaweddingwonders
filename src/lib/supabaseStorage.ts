@@ -15,11 +15,22 @@ export async function uploadImageToSupabase(
   imageId: string
 ): Promise<string> {
   try {
-    // Create file path: venues/{venueId}/{imageId}.jpg
-    const fileExt = 'jpg'; // We're converting all to JPEG in the cropper
+    // Detect file extension from blob type
+    let fileExt = 'jpg';
+    let contentType = 'image/jpeg';
+    
+    if (file.type === 'image/png') {
+      fileExt = 'png';
+      contentType = 'image/png';
+    } else if (file.type === 'image/webp') {
+      fileExt = 'webp';
+      contentType = 'image/webp';
+    }
+    
+    // Create file path: venues/{venueId}/{imageId}.{ext}
     const filePath = `venues/${venueId}/${imageId}.${fileExt}`;
     
-    console.log('📤 Uploading to Supabase Storage:', filePath);
+    console.log('📤 Uploading to Supabase Storage:', filePath, 'Type:', contentType, 'Size:', file.size);
     
     // Upload to Supabase Storage
     const { data, error } = await supabase.storage
@@ -27,13 +38,15 @@ export async function uploadImageToSupabase(
       .upload(filePath, file, {
         cacheControl: '3600',
         upsert: true, // Overwrite if exists
-        contentType: 'image/jpeg'
+        contentType: contentType
       });
     
     if (error) {
       console.error('❌ Supabase upload error:', error);
       throw new Error(`Upload failed: ${error.message}`);
     }
+    
+    console.log('✅ Upload successful, data:', data);
     
     // Get public URL
     const { data: urlData } = supabase.storage
