@@ -94,25 +94,47 @@ export function updateVenuesJsonWithPhotos(venueId: string, photos: Array<{
   }
 }
 
-export function updateVenueInMockData(venueId: string, photos: Array<{
+export async function updateVenueInMockData(venueId: string, photos: Array<{
   id: string;
   url: string;
   alt: string;
   isPrimary: boolean;
   type: 'image' | 'video';
 }>) {
-  // In a real application, this would update the database
-  // For now, we'll store in localStorage as a simulation
+  // Save to both database AND localStorage for backwards compatibility
   try {
     console.log('💾 updateVenueInMockData for venue:', venueId);
     console.log('   Saving', photos.length, 'photos');
-    console.log('   Photo URLs:', photos.map(p => p.url));
+    console.log('   Photo URLs:', photos.map(p => p.url.substring(0, 50) + '...'));
     
+    // Save to localStorage (for backwards compatibility)
     const venuePhotosData = JSON.parse(localStorage.getItem('venue-photos') || '{}');
     venuePhotosData[venueId] = photos;
     localStorage.setItem('venue-photos', JSON.stringify(venuePhotosData));
     
     console.log('✅ Photos saved to localStorage venue-photos');
+    
+    // Save to Supabase database (for cross-device access)
+    try {
+      const { savePhotoToDatabase } = await import('./supabasePhotos');
+      
+      for (const photo of photos) {
+        if (photo.type === 'image') {
+          await savePhotoToDatabase(
+            photo.id,
+            venueId,
+            photo.url,
+            photo.alt,
+            photo.isPrimary,
+            'current-user' // TODO: Replace with actual user ID when auth is implemented
+          );
+        }
+      }
+      
+      console.log('✅ Photos saved to Supabase database');
+    } catch (dbError) {
+      console.warn('⚠️  Failed to save to database, but localStorage succeeded:', dbError);
+    }
     
     // Also update the venues.json data structure
     const venuesData = JSON.parse(localStorage.getItem('venues-data') || '{}');
@@ -137,24 +159,39 @@ export function updateVenueInMockData(venueId: string, photos: Array<{
   }
 }
 
-export function loadVenuePhotosFromStorage(venueId: string): Array<{
+export async function loadVenuePhotosFromStorage(venueId: string): Promise<Array<{
   id: string;
   url: string;
   alt: string;
   isPrimary: boolean;
   type: 'image';
-}> {
+}>> {
   try {
     if (typeof window === 'undefined') {
       console.log('🔍 loadVenuePhotosFromStorage: Server-side, returning empty array');
       return [];
     }
     
-    // First, try to load from localStorage (for backward compatibility)
+    console.log('🔍 loadVenuePhotosFromStorage for venue:', venueId);
+    
+    // Try to load from Supabase database first
+    try {
+      const { loadPhotosFromDatabase } = await import('./supabasePhotos');
+      const dbPhotos = await loadPhotosFromDatabase(venueId);
+      
+      if (dbPhotos.length > 0) {
+        console.log('   Found', dbPhotos.length, 'photos in database');
+        console.log('   Photo URLs:', dbPhotos.map(p => p.url.substring(0, 50) + '...'));
+        return dbPhotos;
+      }
+    } catch (dbError) {
+      console.warn('⚠️  Could not load from database, trying localStorage:', dbError);
+    }
+    
+    // Fallback to localStorage (for backwards compatibility)
     const venuePhotosData = JSON.parse(localStorage.getItem('venue-photos') || '{}');
     const localPhotos = venuePhotosData[venueId] || [];
     
-    console.log('🔍 loadVenuePhotosFromStorage for venue:', venueId);
     console.log('   Found in localStorage:', localPhotos.length);
     
     // Check if we have Supabase URLs (they start with https://aflrmpkolumpjhpaxblz.supabase.co)
@@ -163,7 +200,7 @@ export function loadVenuePhotosFromStorage(venueId: string): Array<{
     );
     
     if (hasSupabasePhotos || localPhotos.length > 0) {
-      console.log('   Using photos from storage (', hasSupabasePhotos ? 'Supabase URLs' : 'data URLs', ')');
+      console.log('   Using photos from localStorage (', hasSupabasePhotos ? 'Supabase URLs' : 'data URLs', ')');
       if (localPhotos.length > 0) {
         console.log('   Photo URLs:', localPhotos.map((p: any) => p.url.substring(0, 50) + '...'));
       }

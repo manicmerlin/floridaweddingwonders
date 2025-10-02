@@ -39,52 +39,56 @@ export default function VenueDetailPage() {
   const [showContactForm, setShowContactForm] = useState(false);
 
   useEffect(() => {
-    if (params.id) {
-      console.log('Looking for venue with ID:', params.id);
-      console.log('Available venues:', allVenues.map(v => ({ id: v.id, name: v.name })));
-      
-      // Find venue by ID or slug in combined venues list
-      let foundVenue = allVenues.find(v => v.id === params.id);
-      
-      // If not found by exact ID, try to find by name-based slug
-      if (!foundVenue) {
-        foundVenue = allVenues.find(v => 
-          v.name.toLowerCase().replace(/[^a-z0-9]/g, '-') === params.id ||
-          v.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') === params.id
-        );
-      }
-      
-      // If still not found, try partial name matching
-      if (!foundVenue && typeof params.id === 'string') {
-        foundVenue = allVenues.find(v => 
-          v.name.toLowerCase().includes(params.id.toString().replace(/-/g, ' ')) ||
-          params.id.toString().replace(/-/g, ' ').includes(v.name.toLowerCase())
-        );
-      }
-      
-      // Load stored photos for this venue if found
-      if (foundVenue) {
-        // Check if venue has been deleted
-        if (isVenueDeleted(foundVenue.id)) {
-          console.log('Venue has been deleted, redirecting...');
-          router.push('/venues');
-          return;
+    async function loadVenue() {
+      if (params.id) {
+        console.log('Looking for venue with ID:', params.id);
+        console.log('Available venues:', allVenues.map(v => ({ id: v.id, name: v.name })));
+        
+        // Find venue by ID or slug in combined venues list
+        let foundVenue = allVenues.find(v => v.id === params.id);
+        
+        // If not found by exact ID, try to find by name-based slug
+        if (!foundVenue) {
+          foundVenue = allVenues.find(v => 
+            v.name.toLowerCase().replace(/[^a-z0-9]/g, '-') === params.id ||
+            v.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') === params.id
+          );
         }
         
-        const storedPhotos = loadVenuePhotosFromStorage(foundVenue.id);
-        if (storedPhotos.length > 0) {
-          console.log('Loading stored photos for venue:', foundVenue.name, storedPhotos);
-          foundVenue = {
-            ...foundVenue,
-            images: storedPhotos
-          };
+        // If still not found, try partial name matching
+        if (!foundVenue && typeof params.id === 'string') {
+          foundVenue = allVenues.find(v => 
+            v.name.toLowerCase().includes(params.id.toString().replace(/-/g, ' ')) ||
+            params.id.toString().replace(/-/g, ' ').includes(v.name.toLowerCase())
+          );
         }
+        
+        // Load stored photos for this venue if found
+        if (foundVenue) {
+          // Check if venue has been deleted
+          if (isVenueDeleted(foundVenue.id)) {
+            console.log('Venue has been deleted, redirecting...');
+            router.push('/venues');
+            return;
+          }
+          
+          const storedPhotos = await loadVenuePhotosFromStorage(foundVenue.id);
+          if (storedPhotos.length > 0) {
+            console.log('Loading stored photos for venue:', foundVenue.name, storedPhotos);
+            foundVenue = {
+              ...foundVenue,
+              images: storedPhotos
+            };
+          }
+        }
+        
+        console.log('Found venue:', foundVenue ? foundVenue.name : 'None');
+        setVenue(foundVenue || null);
+        setLoading(false);
       }
-      
-      console.log('Found venue:', foundVenue ? foundVenue.name : 'None');
-      setVenue(foundVenue || null);
-      setLoading(false);
     }
+    
+    loadVenue();
   }, [params.id]);
 
   if (loading) {
