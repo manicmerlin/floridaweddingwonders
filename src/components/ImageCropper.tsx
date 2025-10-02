@@ -1,14 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 
 interface ImageCropperProps {
   imageUrl: string;
   imageName: string;
   onCropComplete: (croppedBlob: Blob, croppedDataUrl: string) => void;
   onCancel: () => void;
-  aspectRatio?: number; // width/height (e.g., 16/9 = 1.78)
+  aspectRatio?: number;
 }
 
 export default function ImageCropper({ 
@@ -16,90 +15,71 @@ export default function ImageCropper({
   imageName,
   onCropComplete, 
   onCancel,
-  aspectRatio = 16 / 9 // Default to gallery aspect ratio
+  aspectRatio = 4 / 3
 }: ImageCropperProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const [cropArea, setCropArea] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 });
   const [imageLoaded, setImageLoaded] = useState(false);
   const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(null);
+  const [imageScale, setImageScale] = useState(1);
+  const [cropBoxSize, setCropBoxSize] = useState({ width: 600, height: 450 });
 
   useEffect(() => {
-    // Load the image
     const img = new window.Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       setOriginalImage(img);
       setImageLoaded(true);
       
-      // Initialize crop area to center with aspect ratio
-      const imgWidth = img.width;
-      const imgHeight = img.height;
+      // Calculate crop box size (fixed size, centered in viewport)
+      const maxWidth = Math.min(800, window.innerWidth - 100);
+      const cropWidth = maxWidth;
+      const cropHeight = cropWidth / aspectRatio;
+      setCropBoxSize({ width: cropWidth, height: cropHeight });
       
-      let cropWidth = imgWidth;
-      let cropHeight = cropWidth / aspectRatio;
+      // Calculate scale to fit image to crop box
+      const scaleX = cropWidth / img.width;
+      const scaleY = cropHeight / img.height;
+      const scale = Math.max(scaleX, scaleY); // Ensure image covers crop box
+      setImageScale(scale);
       
-      if (cropHeight > imgHeight) {
-        cropHeight = imgHeight;
-        cropWidth = cropHeight * aspectRatio;
-      }
-      
-      const x = (imgWidth - cropWidth) / 2;
-      const y = (imgHeight - cropHeight) / 2;
-      
-      setCropArea({
-        x: Math.max(0, x),
-        y: Math.max(0, y),
-        width: cropWidth,
-        height: cropHeight
+      // Center image in crop box
+      const scaledWidth = img.width * scale;
+      const scaledHeight = img.height * scale;
+      setImagePosition({
+        x: (cropWidth - scaledWidth) / 2,
+        y: (cropHeight - scaledHeight) / 2
       });
     };
     img.src = imageUrl;
   }, [imageUrl, aspectRatio]);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imageRef.current) return;
-    
-    const rect = imageRef.current.getBoundingClientRect();
-    const scaleX = originalImage ? originalImage.width / rect.width : 1;
-    const scaleY = originalImage ? originalImage.height / rect.height : 1;
-    
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
-    
+    e.preventDefault();
     setIsDragging(true);
-    setDragStart({ x, y });
+    setDragStart({ x: e.clientX - imagePosition.x, y: e.clientY - imagePosition.y });
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || !imageRef.current || !originalImage) return;
+    if (!isDragging || !originalImage) return;
     
-    const rect = imageRef.current.getBoundingClientRect();
-    const scaleX = originalImage.width / rect.width;
-    const scaleY = originalImage.height / rect.height;
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
     
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleY;
+    // Constrain movement so image doesn't leave crop box
+    const scaledWidth = originalImage.width * imageScale;
+    const scaledHeight = originalImage.height * imageScale;
     
-    const width = Math.abs(x - dragStart.x);
-    const height = width / aspectRatio;
+    const minX = cropBoxSize.width - scaledWidth;
+    const minY = cropBoxSize.height - scaledHeight;
     
-    const newCropArea = {
-      x: Math.min(dragStart.x, x),
-      y: Math.min(dragStart.y, y),
-      width: Math.min(width, originalImage.width - Math.min(dragStart.x, x)),
-      height: Math.min(height, originalImage.height - Math.min(dragStart.y, y))
-    };
-    
-    // Ensure aspect ratio is maintained
-    if (newCropArea.height > originalImage.height - newCropArea.y) {
-      newCropArea.height = originalImage.height - newCropArea.y;
-      newCropArea.width = newCropArea.height * aspectRatio;
-    }
-    
-    setCropArea(newCropArea);
+    setImagePosition({
+      x: Math.min(0, Math.max(minX, newX)),
+      y: Math.min(0, Math.max(minY, newY))
+    });
   };
 
   const handleMouseUp = () => {
@@ -113,24 +93,29 @@ export default function ImageCropper({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
-    // Set canvas size to crop area
-    canvas.width = cropArea.width;
-    canvas.height = cropArea.height;
+    // Set canvas size to crop box size
+    canvas.width = cropBoxSize.width;
+    canvas.height = cropBoxSize.height;
     
-    // Draw cropped image
+    // Calculate source coordinates (portion of original image to crop)
+    const sourceX = -imagePosition.x / imageScale;
+    const sourceY = -imagePosition.y / imageScale;
+    const sourceWidth = cropBoxSize.width / imageScale;
+    const sourceHeight = cropBoxSize.height / imageScale;
+    
+    // Draw the visible portion of the image
     ctx.drawImage(
       originalImage,
-      cropArea.x,
-      cropArea.y,
-      cropArea.width,
-      cropArea.height,
+      sourceX,
+      sourceY,
+      sourceWidth,
+      sourceHeight,
       0,
       0,
-      cropArea.width,
-      cropArea.height
+      cropBoxSize.width,
+      cropBoxSize.height
     );
     
-    // Convert to blob
     canvas.toBlob((blob) => {
       if (blob) {
         const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
@@ -149,10 +134,6 @@ export default function ImageCropper({
       </div>
     );
   }
-
-  const displayScale = Math.min(800 / originalImage.width, 600 / originalImage.height, 1);
-  const displayWidth = originalImage.width * displayScale;
-  const displayHeight = originalImage.height * displayScale;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
@@ -177,50 +158,50 @@ export default function ImageCropper({
 
           <div className="mb-4 bg-gray-100 p-4 rounded-lg">
             <p className="text-sm text-gray-700">
-              <strong>Instructions:</strong> Click and drag on the image to select the area you want to crop. 
-              The selection will maintain the gallery aspect ratio ({aspectRatio.toFixed(2)}:1).
+              <strong>Instructions:</strong> Drag the image to position it within the crop frame. 
+              The pink frame shows the area that will be saved ({aspectRatio.toFixed(2)}:1 ratio for gallery).
             </p>
           </div>
 
-          <div className="relative inline-block">
+          <div className="flex justify-center">
             <div
-              className="relative cursor-crosshair"
-              style={{ width: displayWidth, height: displayHeight }}
+              ref={containerRef}
+              className="relative border-4 border-pink-500 overflow-hidden cursor-move bg-gray-900"
+              style={{ 
+                width: cropBoxSize.width, 
+                height: cropBoxSize.height,
+                boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.5)'
+              }}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
             >
               <img
-                ref={imageRef}
                 src={imageUrl}
-                alt="Crop preview"
-                className="block"
-                style={{ width: displayWidth, height: displayHeight }}
+                alt="Drag to position"
+                className="absolute select-none"
+                draggable={false}
+                style={{
+                  width: originalImage.width * imageScale,
+                  height: originalImage.height * imageScale,
+                  left: imagePosition.x,
+                  top: imagePosition.y,
+                  cursor: isDragging ? 'grabbing' : 'grab'
+                }}
               />
               
-              {/* Crop overlay */}
-              <div
-                className="absolute border-2 border-pink-500 bg-pink-500 bg-opacity-20"
-                style={{
-                  left: (cropArea.x * displayScale) + 'px',
-                  top: (cropArea.y * displayScale) + 'px',
-                  width: (cropArea.width * displayScale) + 'px',
-                  height: (cropArea.height * displayScale) + 'px'
-                }}
-              >
-                {/* Corner handles */}
-                <div className="absolute -top-1 -left-1 w-3 h-3 bg-pink-500 rounded-full"></div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-pink-500 rounded-full"></div>
-                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-pink-500 rounded-full"></div>
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-pink-500 rounded-full"></div>
-              </div>
+              {/* Corner indicators */}
+              <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-white opacity-75"></div>
+              <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-white opacity-75"></div>
+              <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-white opacity-75"></div>
+              <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-white opacity-75"></div>
             </div>
           </div>
 
           <div className="mt-6 flex justify-between items-center">
             <div className="text-sm text-gray-600">
-              Crop size: {Math.round(cropArea.width)} × {Math.round(cropArea.height)} px
+              Output size: {cropBoxSize.width} × {cropBoxSize.height} px
             </div>
             <div className="flex space-x-3">
               <button
@@ -233,14 +214,13 @@ export default function ImageCropper({
                 onClick={handleCrop}
                 className="px-6 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition"
               >
-                Apply Crop
+                Crop & Upload
               </button>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Hidden canvas for cropping */}
       <canvas ref={canvasRef} className="hidden" />
     </div>
   );
