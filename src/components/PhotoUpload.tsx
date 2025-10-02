@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Image from 'next/image';
+import ImageCropper from './ImageCropper';
 import { ImageUploadManager, processImage, ImageUploadError } from '@/lib/imageUpload';
 import { processVideo, VideoProcessingError, isVideoFile, isImageFile, formatDuration } from '@/lib/videoUtils';
 import { VenueMedia } from '@/types';
@@ -31,6 +32,12 @@ interface UploadProgress {
   fileName?: string;
 }
 
+interface PendingCrop {
+  file: File;
+  previewUrl: string;
+  index: number;
+}
+
 export default function PhotoUpload({ 
   venueId, 
   existingMedia = [], 
@@ -44,6 +51,7 @@ export default function PhotoUpload({
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<UploadProgress | null>(null);
+  const [pendingCrop, setPendingCrop] = useState<PendingCrop | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = async (files: FileList) => {
@@ -69,34 +77,23 @@ export default function PhotoUpload({
       try {
         if (isImageFile(file)) {
           console.log('🖼️  Detected as IMAGE file');
-          // Process image
-          const { preview } = await processImage(file, {
-            maxSize: 10 * 1024 * 1024, // 10MB
-            maxWidth: 2048,
-            maxHeight: 2048,
-            quality: 0.8
-          });
-
-          const newMediaFile: MediaFile = {
-            id: `temp-${Date.now()}-${Math.random()}`,
-            url: preview,
-            alt: file.name.replace(/\.[^/.]+$/, ""),
-            isPrimary: mediaFiles.length === 0 && i === 0,
-            type: 'image',
-            file: file
-          };
           
-          console.log('✅ Image processed successfully:', newMediaFile.id);
+          // Create preview for cropping
+          const previewUrl = URL.createObjectURL(file);
           
-          setMediaFiles(prev => {
-            const updated = [...prev, newMediaFile];
-            onMediaUpdate(updated);
-            return updated;
+          // Show cropper
+          setPendingCrop({
+            file,
+            previewUrl,
+            index: mediaFiles.length + i
           });
+          
+          // Wait for crop (handled by onCropComplete)
+          return; // Exit and wait for crop
 
         } else if (isVideoFile(file)) {
           console.log('🎥 Detected as VIDEO file');
-          // Process video
+          // Process video (no cropping for videos)
           const videoData = await processVideo(file);
 
           const newMediaFile: MediaFile = {
@@ -135,6 +132,46 @@ export default function PhotoUpload({
     }
     
     console.log('✅ All files processed');
+  };
+
+  const handleCropComplete = (croppedBlob: Blob, croppedDataUrl: string) => {
+    if (!pendingCrop) return;
+    
+    console.log('✅ Crop completed for:', pendingCrop.file.name);
+    
+    // Create a new File from the cropped blob
+    const croppedFile = new File([croppedBlob], pendingCrop.file.name, {
+      type: 'image/jpeg',
+      lastModified: Date.now()
+    });
+    
+    const newMediaFile: MediaFile = {
+      id: `temp-${Date.now()}-${Math.random()}`,
+      url: croppedDataUrl, // Use the cropped data URL as preview
+      alt: pendingCrop.file.name.replace(/\.[^/.]+$/, ""),
+      isPrimary: mediaFiles.length === 0,
+      type: 'image',
+      file: croppedFile
+    };
+    
+    console.log('✅ Image cropped and added:', newMediaFile.id);
+    
+    setMediaFiles(prev => {
+      const updated = [...prev, newMediaFile];
+      onMediaUpdate(updated);
+      return updated;
+    });
+    
+    // Clear pending crop
+    URL.revokeObjectURL(pendingCrop.previewUrl);
+    setPendingCrop(null);
+  };
+
+  const handleCropCancel = () => {
+    if (pendingCrop) {
+      URL.revokeObjectURL(pendingCrop.previewUrl);
+      setPendingCrop(null);
+    }
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -310,6 +347,17 @@ export default function PhotoUpload({
 
   return (
     <div className="space-y-6">
+      {/* Image Cropper Modal */}
+      {pendingCrop && (
+        <ImageCropper
+          imageUrl={pendingCrop.previewUrl}
+          imageName={pendingCrop.file.name}
+          onCropComplete={handleCropComplete}
+          onCancel={handleCropCancel}
+          aspectRatio={4 / 3}
+        />
+      )}
+
       {/* Upload Area */}
       <div
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
