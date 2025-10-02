@@ -8,7 +8,14 @@ let supabase: ReturnType<typeof createClient> | null = null;
 
 function getSupabaseClient() {
   if (!supabase && supabaseUrl && supabaseAnonKey) {
+    console.log('🔧 Initializing Supabase client for database...');
+    console.log('   URL:', supabaseUrl);
+    console.log('   Key:', supabaseAnonKey ? supabaseAnonKey.substring(0, 20) + '...' : 'MISSING');
     supabase = createClient(supabaseUrl, supabaseAnonKey);
+  } else if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('❌ Supabase credentials missing!');
+    console.error('   URL:', supabaseUrl || 'MISSING');
+    console.error('   Key:', supabaseAnonKey ? 'present' : 'MISSING');
   }
   return supabase;
 }

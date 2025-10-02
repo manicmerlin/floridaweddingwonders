@@ -118,9 +118,11 @@ export async function updateVenueInMockData(venueId: string, photos: Array<{
     try {
       const { savePhotoToDatabase } = await import('./supabasePhotos');
       
+      console.log('🔄 Attempting to save', photos.length, 'photos to Supabase database...');
+      
       for (const photo of photos) {
         if (photo.type === 'image') {
-          await savePhotoToDatabase(
+          const success = await savePhotoToDatabase(
             photo.id,
             venueId,
             photo.url,
@@ -128,11 +130,18 @@ export async function updateVenueInMockData(venueId: string, photos: Array<{
             photo.isPrimary,
             'current-user' // TODO: Replace with actual user ID when auth is implemented
           );
+          
+          if (!success) {
+            console.error('❌ Failed to save photo to database:', photo.id);
+          } else {
+            console.log('✅ Photo saved to database:', photo.id);
+          }
         }
       }
       
-      console.log('✅ Photos saved to Supabase database');
+      console.log('✅ All photos saved to Supabase database');
     } catch (dbError) {
+      console.error('❌ Database save error:', dbError);
       console.warn('⚠️  Failed to save to database, but localStorage succeeded:', dbError);
     }
     
