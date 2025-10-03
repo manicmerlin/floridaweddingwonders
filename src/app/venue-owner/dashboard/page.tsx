@@ -8,15 +8,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Helper function to check if a venue has been deleted
-function isVenueDeleted(venueId: string): boolean {
+async function isVenueDeleted(venueId: string): Promise<boolean> {
   if (typeof window === 'undefined') return false;
   
   try {
+    // Check database first
+    const { isVenueDeletedInDatabase } = await import('@/lib/supabaseDeletedVenues');
+    const deletedInDb = await isVenueDeletedInDatabase(venueId);
+    if (deletedInDb) return true;
+    
+    // Fallback to localStorage
     const deletedVenuesKey = 'deleted-venues';
     const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
     return deletedVenues.includes(venueId);
-  } catch {
-    return false;
+  } catch (error) {
+    console.error('Error checking if venue is deleted:', error);
+    // Fallback to localStorage only
+    try {
+      const deletedVenuesKey = 'deleted-venues';
+      const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
+      return deletedVenues.includes(venueId);
+    } catch {
+      return false;
+    }
   }
 }
 
@@ -49,7 +63,11 @@ export default function VenueOwnerDashboard() {
               isSuperAdmin: true
             });
             // Super admin can manage all venues - filter out deleted venues
-            const activeVenues = mockVenues.filter(v => !isVenueDeleted(v.id));
+            const activeVenues = [];
+            for (const v of mockVenues) {
+              const deleted = await isVenueDeleted(v.id);
+              if (!deleted) activeVenues.push(v);
+            }
             const allVenueIds = activeVenues.map(v => v.id);
             setOwnedVenues(allVenueIds);
             setVenues(activeVenues);
@@ -67,12 +85,20 @@ export default function VenueOwnerDashboard() {
           // Load owned venues from localStorage and filter out deleted ones
           const userVenues = localStorage.getItem(`owned-venues-${parsedUser.id}`) || '[]';
           const ownedIds = JSON.parse(userVenues);
-          const activeOwnedIds = ownedIds.filter((id: string) => !isVenueDeleted(id));
+          const activeOwnedIds = [];
+          for (const id of ownedIds) {
+            const deleted = await isVenueDeleted(id);
+            if (!deleted) activeOwnedIds.push(id);
+          }
           setOwnedVenues(activeOwnedIds);
         }
         
         // Filter out deleted venues from all venues
-        const activeVenues = mockVenues.filter(v => !isVenueDeleted(v.id));
+        const activeVenues = [];
+        for (const v of mockVenues) {
+          const deleted = await isVenueDeleted(v.id);
+          if (!deleted) activeVenues.push(v);
+        }
         setVenues(activeVenues);
         
         // Load user claims if authenticated
