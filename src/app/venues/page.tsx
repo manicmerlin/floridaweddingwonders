@@ -155,65 +155,17 @@ export default function VenuesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600/80 via-pink-600/80 to-indigo-600/80 backdrop-blur-sm text-white py-20">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Wedding Venues in Florida
-          </h1>
-          <p className="text-xl lg:text-2xl text-purple-100 max-w-4xl mx-auto mb-8">
-            Discover over 130 stunning wedding venues across the Sunshine State. From beachfront ceremonies to elegant ballrooms.
-          </p>
-          
-          {/* Search and Filter Bar */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <input
-                  type="text"
-                  placeholder="Search venues..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
-                />
-              </div>
-              <div>
-                <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
-                >
-                  <option value="">All Venue Types</option>
-                  <option value="beach">Beach</option>
-                  <option value="ballroom">Ballroom</option>
-                  <option value="garden">Garden</option>
-                  <option value="historic">Historic</option>
-                  <option value="modern">Modern</option>
-                </select>
-              </div>
-              <div>
-                <select
-                  value={selectedRegion}
-                  onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
-                >
-                  <option value="">All Locations</option>
-                  <option value="Miami">Miami</option>
-                  <option value="Fort Lauderdale">Fort Lauderdale</option>
-                  <option value="Key Largo">Key Largo</option>
-                  <option value="Naples">Naples</option>
-                  <option value="Tampa">Tampa</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Search and Filters */}
       <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Description */}
+          <div className="text-center mb-6">
+            <p className="text-lg text-gray-200">
+              Discover stunning wedding venues across the Sunshine State from beachfront ceremonies to elegant ballrooms
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
