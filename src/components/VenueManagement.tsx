@@ -258,33 +258,33 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-pink-600">SoFlo Wedding Venues</Link>
-              <span className="ml-4 text-gray-400">|</span>
-              <span className="ml-4 text-gray-600">Venue Management</span>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 sm:h-16 space-y-3 sm:space-y-0">
+            <div className="flex items-center flex-wrap">
+              <Link href="/" className="text-xl sm:text-2xl font-bold text-pink-600">SoFlo Wedding Venues</Link>
+              <span className="hidden sm:inline ml-4 text-gray-400">|</span>
+              <span className="hidden sm:inline ml-4 text-gray-600">Venue Management</span>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 w-full sm:w-auto">
               {authState.user && (
-                <div className="flex items-center space-x-3">
-                  <div className="text-sm text-gray-600">
-                    <span className="font-medium">{authState.user?.email || 'Unknown User'}</span>
-                    <span className={`ml-2 px-2 py-1 rounded-full text-xs font-medium ${
+                <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    <span className="font-medium hidden sm:inline">{authState.user?.email || 'Unknown User'}</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                       isSuper ? 'bg-purple-100 text-purple-800' : 
                       isPremium ? 'bg-gold-100 text-gold-800' : 'bg-gray-100 text-gray-800'
                     }`}>
-                      {isSuper ? 'SUPER ADMIN' : (authState.user?.subscriptionTier || 'free').toUpperCase()}
+                      {isSuper ? 'ADMIN' : (authState.user?.subscriptionTier || 'free').toUpperCase()}
                     </span>
                   </div>
                 </div>
               )}
-              <Link href={`/venues/${venueId}`} className="text-gray-700 hover:text-pink-600 font-medium transition">
-                View Public Page
+              <Link href={`/venues/${venueId}`} className="text-sm sm:text-base text-gray-700 hover:text-pink-600 font-medium transition whitespace-nowrap">
+                View Page
               </Link>
-              <Link href="/venues" className="text-gray-700 hover:text-pink-600 font-medium transition">
-                Browse Venues
+              <Link href="/venues" className="text-sm sm:text-base text-gray-700 hover:text-pink-600 font-medium transition whitespace-nowrap hidden sm:inline">
+                Browse
               </Link>
-              <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium transition">
+              <button onClick={handleLogout} className="bg-red-600 hover:bg-red-700 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-sm sm:text-base font-medium transition">
                 Logout
               </button>
             </div>
@@ -294,40 +294,40 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 {isSuper ? 'Super Admin - Manage Venue' : 'Manage Your Venue'}
               </h1>
               <p className="text-gray-600">{venue.name}</p>
-              <div className="mt-2 flex items-center space-x-4 text-sm text-gray-500">
+              <div className="mt-2 flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-500">
                 <span>Photos: {venue.images?.length || 0}/{photoLimit}</span>
                 <span>•</span>
-                <span>Subscription: {authState.user?.subscriptionTier || 'free'}</span>
+                <span>Tier: {authState.user?.subscriptionTier || 'free'}</span>
                 {isSuper && (
                   <>
                     <span>•</span>
-                    <span className="text-purple-600 font-medium">🔑 SUPER ADMIN ACCESS</span>
+                    <span className="text-purple-600 font-medium">🔑 ADMIN</span>
                   </>
                 )}
               </div>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
               {isSuper && (
                 <Link 
                   href="/venues" 
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md font-medium transition"
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-3 sm:px-4 py-2 rounded-md text-sm sm:text-base font-medium transition text-center"
                 >
                   Browse All Venues
                 </Link>
               )}
               <button
                 onClick={handleDeleteVenue}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium transition flex items-center space-x-2"
+                className="bg-red-600 hover:bg-red-700 text-white px-3 sm:px-4 py-2 rounded-md text-sm sm:text-base font-medium transition flex items-center justify-center space-x-2"
                 title="Delete this venue permanently"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
                 <span>Delete Venue</span>
@@ -338,25 +338,26 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
 
         {/* Tabs */}
         <div className="bg-white rounded-lg shadow-sm">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8 px-6">
+          <div className="border-b border-gray-200 overflow-x-auto">
+            <nav className="-mb-px flex space-x-4 sm:space-x-8 px-4 sm:px-6 min-w-max sm:min-w-0">
               {[
-                { id: 'info', label: 'Basic Information', icon: '📝' },
-                { id: 'photos', label: 'Photo Gallery', icon: '📷' },
-                { id: 'pricing', label: 'Pricing & Packages', icon: '💰' },
-                { id: 'availability', label: 'Availability', icon: '📅' }
+                { id: 'info', label: 'Basic Info', icon: '📝', fullLabel: 'Basic Information' },
+                { id: 'photos', label: 'Photos', icon: '📷', fullLabel: 'Photo Gallery' },
+                { id: 'pricing', label: 'Pricing', icon: '💰', fullLabel: 'Pricing & Packages' },
+                { id: 'availability', label: 'Calendar', icon: '📅', fullLabel: 'Availability' }
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm transition ${
+                  className={`py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap transition ${
                     activeTab === tab.id
                       ? 'border-pink-500 text-pink-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
-                  <span className="mr-2">{tab.icon}</span>
-                  {tab.label}
+                  <span className="mr-1 sm:mr-2">{tab.icon}</span>
+                  <span className="hidden sm:inline">{tab.fullLabel}</span>
+                  <span className="sm:hidden">{tab.label}</span>
                 </button>
               ))}
             </nav>
