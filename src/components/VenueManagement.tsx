@@ -134,15 +134,15 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
     router.push('/login');
   };
 
-  const handleDeleteVenue = async () => {
+  const handleDeleteVenue = () => {
     // Confirm deletion
     const confirmed = window.confirm(
       `⚠️ WARNING: Are you sure you want to DELETE "${venue?.name}"?\n\n` +
-      `This will mark the venue as deleted:\n` +
-      `• Venue will be hidden from public view\n` +
-      `• Photos will be preserved\n` +
-      `• Can be restored from admin panel\n\n` +
-      `Continue?`
+      `This will permanently remove:\n` +
+      `• All venue information\n` +
+      `• All photos and media\n` +
+      `• All saved data\n\n` +
+      `This action CANNOT be undone!`
     );
     
     if (!confirmed) return;
@@ -150,29 +150,14 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
     // Double confirmation for safety
     const doubleConfirm = window.confirm(
       `🚨 FINAL CONFIRMATION 🚨\n\n` +
-      `Are you ABSOLUTELY SURE you want to delete "${venue?.name}"?`
+      `Type the venue name to confirm: "${venue?.name}"\n\n` +
+      `Are you ABSOLUTELY SURE you want to delete this venue?`
     );
     
     if (!doubleConfirm) return;
     
     try {
-      console.log('🗑️  Deleting venue:', venueId);
-      
-      // Save to database (for cross-device persistence)
-      try {
-        const { markVenueAsDeleted } = await import('@/lib/supabaseDeletedVenues');
-        await markVenueAsDeleted(
-          venueId,
-          venue?.name || 'Unknown Venue',
-          authState.user?.id || 'unknown',
-          'Deleted by venue owner'
-        );
-        console.log('✅ Venue marked as deleted in database');
-      } catch (dbError) {
-        console.error('⚠️  Database delete failed, using localStorage only:', dbError);
-      }
-      
-      // Also save to localStorage (for backwards compatibility)
+      // Add venue to deleted list
       const deletedVenuesKey = 'deleted-venues';
       const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
       if (!deletedVenues.includes(venueId)) {
@@ -186,7 +171,7 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
       delete venuesData[venueId];
       localStorage.setItem(venuesDataKey, JSON.stringify(venuesData));
       
-      // Remove venue photos from localStorage
+      // Remove venue photos
       const photosKey = 'venue-photos';
       const photosData = JSON.parse(localStorage.getItem(photosKey) || '{}');
       delete photosData[venueId];
@@ -199,7 +184,7 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
       localStorage.setItem(updatesKey, JSON.stringify(updatesData));
       
       console.log('✅ Venue deleted successfully:', venueId);
-      alert(`✅ Venue "${venue?.name}" has been deleted.\n\nIt can be restored from the admin panel if needed.`);
+      alert(`✅ Venue "${venue?.name}" has been permanently deleted.`);
       
       // Redirect to venues list
       router.push('/venues');
