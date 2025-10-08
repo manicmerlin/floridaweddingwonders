@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ClaimsManagement from '@/components/admin/ClaimsManagement';
+import UsersManagement from '@/components/admin/UsersManagement';
 import { isSuperAdmin, getCurrentUser } from '@/lib/auth';
 
 export default function AdminDashboard() {
@@ -262,10 +263,7 @@ export default function AdminDashboard() {
         )}
 
         {activeTab === 'users' && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">User Management</h3>
-            <p className="text-gray-600">User management features coming soon...</p>
-          </div>
+          <UsersManagement />
         )}
       </div>
 
