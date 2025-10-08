@@ -29,47 +29,84 @@ export default function LoginPage() {
     setError('');
 
     try {
-      // Import the auth function dynamically to avoid SSR issues
-      const { loginAsVenueOwner } = await import('@/lib/auth');
+      // Import Supabase client
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://aflrmpkolumpjhpaxblz.supabase.co',
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmbHJtcGtvbHVtcGpocGF4Ymx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY0MjcyMTIsImV4cCI6MjA0MjAwMzIxMn0.y7cCU7LNcanterUpMPU6j5rO_hWJlgEYF3z9FRw00LU'
+      );
       
-      // Check for super admin credentials
+      // Check for super admin credentials first
+      const { loginAsVenueOwner } = await import('@/lib/auth');
       if (email === 'admin@floridaweddingwonders.com' && password === 'admin123') {
         const success = loginAsVenueOwner(email);
         if (success) {
-          // Check for return URL
           const returnUrl = localStorage.getItem('returnUrl');
           if (returnUrl) {
             localStorage.removeItem('returnUrl');
             router.push(returnUrl);
           } else {
-            // Redirect to admin dashboard
             router.push('/admin');
           }
           return;
         }
       }
-      
-      // For venue owners, check if they have valid credentials
-      // For demo purposes, allow any email with password "demo123"
-      if (password === 'demo123') {
-        const success = loginAsVenueOwner(email);
-        if (success) {
-          // Check for return URL
-          const returnUrl = localStorage.getItem('returnUrl');
-          if (returnUrl) {
-            localStorage.removeItem('returnUrl');
-            router.push(returnUrl);
-          } else {
-            // Redirect to venue owner dashboard
-            router.push('/venue-owner/dashboard');
+
+      // Try Supabase Auth login
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        // Try demo mode for venue owners
+        if (password === 'demo123') {
+          const success = loginAsVenueOwner(email);
+          if (success) {
+            const returnUrl = localStorage.getItem('returnUrl');
+            if (returnUrl) {
+              localStorage.removeItem('returnUrl');
+              router.push(returnUrl);
+            } else {
+              router.push('/venue-owner/dashboard');
+            }
+            return;
           }
-          return;
+        }
+        
+        setError('Invalid credentials. Please check your email and password.');
+        setIsLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        // Store user data in localStorage
+        const userData = {
+          id: data.user.id,
+          email: data.user.email,
+          name: data.user.user_metadata?.full_name || '',
+          role: data.user.user_metadata?.role || 'guest',
+          isAuthenticated: true
+        };
+        
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('isAuthenticated', 'true');
+        document.cookie = `auth-token=${data.user.id}; path=/; max-age=86400`;
+
+        // Check for return URL
+        const returnUrl = localStorage.getItem('returnUrl');
+        if (returnUrl) {
+          localStorage.removeItem('returnUrl');
+          router.push(returnUrl);
+        } else {
+          // Redirect based on role
+          if (userData.role === 'venue_owner') {
+            router.push('/venue-owner/dashboard');
+          } else {
+            router.push('/venues');
+          }
         }
       }
-      
-      // For other venue owners, you could add more credentials here
-      // For now, we'll just handle the super admin case
-      setError('Invalid credentials. Please check your email and password.');
       
     } catch (err) {
       setError('An error occurred. Please try again.');

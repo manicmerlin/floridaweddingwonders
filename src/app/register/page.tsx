@@ -52,37 +52,66 @@ export default function Register() {
 
     setIsLoading(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Use Supabase Auth for registration
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://aflrmpkolumpjhpaxblz.supabase.co',
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmbHJtcGtvbHVtcGpocGF4Ymx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY0MjcyMTIsImV4cCI6MjA0MjAwMzIxMn0.y7cCU7LNcanterUpMPU6j5rO_hWJlgEYF3z9FRw00LU'
+      );
 
-    // In a real app, this would make an API call to register the user
-    const userData = {
-      id: Math.random().toString(36).substr(2, 9),
-      email: formData.email,
-      name: formData.name,
-      role: formData.role,
-      isAuthenticated: true
-    };
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+            role: formData.role
+          }
+        }
+      });
 
-    // Store user data (in production, this would be handled by your auth service)
-    localStorage.setItem('user', JSON.stringify(userData));
-    document.cookie = `auth-token=${userData.id}; path=/; max-age=86400`; // 24 hours
-
-    setIsLoading(false);
-
-    // Check for return URL first
-    const returnUrl = localStorage.getItem('returnUrl');
-    if (returnUrl) {
-      localStorage.removeItem('returnUrl');
-      router.push(returnUrl);
-    } else {
-      // Redirect based on role
-      if (formData.role === 'venue_owner') {
-        router.push('/venue-owner/dashboard');
-      } else {
-        // For guests, redirect to profile completion to fill out lead qualification
-        router.push('/guest/complete-profile');
+      if (error) {
+        setErrors({ email: error.message });
+        setIsLoading(false);
+        return;
       }
+
+      if (data.user) {
+        // Store user data in localStorage for quick access
+        const userData = {
+          id: data.user.id,
+          email: data.user.email,
+          name: formData.name,
+          role: formData.role,
+          isAuthenticated: true
+        };
+        
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('isAuthenticated', 'true');
+        document.cookie = `auth-token=${data.user.id}; path=/; max-age=86400`;
+
+        setIsLoading(false);
+
+        // Check for return URL first
+        const returnUrl = localStorage.getItem('returnUrl');
+        if (returnUrl) {
+          localStorage.removeItem('returnUrl');
+          router.push(returnUrl);
+        } else {
+          // Redirect based on role
+          if (formData.role === 'venue_owner') {
+            router.push('/venue-owner/dashboard');
+          } else {
+            // For guests, redirect to profile completion to fill out lead qualification
+            router.push('/guest/complete-profile');
+          }
+        }
+      }
+    } catch (err: any) {
+      console.error('Registration error:', err);
+      setErrors({ email: 'An error occurred during registration. Please try again.' });
+      setIsLoading(false);
     }
   };
 

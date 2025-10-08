@@ -14,15 +14,23 @@ export default function Navigation() {
 
   useEffect(() => {
     setIsSuper(isSuperAdmin());
+    
+    // Check for both venue owner auth and guest user auth
     const { isAuthenticated: authStatus } = getCurrentUser();
-    setIsAuthenticated(authStatus);
+    const guestUser = localStorage.getItem('user');
+    
+    // User is authenticated if either venue owner auth OR guest user exists
+    const isAuth = authStatus || (guestUser && JSON.parse(guestUser).isAuthenticated);
+    setIsAuthenticated(isAuth);
   }, []);
 
   const handleLogout = () => {
     logout();
     setIsSuper(false);
     setIsAuthenticated(false);
-    window.location.href = '/'; // Redirect to home page
+    
+    // Force a full page reload to clear all state
+    window.location.href = '/';
   };
 
   const isActive = (path: string) => {
@@ -70,6 +78,12 @@ export default function Navigation() {
             ))}
             {isAuthenticated ? (
               <>
+                <Link
+                  href="/favorites"
+                  className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-medium transition"
+                >
+                  View Saved
+                </Link>
                 {isSuper && (
                   <Link
                     href="/admin"
@@ -148,6 +162,13 @@ export default function Navigation() {
               ))}
               {isAuthenticated ? (
                 <>
+                  <Link
+                    href="/favorites"
+                    className="block px-3 py-2 mx-3 mt-2 bg-pink-600 hover:bg-pink-700 text-white rounded-md text-base font-medium text-center transition"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    View Saved
+                  </Link>
                   {isSuper && (
                     <Link
                       href="/admin"

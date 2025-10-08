@@ -169,13 +169,27 @@ export function loginAsVenueOwner(email: string, venueId?: string): boolean {
 }
 
 export function logout(): void {
+  // Clear localStorage
   localStorage.removeItem('isSuperAdmin');
   localStorage.removeItem('isAuthenticated');
   localStorage.removeItem('userEmail');
+  localStorage.removeItem('user');
   
-  // Also clear cookies
+  // Clear cookies
   document.cookie = 'venue-owner-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
   document.cookie = 'venue-owner-email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  
+  // Sign out from Supabase
+  if (typeof window !== 'undefined') {
+    import('@supabase/supabase-js').then(({ createClient }) => {
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://aflrmpkolumpjhpaxblz.supabase.co',
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmbHJtcGtvbHVtcGpocGF4Ymx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY0MjcyMTIsImV4cCI6MjA0MjAwMzIxMn0.y7cCU7LNcanterUpMPU6j5rO_hWJlgEYF3z9FRw00LU'
+      );
+      supabase.auth.signOut();
+    });
+  }
 }
 
 export function upgradeSubscription(venueId: string, newTier: 'premium' | 'enterprise'): boolean {
