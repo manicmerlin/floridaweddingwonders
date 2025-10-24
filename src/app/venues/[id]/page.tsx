@@ -12,6 +12,7 @@ import VenueContactForm from '../../../components/VenueContactForm';
 import SaveVenueButton from '../../../components/SaveVenueButton';
 import { mockVenues } from '../../../lib/mockData';
 import { loadVenuePhotosFromStorage } from '../../../lib/photoStorage';
+import { useVenueAnalytics, trackVenueAction } from '../../../hooks/useVenueAnalytics';
 import { Venue } from '../../../types';
 
 // Helper function to check if a venue has been deleted
@@ -37,6 +38,9 @@ export default function VenueDetailPage() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   const [showContactForm, setShowContactForm] = useState(false);
+
+  // Track venue page view
+  useVenueAnalytics(venue?.id || null);
 
   useEffect(() => {
     async function loadVenue() {

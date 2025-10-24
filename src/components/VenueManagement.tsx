@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Venue } from '@/types';
 import { mockVenues } from '@/lib/mockData';
 import PhotoUpload from '@/components/PhotoUpload';
+import VenueAnalyticsPanel from '@/components/VenueAnalyticsPanel';
 import { getCurrentUser, canManageVenue, getPhotoLimit, logout, isSuperAdmin } from '@/lib/auth';
 import { loadVenuePhotosFromStorage, saveVenuePhotos, initializeVenuePhotos } from '@/lib/photoStorage';
 
@@ -16,7 +17,7 @@ interface VenueManagementProps {
 export default function VenueManagement({ venueId }: VenueManagementProps) {
   const router = useRouter();
   const [venue, setVenue] = useState<Venue | null>(null);
-  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'pricing' | 'availability'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'photos' | 'pricing' | 'availability' | 'analytics'>('info');
   const [saving, setSaving] = useState(false);
   const [authState, setAuthState] = useState<{ user: any; isAuthenticated: boolean }>({ user: null, isAuthenticated: false });
   const [accessDenied, setAccessDenied] = useState(false);
@@ -344,7 +345,8 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
                 { id: 'info', label: 'Basic Info', icon: '📝', fullLabel: 'Basic Information' },
                 { id: 'photos', label: 'Photos', icon: '📷', fullLabel: 'Photo Gallery' },
                 { id: 'pricing', label: 'Pricing', icon: '💰', fullLabel: 'Pricing & Packages' },
-                { id: 'availability', label: 'Calendar', icon: '📅', fullLabel: 'Availability' }
+                { id: 'availability', label: 'Calendar', icon: '📅', fullLabel: 'Availability' },
+                { id: 'analytics', label: 'Analytics', icon: '📊', fullLabel: 'Analytics & Insights' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -542,6 +544,11 @@ export default function VenueManagement({ venueId }: VenueManagementProps) {
                   </p>
                 </div>
               </div>
+            )}
+
+            {/* Analytics Tab */}
+            {activeTab === 'analytics' && venue && (
+              <VenueAnalyticsPanel venueId={venue.id} />
             )}
 
             {/* Save Button */}
