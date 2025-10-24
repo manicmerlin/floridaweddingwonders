@@ -15,29 +15,15 @@ import { loadVenuePhotosFromStorage } from '../../../lib/photoStorage';
 import { Venue } from '../../../types';
 
 // Helper function to check if a venue has been deleted
-async function isVenueDeleted(venueId: string): Promise<boolean> {
+function isVenueDeleted(venueId: string): boolean {
   if (typeof window === 'undefined') return false;
   
   try {
-    // Check database first
-    const { isVenueDeletedInDatabase } = await import('@/lib/supabaseDeletedVenues');
-    const deletedInDb = await isVenueDeletedInDatabase(venueId);
-    if (deletedInDb) return true;
-    
-    // Fallback to localStorage
     const deletedVenuesKey = 'deleted-venues';
     const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
     return deletedVenues.includes(venueId);
-  } catch (error) {
-    console.error('Error checking if venue is deleted:', error);
-    // Fallback to localStorage only
-    try {
-      const deletedVenuesKey = 'deleted-venues';
-      const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
-      return deletedVenues.includes(venueId);
-    } catch {
-      return false;
-    }
+  } catch {
+    return false;
   }
 }
 
@@ -80,8 +66,7 @@ export default function VenueDetailPage() {
         // Load stored photos for this venue if found
         if (foundVenue) {
           // Check if venue has been deleted
-          const deleted = await isVenueDeleted(foundVenue.id);
-          if (deleted) {
+          if (isVenueDeleted(foundVenue.id)) {
             console.log('Venue has been deleted, redirecting...');
             router.push('/venues');
             return;
