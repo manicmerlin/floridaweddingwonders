@@ -95,21 +95,12 @@ export default function VendorsPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600/80 via-pink-600/80 to-emerald-600/80 backdrop-blur-sm py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
-            Wedding Vendors in Florida
-          </h1>
-          <p className="text-xl lg:text-2xl text-purple-100 max-w-4xl mx-auto mb-8">
-            Connect with trusted wedding professionals across South Florida. From photographers to caterers, find everything you need for your perfect day.
-          </p>
-        </div>
-      </section>
-
-      {/* Search and Filters */}
+      {/* Header and Search Section */}
       <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 text-center">
+            Wedding Vendors in Florida
+          </h1>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="md:col-span-2">
               <input

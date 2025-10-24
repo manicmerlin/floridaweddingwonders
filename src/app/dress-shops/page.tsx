@@ -67,51 +67,12 @@ export default function DressShopsPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-pink-600/80 via-purple-600/80 to-rose-600/80 backdrop-blur-sm py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+      {/* Header and Search Section */}
+      <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 text-center">
             Bridal Shops in Florida
           </h1>
-          <p className="text-xl lg:text-2xl text-pink-100 max-w-4xl mx-auto mb-8">
-            Discover 31 premier bridal boutiques across South Florida. From designer gowns to custom creations, find your perfect dress.
-          </p>
-          
-          {/* Search and Filter Bar */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <input
-                  type="text"
-                  placeholder="Search dress shops..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
-                />
-              </div>
-              <div>
-                <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
-                >
-                  <option value="">All Shop Types</option>
-                  <option value="Bridal Boutique">Bridal Boutique</option>
-                  <option value="Designer Showroom">Designer Showroom</option>
-                  <option value="Custom Bridal">Custom Bridal</option>
-                  <option value="Plus Size Specialist">Plus Size Specialist</option>
-                  <option value="Luxury Bridal">Luxury Bridal</option>
-                  <option value="Department Store">Department Store</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Search and Filters */}
-      <section className="py-8 bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-6">
             <div className="md:col-span-2">
               <input
