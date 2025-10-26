@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
@@ -8,8 +6,6 @@ import SEO from '@/components/SEO';
 import { getAllPosts, formatDate, calculateReadingTime } from '@/lib/blog';
 
 export default function BlogPage() {
-  // In a real app, this would be server-side
-  // For now, we'll handle it client-side
   const posts = getAllPosts();
 
   return (

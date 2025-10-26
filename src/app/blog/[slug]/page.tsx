@@ -1,88 +1,32 @@
-'use client';
-
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { getPostBySlug, getAllPosts, formatDate, calculateReadingTime, BlogPost } from '@/lib/blog';
+import { getPostBySlug, getAllPosts, formatDate, calculateReadingTime } from '@/lib/blog';
 import { generateArticleSchema } from '@/lib/seo';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-export default function BlogPostPage() {
-  const params = useParams();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [contentHtml, setContentHtml] = useState<string>('');
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadPost() {
-      if (params.slug) {
-        const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
-        const postData = getPostBySlug(slug);
-        
-        if (postData) {
-          // Convert markdown to HTML
-          const processedContent = await remark()
-            .use(html)
-            .process(postData.content);
-          setContentHtml(processedContent.toString());
-          setPost(postData);
-
-          // Get related posts (same category, exclude current)
-          const allPosts = getAllPosts();
-          const related = allPosts
-            .filter(p => p.slug !== slug && p.category === postData.category)
-            .slice(0, 3);
-          setRelatedPosts(related);
-        }
-        
-        setLoading(false);
-      }
-    }
-
-    loadPost();
-  }, [params.slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-pink-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading article...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = getPostBySlug(params.slug);
+  
   if (!post) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="text-center">
-            <div className="text-gray-400 text-6xl mb-4">📝</div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Post Not Found</h1>
-            <p className="text-gray-600 mb-6">The blog post you're looking for doesn't exist.</p>
-            <Link
-              href="/blog"
-              className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition"
-            >
-              Back to Blog
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
+    notFound();
   }
+
+  // Convert markdown to HTML
+  const processedContent = await remark()
+    .use(html)
+    .process(post.content);
+  const contentHtml = processedContent.toString();
+
+  // Get related posts (same category, exclude current)
+  const allPosts = getAllPosts();
+  const relatedPosts = allPosts
+    .filter(p => p.slug !== params.slug && p.category === post.category)
+    .slice(0, 3);
 
   // Generate Article structured data
   const articleSchema = generateArticleSchema({
