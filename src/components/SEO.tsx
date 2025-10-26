@@ -7,7 +7,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { SITE_CONFIG } from '@/lib/seo';
+import { SITE_CONFIG, generateHreflangLinks } from '@/lib/seo';
 
 interface SEOProps {
   title: string;
@@ -18,6 +18,7 @@ interface SEOProps {
   keywords?: string[];
   noindex?: boolean;
   jsonLd?: object | object[];
+  path?: string; // Current page path for hreflang generation
 }
 
 export default function SEO({
@@ -29,6 +30,7 @@ export default function SEO({
   keywords = [],
   noindex = false,
   jsonLd,
+  path = '/',
 }: SEOProps) {
   const fullTitle = title.includes(SITE_CONFIG.name) ? title : `${title} | ${SITE_CONFIG.name}`;
   const url = canonical || SITE_CONFIG.url;
@@ -70,6 +72,8 @@ export default function SEO({
     updateMetaTag('meta[property="og:type"]', 'content', ogType);
     updateMetaTag('meta[property="og:image"]', 'content', ogImage);
     updateMetaTag('meta[property="og:site_name"]', 'content', SITE_CONFIG.name);
+    updateMetaTag('meta[property="og:locale"]', 'content', 'en_US');
+    updateMetaTag('meta[property="og:locale:alternate"]', 'content', 'es_ES');
     
     // Twitter Card
     updateMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
@@ -86,6 +90,20 @@ export default function SEO({
     }
     canonicalLink.setAttribute('href', url);
     
+    // Remove existing hreflang links
+    const existingHreflangs = document.querySelectorAll('link[rel="alternate"][hreflang]');
+    existingHreflangs.forEach(link => link.remove());
+    
+    // Add hreflang links for multilingual support
+    const hreflangLinks = generateHreflangLinks(path);
+    hreflangLinks.forEach(({ hreflang, href }) => {
+      const link = document.createElement('link');
+      link.setAttribute('rel', 'alternate');
+      link.setAttribute('hreflang', hreflang);
+      link.setAttribute('href', href);
+      document.head.appendChild(link);
+    });
+    
     // JSON-LD
     if (jsonLd) {
       const scriptId = 'json-ld-script';
@@ -98,7 +116,7 @@ export default function SEO({
       }
       script.textContent = JSON.stringify(Array.isArray(jsonLd) ? jsonLd : [jsonLd]);
     }
-  }, [fullTitle, description, url, ogImage, ogType, keywords, noindex, jsonLd]);
+  }, [fullTitle, description, url, ogImage, ogType, keywords, noindex, jsonLd, path]);
 
   return null;
 }

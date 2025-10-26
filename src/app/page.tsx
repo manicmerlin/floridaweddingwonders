@@ -11,6 +11,7 @@ export default function HomePage() {
         title="Florida Wedding Wonders - Premier Wedding Venues in Florida"
         description="Discover Florida's most beautiful wedding venues, trusted vendors, and elegant bridal shops. From beachfront ceremonies to historic estates, find your perfect wedding venue in the Sunshine State."
         canonical="https://floridaweddingwonders.com"
+        path="/"
         keywords={[
           'Florida wedding venues',
           'wedding venues Florida',

@@ -21,7 +21,44 @@ export const SITE_CONFIG = {
   twitter: '@flweddingwonder',
   facebook: 'floridaweddingwonders',
   instagram: 'floridaweddingwonders',
+  languages: ['en', 'es'],
+  defaultLanguage: 'en',
 };
+
+// ============================================================================
+// HREFLANG HELPERS
+// ============================================================================
+
+/**
+ * Generate hreflang alternate links for a page
+ */
+export function generateHreflangLinks(path: string = '/'): Array<{
+  hreflang: string;
+  href: string;
+}> {
+  const baseUrl = SITE_CONFIG.url;
+  
+  // Remove leading slash if present
+  const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+  
+  return [
+    // x-default (fallback) - always points to English version
+    {
+      hreflang: 'x-default',
+      href: `${baseUrl}/${cleanPath}`,
+    },
+    // English version
+    {
+      hreflang: 'en',
+      href: `${baseUrl}/${cleanPath}`,
+    },
+    // Spanish version
+    {
+      hreflang: 'es',
+      href: `${baseUrl}/es/${cleanPath}`,
+    },
+  ];
+}
 
 // ============================================================================
 // METADATA GENERATORS

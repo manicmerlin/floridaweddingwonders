@@ -28,6 +28,11 @@ export default function RootLayout({
         {/* Theme Color */}
         <meta name="theme-color" content="#1e3a8a" />
         
+        {/* Hreflang tags for multilingual support */}
+        <link rel="alternate" hrefLang="x-default" href="https://floridaweddingwonders.com" />
+        <link rel="alternate" hrefLang="en" href="https://floridaweddingwonders.com" />
+        <link rel="alternate" hrefLang="es" href="https://floridaweddingwonders.com/es" />
+        
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-5WN9B7HLTH"

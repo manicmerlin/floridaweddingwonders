@@ -139,6 +139,7 @@ export default function VenuesPage() {
         title="Wedding Venues in Florida"
         description="Browse hundreds of stunning wedding venues across Florida. From Miami to Orlando, find beachfront resorts, historic estates, gardens, and more for your perfect wedding day."
         canonical="https://floridaweddingwonders.com/venues"
+        path="/venues"
         keywords={[
           'Florida wedding venues',
           'wedding venues near me',

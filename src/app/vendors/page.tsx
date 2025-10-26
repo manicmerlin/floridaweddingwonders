@@ -99,6 +99,7 @@ export default function VendorsPage() {
         title="Wedding Vendors in Florida | Photographers, Caterers & More"
         description="Find trusted wedding vendors in Florida. Browse photographers, caterers, DJs, florists, and all the professionals you need for your perfect wedding day."
         canonical="https://floridaweddingwonders.com/vendors"
+        path="/vendors"
         keywords={[
           'Florida wedding vendors',
           'wedding photographers Florida',
