@@ -6,6 +6,7 @@ import ImageCropper from './ImageCropper';
 import { ImageUploadManager, processImage, ImageUploadError } from '@/lib/imageUpload';
 import { processVideo, VideoProcessingError, isVideoFile, isImageFile, formatDuration } from '@/lib/videoUtils';
 import { VenueMedia } from '@/types';
+import { useIndexNow } from '@/hooks/useIndexNow';
 
 interface MediaFile {
   id: string;
@@ -49,6 +50,7 @@ export default function PhotoUpload({
   const fileLimit = isPremium ? maxFiles : 3; // Increased from 2 to 3 for free users to allow 1 video
   const [mediaFiles, setMediaFiles] = useState<MediaFile[]>(existingMedia);
   const [dragActive, setDragActive] = useState(false);
+  const { notifyVenueUpdate } = useIndexNow();
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<UploadProgress | null>(null);
   const [pendingCrop, setPendingCrop] = useState<PendingCrop | null>(null);
@@ -190,6 +192,11 @@ export default function PhotoUpload({
       const updatedMediaFiles = [...mediaFiles, newMediaFile];
       setMediaFiles(updatedMediaFiles);
       onMediaUpdate(updatedMediaFiles);
+      
+      // Notify search engines of venue update
+      notifyVenueUpdate(venueId).catch(err => 
+        console.error('Failed to notify search engines:', err)
+      );
       
     } catch (error) {
       console.error('❌ Upload failed:', error);
