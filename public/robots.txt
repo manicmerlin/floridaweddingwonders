@@ -1,0 +1,83 @@
+# Robots.txt for Florida Wedding Wonders
+# https://floridaweddingwonders.com
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Block private admin areas
+Disallow: /admin/
+Disallow: /admin
+Disallow: /api/
+
+# Block authentication pages
+Disallow: /login
+Disallow: /register
+Disallow: /guest/
+Disallow: /venue-owner/
+Disallow: /vendor-owner/
+
+# Block user-specific pages
+Disallow: /favorites
+Disallow: /saved-venues
+
+# Block claim/manage pages (private functionality)
+Disallow: /venues/*/manage
+Disallow: /venues/*/claim
+Disallow: /dress-shops/*/manage
+Disallow: /dress-shops/*/claim
+
+# Explicitly allow important resources
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+
+# Allow all images and fonts
+Allow: /images/
+Allow: /fonts/
+Allow: /_next/static/
+Allow: /_next/image
+
+# Special rules for major search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /guest/
+Disallow: /venue-owner/
+Disallow: /vendor-owner/
+
+# Allow Google to crawl all images
+User-agent: Googlebot-Image
+Allow: /
+
+# Allow Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+
+# Block bad bots (optional - can help reduce server load)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://floridaweddingwonders.com/sitemap.xml
