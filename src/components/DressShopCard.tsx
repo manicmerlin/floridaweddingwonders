@@ -65,16 +65,18 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
         {primaryImage ? (
           <Image
             src={primaryImage.url}
-            alt={primaryImage.alt}
+            alt={`${shop.name} - ${shop.shopType} bridal shop in Florida`}
             fill
             className="object-cover hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            loading="lazy"
+            quality={85}
           />
         ) : (
           // Fallback to gradient if no image available
-          <div className={`h-full bg-gradient-to-br ${gradientColors} flex items-center justify-center`}>
+          <div className={`h-full bg-gradient-to-br ${gradientColors} flex items-center justify-center`} role="img" aria-label={`${shop.name} - ${shop.shopType} bridal shop`}>
             <div className="text-center text-white p-4">
-              <div className="text-2xl mb-2">
+              <div className="text-2xl mb-2" aria-hidden="true">
                 {shop.shopType === 'boutique' ? '👗' : 
                  shop.shopType === 'department' ? '🏬' :
                  shop.shopType === 'designer' ? '✨' :

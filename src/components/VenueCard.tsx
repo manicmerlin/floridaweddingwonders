@@ -64,16 +64,18 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
         {primaryImage ? (
           <Image
             src={primaryImage.url}
-            alt={primaryImage.alt}
+            alt={`${venueWithPhotos.name} - ${venueWithPhotos.venueType} wedding venue in ${venueWithPhotos.address.city}, Florida`}
             fill
             className="object-cover hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            loading="lazy"
+            quality={85}
           />
         ) : (
           // Fallback to bride and groom emoji if no image available
-          <div className="h-full bg-gray-100 flex items-center justify-center">
+          <div className="h-full bg-gray-100 flex items-center justify-center" role="img" aria-label={`${venueWithPhotos.name} - Photo coming soon`}>
             <div className="text-center text-gray-600 p-4">
-              <div className="text-6xl mb-2">
+              <div className="text-6xl mb-2" aria-hidden="true">
                 👰🤵
               </div>
               <div className="text-sm font-medium leading-tight text-gray-500">No Photo Yet</div>

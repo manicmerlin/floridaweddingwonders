@@ -31,14 +31,18 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
   const isDataURL = (url: string) => url.startsWith('data:');
 
   // Helper to render image - use img tag for data URLs, Image component for regular URLs
-  const renderImage = (url: string, alt: string, className: string, priority?: boolean) => {
+  const renderImage = (url: string, alt: string, className: string, priority?: boolean, index?: number) => {
+    // Generate better alt text if needed
+    const enhancedAlt = alt || `${venueName} - Photo ${index !== undefined ? index + 1 : ''}`;
+    
     if (isDataURL(url)) {
       // Use regular img tag for data URLs (Next.js Image doesn't support them well)
       return (
         <img
           src={url}
-          alt={alt}
+          alt={enhancedAlt}
           className={className}
+          loading={priority ? 'eager' : 'lazy'}
         />
       );
     } else {
@@ -46,11 +50,14 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
       return (
         <Image
           src={url}
-          alt={alt}
+          alt={enhancedAlt}
           width={800}
           height={500}
           className={className}
           priority={priority}
+          loading={priority ? undefined : 'lazy'}
+          quality={90}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
         />
       );
     }
@@ -64,9 +71,10 @@ export default function PhotoGallery({ images, venueName }: PhotoGalleryProps) {
         <div className="w-full aspect-w-16 aspect-h-10 mb-4">
           {renderImage(
             images[selectedImage].url,
-            images[selectedImage].alt,
+            images[selectedImage].alt || `${venueName} - Main photo`,
             "w-full h-64 sm:h-80 object-cover rounded-lg",
-            true
+            selectedImage === 0, // Priority load only first image
+            selectedImage
           )}
         </div>
         
