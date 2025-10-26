@@ -81,6 +81,7 @@ export default function AdminDashboard() {
     { id: 'claims', label: 'Venue Claims', icon: '🏛️' },
     { id: 'venues', label: 'Venue Management', icon: '⚙️' },
     { id: 'users', label: 'User Management', icon: '👥' },
+    { id: 'seo', label: 'SEO Tools', icon: '🔍' },
   ];
 
   return (
@@ -217,6 +218,19 @@ export default function AdminDashboard() {
                         </div>
                       </div>
                     </Link>
+
+                    <Link
+                      href="/admin/indexnow"
+                      className="block w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="flex items-center">
+                        <span className="text-2xl mr-3">🔍</span>
+                        <div>
+                          <p className="font-medium text-gray-900">IndexNow Manager</p>
+                          <p className="text-sm text-gray-600">Notify search engines of content updates</p>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -264,6 +278,84 @@ export default function AdminDashboard() {
 
         {activeTab === 'users' && (
           <UsersManagement />
+        )}
+
+        {activeTab === 'seo' && (
+          <div className="space-y-6">
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">SEO & Search Engine Tools</h3>
+              <p className="text-gray-600 mb-6">
+                Manage search engine optimization and indexing for your content.
+              </p>
+
+              <div className="space-y-3">
+                <Link
+                  href="/admin/indexnow"
+                  className="block p-4 rounded-lg border border-gray-200 hover:border-pink-300 hover:bg-pink-50 transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="text-3xl mr-4">🔍</span>
+                      <div>
+                        <p className="font-medium text-gray-900">IndexNow Manager</p>
+                        <p className="text-sm text-gray-600">
+                          Instantly notify search engines (Bing, Yandex) when content updates
+                        </p>
+                      </div>
+                    </div>
+                    <svg
+                      className="w-5 h-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </Link>
+
+                <div className="p-4 rounded-lg border border-gray-200 bg-gray-50">
+                  <div className="flex items-center">
+                    <span className="text-3xl mr-4 opacity-50">📊</span>
+                    <div>
+                      <p className="font-medium text-gray-500">Analytics Dashboard</p>
+                      <p className="text-sm text-gray-400">Coming soon...</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-lg border border-gray-200 bg-gray-50">
+                  <div className="flex items-center">
+                    <span className="text-3xl mr-4 opacity-50">🗺️</span>
+                    <div>
+                      <p className="font-medium text-gray-500">Sitemap Manager</p>
+                      <p className="text-sm text-gray-400">Coming soon...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 className="font-semibold text-blue-900 mb-2">💡 About IndexNow</h4>
+              <p className="text-sm text-blue-800 mb-2">
+                IndexNow is a protocol that allows you to instantly notify search engines when content
+                is created, updated, or deleted. This helps your changes get indexed faster than
+                waiting for crawlers to discover them naturally.
+              </p>
+              <ul className="text-sm text-blue-800 list-disc list-inside space-y-1">
+                <li>Submit individual URLs or batch submit up to 10,000 URLs</li>
+                <li>Supports Bing, Yandex, Seznam.cz, Naver, and more</li>
+                <li>Automatic notifications on venue photo uploads</li>
+                <li>Faster indexing = Better SEO = More traffic</li>
+              </ul>
+            </div>
+          </div>
         )}
       </div>
 
