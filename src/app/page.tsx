@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import SEO from '@/components/SEO';
+import FAQ from '@/components/FAQ';
 import { generateWebsiteSchema, generateOrganizationSchema } from '@/lib/seo';
 
 export default function HomePage() {
@@ -126,6 +127,34 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* FAQ Section */}
+      <section className="relative z-10 py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Common Questions About Florida Weddings
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Get expert answers to the most frequently asked questions about planning your perfect Florida wedding.
+            </p>
+          </div>
+          
+          <FAQ 
+            showCategoryFilter={false} 
+            maxItems={5}
+          />
+          
+          <div className="text-center mt-8">
+            <a
+              href="/faq"
+              className="inline-block px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg transition-colors"
+            >
+              View All FAQs →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="relative z-10 bg-gray-900/50 backdrop-blur-sm text-white py-12 border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6">
@@ -152,6 +181,8 @@ export default function HomePage() {
                 <li><a href="/venues" className="hover:text-white transition-colors">Wedding Venues</a></li>
                 <li><a href="/vendors" className="hover:text-white transition-colors">Wedding Vendors</a></li>
                 <li><a href="/dress-shops" className="hover:text-white transition-colors">Bridal Shops</a></li>
+                <li><a href="/blog" className="hover:text-white transition-colors">Wedding Blog</a></li>
+                <li><a href="/faq" className="hover:text-white transition-colors">FAQs</a></li>
                 <li><a href="/venue-packages" className="hover:text-white transition-colors">List Your Venue</a></li>
               </ul>
             </div>
