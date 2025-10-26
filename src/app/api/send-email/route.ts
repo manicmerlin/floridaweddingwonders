@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../lib/supabase';
 import { sendCompleteEmailFlow } from '../../../lib/emailNotifications';
+import { EmailSchema, validateData, sanitizeEmail } from '../../../lib/validation';
 
 async function handleClaimEmails(to: string, subject: string, type: string, data: any) {
   try {
@@ -37,33 +38,25 @@ export async function POST(request: NextRequest) {
       return await handleClaimEmails(to, subject, type, data);
     }
 
-    // Validate required fields
-    if (!email || !type) {
+    // Validate email data using Zod schema
+    const validation = await validateData(EmailSchema, { email, type, venueName });
+    
+    if (!validation.success) {
+      console.error('❌ Validation failed:', validation.errors);
       return NextResponse.json(
-        { error: 'Email and type are required' },
+        { 
+          error: 'Invalid input data', 
+          details: validation.errors 
+        },
         { status: 400 }
       );
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
-      );
-    }
-
-    // Validate type
-    if (!['regular_user', 'venue_owner'].includes(type)) {
-      return NextResponse.json(
-        { error: 'Invalid user type' },
-        { status: 400 }
-      );
-    }
+    const validatedData = validation.data;
+    const sanitizedEmail = sanitizeEmail(validatedData.email);
 
     // If venue_owner, validate venue name is provided
-    if (type === 'venue_owner' && !venueName) {
+    if (validatedData.type === 'venue_owner' && !validatedData.venueName) {
       return NextResponse.json(
         { error: 'Venue name is required for venue owners' },
         { status: 400 }
@@ -79,7 +72,7 @@ export async function POST(request: NextRequest) {
     const { data: existingSubscriber, error: checkError } = await supabase
       .from('email_subscribers')
       .select('id, email, is_venue_owner')
-      .eq('email', email)
+      .eq('email', sanitizedEmail)
       .single();
 
     if (checkError && checkError.code !== 'PGRST116') { // PGRST116 is "not found" error
@@ -93,7 +86,7 @@ export async function POST(request: NextRequest) {
     // If subscriber already exists
     if (existingSubscriber) {
       // If they're already a venue owner, don't allow downgrade
-      if (existingSubscriber.is_venue_owner && type === 'regular_user') {
+      if (existingSubscriber.is_venue_owner && validatedData.type === 'regular_user') {
         return NextResponse.json(
           { error: 'Email already registered as venue owner' },
           { status: 400 }
@@ -101,14 +94,14 @@ export async function POST(request: NextRequest) {
       }
       
       // If they're upgrading from regular user to venue owner, update the record
-      if (!existingSubscriber.is_venue_owner && type === 'venue_owner') {
+      if (!existingSubscriber.is_venue_owner && validatedData.type === 'venue_owner') {
         const { error: updateError } = await supabase
           .from('email_subscribers')
           .update({
             is_venue_owner: true,
-            venue_name: venueName,
+            venue_name: validatedData.venueName,
           })
-          .eq('email', email);
+          .eq('email', sanitizedEmail);
 
         if (updateError) {
           console.error('Database update error:', updateError);
@@ -129,9 +122,9 @@ export async function POST(request: NextRequest) {
       const { error: insertError } = await supabase
         .from('email_subscribers')
         .insert({
-          email,
-          venue_name: type === 'venue_owner' ? venueName : null,
-          is_venue_owner: type === 'venue_owner',
+          email: sanitizedEmail,
+          venue_name: validatedData.type === 'venue_owner' ? validatedData.venueName : null,
+          is_venue_owner: validatedData.type === 'venue_owner',
         });
 
       if (insertError) {
@@ -146,9 +139,9 @@ export async function POST(request: NextRequest) {
     // Send emails (admin notification + user welcome)
     console.log('📧 Sending emails...');
     const emailResult = await sendCompleteEmailFlow(
-      type as 'venue_owner' | 'regular_user',
-      email,
-      venueName
+      validatedData.type as 'venue_owner' | 'regular_user',
+      sanitizedEmail,
+      validatedData.venueName
     );
 
     if (!emailResult.success) {
@@ -161,9 +154,9 @@ export async function POST(request: NextRequest) {
 
     // Log successful registration
     console.log('Email capture successful:', {
-      email,
-      type,
-      venueName: type === 'venue_owner' ? venueName : undefined,
+      email: sanitizedEmail,
+      type: validatedData.type,
+      venueName: validatedData.type === 'venue_owner' ? validatedData.venueName : undefined,
       emailSent: emailResult.success,
       timestamp: new Date().toISOString()
     });
