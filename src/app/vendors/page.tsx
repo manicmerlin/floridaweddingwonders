@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
+import SEO from '@/components/SEO';
+import { generateBreadcrumbSchema } from '@/lib/seo';
 
 // Import vendor data
 import vendorData from '../../data/vendors.json';
@@ -92,7 +94,26 @@ export default function VendorsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
+    <>
+      <SEO
+        title="Wedding Vendors in Florida | Photographers, Caterers & More"
+        description="Find trusted wedding vendors in Florida. Browse photographers, caterers, DJs, florists, and all the professionals you need for your perfect wedding day."
+        canonical="https://floridaweddingwonders.com/vendors"
+        keywords={[
+          'Florida wedding vendors',
+          'wedding photographers Florida',
+          'wedding caterers Florida',
+          'wedding DJs Florida',
+          'wedding florists Florida',
+          'wedding planners Florida',
+          'wedding vendors near me',
+        ]}
+        jsonLd={generateBreadcrumbSchema([
+          { name: 'Home', url: 'https://floridaweddingwonders.com' },
+          { name: 'Wedding Vendors', url: 'https://floridaweddingwonders.com/vendors' },
+        ])}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
       
       {/* Header and Search Section */}
@@ -324,5 +345,6 @@ export default function VendorsPage() {
 
       <Footer />
     </div>
+    </>
   );
 }

@@ -5,8 +5,10 @@ import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { mockVenues } from '@/lib/mockData';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
+import { generateBreadcrumbSchema } from '@/lib/seo';
 
 // Helper function to check if a venue has been deleted
 function isVenueDeleted(venueId: string): boolean {
@@ -132,7 +134,27 @@ export default function VenuesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
+    <>
+      <SEO
+        title="Wedding Venues in Florida"
+        description="Browse hundreds of stunning wedding venues across Florida. From Miami to Orlando, find beachfront resorts, historic estates, gardens, and more for your perfect wedding day."
+        canonical="https://floridaweddingwonders.com/venues"
+        keywords={[
+          'Florida wedding venues',
+          'wedding venues near me',
+          'South Florida venues',
+          'beach wedding venues',
+          'garden wedding venues Florida',
+          'historic wedding venues Florida',
+          'outdoor wedding venues Florida',
+          'wedding reception venues',
+        ]}
+        jsonLd={generateBreadcrumbSchema([
+          { name: 'Home', url: 'https://floridaweddingwonders.com' },
+          { name: 'Wedding Venues', url: 'https://floridaweddingwonders.com/venues' },
+        ])}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
 
       {/* Search and Filters */}
@@ -272,5 +294,6 @@ export default function VenuesPage() {
 
       <Footer />
     </div>
+    </>
   );
 }

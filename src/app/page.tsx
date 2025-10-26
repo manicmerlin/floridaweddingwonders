@@ -1,10 +1,30 @@
 'use client';
 
 import Image from 'next/image';
+import SEO from '@/components/SEO';
+import { generateWebsiteSchema, generateOrganizationSchema } from '@/lib/seo';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <>
+      <SEO
+        title="Florida Wedding Wonders - Premier Wedding Venues in Florida"
+        description="Discover Florida's most beautiful wedding venues, trusted vendors, and elegant bridal shops. From beachfront ceremonies to historic estates, find your perfect wedding venue in the Sunshine State."
+        canonical="https://floridaweddingwonders.com"
+        keywords={[
+          'Florida wedding venues',
+          'wedding venues Florida',
+          'South Florida wedding venues',
+          'beach wedding venues Florida',
+          'Miami wedding venues',
+          'Orlando wedding venues',
+          'Tampa wedding venues',
+          'wedding planning Florida',
+          'destination wedding Florida',
+        ]}
+        jsonLd={[generateWebsiteSchema(), generateOrganizationSchema()]}
+      />
+      <div className="min-h-screen bg-gray-900">
       {/* Hero Section */}
       <div className="relative min-h-screen flex items-center justify-center px-6">
         <div className="relative z-10 text-center max-w-6xl mx-auto">
@@ -149,5 +169,6 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
