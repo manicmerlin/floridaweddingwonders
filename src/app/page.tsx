@@ -34,10 +34,12 @@ export default function HomePage() {
             <div className="flex justify-center mb-8">
               <Image 
                 src="/images/logo.png" 
-                alt="Florida Wedding Wonders" 
+                alt="Florida Wedding Wonders - Premier Wedding Venues in Florida" 
                 width={150} 
                 height={150}
                 className="drop-shadow-lg"
+                priority
+                quality={90}
               />
             </div>
           </div>
