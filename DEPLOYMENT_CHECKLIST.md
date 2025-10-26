@@ -2,9 +2,9 @@
 
 ## ✅ Completed Setup (Local Development)
 
-- [x] Generated UUID API key: `d8e26f10-45fd-4817-9db1-4f3666a232c2`
-- [x] Created verification file: `/public/d8e26f10-45fd-4817-9db1-4f3666a232c2.txt`
-- [x] Added to `.env.local`: `INDEXNOW_API_KEY=d8e26f10-45fd-4817-9db1-4f3666a232c2`
+- [x] Obtained Bing IndexNow API key: `a1eccd8545f2408d99b27ab29c795911`
+- [x] Created verification file: `/public/a1eccd8545f2408d99b27ab29c795911.txt`
+- [x] Added to `.env.local`: `INDEXNOW_API_KEY=a1eccd8545f2408d99b27ab29c795911`
 - [x] Updated `.env.example` with IndexNow configuration
 - [x] Built core library: `src/lib/indexnow.ts`
 - [x] Built API route: `src/app/api/indexnow/route.ts`
@@ -23,7 +23,7 @@
 Add to Vercel project settings (https://vercel.com/your-project/settings/environment-variables):
 
 ```
-INDEXNOW_API_KEY=d8e26f10-45fd-4817-9db1-4f3666a232c2
+INDEXNOW_API_KEY=a1eccd8545f2408d99b27ab29c795911
 ```
 
 **Steps:**
@@ -40,8 +40,8 @@ After deployment, test these URLs:
 
 ```bash
 # Verification file (must be publicly accessible)
-curl https://floridaweddingwonders.com/d8e26f10-45fd-4817-9db1-4f3666a232c2.txt
-# Expected: d8e26f10-45fd-4817-9db1-4f3666a232c2
+curl https://floridaweddingwonders.com/a1eccd8545f2408d99b27ab29c795911.txt
+# Expected: a1eccd8545f2408d99b27ab29c795911
 
 # Health check
 curl https://floridaweddingwonders.com/api/indexnow

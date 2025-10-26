@@ -31,14 +31,14 @@ The API key must be a UUID (universally unique identifier).
 uuidgen | tr '[:upper:]' '[:lower:]'
 ```
 
-**Our Generated Key**: `d8e26f10-45fd-4817-9db1-4f3666a232c2`
+**Our Bing-Provided Key**: `a1eccd8545f2408d99b27ab29c795911`
 
 ### Step 2: Create Verification File
 
 Create a text file in `/public/` with the UUID as the filename and content:
 
-**File**: `/public/d8e26f10-45fd-4817-9db1-4f3666a232c2.txt`  
-**Content**: `d8e26f10-45fd-4817-9db1-4f3666a232c2`
+**File**: `/public/a1eccd8545f2408d99b27ab29c795911.txt`  
+**Content**: `a1eccd8545f2408d99b27ab29c795911`
 
 This file proves you own the domain.
 
@@ -48,22 +48,22 @@ Add to `.env.local` (production) and `.env.example` (template):
 
 ```bash
 # IndexNow API Configuration
-INDEXNOW_API_KEY=d8e26f10-45fd-4817-9db1-4f3666a232c2
+INDEXNOW_API_KEY=a1eccd8545f2408d99b27ab29c795911
 ```
 
 ### Step 4: Deploy Verification File
 
 Ensure the verification file is accessible at:
 ```
-https://floridaweddingwonders.com/d8e26f10-45fd-4817-9db1-4f3666a232c2.txt
+https://floridaweddingwonders.com/a1eccd8545f2408d99b27ab29c795911.txt
 ```
 
 Test it:
 ```bash
-curl https://floridaweddingwonders.com/d8e26f10-45fd-4817-9db1-4f3666a232c2.txt
+curl https://floridaweddingwonders.com/a1eccd8545f2408d99b27ab29c795911.txt
 ```
 
-Should return: `d8e26f10-45fd-4817-9db1-4f3666a232c2`
+Should return: `a1eccd8545f2408d99b27ab29c795911`
 
 ---
 
