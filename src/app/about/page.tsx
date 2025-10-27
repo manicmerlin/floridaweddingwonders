@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
-import { generatePageMetadata } from '@/lib/seo';
+import { SITE_CONFIG } from '@/lib/seo';
 
-export const metadata: Metadata = generatePageMetadata({
-  title: 'About Us | Sobre Nosotros',
+export const metadata: Metadata = {
+  title: 'About Us | Sobre Nosotros - Florida Wedding Wonders',
   description: 'We\'ve seen the wedding world from every angle. Florida Wedding Wonders was built by people who have lived it - venue managers, planners, and digital creatives who understand the heartbeat of celebration.',
   keywords: ['about florida wedding wonders', 'miami wedding team', 'wedding venue directory', 'sobre nosotros', 'equipo de bodas'],
+  openGraph: {
+    title: 'About Us - Florida Wedding Wonders',
+    description: 'Built by Miami natives who understand the wedding world from every angle.',
+    url: `${SITE_CONFIG.url}/about`,
+    siteName: SITE_CONFIG.name,
+    type: 'website',
+  },
   alternates: {
     canonical: '/about',
   },
-});
+};
 
 export default function AboutPage() {
   return (
