@@ -44,6 +44,7 @@ export default function Navigation() {
     { href: '/venues', label: 'Browse Venues' },
     { href: '/dress-shops', label: 'Dress Shops' },
     { href: '/vendors', label: 'Vendors' },
+    { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
 
