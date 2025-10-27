@@ -3,12 +3,16 @@ import { useEffect } from 'react';
 // Hook to automatically track venue page views
 export function useVenueAnalytics(venueId: string | null) {
   useEffect(() => {
-    if (!venueId) return;
+    if (!venueId) {
+      console.log('[Analytics] No venue ID provided');
+      return;
+    }
 
     // Track page view
     const trackPageView = async () => {
       try {
-        await fetch('/api/venue-analytics', {
+        console.log('[Analytics] Tracking page view for venue:', venueId);
+        const response = await fetch('/api/venue-analytics', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -18,9 +22,15 @@ export function useVenueAnalytics(venueId: string | null) {
             action: 'page_view'
           }),
         });
+        
+        if (response.ok) {
+          console.log('[Analytics] ✅ Page view tracked successfully');
+        } else {
+          console.warn('[Analytics] ⚠️ Tracking failed with status:', response.status);
+        }
       } catch (error) {
         // Silently fail - analytics shouldn't break the app
-        console.debug('Analytics tracking failed:', error);
+        console.debug('[Analytics] ❌ Tracking failed:', error);
       }
     };
 
