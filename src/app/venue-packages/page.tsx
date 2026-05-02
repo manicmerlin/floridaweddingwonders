@@ -40,43 +40,41 @@ export default function VenuePackagesPage() {
     setIsSubmitting(true);
 
     try {
-      // Send email to bennett.boundless@gmail.com
-      const emailBody = `
-Early Bird Offer Request - Free Premium Year
-
-Name: ${earlyBirdForm.name}
-Email: ${earlyBirdForm.email}
-Phone: ${earlyBirdForm.phone}
-Venue Name: ${earlyBirdForm.venueName}
-Claimed Offer: ${earlyBirdForm.claimOffer ? 'Yes' : 'No'}
-
-Submitted: ${new Date().toLocaleString()}
-      `;
-
+      // /api/send-email's EmailSchema expects { email, type, venueName? }.
+      // The original payload here was { to, subject, text, from, replyTo },
+      // which always failed validation silently. Sending the right shape now
+      // and surfacing whatever the API responds.
       const response = await fetch('/api/send-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          to: 'bennett.boundless@gmail.com',
-          subject: `🎁 Early Bird Offer Request - ${earlyBirdForm.venueName}`,
-          text: emailBody,
-          from: earlyBirdForm.email,
-          replyTo: earlyBirdForm.email
+          email: earlyBirdForm.email,
+          type: 'venue_owner',
+          venueName: earlyBirdForm.venueName,
         }),
       });
 
+      const result = await response.json().catch(() => ({}));
+
       if (response.ok) {
-        alert('🎉 Your early bird offer request has been submitted! We\'ll contact you within 24 hours.');
+        alert("🎉 You're on the list! We'll contact you within 24 hours to confirm your spot.");
         setEarlyBirdForm({ name: '', email: '', phone: '', venueName: '', claimOffer: false });
         setShowEarlyBirdForm(false);
       } else {
-        alert('Something went wrong. Please email us directly at hello@floridaweddingwonders.com');
+        // Surface the actual reason from the API instead of the generic
+        // "something went wrong". Common cases the user will see:
+        //   - "Email already registered as venue owner"
+        //   - "Email already registered"
+        //   - "Invalid input data"
+        const reason =
+          result?.error ||
+          result?.message ||
+          `Submission failed (${response.status}).`;
+        alert(`${reason}\n\nIf this looks wrong, email hello@floridaweddingwonders.com.`);
       }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('Something went wrong. Please email us directly at hello@floridaweddingwonders.com');
+      alert('Could not reach the server. Please try again, or email hello@floridaweddingwonders.com.');
     }
 
     setIsSubmitting(false);
@@ -103,29 +101,33 @@ Submitted: ${new Date().toLocaleString()}
     setIsSubmitting(true);
 
     try {
-      // Here we'll integrate with Stripe and email system
       const response = await fetch('/api/venue-package-signup', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...contactForm,
           selectedPackage,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         }),
       });
 
+      const result = await response.json().catch(() => ({}));
+
       if (response.ok) {
-        alert('Thank you! We\'ll contact you within 24 hours to set up your package.');
+        alert("Thanks! We'll contact you within 24 hours to set up your package.");
         setContactForm({ name: '', email: '', venueName: '', phone: '', message: '' });
         setSelectedPackage(null);
       } else {
-        alert('Something went wrong. Please try again or call us directly.');
+        // Surface the actual API error reason rather than a generic alert.
+        const reason =
+          result?.error ||
+          result?.message ||
+          `Submission failed (${response.status}).`;
+        alert(`${reason}\n\nFor help, email hello@floridaweddingwonders.com.`);
       }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('Something went wrong. Please try again or call us directly.');
+      alert('Could not reach the server. Please try again, or email hello@floridaweddingwonders.com.');
     }
 
     setIsSubmitting(false);

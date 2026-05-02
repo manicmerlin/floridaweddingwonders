@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import ClaimsManagement from '@/components/admin/ClaimsManagement';
 import UsersManagement from '@/components/admin/UsersManagement';
 
 // Authorization is enforced by src/app/admin/layout.tsx (server-side via
@@ -190,12 +189,16 @@ export default function AdminDashboard() {
 
         {activeTab === 'claims' && (
           <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Venue Claims Management</h3>
-            <p className="text-gray-600 mb-4">Claims management features coming soon...</p>
-            <div className="text-center py-8 text-gray-500">
-              <span className="text-4xl block mb-2">🏛️</span>
-              <p>No pending claims at this time</p>
-            </div>
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Venue Claims</h3>
+            <p className="text-gray-600 mb-4">
+              Review pending venue ownership claims from the dedicated queue.
+            </p>
+            <Link
+              href="/admin/claims"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"
+            >
+              Open Claims Queue →
+            </Link>
           </div>
         )}
 
