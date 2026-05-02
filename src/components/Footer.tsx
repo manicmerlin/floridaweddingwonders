@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">For Venues</h4>
             <div className="space-y-2 text-gray-400">
-              <Link href="/venue-owner" className="block hover:text-white transition">
+              <Link href="/venue-packages" className="block hover:text-white transition">
                 List Your Venue
               </Link>
               <Link href="/vendor-owner" className="block hover:text-white transition">
@@ -46,9 +46,15 @@ export default function Footer() {
               <Link href="/contact" className="block hover:text-white transition">
                 Contact Us
               </Link>
-              <div className="hover:text-white transition cursor-pointer">About Us</div>
-              <div className="hover:text-white transition cursor-pointer">Privacy Policy</div>
-              <div className="hover:text-white transition cursor-pointer">Terms of Service</div>
+              <Link href="/about" className="block hover:text-white transition">
+                About Us
+              </Link>
+              <Link href="/privacy" className="block hover:text-white transition">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="block hover:text-white transition">
+                Terms of Service
+              </Link>
             </div>
           </div>
         </div>
