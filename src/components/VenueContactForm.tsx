@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Venue, LeadQualificationData } from '../types';
 import { useAuth } from './AuthProvider';
 
@@ -9,23 +9,50 @@ interface VenueContactFormProps {
   onClose: () => void;
 }
 
-// Adapter: AuthProvider gives us a Supabase user; this form was written
-// against the legacy localStorage `{id, email, name, leadQualification}`
-// shape. Until the lead qualification migrates into the profiles table
-// (Phase 2), we read the qualification from localStorage but identity from
-// the trusted auth context.
+// Phase 3B: lead-qualification source of truth is now `profiles` (DB) for
+// signed-in users. Falls back to legacy localStorage for unauthenticated
+// users so the inquiry form keeps working in both states. The /api/profile
+// GET returns the prefill shape on mount.
 function useFormUser() {
   const { user, isAuthenticated } = useAuth();
-  if (!user) return null;
-  let leadQualification: LeadQualificationData | null = null;
-  if (typeof window !== 'undefined') {
-    try {
-      const raw = localStorage.getItem('user');
-      if (raw) leadQualification = JSON.parse(raw)?.leadQualification ?? null;
-    } catch {
-      /* legacy data was malformed; treat as missing */
+  const [leadQualification, setLeadQualification] =
+    useState<LeadQualificationData | null>(null);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      // Anonymous fallback — read whatever's in legacy localStorage.
+      if (typeof window === 'undefined') return;
+      try {
+        const raw = localStorage.getItem('user');
+        if (raw) setLeadQualification(JSON.parse(raw)?.leadQualification ?? null);
+      } catch {
+        /* legacy data was malformed; treat as missing */
+      }
+      return;
     }
-  }
+    // Auth: pull from profiles via API.
+    fetch('/api/profile')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        const p = d?.profile;
+        if (!p) return;
+        setLeadQualification({
+          fullName: p.full_name || '',
+          email: p.email || '',
+          phoneNumber: p.phone || '',
+          // preferences is the saved snapshot — prefer fields from there
+          // when available (more granular than the columns we promote).
+          eventType: p.preferences?.eventType || '',
+          guestCount: p.guest_count ?? p.preferences?.guestCount ?? 0,
+          preferredDate: p.wedding_date || p.preferences?.preferredDate || '',
+          dateFlexibility: p.preferences?.dateFlexibility || '',
+          venuebudget: p.preferences?.venuebudget || '',
+        });
+      })
+      .catch(() => null);
+  }, [isAuthenticated]);
+
+  if (!user) return null;
   return {
     id: user.id,
     email: user.email || '',
