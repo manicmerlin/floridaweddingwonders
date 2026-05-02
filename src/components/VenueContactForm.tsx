@@ -13,6 +13,7 @@ const VenueContactForm: React.FC<VenueContactFormProps> = ({ venue, onClose }) =
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState<'message' | 'confirm' | 'success'>('message');
+  const [submitStatus, setSubmitStatus] = useState<'sent' | 'pending-real-email' | 'failed'>('sent');
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -55,6 +56,12 @@ const VenueContactForm: React.FC<VenueContactFormProps> = ({ venue, onClose }) =
       });
 
       if (response.ok) {
+        const result = await response.json().catch(() => ({}));
+        if (result?.status === 'pending-real-email' || result?.status === 'failed') {
+          setSubmitStatus(result.status);
+        } else {
+          setSubmitStatus('sent');
+        }
         setStep('success');
       } else {
         throw new Error('Failed to send inquiry');
@@ -248,18 +255,32 @@ const VenueContactForm: React.FC<VenueContactFormProps> = ({ venue, onClose }) =
         {step === 'success' && (
           <div className="p-6 text-center">
             <div className="text-6xl text-green-500 mb-4">✅</div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">Inquiry Sent Successfully!</h3>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              {submitStatus === 'pending-real-email'
+                ? 'Inquiry received — we\'ll be in touch'
+                : 'Inquiry Sent Successfully!'}
+            </h3>
             <p className="text-gray-600 mb-6">
-              Your inquiry has been sent to {venue.name}. They have all your wedding details and will contact you soon!
+              {submitStatus === 'pending-real-email'
+                ? `Thanks for your interest in ${venue.name}. Our team is finalizing the venue's contact details and will reach out within 24–48 hours.`
+                : `Your inquiry has been sent to ${venue.name}. They have all your wedding details and will contact you soon!`}
             </p>
             <div className="bg-blue-50 rounded-lg p-4 mb-6">
               <h4 className="font-semibold text-blue-800 mb-2">What happens next?</h4>
-              <ul className="text-blue-700 text-sm space-y-1 text-left">
-                <li>• The venue will receive your detailed inquiry</li>
-                <li>• They'll review your wedding details and budget</li>
-                <li>• Expect a response within 24-48 hours</li>
-                <li>• They may call or email with availability and pricing</li>
-              </ul>
+              {submitStatus === 'pending-real-email' ? (
+                <ul className="text-blue-700 text-sm space-y-1 text-left">
+                  <li>• Our team verifies the venue's contact info</li>
+                  <li>• We forward your full wedding details directly</li>
+                  <li>• Expect a response within 24–48 hours</li>
+                </ul>
+              ) : (
+                <ul className="text-blue-700 text-sm space-y-1 text-left">
+                  <li>• The venue will receive your detailed inquiry</li>
+                  <li>• They'll review your wedding details and budget</li>
+                  <li>• Expect a response within 24-48 hours</li>
+                  <li>• They may call or email with availability and pricing</li>
+                </ul>
+              )}
             </div>
             <button
               onClick={onClose}
