@@ -5,6 +5,13 @@ import {
   getAllVendorSlugs,
   getAllDressShopSlugs,
 } from '@/lib/catalog';
+import {
+  REGIONS,
+  VENUE_TYPES,
+  combosWithCoverage,
+  filterVenuesByRegion,
+  filterVenuesByType,
+} from '@/lib/hyperlocal';
 
 export const dynamic = 'force-dynamic';
 
@@ -68,5 +75,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...venuePages, ...vendorPages, ...dressShopPages];
+  // Hyperlocal landing pages — only emit pages that actually have venues.
+  // priority is 0.7 because they're aggregator pages, just under venue
+  // detail (0.6-1.0) but above the contact/about static pages.
+  const regionPages: MetadataRoute.Sitemap = REGIONS
+    .filter((r) => filterVenuesByRegion(venues, r).length > 0)
+    .map((r) => ({
+      url: `${baseUrl}/venues/in/${r.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+  const typePages: MetadataRoute.Sitemap = VENUE_TYPES
+    .filter((t) => filterVenuesByType(venues, t).length > 0)
+    .map((t) => ({
+      url: `${baseUrl}/venues/style/${t.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+  const comboPages: MetadataRoute.Sitemap = combosWithCoverage(venues, 3).map(
+    (c) => ({
+      url: `${baseUrl}/venues/in/${c.region.slug}/${c.type.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.65,
+    })
+  );
+
+  return [
+    ...staticPages,
+    ...venuePages,
+    ...vendorPages,
+    ...dressShopPages,
+    ...regionPages,
+    ...typePages,
+    ...comboPages,
+  ];
 }
