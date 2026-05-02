@@ -1,13 +1,36 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { signInWithEmail } from '@/lib/auth';
 
+// useSearchParams() forces dynamic rendering and must sit inside a Suspense
+// boundary, otherwise Next.js 14 fails the build with
+// "useSearchParams() should be wrapped in a suspense boundary at page /login".
 export default function LoginPage() {
+  return (
+    <Suspense fallback={<LoginShell />}>
+      <LoginPageInner />
+    </Suspense>
+  );
+}
+
+function LoginShell() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Navigation />
+      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full text-center text-gray-500">Loading…</div>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+function LoginPageInner() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
