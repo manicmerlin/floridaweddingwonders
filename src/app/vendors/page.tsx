@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 import SEO from '@/components/SEO';
+import VendorImagePlaceholder from '../../components/VendorImagePlaceholder';
 import { generateBreadcrumbSchema } from '@/lib/seo';
 
 // Import vendor data
@@ -83,7 +84,10 @@ export default function VendorsPage() {
     return true;
   });
 
-  // Tab options based on vendor categories
+  // Tab options based on vendor categories. "All" is always shown; the
+  // category-specific tabs are filtered to those with at least one vendor —
+  // empty tabs (Florals 0, Music & DJ 0) are misleading until those vendors
+  // exist.
   const tabOptions = [
     { id: 'all', label: 'All Vendors', count: vendors.length },
     { id: 'photography', label: 'Photography', count: vendors.filter(v => v.category.toLowerCase().includes('photo')).length },
@@ -91,7 +95,7 @@ export default function VendorsPage() {
     { id: 'florist', label: 'Florals', count: vendors.filter(v => v.category.toLowerCase().includes('flor')).length },
     { id: 'music', label: 'Music & DJ', count: vendors.filter(v => v.category.toLowerCase().includes('music') || v.category.toLowerCase().includes('dj')).length },
     { id: 'planning', label: 'Planning', count: vendors.filter(v => v.category.toLowerCase().includes('plan')).length },
-  ];
+  ].filter(tab => tab.id === 'all' || tab.count > 0);
 
   return (
     <>
@@ -224,7 +228,7 @@ export default function VendorsPage() {
                 {filteredVendors.map((vendor) => (
                   <div key={vendor.id} className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                     {/* Vendor Image */}
-                    <div className="aspect-w-16 aspect-h-10 bg-gray-200">
+                    <div className="aspect-w-16 aspect-h-10">
                       {vendor.images && vendor.images.length > 0 ? (
                         <img
                           src={vendor.images[0]}
@@ -232,9 +236,10 @@ export default function VendorsPage() {
                           className="w-full h-48 object-cover"
                         />
                       ) : (
-                        <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
-                          <span className="text-6xl">�🤵</span>
-                        </div>
+                        <VendorImagePlaceholder
+                          name={vendor.name}
+                          category={vendor.category}
+                        />
                       )}
                     </div>
 
