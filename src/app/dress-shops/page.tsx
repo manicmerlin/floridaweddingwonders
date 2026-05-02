@@ -3,6 +3,11 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import DressShopsListClient from '@/components/dress-shops/DressShopsListClient';
 import { getDressShops } from '@/lib/catalog';
+import {
+  breadcrumbLD,
+  dressShopListLD,
+  jsonLdScript,
+} from '@/lib/structuredData';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,6 +22,24 @@ export default async function DressShopsPage() {
   const shops = await getDressShops();
 
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(
+            breadcrumbLD([
+              { name: 'Home', href: '/' },
+              { name: 'Bridal Shops', href: '/dress-shops' },
+            ])
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(dressShopListLD(shops)),
+        }}
+      />
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
       <Navigation />
 
@@ -128,5 +151,6 @@ export default async function DressShopsPage() {
 
       <Footer />
     </div>
+    </>
   );
 }

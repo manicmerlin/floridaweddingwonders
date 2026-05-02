@@ -6,6 +6,11 @@ import {
   getVenueBySlug,
   getVenues,
 } from '@/lib/catalog';
+import {
+  breadcrumbLD,
+  jsonLdScript,
+  venueLocalBusinessLD,
+} from '@/lib/structuredData';
 
 interface Params {
   params: { slug: string };
@@ -56,5 +61,27 @@ export default async function VenueSlugPage({ params }: Params) {
     : [];
   const relatedVenues = cityCohort.filter((v) => v.id !== venue.id);
 
-  return <VenueDetailClient venue={venue} relatedVenues={relatedVenues} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(venueLocalBusinessLD(venue)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(
+            breadcrumbLD([
+              { name: 'Home', href: '/' },
+              { name: 'Wedding Venues', href: '/venues' },
+              { name: venue.name, href: `/venues/${venue.slug}` },
+            ])
+          ),
+        }}
+      />
+      <VenueDetailClient venue={venue} relatedVenues={relatedVenues} />
+    </>
+  );
 }

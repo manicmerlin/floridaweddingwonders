@@ -192,6 +192,7 @@ export default function ImageCropper({
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrl}
                 alt="Drag to position"

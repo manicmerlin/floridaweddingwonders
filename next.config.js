@@ -46,12 +46,12 @@ const securityHeaders = [
 
 const nextConfig = {
   eslint: {
-    // Disable ESLint during builds for deployment
-    ignoreDuringBuilds: true,
+    // Phase 2B re-enabled. The previous `true` setting hid 6 preexisting
+    // type errors that Phase 2A surfaced when running tsc separately.
+    ignoreDuringBuilds: false,
   },
   typescript: {
-    // Ignore TypeScript errors during build
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     // Allow data URLs for development mode uploaded images

@@ -6,6 +6,11 @@ import {
   getVendorBySlug,
   getVendors,
 } from '@/lib/catalog';
+import {
+  breadcrumbLD,
+  jsonLdScript,
+  vendorServiceLD,
+} from '@/lib/structuredData';
 
 interface Params {
   params: { slug: string };
@@ -52,5 +57,27 @@ export default async function VendorSlugPage({ params }: Params) {
   const cohort = await getVendors({ category: vendor.category });
   const relatedVendors = cohort.filter((v) => v.id !== vendor.id).slice(0, 3);
 
-  return <VendorDetailClient vendor={vendor} relatedVendors={relatedVendors} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(vendorServiceLD(vendor)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(
+            breadcrumbLD([
+              { name: 'Home', href: '/' },
+              { name: 'Wedding Vendors', href: '/vendors' },
+              { name: vendor.name, href: `/vendors/${vendor.slug}` },
+            ])
+          ),
+        }}
+      />
+      <VendorDetailClient vendor={vendor} relatedVendors={relatedVendors} />
+    </>
+  );
 }
