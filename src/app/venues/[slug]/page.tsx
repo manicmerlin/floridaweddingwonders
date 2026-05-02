@@ -11,6 +11,11 @@ import {
   jsonLdScript,
   venueLocalBusinessLD,
 } from '@/lib/structuredData';
+import {
+  getApprovedReviewsForVenue,
+  getAggregateRatingForVenue,
+} from '@/lib/reviews';
+import VenueReviewsSection from '@/components/reviews/VenueReviewsSection';
 
 interface Params {
   params: { slug: string };
@@ -61,12 +66,30 @@ export default async function VenueSlugPage({ params }: Params) {
     : [];
   const relatedVenues = cityCohort.filter((v) => v.id !== venue.id);
 
+  // Reviews + aggregate. Both queries hit RLS-gated public reads so no auth
+  // is required. Decorate the venue with the live aggregate so JSON-LD
+  // emits actual aggregateRating (the catalog default is {rating:0,count:0}).
+  // venue.uuid is the Postgres UUID; the catalog mapper always populates it
+  // (see rowToVenue in src/lib/catalog.ts) — the optional Venue.uuid in
+  // src/types is a legacy artifact from when ids were string slugs.
+  const venueUuid = venue.uuid ?? venue.id;
+  const [reviews, aggregate] = await Promise.all([
+    getApprovedReviewsForVenue(venueUuid),
+    getAggregateRatingForVenue(venueUuid),
+  ]);
+  const venueWithRating = aggregate
+    ? {
+        ...venue,
+        reviews: { rating: aggregate.average, count: aggregate.count, reviews: [] },
+      }
+    : venue;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: jsonLdScript(venueLocalBusinessLD(venue)),
+          __html: jsonLdScript(venueLocalBusinessLD(venueWithRating)),
         }}
       />
       <script
@@ -81,7 +104,15 @@ export default async function VenueSlugPage({ params }: Params) {
           ),
         }}
       />
-      <VenueDetailClient venue={venue} relatedVenues={relatedVenues} />
+      <VenueDetailClient venue={venueWithRating} relatedVenues={relatedVenues} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-12">
+        <VenueReviewsSection
+          venueUuid={venueUuid}
+          venueName={venue.name}
+          reviews={reviews}
+          aggregate={aggregate}
+        />
+      </div>
     </>
   );
 }

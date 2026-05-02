@@ -113,11 +113,20 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-1">{venueWithPhotos.name}</h3>
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">{venueWithPhotos.description}</p>
-        
+
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm text-gray-500">
             {venueWithPhotos.address.city}, {venueWithPhotos.address.state}
           </span>
+          {venueWithPhotos.reviews?.count && venueWithPhotos.reviews.count > 0 ? (
+            <span
+              className="text-xs text-amber-600 font-medium"
+              aria-label={`${venueWithPhotos.reviews.rating.toFixed(1)} of 5 stars from ${venueWithPhotos.reviews.count} reviews`}
+            >
+              ★ {venueWithPhotos.reviews.rating.toFixed(1)}
+              <span className="text-gray-500 font-normal"> ({venueWithPhotos.reviews.count})</span>
+            </span>
+          ) : null}
         </div>
         
         <div className="flex justify-between items-center mb-3">
