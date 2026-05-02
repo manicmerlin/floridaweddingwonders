@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
@@ -15,17 +14,12 @@ import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
 import { tierFeatures } from '@/lib/tierFeatures';
 import { Venue } from '@/types';
 
-// Per-device admin soft-delete. Stays in localStorage until Phase 3 moves it
-// to the DB.
-function isVenueDeleted(venueId: string): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    const list = JSON.parse(localStorage.getItem('deleted-venues') || '[]');
-    return list.includes(venueId);
-  } catch {
-    return false;
-  }
-}
+// REMOVED: localStorage `deleted-venues` redirect.
+//
+// Same fix as VenuesListClient — the per-device soft-delete flag was
+// redirecting paid-tier venues out from under their owners and admins
+// alike. Phase 3B will introduce a DB-backed deleted_at flag; until then
+// every venue in the catalog is reachable.
 
 interface Props {
   venue: Venue;
@@ -33,7 +27,6 @@ interface Props {
 }
 
 export default function VenueDetailClient({ venue: serverVenue, relatedVenues }: Props) {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState('overview');
   const [showContactForm, setShowContactForm] = useState(false);
   // Start with the server-rendered venue. The effect below replaces images
@@ -44,10 +37,6 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
   useVenueAnalytics(venue.id);
 
   useEffect(() => {
-    if (isVenueDeleted(serverVenue.id)) {
-      router.push('/venues');
-      return;
-    }
     let cancelled = false;
     (async () => {
       try {
@@ -64,7 +53,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
     return () => {
       cancelled = true;
     };
-  }, [serverVenue, router]);
+  }, [serverVenue]);
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
