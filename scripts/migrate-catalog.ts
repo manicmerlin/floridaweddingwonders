@@ -166,17 +166,28 @@ function parseCapacity(text: string | null | undefined): {
   min: number | null;
   max: number | null;
 } {
+  // Phase 4 fix: the previous parser took numbers[0] as min and the LAST
+  // captured number as max. For Hialeah Park's source text
+  //   "Multiple venues: Ballroom (450 banquet/500 reception),
+  //    Clubhouse (600 banquet/1,000 reception), ..., Director's Room (50 reception)"
+  // that picked "450" as min and "50" as max → "450-50" rendered.
+  // Compounding: "1,000" emitted "000" → parseInt("000")===0 polluting the array.
+  //
+  // New behavior:
+  //   1. Strip commas so "1,000" reads as "1000" (single 4-digit number).
+  //   2. Take min = Math.min, max = Math.max across all valid 2-5 digit captures.
+  //   3. Single-number inputs keep the prior 0.5*n heuristic for min.
   if (!text || typeof text !== 'string') return { min: null, max: null };
-  const numbers = text.match(/\d{2,5}/g); // 2–5-digit guests
-  if (!numbers || numbers.length === 0) return { min: null, max: null };
+  const stripped = text.replace(/,/g, '');
+  const numbers = (stripped.match(/\d{2,5}/g) ?? [])
+    .map((s) => parseInt(s, 10))
+    .filter((n) => n > 0 && n <= 10000);
+  if (numbers.length === 0) return { min: null, max: null };
   if (numbers.length === 1) {
-    const n = parseInt(numbers[0], 10);
+    const n = numbers[0];
     return { min: Math.floor(n * 0.5), max: n };
   }
-  return {
-    min: parseInt(numbers[0], 10),
-    max: parseInt(numbers[numbers.length - 1], 10),
-  };
+  return { min: Math.min(...numbers), max: Math.max(...numbers) };
 }
 
 function parsePrice(text: string | null | undefined): number | null {
