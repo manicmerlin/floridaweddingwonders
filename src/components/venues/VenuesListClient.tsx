@@ -6,34 +6,28 @@ import VenueCard from '@/components/VenueCard';
 
 const ITEMS_PER_PAGE = 12;
 
-// localStorage soft-delete is per-device admin state. Until Phase 3 moves it
-// to the DB, we honor it here so the admin's "delete" stays effective on
-// their browser.
-function readDeletedSet(): Set<string> {
-  if (typeof window === 'undefined') return new Set();
-  try {
-    return new Set(JSON.parse(localStorage.getItem('deleted-venues') || '[]'));
-  } catch {
-    return new Set();
-  }
-}
-
+// REMOVED: per-device localStorage `deleted-venues` filter.
+//
+// The legacy admin VenueManagement UI writes legacy_ids into a localStorage
+// array when admin clicks Delete. Reading that array here meant any venue
+// the admin had ever soft-deleted in their browser became invisible — to
+// THEM only — across every session, with no way to undo without DevTools.
+// This collided with paid tiers in Phase 3A: a $2,500 Scale-tier customer
+// could be invisible to the admin's stale localStorage. Phase 0 recon
+// flagged this as a "device-local soft-delete" bug; Phase 3B will replace
+// it with a DB-backed deleted_at column. Until then the safe behaviour is
+// to render every catalog row; the localStorage writes from
+// VenueManagement become no-ops on read paths.
 export default function VenuesListClient({ venues }: { venues: Venue[] }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [deleted, setDeleted] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    setDeleted(readDeletedSet());
-  }, []);
-
-  const visible = useMemo(
-    () => venues.filter((v) => !deleted.has(v.id)),
-    [venues, deleted]
-  );
+  // No client-side filter — every catalog row is visible. Server-side sort
+  // (compareByTier in catalog.ts) controls ordering: scale > growth > starter.
+  const visible = venues;
 
   const filteredVenues = useMemo(() => {
     let out = visible;
