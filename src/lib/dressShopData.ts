@@ -110,6 +110,7 @@ export const mockDressShops: DressShop[] = dressShopData
   .filter((shop: any) => shop && typeof shop === 'object' && shop.name)
   .map((shop: any, index: number): DressShop => ({
     id: (index + 1).toString(),
+    slug: (index + 1).toString(),
     name: shop.name || `Dress Shop ${index + 1}`,
     description: shop.description || 'Beautiful wedding dress boutique',
     address: {

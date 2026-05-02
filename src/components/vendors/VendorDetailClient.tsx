@@ -3,36 +3,24 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import vendorsData from '@/data/vendors.json';
+import { Vendor } from '@/types';
 
-interface VendorDetailPageProps {
-  params: {
-    id: string;
-  };
+interface Props {
+  vendor: Vendor;
+  relatedVendors: Vendor[];
 }
 
-export default function VendorDetailPage({ params }: VendorDetailPageProps) {
+export default function VendorDetailClient({ vendor, relatedVendors }: Props) {
   const [activeTab, setActiveTab] = useState('overview');
-  
-  const vendor = vendorsData.weddingVendors.find(v => v.id === params.id);
-  
-  if (!vendor) {
-    notFound();
-  }
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
     { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'contact', label: 'Contact' },
   ];
-
-  const relatedVendors = vendorsData.weddingVendors
-    .filter(v => v.category === vendor.category && v.id !== vendor.id)
-    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -68,7 +56,7 @@ export default function VendorDetailPage({ params }: VendorDetailPageProps) {
               <div className="text-gray-600">Location</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-pink-600">{vendor.address.serviceArea.length}</div>
+              <div className="text-2xl font-bold text-pink-600">{vendor.address.serviceArea?.length ?? 0}</div>
               <div className="text-gray-600">Service Areas</div>
             </div>
           </div>
@@ -126,7 +114,7 @@ export default function VendorDetailPage({ params }: VendorDetailPageProps) {
                     </div>
                     <div>
                       <span className="font-medium text-gray-900">Service Areas:</span>
-                      <span className="ml-2 text-gray-600">{vendor.address.serviceArea.join(', ')}</span>
+                      <span className="ml-2 text-gray-600">{(vendor.address.serviceArea ?? []).join(', ')}</span>
                     </div>
                   </div>
                 </div>
@@ -407,17 +395,17 @@ export default function VendorDetailPage({ params }: VendorDetailPageProps) {
             
             <div className="grid md:grid-cols-3 gap-8">
               {relatedVendors.map((relatedVendor) => (
-                <Link key={relatedVendor.id} href={`/vendors/${relatedVendor.id}`} className="block group">
+                <Link key={relatedVendor.id} href={`/vendors/${relatedVendor.slug || relatedVendor.id}`} className="block group">
                   <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow p-6">
                     <div className="text-center mb-4">
                       <div className="text-4xl mb-2">
-                        {relatedVendor.category === 'Photography' && '📷'}
-                        {relatedVendor.category === 'Catering' && '🍽️'}
-                        {relatedVendor.category === 'Flowers' && '💐'}
-                        {relatedVendor.category === 'Music' && '🎵'}
-                        {relatedVendor.category === 'Planning' && '📋'}
-                        {relatedVendor.category === 'Transportation' && '🚗'}
-                        {!['Photography', 'Catering', 'Flowers', 'Music', 'Planning', 'Transportation'].includes(relatedVendor.category) && '💼'}
+                        {relatedVendor.category === 'photographer' && '📷'}
+                        {relatedVendor.category === 'caterer' && '🍽️'}
+                        {relatedVendor.category === 'florist' && '💐'}
+                        {(relatedVendor.category === 'dj' || relatedVendor.category === 'band') && '🎵'}
+                        {relatedVendor.category === 'planner' && '📋'}
+                        {relatedVendor.category === 'transportation' && '🚗'}
+                        {!['photographer', 'caterer', 'florist', 'dj', 'band', 'planner', 'transportation'].includes(relatedVendor.category) && '💼'}
                       </div>
                     </div>
                     

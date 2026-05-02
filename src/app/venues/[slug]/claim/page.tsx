@@ -34,7 +34,9 @@ export default function VenueClaimPage() {
   
   const router = useRouter();
   const params = useParams();
-  const venueId = params.id as string;
+  // After the [id] -> [slug] rename, the param key changed. Accept both
+  // until Phase 3 reworks the claim flow against the catalog.
+  const venueId = (params.slug ?? params.id) as string;
 
   useEffect(() => {
     // Check authentication
@@ -129,7 +131,8 @@ export default function VenueClaimPage() {
       }
     } catch (error) {
       console.error('Failed to submit claim:', error);
-      alert('Failed to submit claim. Please try again. Error: ' + error.message);
+      const msg = error instanceof Error ? error.message : String(error);
+      alert('Failed to submit claim. Please try again. Error: ' + msg);
     } finally {
       setIsSubmitting(false);
     }

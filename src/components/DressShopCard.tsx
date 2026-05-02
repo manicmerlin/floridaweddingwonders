@@ -159,7 +159,7 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
           )}
         </div>
         
-        <Link href={`/dress-shops/${shop.id}`} className="block w-full">
+        <Link href={`/dress-shops/${shop.slug || shop.id}`} className="block w-full">
           <button className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded transition-colors duration-200">
             View Details
           </button>

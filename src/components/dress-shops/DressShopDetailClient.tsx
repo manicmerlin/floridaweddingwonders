@@ -3,36 +3,24 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import Navigation from '../../../components/Navigation';
-import Footer from '../../../components/Footer';
-import { mockDressShops } from '../../../lib/dressShopData';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import { DressShop } from '@/types';
 
-interface DressShopDetailPageProps {
-  params: {
-    id: string;
-  };
+interface Props {
+  dressShop: DressShop;
+  relatedShops: DressShop[];
 }
 
-export default function DressShopDetailPage({ params }: DressShopDetailPageProps) {
+export default function DressShopDetailClient({ dressShop, relatedShops }: Props) {
   const [activeTab, setActiveTab] = useState('overview');
-  
-  const dressShop = mockDressShops.find(shop => shop.id === params.id);
-  
-  if (!dressShop) {
-    notFound();
-  }
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
     { id: 'services', label: 'Services' },
     { id: 'gallery', label: 'Gallery' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'contact', label: 'Contact' },
   ];
-
-  const relatedShops = mockDressShops
-    .filter(shop => shop.shopType === dressShop.shopType && shop.id !== dressShop.id)
-    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -435,7 +423,7 @@ export default function DressShopDetailPage({ params }: DressShopDetailPageProps
             
             <div className="grid md:grid-cols-3 gap-8">
               {relatedShops.map((relatedShop) => (
-                <Link key={relatedShop.id} href={`/dress-shops/${relatedShop.id}`} className="block group">
+                <Link key={relatedShop.id} href={`/dress-shops/${relatedShop.slug || relatedShop.id}`} className="block group">
                   <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow p-6">
                     <div className="text-center mb-4">
                       <div className="text-4xl mb-2">👗</div>

@@ -129,7 +129,7 @@ export default function GuestDashboard() {
             <div className="text-gray-600">Saved Venues</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="text-2xl font-bold text-blue-600">{venues.filter(v => v.availability.isAvailable).length}</div>
+            <div className="text-2xl font-bold text-blue-600">{venues.filter(v => (v.availability as any)?.isAvailable).length}</div>
             <div className="text-gray-600">Available Venues</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">

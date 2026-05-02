@@ -45,10 +45,10 @@ const LeadQualificationForm: React.FC<LeadQualificationFormProps> = ({
     venuebudget: initialData.venuebudget || ''
   });
 
-  const [errors, setErrors] = useState<Partial<LeadQualificationData>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof LeadQualificationData, string>>>({});
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<LeadQualificationData> = {};
+    const newErrors: Partial<Record<keyof LeadQualificationData, string>> = {};
 
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full name is required';

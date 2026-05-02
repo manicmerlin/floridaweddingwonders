@@ -22,6 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Migration script run log
+migration.log
+
 # Local env files
 .env*.local
 .env.local

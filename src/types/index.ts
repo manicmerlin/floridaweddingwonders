@@ -14,7 +14,12 @@ export interface VenueImage extends VenueMedia {
 }
 
 export interface Venue {
+  // `id` carries the legacy numeric id ("1".."129") for localStorage compat
+  // (saved-venues, deleted-venues, photo storage). The Supabase UUID lives
+  // in `uuid`. URLs are built from `slug`.
   id: string;
+  slug: string;
+  uuid?: string;
   name: string;
   description: string;
   venueType: 'beach' | 'garden' | 'ballroom' | 'historic' | 'modern' | 'rustic';
@@ -37,6 +42,7 @@ export interface Venue {
     packages: any[];
   };
   amenities: string[];
+  tags?: string[];
   images?: VenueImage[]; // Legacy field for images only
   media?: VenueMedia[]; // New field for mixed media (images + videos)
   contact: {
@@ -144,7 +150,10 @@ export interface DressShopImage {
 }
 
 export interface DressShop {
+  // legacy_id (kebab string from JSON) for compat. UUID in `uuid`.
   id: string;
+  slug: string;
+  uuid?: string;
   name: string;
   description: string;
   address: {
@@ -246,7 +255,10 @@ export interface ClaimSubmission {
 }
 
 export interface Vendor {
+  // legacy_id (kebab string from JSON) for compat. UUID in `uuid`.
   id: string;
+  slug: string;
+  uuid?: string;
   name: string;
   businessName?: string; // If different from name
   description: string;

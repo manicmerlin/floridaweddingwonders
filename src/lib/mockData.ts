@@ -186,6 +186,11 @@ export const mockVenues: Venue[] = sortedVenueData
   .map((venue: any, index: number): Venue => {
     const venueObj = {
       id: (index + 1).toString(),
+      // mockData is dead-end now (catalog.ts is the source of truth) but this
+      // file still satisfies the Venue type for legacy callers that haven't
+      // migrated yet. The slug here is a best-effort placeholder.
+      slug: (index + 1).toString(),
+      claimStatus: 'unclaimed' as const,
       name: venue.name || `Venue ${index + 1}`,
       description: venue.style || venue.description || 'Beautiful wedding venue',
       address: {

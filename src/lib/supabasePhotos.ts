@@ -50,8 +50,7 @@ export async function savePhotoToDatabase(
 
     console.log('💾 Saving photo to database:', { id, venueId, url: url.substring(0, 50) + '...' });
 
-    const { data, error } = await client
-      .from('venue_photos')
+    const { data, error } = await (client.from('venue_photos') as any)
       .upsert({
         id,
         venue_id: venueId,
@@ -114,7 +113,7 @@ export async function loadPhotosFromDatabase(venueId: string): Promise<Array<{
 
     console.log(`   Found ${data.length} photos in database`);
 
-    return data.map(photo => ({
+    return (data as any[]).map((photo: any) => ({
       id: photo.id,
       url: photo.url,
       alt: photo.alt,
@@ -168,14 +167,12 @@ export async function setPrimaryPhotoInDatabase(venueId: string, photoId: string
     }
 
     // First, unset all primary photos for this venue
-    await client
-      .from('venue_photos')
+    await (client.from('venue_photos') as any)
       .update({ is_primary: false })
       .eq('venue_id', venueId);
 
     // Then set the selected photo as primary
-    const { error } = await client
-      .from('venue_photos')
+    const { error } = await (client.from('venue_photos') as any)
       .update({ is_primary: true })
       .eq('id', photoId);
 

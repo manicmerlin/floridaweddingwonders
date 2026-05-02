@@ -109,7 +109,7 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
         </div>
         
         {/* Button */}
-        <Link href={`/venues/${venueWithPhotos.id}`} className="block w-full">
+        <Link href={`/venues/${venueWithPhotos.slug || venueWithPhotos.id}`} className="block w-full">
           <button className="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-200 text-sm">
             View Details
           </button>
