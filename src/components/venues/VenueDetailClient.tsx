@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import PhotoGallery from '@/components/PhotoGallery';
 import VenueClaimButton from '@/components/VenueClaimButton';
 import VenueContactForm from '@/components/VenueContactForm';
+import VenueViewTracker from '@/components/VenueViewTracker';
 import SaveVenueButton from '@/components/SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
@@ -63,6 +64,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <VenueViewTracker venueUuid={venue.uuid} />
       <Navigation />
 
       {/* Photo Gallery Section - Standalone */}
