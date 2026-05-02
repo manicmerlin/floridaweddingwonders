@@ -1,72 +1,66 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Navigation from '../../components/Navigation';
-import Footer from '../../components/Footer';
-import DressShopCard from '../../components/DressShopCard';
-import { mockDressShops } from '../../lib/dressShopData';
-import { DressShop } from '../../types';
+import { useMemo, useState } from 'react';
+import DressShopCard from '@/components/DressShopCard';
+import { DressShop } from '@/types';
 
-export default function DressShopsPage() {
+interface Props {
+  shops: DressShop[];
+}
+
+export default function DressShopsListClient({ shops }: Props) {
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [priceFilter, setPriceFilter] = useState('');
 
-  // Get unique shop types for filtering
-  const shopTypes = Array.from(new Set(mockDressShops.map(shop => shop.shopType))).sort();
+  const shopTypes = useMemo(
+    () => Array.from(new Set(shops.map((s) => s.shopType).filter(Boolean))).sort(),
+    [shops]
+  );
 
-  // Filter dress shops based on active tab and filters
-  const filteredShops = mockDressShops.filter(shop => {
-    // Tab filtering
-    if (activeTab !== 'all' && shop.shopType !== activeTab) {
-      return false;
-    }
+  const filteredShops = useMemo(() => {
+    return shops.filter((shop) => {
+      if (activeTab !== 'all' && shop.shopType !== activeTab) return false;
+      if (selectedType && shop.shopType !== selectedType) return false;
+      if (searchTerm) {
+        const q = searchTerm.toLowerCase();
+        const matched =
+          shop.name.toLowerCase().includes(q) ||
+          shop.description.toLowerCase().includes(q) ||
+          shop.specialties.some((s) => s.toLowerCase().includes(q)) ||
+          shop.address.city.toLowerCase().includes(q) ||
+          (shop.brands ?? []).some((b) => b.toLowerCase().includes(q));
+        if (!matched) return false;
+      }
+      if (priceFilter) {
+        const minPrice = shop.priceRange.min;
+        const maxPrice = shop.priceRange.max;
+        if (priceFilter === 'budget' && maxPrice > 1000) return false;
+        if (priceFilter === 'mid' && (minPrice < 1000 || maxPrice > 3000)) return false;
+        if (priceFilter === 'luxury' && minPrice < 3000) return false;
+      }
+      return true;
+    });
+  }, [shops, activeTab, selectedType, searchTerm, priceFilter]);
 
-    // Type filtering
-    if (selectedType && shop.shopType !== selectedType) {
-      return false;
-    }
-
-    // Search filtering
-    if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase();
-      return (
-        shop.name.toLowerCase().includes(searchLower) ||
-        shop.description.toLowerCase().includes(searchLower) ||
-        shop.specialties.some(specialty => specialty.toLowerCase().includes(searchLower)) ||
-        shop.address.city.toLowerCase().includes(searchLower) ||
-        shop.brands?.some(brand => brand.toLowerCase().includes(searchLower))
-      );
-    }
-
-    // Price filtering
-    if (priceFilter) {
-      const minPrice = shop.priceRange.min;
-      const maxPrice = shop.priceRange.max;
-      if (priceFilter === 'budget' && maxPrice > 1000) return false;
-      if (priceFilter === 'mid' && (minPrice < 1000 || maxPrice > 3000)) return false;
-      if (priceFilter === 'luxury' && minPrice < 3000) return false;
-    }
-
-    return true;
-  });
-
-  // Tab options based on shop types
-  const tabOptions = [
-    { id: 'all', label: 'All Shops', count: mockDressShops.length },
-    { id: 'boutique', label: 'Boutiques', count: mockDressShops.filter(s => s.shopType === 'boutique').length },
-    { id: 'designer', label: 'Designer', count: mockDressShops.filter(s => s.shopType === 'designer').length },
-    { id: 'department', label: 'Department Stores', count: mockDressShops.filter(s => s.shopType === 'department').length },
-    { id: 'consignment', label: 'Consignment', count: mockDressShops.filter(s => s.shopType === 'consignment').length },
-    { id: 'plus-size', label: 'Plus Size', count: mockDressShops.filter(s => s.shopType === 'plus-size').length },
-  ];
+  // Tabs: only show shop-type tabs that have at least one shop.
+  const tabOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    shops.forEach((s) => counts.set(s.shopType, (counts.get(s.shopType) ?? 0) + 1));
+    return [
+      { id: 'all', label: 'All Shops', count: shops.length },
+      { id: 'boutique', label: 'Boutiques', count: counts.get('boutique') ?? 0 },
+      { id: 'designer', label: 'Designer', count: counts.get('designer') ?? 0 },
+      { id: 'department', label: 'Department Stores', count: counts.get('department') ?? 0 },
+      { id: 'salon', label: 'Salons', count: counts.get('salon') ?? 0 },
+      { id: 'consignment', label: 'Consignment', count: counts.get('consignment') ?? 0 },
+      { id: 'plus-size', label: 'Plus Size', count: counts.get('plus-size') ?? 0 },
+    ].filter((t) => t.id === 'all' || t.count > 0);
+  }, [shops]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
-      <Navigation />
-      
+    <>
       {/* Header and Search Section */}
       <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,110 +176,6 @@ export default function DressShopsPage() {
         </div>
       </section>
 
-      {/* Featured Services */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose South Florida Bridal Shops?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From Miami to Palm Beach, discover what makes our bridal boutiques special
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl mb-4">🌴</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Beach-Ready Styles</h3>
-              <p className="text-gray-600 text-sm">Perfect gowns for Florida's beautiful beach and outdoor venues</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-4xl mb-4">✨</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Designer Selection</h3>
-              <p className="text-gray-600 text-sm">Exclusive access to top designers and unique collections</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-4xl mb-4">👥</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Expert Stylists</h3>
-              <p className="text-gray-600 text-sm">Personal consultants who understand Florida wedding style</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-4xl mb-4">⏰</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Perfect Timing</h3>
-              <p className="text-gray-600 text-sm">Alterations and timing perfect for your Florida wedding date</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Tips Section */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Dress Shopping Tips for Florida Brides
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-3">🏖️ Consider the Climate</h3>
-              <p className="text-gray-600 text-sm">
-                Florida's warm weather calls for breathable fabrics like chiffon, tulle, or lightweight satin. 
-                Avoid heavy materials that might be uncomfortable in the heat.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-3">📅 Start Early</h3>
-              <p className="text-gray-600 text-sm">
-                Begin shopping 8-12 months before your wedding. Florida's peak wedding season requires extra time 
-                for alterations and shipping delays.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-3">👯 Bring Your Crew</h3>
-              <p className="text-gray-600 text-sm">
-                Limit your entourage to 2-3 trusted people whose opinions matter most. Too many voices 
-                can make the decision overwhelming.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-3">💰 Set Your Budget</h3>
-              <p className="text-gray-600 text-sm">
-                Remember to budget for alterations (typically 15-20% of dress cost) and accessories. 
-                Communicate your budget clearly with your consultant.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="bg-gradient-to-r from-pink-600 to-purple-600 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Find Your Perfect Dress?
-          </h2>
-          <p className="text-xl text-pink-100 mb-8">
-            Book appointments at multiple shops and start your bridal journey
-          </p>
-          <Link
-            href="/register"
-            className="bg-white hover:bg-gray-100 text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg transition"
-          >
-            Create Your Bridal Profile
-          </Link>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }

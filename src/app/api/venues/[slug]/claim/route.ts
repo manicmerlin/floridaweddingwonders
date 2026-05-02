@@ -8,10 +8,10 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { slug: string } }
 ) {
   try {
-    const venueId = params.id;
+    const venueId = params.slug;
     const body = await request.json();
 
     console.log('Venue claim request:', { venueId, body });

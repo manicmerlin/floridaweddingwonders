@@ -1,135 +1,69 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navigation from '../../../components/Navigation';
-import Footer from '../../../components/Footer';
-import PhotoGallery from '../../../components/PhotoGallery';
-import VenueClaimButton from '../../../components/VenueClaimButton';
-import VenueContactForm from '../../../components/VenueContactForm';
-import SaveVenueButton from '../../../components/SaveVenueButton';
-import { mockVenues } from '../../../lib/mockData';
-import { loadVenuePhotosFromStorage } from '../../../lib/photoStorage';
-import { useVenueAnalytics, trackVenueAction } from '../../../hooks/useVenueAnalytics';
-import { Venue } from '../../../types';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import PhotoGallery from '@/components/PhotoGallery';
+import VenueClaimButton from '@/components/VenueClaimButton';
+import VenueContactForm from '@/components/VenueContactForm';
+import SaveVenueButton from '@/components/SaveVenueButton';
+import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
+import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
+import { Venue } from '@/types';
 
-// Helper function to check if a venue has been deleted
+// Per-device admin soft-delete. Stays in localStorage until Phase 3 moves it
+// to the DB.
 function isVenueDeleted(venueId: string): boolean {
   if (typeof window === 'undefined') return false;
-  
   try {
-    const deletedVenuesKey = 'deleted-venues';
-    const deletedVenues = JSON.parse(localStorage.getItem(deletedVenuesKey) || '[]');
-    return deletedVenues.includes(venueId);
+    const list = JSON.parse(localStorage.getItem('deleted-venues') || '[]');
+    return list.includes(venueId);
   } catch {
     return false;
   }
 }
 
-// Use mockVenues which already includes the JSON data to avoid duplicates
-const allVenues = mockVenues;
+interface Props {
+  venue: Venue;
+  relatedVenues: Venue[];
+}
 
-export default function VenueDetailPage() {
-  const params = useParams();
+export default function VenueDetailClient({ venue: serverVenue, relatedVenues }: Props) {
   const router = useRouter();
-  const [venue, setVenue] = useState<Venue | null>(null);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   const [showContactForm, setShowContactForm] = useState(false);
+  // Start with the server-rendered venue. The effect below replaces images
+  // with stored photos (post-migration uploads) and triggers a redirect if
+  // the admin has soft-deleted this venue on this device.
+  const [venue, setVenue] = useState<Venue>(serverVenue);
 
-  // Track venue page view
-  useVenueAnalytics(venue?.id || null);
+  useVenueAnalytics(venue.id);
 
   useEffect(() => {
-    async function loadVenue() {
-      if (params.id) {
-        console.log('Looking for venue with ID:', params.id);
-        console.log('Available venues:', allVenues.map(v => ({ id: v.id, name: v.name })));
-        
-        // Find venue by ID or slug in combined venues list
-        let foundVenue = allVenues.find(v => v.id === params.id);
-        
-        // If not found by exact ID, try to find by name-based slug
-        if (!foundVenue) {
-          foundVenue = allVenues.find(v => 
-            v.name.toLowerCase().replace(/[^a-z0-9]/g, '-') === params.id ||
-            v.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') === params.id
-          );
-        }
-        
-        // If still not found, try partial name matching
-        if (!foundVenue && typeof params.id === 'string') {
-          foundVenue = allVenues.find(v => 
-            v.name.toLowerCase().includes(params.id.toString().replace(/-/g, ' ')) ||
-            params.id.toString().replace(/-/g, ' ').includes(v.name.toLowerCase())
-          );
-        }
-        
-        // Load stored photos for this venue if found
-        if (foundVenue) {
-          // Check if venue has been deleted
-          if (isVenueDeleted(foundVenue.id)) {
-            console.log('Venue has been deleted, redirecting...');
-            router.push('/venues');
-            return;
-          }
-          
-          const storedPhotos = await loadVenuePhotosFromStorage(foundVenue.id);
-          if (storedPhotos.length > 0) {
-            console.log('Loading stored photos for venue:', foundVenue.name, storedPhotos);
-            foundVenue = {
-              ...foundVenue,
-              images: storedPhotos
-            };
-          }
-        }
-        
-        console.log('Found venue:', foundVenue ? foundVenue.name : 'None');
-        setVenue(foundVenue || null);
-        setLoading(false);
-      }
+    if (isVenueDeleted(serverVenue.id)) {
+      router.push('/venues');
+      return;
     }
-    
-    loadVenue();
-  }, [params.id]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-pink-600 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading venue details...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!venue) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Navigation />
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="text-center">
-            <div className="text-gray-400 text-6xl mb-4">🏛️</div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Venue Not Found</h1>
-            <p className="text-gray-600 mb-6">The venue you're looking for doesn't exist.</p>
-            <Link
-              href="/venues"
-              className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition"
-            >
-              Browse All Venues
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+    let cancelled = false;
+    (async () => {
+      try {
+        const stored = await loadVenuePhotosFromStorage(serverVenue.id);
+        if (!cancelled && stored.length > 0) {
+          setVenue({ ...serverVenue, images: stored });
+        } else if (!cancelled) {
+          setVenue(serverVenue);
+        }
+      } catch {
+        if (!cancelled) setVenue(serverVenue);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [serverVenue, router]);
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
@@ -799,11 +733,10 @@ export default function VenueDetailPage() {
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {allVenues
-              .filter(v => v.address.city === venue.address.city && v.id !== venue.id)
+            {relatedVenues
               .slice(0, 3)
               .map((relatedVenue) => (
-                <Link key={relatedVenue.id} href={`/venues/${relatedVenue.id}`} className="block group">
+                <Link key={relatedVenue.id} href={`/venues/${relatedVenue.slug || relatedVenue.id}`} className="block group">
                   <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
                     {relatedVenue.images && relatedVenue.images.length > 0 ? (
                       <div className="aspect-w-16 aspect-h-10">
