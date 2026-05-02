@@ -1,151 +1,141 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { VenueClaim, ClaimSubmission } from '@/types';
-import { getClaims, addClaim, hasExistingClaim, updateClaim } from '@/lib/claimsStorage';
+import { z } from 'zod';
+import {
+  createSupabaseAdminClient,
+  createSupabaseServerClient,
+} from '@/lib/supabaseServer';
+import { getAppSession } from '@/lib/authServer';
 
-export async function GET() {
-  try {
-    const claims = getClaims();
-    console.log('📋 Admin fetching claims. Current claims count:', claims.length);
-    console.log('📋 Claims in memory:', claims);
-    
-    // Return all venue claims (admin only)
-    return NextResponse.json({
-      success: true,
-      claims: claims
-    });
-  } catch (error) {
-    console.error('Failed to fetch venue claims:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to fetch venue claims' },
-      { status: 500 }
-    );
-  }
-}
+// POST /api/claims
+//   { venueSlug | venueId, name, email, phone?, businessName?,
+//     relationshipToVenue?, notes?, intendedTier? }
+//
+// Inserts a row in claim_requests. Auth-gate: signed-in user, profile_id
+// pinned to the caller. Anonymous claims (no auth) are NOT allowed in
+// Phase 3A — keeps the spam surface small. Phase 3B can add a public form
+// behind hCaptcha if needed.
+//
+// For paid intended_tiers (growth/scale), the client follows up with a
+// POST /api/stripe/checkout — that route uses its own metadata to link the
+// resulting subscription back to the claim_request. The webhook flips the
+// claim to approved on payment success.
+//
+// For starter tier, the claim sits in `pending` until an admin approves
+// via /api/admin/claims/[id]/approve.
+
+const ClaimSchema = z.object({
+  venueId: z.string().uuid().optional(),
+  venueSlug: z.string().min(1).optional(),
+  name: z.string().min(1).max(120),
+  email: z.string().email().max(255),
+  phone: z.string().max(40).optional(),
+  businessName: z.string().max(255).optional(),
+  relationshipToVenue: z.string().max(255).optional(),
+  notes: z.string().max(2000).optional(),
+  intendedTier: z.enum(['starter', 'growth', 'scale']).optional(),
+}).refine((d) => d.venueId || d.venueSlug, {
+  message: 'venueId or venueSlug is required',
+});
 
 export async function POST(request: NextRequest) {
+  const session = await getAppSession();
+  if (!session) {
+    return NextResponse.json(
+      { error: 'You must be signed in to submit a claim.' },
+      { status: 401 }
+    );
+  }
+
+  let parsed: z.infer<typeof ClaimSchema>;
   try {
     const body = await request.json();
-    const { venueId, venueName, userId, userEmail, userName, businessName, businessType, additionalNotes } = body;
+    parsed = ClaimSchema.parse(body);
+  } catch (err) {
+    const message =
+      err instanceof z.ZodError ? err.issues.map((i) => i.message).join('; ') : 'Invalid request body';
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
 
-    // Check if venue is already claimed or has pending claim
-    const { exists, claim: existingClaim } = hasExistingClaim(venueId);
+  // Resolve venue UUID (we accept either uuid or slug from the client).
+  const supabase = createSupabaseServerClient();
+  let venueRow: { id: string; name: string } | null = null;
+  if (parsed.venueId) {
+    const { data } = await supabase
+      .from('venues')
+      .select('id, name')
+      .eq('id', parsed.venueId)
+      .maybeSingle();
+    venueRow = data;
+  } else if (parsed.venueSlug) {
+    const { data } = await supabase
+      .from('venues')
+      .select('id, name')
+      .eq('slug', parsed.venueSlug)
+      .maybeSingle();
+    venueRow = data;
+  }
+  if (!venueRow) {
+    return NextResponse.json({ error: 'Venue not found' }, { status: 404 });
+  }
 
-    if (exists && existingClaim) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: existingClaim.status === 'approved' 
-            ? 'This venue is already claimed' 
-            : 'This venue has a pending claim'
-        },
-        { status: 400 }
-      );
-    }
+  // Block duplicate pending claims by the same user for the same venue.
+  // (UNIQUE on venue_ownerships handles ownership; here we want to keep the
+  // claim queue clean.)
+  const { data: existing } = await supabase
+    .from('claim_requests')
+    .select('id, status')
+    .eq('venue_id', venueRow.id)
+    .eq('profile_id', session.user.id)
+    .in('status', ['pending', 'approved'])
+    .maybeSingle();
+  if (existing) {
+    return NextResponse.json(
+      {
+        error:
+          existing.status === 'approved'
+            ? 'You have already claimed this venue.'
+            : 'You already have a pending claim for this venue.',
+        claimRequestId: existing.id,
+        status: existing.status,
+      },
+      { status: 409 }
+    );
+  }
 
-    // Create new claim
-    const newClaim: VenueClaim = {
-      id: `claim_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      venueId,
-      venueName,
-      userId,
-      userEmail,
-      userName,
+  // Insert via service-role to write the FK + email columns reliably.
+  // RLS on claim_requests permits user inserts where profile_id = auth.uid()
+  // anyway, but we bypass to avoid timing issues with the SSR cookie.
+  const admin = createSupabaseAdminClient();
+  const { data: inserted, error: insertErr } = await admin
+    .from('claim_requests')
+    .insert({
+      venue_id: venueRow.id,
+      profile_id: session.user.id,
+      requester_email: parsed.email,
+      requester_name: parsed.name,
+      requester_phone: parsed.phone ?? null,
+      business_name: parsed.businessName ?? null,
+      relationship_to_venue: parsed.relationshipToVenue ?? null,
+      notes: parsed.notes ?? null,
+      intended_tier: parsed.intendedTier ?? 'starter',
       status: 'pending',
-      submittedAt: new Date().toISOString(),
-      notes: additionalNotes
-    };
+    })
+    .select('id')
+    .single();
 
-    addClaim(newClaim);
-
-    // Send email notifications
-    try {
-      // Send notification to admin
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: 'admin@floridaweddingwonders.com',
-          subject: `New Venue Claim: ${venueName}`,
-          type: 'venue_claim_admin',
-          data: {
-            claimId: newClaim.id,
-            venueName,
-            userName,
-            userEmail,
-            businessName,
-            businessType,
-            submittedAt: newClaim.submittedAt,
-            additionalNotes
-          }
-        })
-      });
-
-      // Send confirmation to user
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: userEmail,
-          subject: `Your venue claim for ${venueName} has been submitted`,
-          type: 'venue_claim_confirmation',
-          data: {
-            claimId: newClaim.id,
-            venueName,
-            userName,
-            submittedAt: newClaim.submittedAt
-          }
-        })
-      });
-    } catch (emailError) {
-      console.error('Failed to send email notifications:', emailError);
-      // Don't fail the claim submission if emails fail
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: 'Venue claim submitted successfully',
-      claimId: newClaim.id
-    });
-
-  } catch (error) {
-    console.error('Failed to submit venue claim:', error);
+  if (insertErr) {
+    console.error('claim insert failed:', insertErr);
     return NextResponse.json(
-      { success: false, error: 'Failed to submit venue claim' },
+      { error: 'Could not save claim. Please try again.' },
       { status: 500 }
     );
   }
-}
 
-export async function PATCH(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { claimId, status, reviewedBy, adminNotes } = body;
-
-    // Update claim using shared storage
-    const updatedClaim = updateClaim(claimId, {
-      status,
-      reviewedAt: new Date().toISOString(),
-      reviewedBy,
-      adminNotes
-    });
-    
-    if (!updatedClaim) {
-      return NextResponse.json(
-        { success: false, error: 'Claim not found' },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json({
-      success: true,
-      claim: updatedClaim
-    });
-
-  } catch (error) {
-    console.error('Failed to update venue claim:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to update venue claim' },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json({
+    success: true,
+    claimRequestId: inserted!.id,
+    venueId: venueRow.id,
+    venueName: venueRow.name,
+    intendedTier: parsed.intendedTier ?? 'starter',
+  });
 }

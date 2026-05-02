@@ -11,6 +11,7 @@
 // accidental client-side imports.
 
 import { createSupabasePublicClient } from './supabaseServer';
+import { compareByTier } from './tierFeatures';
 import type {
   Venue,
   Vendor,
@@ -83,6 +84,8 @@ interface VenueRow {
   id: string;
   legacy_id: string | null;
   slug: string;
+  tier: 'starter' | 'growth' | 'scale';
+  tier_expires_at: string | null;
   name: string;
   description: string | null;
   city: string | null;
@@ -134,6 +137,8 @@ function rowToVenue(row: VenueRow): Venue {
     id: row.legacy_id ?? row.id,
     slug: row.slug,
     uuid: row.id,
+    tier: row.tier,
+    tierExpiresAt: row.tier_expires_at,
     name: row.name,
     description: row.description ?? '',
     venueType,
@@ -371,6 +376,9 @@ export async function getVenues(opts: {
         v.address.city.toLowerCase().includes(q2)
     );
   }
+  // Paid tiers first (scale > growth > starter), then alpha within tier.
+  // Phase 3A — see src/lib/tierFeatures.ts for the weights.
+  venues.sort(compareByTier);
   return venues;
 }
 

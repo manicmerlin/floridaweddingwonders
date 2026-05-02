@@ -12,6 +12,7 @@ import VenueContactForm from '@/components/VenueContactForm';
 import SaveVenueButton from '@/components/SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
+import { tierFeatures } from '@/lib/tierFeatures';
 import { Venue } from '@/types';
 
 // Per-device admin soft-delete. Stays in localStorage until Phase 3 moves it
@@ -77,17 +78,37 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
 
       {/* Photo Gallery Section - Standalone */}
       <section className="bg-white relative z-0">
+        {/* Tier hero overlay — top-right corner of the gallery section.
+            Scale gets a gold ribbon, growth gets a purple "Featured" tag. */}
+        {(() => {
+          const tf = tierFeatures(venue.tier);
+          if (!tf.badgeLabel) return null;
+          const isScale = tf.showFoundingPartnerBadge;
+          return (
+            <div
+              className={`absolute top-4 right-4 z-20 px-4 py-2 rounded-full text-sm font-bold shadow-xl ${
+                isScale
+                  ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-amber-950'
+                  : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+              }`}
+              aria-label={`${tf.badgeLabel} venue`}
+            >
+              {isScale ? '★ ' : ''}
+              {tf.badgeLabel}
+            </div>
+          );
+        })()}
         {venue.images && venue.images.length > 0 ? (
           <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-8 lg:pb-20">
             <div className="max-w-7xl mx-auto">
-              <PhotoGallery 
+              <PhotoGallery
                 images={venue.images.map((img, index) => ({
                   id: img.id,
                   url: img.url,
                   alt: img.alt,
                   isPrimary: img.isPrimary || index === 0
-                }))} 
-                venueName={venue.name} 
+                }))}
+                venueName={venue.name}
               />
             </div>
           </div>

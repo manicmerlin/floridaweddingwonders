@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { isSuperAdmin } from '@/lib/auth';
+import { tierFeatures } from '@/lib/tierFeatures';
 import SaveVenueButton from './SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 
@@ -83,6 +84,26 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
           </div>
         )}
         
+        {/* Tier badge — top-left, leaves the save button on the right alone */}
+        {(() => {
+          const tf = tierFeatures(venueWithPhotos.tier);
+          if (!tf.badgeLabel) return null;
+          const isScale = tf.showFoundingPartnerBadge;
+          return (
+            <div
+              className={`absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-lg ${
+                isScale
+                  ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-amber-950'
+                  : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+              }`}
+              aria-label={`${tf.badgeLabel} venue`}
+            >
+              {isScale ? '★ ' : ''}
+              {tf.badgeLabel}
+            </div>
+          );
+        })()}
+
         {/* Save Button */}
         <div className="absolute top-3 right-3 z-10">
           <SaveVenueButton venue={venueWithPhotos} size="md" />
