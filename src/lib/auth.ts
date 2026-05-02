@@ -1,220 +1,217 @@
-// Authentication and venue ownership utilities
+// Client-side auth surface for the rest of the app. Wraps Supabase Auth and
+// keeps a small, sync-readable mirror in localStorage so the existing
+// localStorage-reading components (Navigation, VenueCard, VenueManagement,
+// etc.) keep working without a one-shot mass refactor.
+//
+// IMPORTANT: client-side state is a CACHE, not a security boundary. Every
+// secured surface (middleware, /admin/layout.tsx server guard, admin API
+// routes) re-validates against the Supabase session cookie on the server.
+// Setting localStorage flags in DevTools no longer grants access to anything
+// that matters.
 
-export interface VenueOwnerAuth {
+'use client';
+
+import { supabase } from './supabase';
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+export type AppRole = 'guest' | 'venue_owner' | 'vendor_owner' | 'super_admin';
+
+export interface AuthSnapshot {
   id: string;
   email: string;
-  venueId: string | 'all'; // 'all' for super admin
-  isVerified: boolean;
-  subscriptionTier: 'free' | 'premium' | 'enterprise';
-  photoLimit: number;
-  claimedAt: string;
-  role: 'venue_owner' | 'super_admin';
+  name: string;
+  role: AppRole;
+  isAuthenticated: true;
 }
 
-export interface AuthSession {
-  user: VenueOwnerAuth | null;
+// Legacy shape compat. Some callers destructure `{ user, isAuthenticated }`.
+export interface LegacyAuthSession {
+  user: AuthSnapshot | null;
   isAuthenticated: boolean;
 }
 
-// Mock venue ownership data (in production, this would be in a database)
-const VENUE_OWNERS: VenueOwnerAuth[] = [
-  {
-    id: 'super-admin-1',
-    email: 'admin@floridaweddingwonders.com',
-    venueId: 'all', // Can manage all venues
-    isVerified: true,
-    subscriptionTier: 'enterprise',
-    photoLimit: 1000, // Unlimited essentially
-    claimedAt: '2025-09-01T00:00:00Z',
-    role: 'super_admin'
-  },
-  {
-    id: 'owner-1',
-    email: 'manager@curtissmansion.com',
-    venueId: '11', // Curtiss Mansion
-    isVerified: true,
-    subscriptionTier: 'free',
-    photoLimit: 2,
-    claimedAt: '2025-09-10T10:00:00Z',
-    role: 'venue_owner'
-  },
-  {
-    id: 'owner-2', 
-    email: 'owner@hialeahpark.com',
-    venueId: '1', // Hialeah Park Racing & Casino
-    isVerified: true,
-    subscriptionTier: 'premium',
-    photoLimit: 50,
-    claimedAt: '2025-09-08T15:30:00Z',
-    role: 'venue_owner'
-  }
-];
+// ---------------------------------------------------------------------------
+// Feature flags
+// ---------------------------------------------------------------------------
 
-export function getCurrentUser(): AuthSession {
-  if (typeof window === 'undefined') {
-    return { user: null, isAuthenticated: false };
-  }
+/**
+ * NEXT_PUBLIC_LEGACY_AUTH_BYPASS=true keeps the pre-Supabase-Auth client
+ * helpers reading the old localStorage flags. Production should NEVER set
+ * this. Locally the user can flip it on if the new auth misbehaves.
+ */
+function legacyBypassEnabled(): boolean {
+  return process.env.NEXT_PUBLIC_LEGACY_AUTH_BYPASS === 'true';
+}
 
+// ---------------------------------------------------------------------------
+// localStorage cache (written by AuthProvider; read by sync helpers below)
+// ---------------------------------------------------------------------------
+
+const LS_KEY = 'user'; // intentionally the same key the legacy code wrote
+
+export function readAuthSnapshotFromLocalStorage(): AuthSnapshot | null {
+  if (typeof window === 'undefined') return null;
   try {
-    // Check localStorage for authentication
-    const isAuthenticated = localStorage.getItem('isSuperAdmin') === 'true' || localStorage.getItem('isAuthenticated') === 'true';
-    const userEmail = localStorage.getItem('userEmail');
-
-    if (!isAuthenticated || !userEmail) {
-      return { user: null, isAuthenticated: false };
-    }
-
-    const user = VENUE_OWNERS.find(owner => owner.email === userEmail);
-    
-    if (user) {
-      return { user, isAuthenticated: true };
-    }
-
-    return { user: null, isAuthenticated: false };
-  } catch (error) {
-    console.error('Auth error:', error);
-    return { user: null, isAuthenticated: false };
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed?.email || !parsed?.id) return null;
+    return {
+      id: parsed.id,
+      email: parsed.email,
+      name: parsed.name || '',
+      role: (parsed.role || 'guest') as AppRole,
+      isAuthenticated: true,
+    };
+  } catch {
+    return null;
   }
 }
 
-export function canManageVenue(venueId: string): boolean {
-  const { user, isAuthenticated } = getCurrentUser();
-  
-  if (!isAuthenticated || !user) {
-    return false;
+/**
+ * AuthProvider calls this on every Supabase auth-state change to keep the
+ * legacy mirror in sync. Single writer, many readers.
+ */
+export function writeAuthSnapshotToLocalStorage(snap: AuthSnapshot | null) {
+  if (typeof window === 'undefined') return;
+  if (!snap) {
+    localStorage.removeItem(LS_KEY);
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('isSuperAdmin');
+    localStorage.removeItem('userEmail');
+    return;
   }
-
-  // Super admin can manage all venues
-  if (user.role === 'super_admin' && user.venueId === 'all') {
-    return true;
-  }
-
-  // Regular venue owner can only manage their specific venue
-  return user.venueId === venueId && user.isVerified;
+  localStorage.setItem(LS_KEY, JSON.stringify(snap));
+  localStorage.setItem('isAuthenticated', 'true');
+  localStorage.setItem('isSuperAdmin', snap.role === 'super_admin' ? 'true' : 'false');
+  localStorage.setItem('userEmail', snap.email);
 }
 
-export function getPhotoLimit(venueId: string): number {
-  const { user, isAuthenticated } = getCurrentUser();
-  
-  if (!isAuthenticated || !user) {
-    return 0; // No access
+// ---------------------------------------------------------------------------
+// Sync helpers — backward-compatible API surface
+// ---------------------------------------------------------------------------
+
+/**
+ * Sync read of the current auth state for code that can't easily go async or
+ * use React context. Reflects whatever AuthProvider last cached. Returns
+ * null when signed out.
+ */
+export function getCurrentUser(): LegacyAuthSession {
+  // In production: read the cache the AuthProvider keeps in sync. The cache
+  // is purely UX; security relies on the server.
+  const snap = readAuthSnapshotFromLocalStorage();
+  if (snap) return { user: snap, isAuthenticated: true };
+
+  // Bypass: also accept the old hardcoded super-admin flag pattern.
+  if (legacyBypassEnabled() && typeof window !== 'undefined') {
+    const isAuth = localStorage.getItem('isAuthenticated') === 'true';
+    const email = localStorage.getItem('userEmail') || '';
+    if (isAuth && email) {
+      const isSuper = localStorage.getItem('isSuperAdmin') === 'true';
+      return {
+        user: {
+          id: 'legacy-' + email,
+          email,
+          name: '',
+          role: isSuper ? 'super_admin' : 'guest',
+          isAuthenticated: true,
+        },
+        isAuthenticated: true,
+      };
+    }
   }
 
-  // Super admin gets unlimited photos
-  if (user.role === 'super_admin') {
-    return user.photoLimit;
-  }
-
-  // Regular venue owner can only access their venue
-  if (user.venueId !== venueId) {
-    return 0; // No access to other venues
-  }
-
-  return user.photoLimit;
+  return { user: null, isAuthenticated: false };
 }
 
 export function isSuperAdmin(): boolean {
-  if (typeof window === 'undefined') {
-    console.log('isSuperAdmin: window undefined (SSR)');
-    return false;
-  }
-  
-  // Check localStorage directly for super admin status
-  const isSuperAdminFlag = localStorage.getItem('isSuperAdmin') === 'true';
-  const userEmail = localStorage.getItem('userEmail');
-  
-  console.log('isSuperAdmin check:', { isSuperAdminFlag, userEmail });
-  
-  if (isSuperAdminFlag && userEmail) {
-    const user = VENUE_OWNERS.find(owner => owner.email === userEmail && owner.role === 'super_admin');
-    console.log('Found user:', user);
-    return !!user;
-  }
-  
-  console.log('isSuperAdmin: returning false');
-  return false;
-}
-
-export function loginAsVenueOwner(email: string, venueId?: string): boolean {
-  // Check for super admin first
-  const superAdmin = VENUE_OWNERS.find(o => o.email === email && o.role === 'super_admin');
-  if (superAdmin) {
-    // Set localStorage for super admin
-    localStorage.setItem('isSuperAdmin', 'true');
-    localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('userEmail', email);
-    
-    // Also set cookies for server-side middleware
-    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400';
-    document.cookie = `venue-owner-email=${encodeURIComponent(email)}; path=/; max-age=86400`;
-    return true;
-  }
-
-  // Check for specific venue owner
-  const owner = VENUE_OWNERS.find(o => o.email === email && (venueId ? o.venueId === venueId : true));
-  
-  if (owner) {
-    // Set localStorage for regular venue owner
-    localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('isSuperAdmin', 'false');
-    
-    // Also set cookies for server-side middleware
-    document.cookie = 'venue-owner-auth=authenticated; path=/; max-age=86400';
-    document.cookie = `venue-owner-email=${encodeURIComponent(email)}; path=/; max-age=86400`;
-    return true;
-  }
-  
-  return false;
-}
-
-export function logout(): void {
-  // Clear localStorage
-  localStorage.removeItem('isSuperAdmin');
-  localStorage.removeItem('isAuthenticated');
-  localStorage.removeItem('userEmail');
-  localStorage.removeItem('user');
-  
-  // Clear cookies
-  document.cookie = 'venue-owner-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  document.cookie = 'venue-owner-email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-  
-  // Sign out from Supabase
-  if (typeof window !== 'undefined') {
-    import('@supabase/supabase-js').then(({ createClient }) => {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://aflrmpkolumpjhpaxblz.supabase.co',
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmbHJtcGtvbHVtcGpocGF4Ymx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjY0MjcyMTIsImV4cCI6MjA0MjAwMzIxMn0.y7cCU7LNcanterUpMPU6j5rO_hWJlgEYF3z9FRw00LU'
-      );
-      supabase.auth.signOut();
-    });
-  }
-}
-
-export function upgradeSubscription(venueId: string, newTier: 'premium' | 'enterprise'): boolean {
   const { user } = getCurrentUser();
-  
-  if (!user || user.venueId !== venueId) {
-    return false;
-  }
-
-  // In production, this would update the database
-  const ownerIndex = VENUE_OWNERS.findIndex(o => o.id === user.id);
-  if (ownerIndex !== -1) {
-    VENUE_OWNERS[ownerIndex].subscriptionTier = newTier;
-    VENUE_OWNERS[ownerIndex].photoLimit = newTier === 'premium' ? 50 : 100;
-    return true;
-  }
-  
-  return false;
+  return user?.role === 'super_admin';
 }
 
-// Get available venue owners for demo purposes
-export function getAvailableVenueOwners(): Array<{ email: string; venueId: string; venueName: string }> {
-  return [
-    { email: 'admin@floridaweddingwonders.com', venueId: 'all', venueName: 'Super Admin (All Venues)' },
-    { email: 'manager@curtissmansion.com', venueId: '11', venueName: 'Curtiss Mansion' },
-    { email: 'owner@hialeahpark.com', venueId: '1', venueName: 'Hialeah Park Racing & Casino' },
-  ];
+export function canManageVenue(_venueId: string): boolean {
+  // Until per-venue ownership records land in profiles, only super_admin can
+  // manage. Phase 3 expands this to vendor_owner / venue_owner with venue_id
+  // join lookups.
+  return isSuperAdmin();
 }
+
+export function getPhotoLimit(_venueId: string): number {
+  return isSuperAdmin() ? Number.POSITIVE_INFINITY : 0;
+}
+
+// ---------------------------------------------------------------------------
+// Auth actions
+// ---------------------------------------------------------------------------
+
+export interface SignInResult {
+  success: boolean;
+  error?: string;
+}
+
+export async function signInWithEmail(
+  email: string,
+  password: string
+): Promise<SignInResult> {
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) {
+    return { success: false, error: error.message };
+  }
+  return { success: true };
+}
+
+export async function signUpWithEmail(input: {
+  email: string;
+  password: string;
+  fullName: string;
+}): Promise<SignInResult> {
+  const emailRedirectTo =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/login`
+      : undefined;
+  const { error } = await supabase.auth.signUp({
+    email: input.email,
+    password: input.password,
+    options: {
+      data: { full_name: input.fullName },
+      emailRedirectTo,
+    },
+  });
+  if (error) return { success: false, error: error.message };
+  return { success: true };
+}
+
+export async function requestPasswordReset(email: string): Promise<SignInResult> {
+  const redirectTo =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/reset-password`
+      : undefined;
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo,
+  });
+  if (error) return { success: false, error: error.message };
+  return { success: true };
+}
+
+export async function updatePassword(newPassword: string): Promise<SignInResult> {
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (error) return { success: false, error: error.message };
+  return { success: true };
+}
+
+export async function signOut(): Promise<void> {
+  await supabase.auth.signOut();
+  writeAuthSnapshotToLocalStorage(null);
+  if (typeof document !== 'undefined') {
+    // Belt-and-braces: clear the legacy compat cookies too.
+    document.cookie = 'venue-owner-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'venue-owner-email=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+    document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+  }
+}
+
+// Legacy alias used by Navigation.tsx and other callers.
+export const logout = signOut;

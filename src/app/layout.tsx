@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import { generateHomeMetadata, SITE_CONFIG } from '@/lib/seo'
+import AuthProvider from '@/components/AuthProvider'
 
 export const metadata: Metadata = {
   ...generateHomeMetadata(),
@@ -90,7 +91,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   )
 }
