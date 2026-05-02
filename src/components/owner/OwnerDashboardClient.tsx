@@ -224,7 +224,17 @@ function InquiriesPanel({ inquiries }: { inquiries: InquiryRow[] }) {
           >
             <div className="flex items-start justify-between gap-3 mb-2 flex-wrap">
               <div>
-                <h3 className="font-semibold text-gray-900">{inq.userName}</h3>
+                <h3 className="font-semibold text-gray-900 flex items-center gap-2 flex-wrap">
+                  {inq.userName}
+                  {inq.multiQuoteId && (
+                    <span
+                      className="px-2 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200"
+                      title="The couple sent this same inquiry to multiple venues. Respond fast."
+                    >
+                      ⚡ Multi-quote · 1 of {inq.multiQuotePeerCount ?? '?'}
+                    </span>
+                  )}
+                </h3>
                 <p className="text-sm text-gray-600">
                   for{' '}
                   <Link

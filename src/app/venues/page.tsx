@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import VenuesListClient from '@/components/venues/VenuesListClient';
 import { getVenues } from '@/lib/catalog';
+import { decorateVenuesWithRatings } from '@/lib/reviews';
 import { generateBreadcrumbSchema } from '@/lib/seo';
 import {
   breadcrumbLD,
@@ -16,7 +17,7 @@ import {
 export const dynamic = 'force-dynamic';
 
 export default async function VenuesPage() {
-  const venues = await getVenues();
+  const venues = await decorateVenuesWithRatings(await getVenues());
 
   return (
     <>

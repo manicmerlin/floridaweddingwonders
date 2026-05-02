@@ -165,6 +165,12 @@ export interface InquiryRow {
   submittedAt: string;
   viewedAt: string | null;
   respondedAt: string | null;
+  /** When set, this inquiry is one of N venues the couple submitted to in
+   *  a single multi-quote request. UI surfaces a "1 of N" badge. */
+  multiQuoteId: string | null;
+  /** Total venues in the multi-quote group (only computed when multiQuoteId
+   *  is set). undefined for single-venue inquiries. */
+  multiQuotePeerCount?: number;
 }
 
 /**
@@ -200,11 +206,34 @@ export async function getInquiriesForOwner(profileId: string): Promise<InquiryRo
   const { data: leads } = await admin
     .from('venue_leads')
     .select(
-      'id, venue_id, venue_name, state, user_name, user_email, user_phone, message, qualification, owner_notes, submitted_at, viewed_at, responded_at'
+      'id, venue_id, venue_name, state, user_name, user_email, user_phone, message, qualification, owner_notes, submitted_at, viewed_at, responded_at, multi_quote_id'
     )
     .in('venue_id', venueIdKeys)
     .order('submitted_at', { ascending: false });
   if (!leads) return [];
+
+  // For multi-quote leads, find peer counts (how many venues the couple sent
+  // to in the same submission). Single query keyed on multi_quote_id.
+  const multiQuoteIds = Array.from(
+    new Set(
+      (leads as any[])
+        .map((l) => l.multi_quote_id)
+        .filter((x): x is string => typeof x === 'string')
+    )
+  );
+  const peerCountByMqId = new Map<string, number>();
+  if (multiQuoteIds.length > 0) {
+    const { data: peers } = await admin
+      .from('venue_leads')
+      .select('multi_quote_id')
+      .in('multi_quote_id', multiQuoteIds);
+    for (const p of (peers ?? []) as any[]) {
+      peerCountByMqId.set(
+        p.multi_quote_id,
+        (peerCountByMqId.get(p.multi_quote_id) ?? 0) + 1
+      );
+    }
+  }
 
   return (leads as any[]).map((l) => {
     const v = idLookup.get(l.venue_id);
@@ -223,6 +252,10 @@ export async function getInquiriesForOwner(profileId: string): Promise<InquiryRo
       submittedAt: l.submitted_at,
       viewedAt: l.viewed_at,
       respondedAt: l.responded_at,
+      multiQuoteId: l.multi_quote_id ?? null,
+      multiQuotePeerCount: l.multi_quote_id
+        ? peerCountByMqId.get(l.multi_quote_id)
+        : undefined,
     };
   });
 }

@@ -108,14 +108,20 @@ export default function HomePage() {
             <h3 className="text-2xl font-bold text-white mb-4">Ready to Plan Your Dream Wedding?</h3>
             <p className="text-gray-300 mb-6">Start exploring Florida's most beautiful venues and connect with trusted wedding professionals.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/venues" 
+              <a
+                href="/venues"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Explore Venues 🏛️
               </a>
-              <a 
-                href="/venue-packages" 
+              <a
+                href="/quotes/request"
+                className="bg-gradient-to-r from-amber-500 to-rose-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                Get Quotes from 5 Venues ⚡
+              </a>
+              <a
+                href="/venue-packages"
                 className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 List Your Venue 💼
