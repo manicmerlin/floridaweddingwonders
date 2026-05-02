@@ -3,9 +3,11 @@
 import Image from 'next/image';
 import SEO from '@/components/SEO';
 import FAQ from '@/components/FAQ';
-import { generateWebsiteSchema, generateOrganizationSchema } from '@/lib/seo';
+import { generateWebsiteSchema, generateOrganizationSchema, SITE_CONFIG } from '@/lib/seo';
+import { getSiteStats } from '@/lib/siteStats';
 
 export default function HomePage() {
+  const stats = getSiteStats();
   return (
     <>
       <SEO
@@ -85,22 +87,18 @@ export default function HomePage() {
 
           {/* Stats Section */}
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 mb-16">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">130+</div>
-                <div className="text-gray-300 font-medium">Premium Venues</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.venues}</div>
+                <div className="text-gray-300 font-medium">Wedding Venues</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">50+</div>
-                <div className="text-gray-300 font-medium">Trusted Vendors</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.vendors}</div>
+                <div className="text-gray-300 font-medium">Wedding Vendors</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">31+</div>
+                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.dressShops}</div>
                 <div className="text-gray-300 font-medium">Bridal Shops</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">5★</div>
-                <div className="text-gray-300 font-medium">Quality Service</div>
               </div>
             </div>
           </div>
@@ -190,8 +188,10 @@ export default function HomePage() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
               <div className="space-y-2 text-gray-400">
-                <p>📧 hello@floridaweddingwonders.com</p>
-                <p>📱 (555) 123-4567</p>
+                <p>📧 <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-white transition-colors">{SITE_CONFIG.email}</a></p>
+                {SITE_CONFIG.phone && (
+                  <p>📱 <a href={`tel:${SITE_CONFIG.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white transition-colors">{SITE_CONFIG.phone}</a></p>
+                )}
                 <p>📍 South Florida</p>
               </div>
             </div>

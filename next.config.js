@@ -90,6 +90,17 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // Stale URLs flagged by the live audit. 308 = permanent + preserve method.
+      { source: '/wedding-venues', destination: '/venues', permanent: true },
+      { source: '/list-your-venue', destination: '/venue-packages', permanent: true },
+      // /venue-owner has no top-level page (only /venue-owner/dashboard for
+      // signed-in owners). Public clicks from old links should land on the
+      // listing/pricing page.
+      { source: '/venue-owner', destination: '/venue-packages', permanent: true },
+    ];
+  },
 }
 
 module.exports = nextConfig

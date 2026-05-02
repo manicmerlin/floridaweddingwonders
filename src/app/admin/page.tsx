@@ -1,80 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ClaimsManagement from '@/components/admin/ClaimsManagement';
 import UsersManagement from '@/components/admin/UsersManagement';
-import { isSuperAdmin, getCurrentUser } from '@/lib/auth';
+
+// Authorization is enforced by src/app/admin/layout.tsx (server-side via
+// requireSuperAdmin) and by src/middleware.ts. This component renders only
+// when those gates have already passed — no client-side check needed.
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    // Check authentication status
-    const checkAuth = () => {
-      try {
-        const { isAuthenticated } = getCurrentUser();
-        const isSuper = isSuperAdmin();
-        
-        console.log('Admin auth check:', { isAuthenticated, isSuper });
-        
-        if (!isAuthenticated || !isSuper) {
-          console.log('Not authorized, redirecting to login');
-          // Redirect to login if not authenticated or not super admin
-          router.push('/login');
-          return;
-        }
-        
-        console.log('Authorization successful');
-        setIsAuthorized(true);
-      } catch (error) {
-        console.error('Auth check error:', error);
-        router.push('/login');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    // Add a small delay to ensure localStorage is available
-    setTimeout(checkAuth, 100);
-  }, [router]);
-
-  // Show loading spinner while checking authentication
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading admin dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Don't render admin content if not authorized
-  if (!isAuthorized) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-600 text-6xl mb-4">🚫</div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-          <p className="text-gray-600 mb-6">You don't have permission to access this page.</p>
-          <Link
-            href="/login"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition"
-          >
-            Go to Login
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: '📊' },

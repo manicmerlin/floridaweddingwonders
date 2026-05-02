@@ -2,34 +2,19 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { isSuperAdmin, getCurrentUser, logout } from '@/lib/auth';
+import { useState } from 'react';
+import { signOut } from '@/lib/auth';
+import { useAuth } from '@/components/AuthProvider';
 import Logo from '@/components/Logo';
 
 export default function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSuper, setIsSuper] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, isSuperAdmin: isSuper } = useAuth();
 
-  useEffect(() => {
-    setIsSuper(isSuperAdmin());
-    
-    // Check for both venue owner auth and guest user auth
-    const { isAuthenticated: authStatus } = getCurrentUser();
-    const guestUser = localStorage.getItem('user');
-    
-    // User is authenticated if either venue owner auth OR guest user exists
-    const isAuth = authStatus || (guestUser && JSON.parse(guestUser).isAuthenticated);
-    setIsAuthenticated(isAuth);
-  }, []);
-
-  const handleLogout = () => {
-    logout();
-    setIsSuper(false);
-    setIsAuthenticated(false);
-    
-    // Force a full page reload to clear all state
+  const handleLogout = async () => {
+    await signOut();
+    // Full reload to discard any cached client state.
     window.location.href = '/';
   };
 
