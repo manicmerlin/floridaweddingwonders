@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
+import { compareByTier } from '@/lib/tierFeatures';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -54,11 +55,13 @@ export default function VenuesListClient({ venues }: { venues: Venue[] }) {
       const max = maxStr ? parseInt(maxStr, 10) : Infinity;
       out = out.filter((v) => v.capacity.max >= min && v.capacity.min <= max);
     }
-    return out.slice().sort((a, b) => {
-      if (a.owner.isPremium && !b.owner.isPremium) return -1;
-      if (!a.owner.isPremium && b.owner.isPremium) return 1;
-      return a.name.localeCompare(b.name);
-    });
+    // Match the server-side sort from catalog.ts so filters don't reorder
+    // the list incorrectly. Tier-first (scale > growth > starter), alpha
+    // within tier. The legacy `owner.isPremium` sort that lived here was a
+    // Phase 0 leftover — that field is hardcoded to `false` for every venue
+    // in the catalog mapper, so the sort collapsed to pure alphabetical and
+    // sent paid scale-tier venues several pages deep.
+    return out.slice().sort(compareByTier);
   }, [visible, searchTerm, selectedRegion, selectedType, selectedCapacity]);
 
   // Reset to page 1 whenever filters change.
