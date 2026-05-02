@@ -1,26 +1,46 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Venue, LeadQualificationData } from '../types';
+import { useAuth } from './AuthProvider';
 
 interface VenueContactFormProps {
   venue: Venue;
   onClose: () => void;
 }
 
+// Adapter: AuthProvider gives us a Supabase user; this form was written
+// against the legacy localStorage `{id, email, name, leadQualification}`
+// shape. Until the lead qualification migrates into the profiles table
+// (Phase 2), we read the qualification from localStorage but identity from
+// the trusted auth context.
+function useFormUser() {
+  const { user, isAuthenticated } = useAuth();
+  if (!user) return null;
+  let leadQualification: LeadQualificationData | null = null;
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = localStorage.getItem('user');
+      if (raw) leadQualification = JSON.parse(raw)?.leadQualification ?? null;
+    } catch {
+      /* legacy data was malformed; treat as missing */
+    }
+  }
+  return {
+    id: user.id,
+    email: user.email || '',
+    name: (user.user_metadata?.full_name as string) || '',
+    isAuthenticated,
+    leadQualification,
+  };
+}
+
 const VenueContactForm: React.FC<VenueContactFormProps> = ({ venue, onClose }) => {
-  const [user, setUser] = useState<any>(null);
+  const user = useFormUser();
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState<'message' | 'confirm' | 'success'>('message');
   const [submitStatus, setSubmitStatus] = useState<'sent' | 'pending-real-email' | 'failed'>('sent');
-
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
