@@ -243,6 +243,37 @@ export function dressShopListLD(shops: DressShop[], maxItems = 50) {
 }
 
 // ---------------------------------------------------------------------------
+// CollectionPage (used on /venues/in/[region], /venues/style/[type], etc.)
+// ---------------------------------------------------------------------------
+
+export function collectionPageLD(args: {
+  name: string;
+  description: string;
+  path: string;
+  venues: Venue[];
+  maxItems?: number;
+}) {
+  const max = args.maxItems ?? 50;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: args.name,
+    description: args.description,
+    url: `${SITE}${args.path}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: args.venues.length,
+      itemListElement: args.venues.slice(0, max).map((v, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: `${SITE}/venues/${v.slug || v.id}`,
+        name: v.name,
+      })),
+    },
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Render helper — one place to safely serialize and inject
 // ---------------------------------------------------------------------------
 
