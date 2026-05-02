@@ -554,6 +554,9 @@ export default function VendorOwnerPage() {
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     {photos.map((photo, index) => (
                       <div key={index} className="relative">
+                        {/* Object/data URL preview from a freshly-uploaded
+                            file — next/image can't optimise blob: URLs. */}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={photo}
                           alt={`Portfolio ${index + 1}`}

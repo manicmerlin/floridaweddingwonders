@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Vendor } from '@/types';
 import VendorImagePlaceholder from '@/components/VendorImagePlaceholder';
@@ -177,13 +178,15 @@ export default function VendorsListClient({ vendors }: Props) {
                       key={vendor.id}
                       className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden"
                     >
-                      <div className="aspect-w-16 aspect-h-10">
+                      <div className="relative w-full h-48">
                         {primaryImage ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
+                          <Image
                             src={primaryImage.url}
                             alt={vendor.name}
-                            className="w-full h-48 object-cover"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            loading="lazy"
                           />
                         ) : (
                           <VendorImagePlaceholder name={vendor.name} category={vendor.category} />
