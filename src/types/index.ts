@@ -43,6 +43,10 @@ export interface Venue {
   };
   amenities: string[];
   tags?: string[];
+  // Phase 3A — paid tier ('starter' | 'growth' | 'scale'). Drives badges,
+  // listing sort, and per-tier feature flags (see src/lib/tierFeatures.ts).
+  tier?: 'starter' | 'growth' | 'scale';
+  tierExpiresAt?: string | null;
   images?: VenueImage[]; // Legacy field for images only
   media?: VenueMedia[]; // New field for mixed media (images + videos)
   contact: {
