@@ -48,6 +48,17 @@ export function createSupabaseServerClient() {
 }
 
 /**
+ * Server-side client with no cookie binding, backed by the anon key.
+ * For RSC reads of public-RLS tables (catalog, etc.) where there's no
+ * per-user state. Reusable from sitemap.ts, route handlers, anywhere.
+ */
+export function createSupabasePublicClient() {
+  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+}
+
+/**
  * Server-only client backed by the service role key. Bypasses RLS — only
  * call from API routes after you have already verified the caller is a
  * super_admin via the regular client. Will throw at import time if used
