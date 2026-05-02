@@ -6,6 +6,11 @@ import {
   getDressShopBySlug,
   getDressShops,
 } from '@/lib/catalog';
+import {
+  breadcrumbLD,
+  dressShopStoreLD,
+  jsonLdScript,
+} from '@/lib/structuredData';
 
 interface Params {
   params: { slug: string };
@@ -46,5 +51,27 @@ export default async function DressShopSlugPage({ params }: Params) {
   const cohort = await getDressShops({ shopType: dressShop.shopType });
   const relatedShops = cohort.filter((s) => s.id !== dressShop.id).slice(0, 3);
 
-  return <DressShopDetailClient dressShop={dressShop} relatedShops={relatedShops} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(dressShopStoreLD(dressShop)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(
+            breadcrumbLD([
+              { name: 'Home', href: '/' },
+              { name: 'Bridal Shops', href: '/dress-shops' },
+              { name: dressShop.name, href: `/dress-shops/${dressShop.slug}` },
+            ])
+          ),
+        }}
+      />
+      <DressShopDetailClient dressShop={dressShop} relatedShops={relatedShops} />
+    </>
+  );
 }

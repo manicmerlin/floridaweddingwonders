@@ -4,6 +4,11 @@ import SEO from '@/components/SEO';
 import VendorsListClient from '@/components/vendors/VendorsListClient';
 import { getVendors } from '@/lib/catalog';
 import { generateBreadcrumbSchema } from '@/lib/seo';
+import {
+  breadcrumbLD,
+  jsonLdScript,
+  vendorListLD,
+} from '@/lib/structuredData';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,6 +35,23 @@ export default async function VendorsPage() {
           { name: 'Home', url: 'https://floridaweddingwonders.com' },
           { name: 'Wedding Vendors', url: 'https://floridaweddingwonders.com/vendors' },
         ])}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(
+            breadcrumbLD([
+              { name: 'Home', href: '/' },
+              { name: 'Wedding Vendors', href: '/vendors' },
+            ])
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdScript(vendorListLD(vendors)),
+        }}
       />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
         <Navigation />
