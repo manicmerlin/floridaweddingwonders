@@ -23,6 +23,12 @@ export const SITE_CONFIG = {
   instagram: 'floridaweddingwonders',
   languages: ['en', 'es'],
   defaultLanguage: 'en',
+  // Public contact channels. Phone is intentionally optional — the site
+  // shipped a "(555) 123-4567" placeholder for months. Set
+  // NEXT_PUBLIC_SITE_PHONE in Vercel once a real number is live and the
+  // footer will render it; leave unset and the phone row is hidden.
+  email: 'hello@floridaweddingwonders.com',
+  phone: process.env.NEXT_PUBLIC_SITE_PHONE || null as string | null,
 };
 
 // ============================================================================
