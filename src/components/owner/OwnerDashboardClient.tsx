@@ -28,8 +28,16 @@ export default function OwnerDashboardClient({ ownerEmail, venues, inquiries }: 
 
   return (
     <>
-      <div className="bg-white rounded-xl shadow-sm p-4 mb-4 text-sm text-gray-600">
-        Signed in as <strong className="text-gray-900">{ownerEmail}</strong>
+      <div className="bg-white rounded-xl shadow-sm p-4 mb-4 text-sm text-gray-600 flex items-center justify-between flex-wrap gap-2">
+        <span>
+          Signed in as <strong className="text-gray-900">{ownerEmail}</strong>
+        </span>
+        <Link
+          href="/owner/billing"
+          className="text-pink-600 hover:text-pink-700 font-medium text-sm"
+        >
+          Manage billing →
+        </Link>
       </div>
 
       <div className="border-b border-gray-200 mb-6">
