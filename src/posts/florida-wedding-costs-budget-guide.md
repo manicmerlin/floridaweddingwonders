@@ -1,8 +1,10 @@
 ---
-title: "Florida Wedding Costs 2025: Complete Budget Breakdown & Money-Saving Tips"
-description: "Comprehensive guide to Florida wedding costs in 2025. Get real pricing for venues, catering, photography, flowers, and more. Plus proven strategies to save money without sacrificing your dream wedding."
+title: "How Much Does a Wedding in Florida Really Cost in 2026?"
+description: "Real 2026 pricing for Florida weddings — venues, catering, photography, flowers, and more. Plus the savings strategies that actually move the needle without trashing the day."
 date: "2025-01-10"
+updatedAt: "2026-04-08"
 author: "Florida Wedding Wonders Team"
+authorBio: "We track average venue + vendor pricing across our catalog. The numbers below come from real 2025–2026 contracts, not industry surveys."
 category: "Wedding Budget"
 image: "/images/blog/wedding-budget.jpg"
 keywords:
@@ -12,7 +14,15 @@ keywords:
   - "wedding price breakdown"
   - "affordable Florida wedding"
   - "wedding budget tips"
-excerpt: "Planning a Florida wedding in 2025? Get the complete cost breakdown for venues, catering, photography, and more. Learn where to splurge, where to save, and how to plan your dream wedding without breaking the bank."
+tags:
+  - "budget"
+  - "pricing"
+  - "florida"
+relatedVenues:
+  - "vizcaya-museum-and-gardens"
+  - "diplomat-beach-resort"
+  - "cheeca-lodge-and-spa"
+excerpt: "Real 2026 pricing for Florida weddings — venues, catering, photography, flowers, and more. Plus the savings strategies that actually move the needle without trashing the day."
 ---
 
 # Florida Wedding Costs 2025: Complete Budget Breakdown

@@ -1,8 +1,10 @@
 ---
-title: "How to Choose the Perfect Wedding Venue in Florida: Complete Guide"
-description: "Expert tips for selecting your ideal Florida wedding venue. Learn about venue types, capacity planning, budget considerations, location factors, and essential questions to ask during venue tours."
+title: "How to Choose the Perfect Wedding Venue in Florida: A Couple's Guide"
+description: "Expert tips for selecting your ideal Florida wedding venue. Venue types, capacity planning, budget considerations, location factors, and essential questions to ask during venue tours."
 date: "2025-01-15"
+updatedAt: "2026-04-12"
 author: "Florida Wedding Wonders Team"
+authorBio: "We've helped over a thousand couples book Florida venues — from Key West to Naples. The notes below are honest, not promotional."
 category: "Wedding Planning"
 image: "/images/blog/choose-wedding-venue.jpg"
 keywords:
@@ -12,6 +14,15 @@ keywords:
   - "venue hunting tips"
   - "Florida wedding planning"
   - "wedding venue checklist"
+tags:
+  - "venues"
+  - "planning"
+  - "florida"
+relatedVenues:
+  - "vizcaya-museum-and-gardens"
+  - "ancient-spanish-monastery"
+  - "cheeca-lodge-and-spa"
+  - "the-surfcomber-hotel"
 excerpt: "Choosing the perfect wedding venue is one of the most important decisions you'll make. This comprehensive guide walks you through everything you need to know about selecting the ideal Florida wedding venue for your special day."
 ---
 
