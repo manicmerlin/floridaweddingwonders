@@ -28,9 +28,14 @@ import { createSupabaseAdminClient } from '@/lib/supabaseServer';
 const STORAGE_BUCKET = 'blog-images';
 const DALLE_MODEL = 'dall-e-3';
 
-// 2026 standard-quality DALL-E 3 pricing (cents per image).
-const COST_CENTS_LANDSCAPE_STANDARD = 8;
-const COST_CENTS_PORTRAIT_STANDARD = 8;
+// 2026 standard-quality DALL-E 3 pricing (cents per image), per size.
+const COST_CENTS_BY_SIZE: Record<DalleSize, number> = {
+  '1024x1024': 4, // square, $0.04
+  '1792x1024': 8, // landscape, $0.08
+  '1024x1792': 8, // portrait, $0.08
+};
+
+type DalleSize = '1024x1024' | '1792x1024' | '1024x1792';
 
 // Style anchor — appended to every image prompt so the brand look is
 // consistent across posts even when the contextual prompt varies.
@@ -54,15 +59,27 @@ export function isImageGenConfigured(): boolean {
 }
 
 /**
- * Generate a hero (16:9) and Pinterest (9:16) image for a post and upload
- * both to Supabase Storage. Returns public URLs and cost; logs partial
- * failures rather than throwing so the orchestrator can finish the run.
+ * Generate a hero and Pinterest image for a post and upload both to
+ * Supabase Storage. Returns public URLs and cost; logs partial failures
+ * rather than throwing so callers can finish their run.
+ *
+ * Default sizes (used by the weekly cron):
+ *   hero      → 1792×1024 (16:9 landscape)
+ *   pinterest → 1024×1792 (9:16 portrait)
+ *
+ * Override `heroSize` and/or `pinterestSize` for backfills or custom flows
+ * (e.g., the published-post backfill uses 1024×1024 square heroes since
+ * the existing /blog/[slug] hero crop reads better as a square).
  */
 export async function generateImagesForPost(args: {
   slug: string;
   imagePrompt: string;
   postId: string;
+  heroSize?: DalleSize;
+  pinterestSize?: DalleSize;
 }): Promise<ImageGenResult> {
+  const heroSize: DalleSize = args.heroSize ?? '1792x1024';
+  const pinterestSize: DalleSize = args.pinterestSize ?? '1024x1792';
   const result: ImageGenResult = {
     imageUrl: null,
     pinterestImageUrl: null,
@@ -87,11 +104,11 @@ export async function generateImagesForPost(args: {
   // halve wall-clock time. Each call is independently caught so one
   // succeeding when the other fails still produces partial output.
   const [heroResult, pinResult] = await Promise.all([
-    generateOneImage(openai, composedPrompt, '1792x1024').catch((err) => ({
+    generateOneImage(openai, composedPrompt, heroSize).catch((err) => ({
       ok: false as const,
       error: err instanceof Error ? err.message : String(err),
     })),
-    generateOneImage(openai, composedPrompt, '1024x1792').catch((err) => ({
+    generateOneImage(openai, composedPrompt, pinterestSize).catch((err) => ({
       ok: false as const,
       error: err instanceof Error ? err.message : String(err),
     })),
@@ -105,7 +122,7 @@ export async function generateImagesForPost(args: {
     ).catch((e) => ({ ok: false as const, error: e instanceof Error ? e.message : String(e) }));
     if (upload.ok) {
       result.imageUrl = upload.publicUrl;
-      result.costCents += COST_CENTS_LANDSCAPE_STANDARD;
+      result.costCents += COST_CENTS_BY_SIZE[heroSize];
     } else {
       result.errors.push(`hero upload failed: ${upload.error}`);
     }
@@ -121,7 +138,7 @@ export async function generateImagesForPost(args: {
     ).catch((e) => ({ ok: false as const, error: e instanceof Error ? e.message : String(e) }));
     if (upload.ok) {
       result.pinterestImageUrl = upload.publicUrl;
-      result.costCents += COST_CENTS_PORTRAIT_STANDARD;
+      result.costCents += COST_CENTS_BY_SIZE[pinterestSize];
     } else {
       result.errors.push(`pinterest upload failed: ${upload.error}`);
     }
@@ -142,7 +159,7 @@ type GenerateErr = { ok: false; error: string };
 async function generateOneImage(
   openai: OpenAI,
   prompt: string,
-  size: '1792x1024' | '1024x1792'
+  size: DalleSize
 ): Promise<GenerateOk | GenerateErr> {
   // Request URL response (default). DALL-E URLs expire in ~1 hour, so we
   // fetch + re-host immediately. The alternative (`response_format: 'b64_json'`)

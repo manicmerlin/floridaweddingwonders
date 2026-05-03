@@ -6,7 +6,8 @@ updatedAt: "2026-04-15"
 author: "Florida Wedding Wonders Team"
 authorBio: "We're not lawyers. The information here is the same checklist we share with couples on day one — verify state-specific details with your venue and county clerk."
 category: "Wedding Planning"
-image: "/images/blog/wedding-legal.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-permits-insurance-legal/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-permits-insurance-legal/pinterest.png"
 keywords:
   - "Florida marriage license"
   - "Florida wedding permit"
@@ -21,6 +22,12 @@ relatedVenues: []
 excerpt: "Marriage license, vendor insurance, public-property permits, beach permits, and the alcohol-license rules every Florida couple should know — without the legalese."
 ---
 
+
+<!-- imagePrompt: A serene Florida wedding venue exterior or ceremony space at twilight — calm, considered, well-prepared, no people prominently in frame.
+
+Article context: Marriage license, vendor insurance, public-property permits, beach permits, and the alcohol-license rules every Florida couple should know — without the legalese.
+
+Lede excerpt for tone:  Permits, Insurance, and Legal Requirements for Florida Weddings -->
 # Permits, Insurance, and Legal Requirements for Florida Weddings
 
 Weddings are the rare event that combines a religious ceremony, a legal contract, alcohol service, fireworks (sometimes), insurance, and 100+ guests in one afternoon. Most couples treat the legal side as their venue's problem. Mostly that's right — but there are five places where the responsibility lands on you, and missing one is expensive.

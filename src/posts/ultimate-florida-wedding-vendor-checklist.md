@@ -6,7 +6,8 @@ updatedAt: "2026-05-08"
 author: "Florida Wedding Wonders Team"
 authorBio: "We work with hundreds of Florida wedding vendors. The list below is what we'd hand a friend planning their first Florida wedding."
 category: "Wedding Planning"
-image: "/images/blog/wedding-vendors.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/ultimate-florida-wedding-vendor-checklist/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/ultimate-florida-wedding-vendor-checklist/pinterest.png"
 keywords:
   - "Florida wedding vendor checklist"
   - "wedding vendors Florida"
@@ -23,6 +24,12 @@ relatedVenues:
 excerpt: "Every vendor you actually need for a Florida wedding, when to book each, what to ask before signing, and what's safe to skip. Built from real 2026 Florida market knowledge."
 ---
 
+
+<!-- imagePrompt: Behind-the-scenes Florida wedding craft moment — flowers being arranged, table settings being placed, bridal-suite quiet before the ceremony.
+
+Article context: Every vendor type you actually need for a Florida wedding, when to book each, what to ask before signing, and what's safe to skip. Built from real 2026 Florida market knowledge.
+
+Lede excerpt for tone:  The Ultimate Florida Wedding Vendor Checklist -->
 # The Ultimate Florida Wedding Vendor Checklist
 
 Most wedding vendor lists are shopping lists. This is a triage list.

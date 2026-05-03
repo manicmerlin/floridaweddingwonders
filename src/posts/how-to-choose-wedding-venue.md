@@ -6,7 +6,8 @@ updatedAt: "2026-04-12"
 author: "Florida Wedding Wonders Team"
 authorBio: "We've helped over a thousand couples book Florida venues — from Key West to Naples. The notes below are honest, not promotional."
 category: "Wedding Planning"
-image: "/images/blog/choose-wedding-venue.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/how-to-choose-wedding-venue/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/how-to-choose-wedding-venue/pinterest.png"
 keywords:
   - "how to choose wedding venue"
   - "Florida wedding venue guide"
@@ -26,6 +27,12 @@ relatedVenues:
 excerpt: "Choosing the perfect wedding venue is one of the most important decisions you'll make. This comprehensive guide walks you through everything you need to know about selecting the ideal Florida wedding venue for your special day."
 ---
 
+
+<!-- imagePrompt: A tasteful Florida wedding reception scene that suggests careful planning and craft, table details and decor in the foreground.
+
+Article context: Expert tips for selecting your ideal Florida wedding venue. Venue types, capacity planning, budget considerations, location factors, and essential questions to ask during venue tours.
+
+Lede excerpt for tone:  How to Choose the Perfect Wedding Venue in Florida -->
 # How to Choose the Perfect Wedding Venue in Florida
 
 Choosing your wedding venue is one of the most exciting—and important—decisions you'll make during the planning process. Your venue sets the tone for your entire celebration and often determines many other aspects of your big day. If you're planning a Florida wedding, you're in luck! The Sunshine State offers an incredible variety of stunning venues, from pristine beaches to historic estates, elegant ballrooms to rustic barns.

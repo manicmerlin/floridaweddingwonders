@@ -6,7 +6,8 @@ updatedAt: "2026-04-28"
 author: "Florida Wedding Wonders Team"
 authorBio: "We've toured every venue on this list. The notes below are honest, not promotional."
 category: "Venues"
-image: "/images/blog/beach-wedding.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/best-beachfront-wedding-venues-florida/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/best-beachfront-wedding-venues-florida/pinterest.png"
 keywords:
   - "beachfront wedding venues Florida"
   - "beach wedding Florida"
@@ -26,6 +27,12 @@ relatedVenues:
 excerpt: "Twelve beachfront wedding venues across Florida — the Keys, Naples, Palm Beach, and Miami Beach. Capacity, character, and what each is actually best for. No filler, no paid placements."
 ---
 
+
+<!-- imagePrompt: A Florida beachfront wedding ceremony or reception scene at golden hour, sand-aisle and ocean horizon.
+
+Article context: A curated list of 12 beachfront wedding venues across Florida — from the Keys to Palm Beach to Naples. Capacity, character, and what each venue is actually best for.
+
+Lede excerpt for tone:  The 12 Best Beachfront Wedding Venues in Florida -->
 # The 12 Best Beachfront Wedding Venues in Florida
 
 A beach wedding in Florida is its own category. The aesthetic is half the work — turquoise water, white sand, a sky that does the lighting for free — and the right venue makes the rest easy. The wrong one makes you fight for parking, fight the tide schedule, fight the mosquitos.

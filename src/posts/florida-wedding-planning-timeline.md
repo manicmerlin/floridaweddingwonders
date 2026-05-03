@@ -6,7 +6,8 @@ updatedAt: "2026-05-02"
 author: "Florida Wedding Wonders Team"
 authorBio: "We've helped over a thousand couples book Florida venues — from Key West to Naples. The timeline below is what we'd give a friend."
 category: "Wedding Planning"
-image: "/images/blog/wedding-planning.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-planning-timeline/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-planning-timeline/pinterest.png"
 keywords:
   - "Florida wedding planning timeline"
   - "wedding planning checklist"
@@ -24,6 +25,12 @@ relatedVenues:
 excerpt: "A Florida-specific wedding planning timeline: what to lock down each month over 12 months, with notes on hurricane season, snowbird-driven peak weeks, and the booking lead times that actually matter in this market."
 ---
 
+
+<!-- imagePrompt: A Florida wedding scene that suggests anticipation and arrival — venue ready, guests beginning to gather, soft late-afternoon light.
+
+Article context: A 12-month Florida wedding planning timeline built around hurricane season, snowbird crowds, and venue booking realities. What to lock down each month, with Florida-specific tips.
+
+Lede excerpt for tone:  Florida Wedding Planning Timeline: Month-by-Month Guide -->
 # Florida Wedding Planning Timeline: Month-by-Month Guide
 
 If you Google "wedding planning timeline" you get the same generic 12-month checklist that a New York couple gets. That's not what a Florida couple needs. Hurricane season, snowbird crowds, and the way Keys + Miami venues book out 18 months ahead in peak season change the math.
