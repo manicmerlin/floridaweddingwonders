@@ -1,34 +1,83 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import SEO from '@/components/SEO';
-import { getPostBySlug, getAllPosts, formatDate, calculateReadingTime } from '@/lib/blog';
+import EmailCaptureCTA from '@/components/blog/EmailCaptureCTA';
+import RelatedVenuesSection from '@/components/blog/RelatedVenuesSection';
+import {
+  getPostBySlug,
+  getAllPosts,
+  getAllPostSlugs,
+  formatDate,
+  calculateReadingTime,
+} from '@/lib/blog';
 import { generateArticleSchema } from '@/lib/seo';
+import { breadcrumbLD, jsonLdScript } from '@/lib/structuredData';
+import { getVenueBySlug } from '@/lib/catalog';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
-  
-  if (!post) {
-    notFound();
-  }
+export const dynamic = 'force-static';
+export const revalidate = 3600;
 
-  // Convert markdown to HTML
-  const processedContent = await remark()
-    .use(html)
-    .process(post.content);
+export function generateStaticParams() {
+  return getAllPostSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const post = getPostBySlug(params.slug);
+  if (!post) return { title: 'Florida Wedding Wonders Blog' };
+  return {
+    title: `${post.title} | Florida Wedding Wonders`,
+    description: post.description,
+    keywords: post.keywords,
+    alternates: { canonical: `https://floridaweddingwonders.com/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: `https://floridaweddingwonders.com/blog/${post.slug}`,
+      type: 'article',
+      publishedTime: post.date,
+      modifiedTime: post.updatedAt || post.date,
+      authors: [post.author],
+      images: post.image ? [post.image] : undefined,
+    },
+  };
+}
+
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const post = getPostBySlug(params.slug);
+  if (!post) notFound();
+
+  const processedContent = await remark().use(html).process(post.content);
   const contentHtml = processedContent.toString();
 
-  // Get related posts (same category, exclude current)
+  // Related posts (same category) — same as before
   const allPosts = getAllPosts();
   const relatedPosts = allPosts
-    .filter(p => p.slug !== params.slug && p.category === post.category)
+    .filter((p) => p.slug !== params.slug && p.category === post.category)
     .slice(0, 3);
 
-  // Generate Article structured data
+  // Resolve relatedVenues frontmatter slugs through the catalog.
+  // Skip-on-miss: a stale slug shouldn't break the post.
+  const relatedVenues = post.relatedVenues
+    ? (
+        await Promise.all(
+          post.relatedVenues.map((slug) => getVenueBySlug(slug).catch(() => null))
+        )
+      ).filter((v): v is NonNullable<typeof v> => !!v)
+    : [];
+
   const articleSchema = generateArticleSchema({
     title: post.title,
     description: post.description,
@@ -38,26 +87,29 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     url: `https://floridaweddingwonders.com/blog/${post.slug}`,
   });
 
+  const breadcrumbSchema = breadcrumbLD([
+    { name: 'Home', href: '/' },
+    { name: 'Blog', href: '/blog' },
+    { name: post.title, href: `/blog/${post.slug}` },
+  ]);
+
   return (
     <>
-      <SEO
-        title={`${post.title} - Florida Wedding Wonders Blog`}
-        description={post.description}
-        canonical={`https://floridaweddingwonders.com/blog/${post.slug}`}
-        path={`/blog/${post.slug}`}
-        keywords={post.keywords}
-        ogImage={post.image}
-        jsonLd={[articleSchema]}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(articleSchema) }}
       />
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(breadcrumbSchema) }}
+      />
+
       <div className="min-h-screen bg-gray-50">
         <Navigation />
-        
-        {/* Hero Section with Featured Image */}
+
         <article>
           <header className="bg-white border-b border-gray-200">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-              {/* Breadcrumbs */}
               <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
                 <Link href="/" className="hover:text-pink-600">Home</Link>
                 <span>/</span>
@@ -66,7 +118,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <span className="text-gray-900">{post.category}</span>
               </nav>
 
-              {/* Category Badge */}
               {post.category && (
                 <div className="mb-4">
                   <span className="inline-block px-4 py-1.5 bg-pink-100 text-pink-700 text-sm font-semibold rounded-full">
@@ -75,12 +126,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 </div>
               )}
 
-              {/* Title */}
               <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 {post.title}
               </h1>
 
-              {/* Meta Info */}
               <div className="flex flex-wrap items-center gap-4 text-gray-600">
                 <div className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,11 +149,15 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   </svg>
                   <span>{calculateReadingTime(post.content)} min read</span>
                 </div>
+                {post.updatedAt && post.updatedAt !== post.date && (
+                  <span className="text-xs italic text-gray-400">
+                    Updated {formatDate(post.updatedAt)}
+                  </span>
+                )}
               </div>
             </div>
           </header>
 
-          {/* Featured Image */}
           {post.image && (
             <div className="relative h-96 w-full bg-gray-200">
               <Image
@@ -119,9 +172,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             </div>
           )}
 
-          {/* Article Content */}
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div 
+            <div
               className="prose prose-lg prose-pink max-w-none
                 prose-headings:font-bold prose-headings:text-gray-900
                 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
@@ -135,6 +187,25 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 prose-code:text-pink-600 prose-code:bg-pink-50 prose-code:px-2 prose-code:py-1 prose-code:rounded"
               dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
+
+            {/* Email capture — Pinterest-traffic-monster wedding-blog playbook */}
+            <EmailCaptureCTA source={`blog:${post.slug}`} />
+
+            {/* Related Florida venues — auto-linked from frontmatter */}
+            <RelatedVenuesSection venues={relatedVenues} />
+
+            {/* Author bio */}
+            {post.authorBio && (
+              <aside className="not-prose mt-12 pt-8 border-t border-gray-200 flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-white font-bold flex-shrink-0">
+                  {post.author.charAt(0)}
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">{post.author}</p>
+                  <p className="text-sm text-gray-600">{post.authorBio}</p>
+                </div>
+              </aside>
+            )}
           </div>
 
           {/* Social Sharing */}
@@ -150,7 +221,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   aria-label="Share on Facebook"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
                 </a>
                 <a
@@ -161,18 +232,18 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   aria-label="Share on Twitter"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                   </svg>
                 </a>
                 <a
-                  href={`https://www.pinterest.com/pin/create/button/?url=https://floridaweddingwonders.com/blog/${post.slug}&description=${encodeURIComponent(post.title)}`}
+                  href={`https://www.pinterest.com/pin/create/button/?url=https://floridaweddingwonders.com/blog/${post.slug}&description=${encodeURIComponent(post.title)}${post.image ? `&media=https://floridaweddingwonders.com${post.image}` : ''}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
                   aria-label="Share on Pinterest"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/>
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
                   </svg>
                 </a>
               </div>
@@ -183,7 +254,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           {relatedPosts.length > 0 && (
             <section className="bg-gray-100 py-16">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Related Articles</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                  Related Articles
+                </h2>
                 <div className="grid md:grid-cols-3 gap-8">
                   {relatedPosts.map((relatedPost) => (
                     <Link
@@ -221,27 +294,27 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             </section>
           )}
 
-          {/* CTA Section */}
+          {/* Closing CTA — multi-quote form (Phase 4) is the conversion target */}
           <section className="py-16 bg-gradient-to-br from-pink-600 via-purple-600 to-blue-600 text-white">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-                Ready to Plan Your Florida Wedding?
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+                Skip the legwork. Get quotes from up to 5 venues.
               </h2>
               <p className="text-xl text-pink-100 mb-8 leading-relaxed">
-                Discover 130+ stunning venues, connect with trusted vendors, and make your wedding dreams come true.
+                One form. Pre-qualified inquiries. Faster responses than reaching out one-by-one.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="/venues"
+                  href="/quotes/request"
                   className="px-8 py-3 bg-white hover:bg-gray-100 text-pink-600 font-semibold rounded-lg transition-colors"
                 >
-                  Browse Venues
+                  Get matching quotes →
                 </a>
                 <a
-                  href="/blog"
+                  href="/venues"
                   className="px-8 py-3 bg-pink-700 hover:bg-pink-800 text-white font-semibold rounded-lg transition-colors border-2 border-white/30"
                 >
-                  Read More Articles
+                  Browse all venues
                 </a>
               </div>
             </div>

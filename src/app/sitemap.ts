@@ -12,6 +12,7 @@ import {
   filterVenuesByRegion,
   filterVenuesByType,
 } from '@/lib/hyperlocal';
+import { getAllPosts } from '@/lib/blog';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,6 +37,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${baseUrl}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
+    { url: `${baseUrl}/quotes/request`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/tools`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${baseUrl}/tools/budget`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${baseUrl}/tools/timeline`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ];
@@ -103,6 +108,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   );
 
+  // Blog posts — pulled at request time so newly added MDX files appear
+  // without a redeploy of the sitemap. Priority 0.65 (above generic static
+  // pages, below venue detail).
+  const blogPages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.updatedAt || post.date || now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.65,
+  }));
+
   return [
     ...staticPages,
     ...venuePages,
@@ -111,5 +126,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...regionPages,
     ...typePages,
     ...comboPages,
+    ...blogPages,
   ];
 }
