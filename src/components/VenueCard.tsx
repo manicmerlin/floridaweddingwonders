@@ -8,6 +8,7 @@ import { isSuperAdmin } from '@/lib/auth';
 import { tierFeatures } from '@/lib/tierFeatures';
 import SaveVenueButton from './SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
+import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 
 interface VenueCardProps {
   venue: Venue;
@@ -33,6 +34,9 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
   const isSuper = isSuperAdmin();
   const [venueWithPhotos, setVenueWithPhotos] = useState<Venue>(venue);
   const [isLoadingPhotos, setIsLoadingPhotos] = useState(true);
+  // Toggles to true if the watercolor placeholder PNG 404s — drops the
+  // card to the emoji fallback rather than rendering a broken <img>.
+  const [placeholderFailed, setPlaceholderFailed] = useState(false);
   
   // Load photos from Supabase database
   useEffect(() => {
@@ -56,8 +60,13 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
     loadPhotos();
   }, [venue.id]);
 
-  // Get the primary image or fall back to first image
+  // Image fallback chain (in order):
+  //   1. Real photo from venues.images JSONB (primary, then first)
+  //   2. Watercolor placeholder PNG at placeholders/venues/<slug>.png
+  //   3. Emoji card if (2) 404s — handled via onError on the <Image>
   const primaryImage = venueWithPhotos.images?.find(img => img.isPrimary) || venueWithPhotos.images?.[0];
+  const placeholderUrl = venueWithPhotos.slug ? placeholderUrlForVenue(venueWithPhotos.slug) : null;
+  const showPlaceholder = !primaryImage && placeholderUrl && !placeholderFailed;
 
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100">
@@ -72,8 +81,24 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
             loading="lazy"
             quality={85}
           />
+        ) : showPlaceholder ? (
+          <Image
+            src={placeholderUrl!}
+            alt={`${venueWithPhotos.name} - watercolor illustration`}
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            loading="lazy"
+            quality={85}
+            onError={() => {
+              if (typeof console !== 'undefined') {
+                console.warn(`[VenueCard] placeholder missing for ${venueWithPhotos.slug}`);
+              }
+              setPlaceholderFailed(true);
+            }}
+          />
         ) : (
-          // Fallback to bride and groom emoji if no image available
+          // Final fallback if neither real photo nor placeholder available.
           <div className="h-full bg-gray-100 flex items-center justify-center" role="img" aria-label={`${venueWithPhotos.name} - Photo coming soon`}>
             <div className="text-center text-gray-600 p-4">
               <div className="text-6xl mb-2" aria-hidden="true">

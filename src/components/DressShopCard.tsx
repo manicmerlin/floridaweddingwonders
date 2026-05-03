@@ -4,6 +4,7 @@ import { DressShop } from '../types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { placeholderUrlForDressShop } from '@/lib/placeholderImages';
 
 interface DressShopCardProps {
   shop: DressShop;
@@ -28,6 +29,9 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
   const [user, setUser] = useState<any>(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const gradientColors = getShopColors(shop.shopType);
+  // Toggles to true if the watercolor placeholder PNG 404s — drops to
+  // the gradient+emoji card rather than a broken <img>.
+  const [placeholderFailed, setPlaceholderFailed] = useState(false);
 
   useEffect(() => {
     // Check if user is logged in
@@ -56,8 +60,14 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
     setIsFavorite(!isFavorite);
   };
   
-  // Get the primary image or fall back to first image
+  // Image fallback chain (in order):
+  //   1. Real photo from dress_shops.images JSONB (primary, then first)
+  //   2. Watercolor placeholder at placeholders/dress-shops/<slug>.png
+  //   3. Gradient + emoji card if (2) 404s — handled via onError
   const primaryImage = shop.images?.find(img => img.isPrimary) || shop.images?.[0];
+  const placeholderUrl = shop.slug ? placeholderUrlForDressShop(shop.slug) : null;
+  const showPlaceholder = !primaryImage && placeholderUrl && !placeholderFailed;
+  const hasImage = !!primaryImage || !!showPlaceholder;
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -72,12 +82,28 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
             loading="lazy"
             quality={85}
           />
+        ) : showPlaceholder ? (
+          <Image
+            src={placeholderUrl!}
+            alt={`${shop.name} - watercolor illustration`}
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            loading="lazy"
+            quality={85}
+            onError={() => {
+              if (typeof console !== 'undefined') {
+                console.warn(`[DressShopCard] placeholder missing for ${shop.slug}`);
+              }
+              setPlaceholderFailed(true);
+            }}
+          />
         ) : (
-          // Fallback to gradient if no image available
+          // Final fallback if neither real photo nor placeholder available.
           <div className={`h-full bg-gradient-to-br ${gradientColors} flex items-center justify-center`} role="img" aria-label={`${shop.name} - ${shop.shopType} bridal shop`}>
             <div className="text-center text-white p-4">
               <div className="text-2xl mb-2" aria-hidden="true">
-                {shop.shopType === 'boutique' ? '👗' : 
+                {shop.shopType === 'boutique' ? '👗' :
                  shop.shopType === 'department' ? '🏬' :
                  shop.shopType === 'designer' ? '✨' :
                  shop.shopType === 'consignment' ? '♻️' :
@@ -87,9 +113,9 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
             </div>
           </div>
         )}
-        
-        {/* Image overlay for shop name when image is present */}
-        {primaryImage && (
+
+        {/* Image overlay for shop name when an image (real or placeholder) is shown */}
+        {hasImage && (
           <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-10 transition-all duration-300">
             <div className="absolute bottom-4 left-4 text-white">
               <div className="text-lg font-semibold leading-tight drop-shadow-lg">{shop.name}</div>
