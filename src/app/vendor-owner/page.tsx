@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 export default function VendorOwnerPage() {
   const [formData, setFormData] = useState({
@@ -133,38 +135,7 @@ export default function VendorOwnerPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-pink-600">
-                SoFloWeddingVenues
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/venues" className="text-gray-700 hover:text-gray-900 font-medium">
-                Browse Venues
-              </Link>
-              <Link href="/dress-shops" className="text-gray-700 hover:text-gray-900 font-medium">
-                Dress Shops
-              </Link>
-              <Link href="/vendors" className="text-gray-700 hover:text-gray-900 font-medium">
-                Vendors
-              </Link>
-              <Link href="#" className="text-gray-700 hover:text-gray-900 font-medium">
-                Planning Tools
-              </Link>
-              <Link href="/login" className="text-gray-700 hover:text-gray-900 font-medium">
-                Login
-              </Link>
-              <Link href="/register" className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-medium transition">
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-purple-50 to-pink-50 py-16">
@@ -617,6 +588,8 @@ export default function VendorOwnerPage() {
           </form>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

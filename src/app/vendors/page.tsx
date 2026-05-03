@@ -1,9 +1,11 @@
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import VendorsListClient from '@/components/vendors/VendorsListClient';
 import { getVendors } from '@/lib/catalog';
 import { generateBreadcrumbSchema } from '@/lib/seo';
+import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
 import {
   breadcrumbLD,
   jsonLdScript,
@@ -55,6 +57,18 @@ export default async function VendorsPage() {
       />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">
         <Navigation />
+        <section className="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
+          <Image
+            src={PAGE_HERO_IMAGES.vendors}
+            alt="A florist arranging blooms for a Florida wedding"
+            fill
+            priority
+            quality={85}
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
+        </section>
         <VendorsListClient vendors={vendors} />
 
         {/* CTA */}

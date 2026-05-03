@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { signUpWithEmail } from '@/lib/auth';
 
 export default function Register() {
@@ -65,30 +67,36 @@ export default function Register() {
 
   if (pendingVerification) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-            <span className="text-3xl">✉️</span>
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+              <span className="text-3xl">✉️</span>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Check your email</h1>
+            <p className="text-gray-600 mb-6">
+              We sent a verification link to <strong>{formData.email}</strong>. Click
+              the link to activate your account, then come back to sign in.
+            </p>
+            <Link
+              href="/login"
+              className="inline-block bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-md font-medium transition"
+            >
+              Back to sign in
+            </Link>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Check your email</h1>
-          <p className="text-gray-600 mb-6">
-            We sent a verification link to <strong>{formData.email}</strong>. Click
-            the link to activate your account, then come back to sign in.
-          </p>
-          <Link
-            href="/login"
-            className="inline-block bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-md font-medium transition"
-          >
-            Back to sign in
-          </Link>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 flex flex-col">
+      <Navigation />
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-4">
             <svg className="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +213,9 @@ export default function Register() {
             ← Back to main site
           </Link>
         </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { SITE_CONFIG } from '@/lib/seo';
+import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
 
 export const metadata: Metadata = {
   title: 'About Us | Sobre Nosotros - Florida Wedding Wonders',
@@ -20,9 +24,20 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <Navigation />
+
       {/* Hero Section */}
-      <div className="relative bg-blue-900 text-white py-20">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <div className="relative bg-blue-900 text-white py-20 overflow-hidden">
+        <Image
+          src={PAGE_HERO_IMAGES.about}
+          alt="A Florida wedding venue at golden hour"
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-blue-900/60"></div>
         <div className="container mx-auto px-4 relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
             About Us
@@ -168,6 +183,8 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

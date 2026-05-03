@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import PricingSection from '@/components/PricingSection';
+import Navigation from '@/components/Navigation';
 import Logo from '@/components/Logo';
 
 export default function VenuePackagesPage() {
@@ -135,12 +136,7 @@ export default function VenuePackagesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <Logo size="md" variant="horizontal" />
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-600 via-pink-600 to-rose-500 text-white py-20">

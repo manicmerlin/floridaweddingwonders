@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { getAllPosts, formatDate, calculateReadingTime } from '@/lib/blog';
+import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -29,8 +30,18 @@ export default function BlogPage() {
         <Navigation />
         
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-pink-600 via-purple-600 to-blue-600 text-white py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative text-white py-20 overflow-hidden">
+          <Image
+            src={PAGE_HERO_IMAGES.blog}
+            alt="A Florida wedding planning scene with notebook, flowers, and coffee"
+            fill
+            priority
+            quality={85}
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-600/85 via-purple-600/80 to-blue-600/85" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl lg:text-5xl font-bold mb-6">
                 Florida Wedding Planning Blog
