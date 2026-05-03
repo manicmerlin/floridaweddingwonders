@@ -31,12 +31,18 @@ import { Venue } from '@/types';
 
 const AGENT_NAME = 'weekly-blog-draft';
 const MODEL = 'claude-opus-4-7';
-const VOICE_VERSION = 'v2-narrative-column';
+const VOICE_VERSION = 'v3-blended';
 
-// VOICE CHARTER — the single primary spec for the agent. Replaces the
-// utility/list-heavy Phase 7A v1 voice (which used the existing 10 posts
-// as few-shot examples). Edit this block + bump VOICE_VERSION above when
-// the charter changes; future runs are tagged with the new version.
+// VOICE CHARTER — tonal lock for every post. The voice is HOW we write.
+// The blend instructions below cover WHAT we write about and how voice
+// + utility coexist. Both required. Bump VOICE_VERSION when either
+// block materially changes; future runs are tagged with the new version.
+//
+// v3 blend rationale: pure narrative-column posts (v2) would have built
+// brand love but ranked badly for transactional searches. Pure utility
+// posts (v1, the existing 10) read like SEO content. The blend gives us
+// both — voice carries the reading experience, the practical numbers
+// give Google something to index.
 const VOICE_CHARTER = `VOICE CHARTER — sharp, stylish relationship columnist narrating a modern love story.
 
 Tone:
@@ -65,10 +71,21 @@ Guidelines:
 - Speak directly to the reader as if offering insider perspective
 - Keep it engaging, never overly formal or corporate
 - Avoid clichés unless they are cleverly reimagined
-- AVOID bullet points or list formatting entirely
-- Do NOT sound like an advertisement — this should feel like a story that just happens to feature a venue
+- Do NOT sound like an advertisement — this should feel like a story that just happens to feature a venue`;
 
-Include 2-3 short, quotable lines that could double as social captions.`;
+// STRUCTURAL BLEND — the resolution of voice ↔ utility. This rides
+// alongside the voice charter in every draft prompt.
+const STRUCTURAL_BLEND = `STRUCTURAL BLEND — every post must carry the voice AND deliver real practical value.
+
+The voice is how you write. The utility is what you write about. Both required.
+
+- YES use occasional H2 headers to mark narrative beats — but write them as evocative, not utilitarian ("The night the bartender saved everything" not "Bar service tips")
+- YES include real numbers, price bands, capacity ranges, regional weather data, vendor names — but introduce them through scene or anecdote, not as bullet lists ("A Naples ballroom for 200 will run you $18-32k once you account for the linens line item nobody warned you about" — number is there, voice carries it)
+- YES use lists ONLY when the content genuinely demands enumeration (e.g., "Five things to ask your photographer") and frame even those with a witty intro line per item, not just bullet text
+- NO tables — restructure as flowing prose
+- NO bare data dumps — every fact gets a reason to be in the sentence
+- END every post with a memorable, reflective line about love/timing/meaningful choices, then a soft CTA to /quotes/request
+- INCLUDE 2-3 short quotable lines (<140 chars each) marked with <!-- caption --> immediately after on its own line — these double as social captions`;
 
 // Per-million pricing (cents) for Opus 4.7 — used to estimate cost_cents.
 // Prices recompute easily; this is rough but useful.
@@ -353,34 +370,27 @@ async function generateTopicIdeas(
     messages: [
       {
         role: 'user',
-        content: `You're the editorial director for Florida Wedding Wonders. We're launching a new column-form voice — sharp, stylish, narrating modern love stories. Each post is a personal essay that happens to feature a Florida wedding venue, not a utility article.
+        content: `You're the editorial director for Florida Wedding Wonders, a Florida wedding venue catalog. Every post we publish blends a sharp, stylish columnist voice with real practical info — search engines see actionable content, readers feel like they're being let in on something. Topics can be utility-shaped (budgets, timelines, regional guides) — the voice handles the blending later.
 
-We have these blog posts already published (utility/list-form, the OLD voice — don't duplicate or rewrite them):
+We have these blog posts already published:
 
 ${existingTitles}
 
-Generate 5 NEW topics that lend themselves to the column voice. Examples of the angles we want:
-- "The moment a couple knows the venue is the one"
-- "The hidden tax of compromise in wedding planning"
-- "Why the engagement period feels weirdly long and weirdly short"
-- "What walking a venue together actually feels like"
-- "On the small panic of choosing the date"
-- "Falling in love with a place before you fall in love with a wedding"
-- "The conversations couples have on the drive home from venue tours"
-
-Notes:
-- These are essay topics, not how-to guides. The post will use the topic to explore an emotional truth, then naturally land on a Florida venue as the place where that truth becomes specific.
-- Florida-flavored is good (the light, the seasons, the destination-wedding feel) but not all of them have to be Florida-specific in the topic itself — Florida shows up in the venues and details.
-- Avoid topics that beg for bullet lists (timelines, checklists, vendor lists). The column voice cannot sustain that format.
-- A range of moods: some witty, some tender, some quietly observational. Not all wedding-day; some pre-engagement, some post-engagement, some about the relationship itself.
+Generate 5 NEW topics for the queue. Requirements:
+- Florida-specific, not generic wedding advice
+- Should not duplicate or overlap meaningfully with the existing posts
+- Practical, opinionated, useful — but not pure SEO filler
+- A reader should be able to imagine both the search query that brings them here AND the emotional reason they're searching it
+- Mix of seasonal (some winter/summer-specific) and evergreen
+- Range across topics: vendors, planning, design, guests, logistics, budget
 
 Return JSON only — no commentary, no markdown fences:
 {"topics":[
-  {"topic":"slug-friendly-topic","workingTitle":"Evocative working title","description":"1-2 sentence brief about the angle","priority":7,"season":"any|spring|summer|fall|winter","tags":["tag1","tag2"]},
+  {"topic":"slug-friendly-topic","workingTitle":"Working title (search-friendly is fine)","description":"1-2 sentence brief","priority":7,"season":"any|spring|summer|fall|winter","tags":["tag1","tag2"]},
   ...4 more
 ]}
 
-Priority: 1-10, higher = stronger angle.`,
+Priority: 1-10, higher = more time-sensitive or higher value.`,
       },
     ],
   });
@@ -435,15 +445,19 @@ async function draftPost(
     messages: [
       {
         role: 'user',
-        content: `You're a writer for Florida Wedding Wonders. The Voice Charter below is the single most important spec for this piece — read it twice before drafting.
+        content: `You're a writer for Florida Wedding Wonders. Read the Voice Charter and the Structural Blend below in full before drafting — both are required, equally.
 
 ${VOICE_CHARTER}
 
 ---
 
+${STRUCTURAL_BLEND}
+
+---
+
 TOPIC FOR THIS POST:
 - Topic: ${topic.topic}
-- Working title: ${topic.working_title ?? '(none — pick something evocative)'}
+- Working title: ${topic.working_title ?? '(none — pick something evocative but search-friendly)'}
 - Brief: ${topic.description ?? '(none)'}
 - Season: ${topic.season ?? 'any'}
 - Tags: ${(topic.tags ?? []).join(', ')}
@@ -452,17 +466,13 @@ REAL FLORIDA VENUES YOU CAN WEAVE IN (link by slug as /venues/[slug]):
 
 ${venueSample.map((v) => `- ${v.name} — ${v.type} venue in ${v.city} (slug: ${v.slug})`).join('\n')}
 
-Plus 100+ more in the catalog. Don't fabricate venue names — only use ones from the list above. Reference them through sensory, emotional storytelling — the way the light falls on the courtyard, the moment a couple knows this is the place — never as a feature list.
+Plus 100+ more in the catalog. Don't fabricate venue names — only use ones from the list above. Reference 2-4 of them through sensory, emotional storytelling — the way the light falls on the courtyard, the moment a couple knows this is the place — and weave the real practical detail (capacity, region, what they're known for) into the same sentence the venue appears in.
 
-STRUCTURAL REQUIREMENTS (hold the line on these):
-- Length: 1500-1800 words. Column-form is dense; lean shorter rather than longer.
+ADDITIONAL STRUCTURAL REQUIREMENTS:
+- Length: 1500-2200 words. Lean toward the higher end — the blend needs room for both the voice and the data to breathe.
 - Markdown body only — NO frontmatter (frontmatter is added separately).
-- Use H2 (##) sparingly to mark narrative beats — never as utility headers like "What to know" or "Step 1". A piece can have 0-3 H2s total. Many won't need any.
-- NO bulleted lists. NO numbered lists. NO tables. Flowing prose with section breaks where natural.
-- Weave in 2-4 real venue references using inline markdown links: [Venue Name](/venues/slug). Don't introduce them as menu items — let them appear inside the story.
-- Include 2-3 short, quotable lines (each under 140 characters) that could stand alone as social captions. Mark each with the comment \`<!-- caption -->\` immediately after the line, on its own line. The captions stay in the post; we'll extract them programmatically later.
-- Close with a memorable, reflective line first — something about love, timing, or meaningful choices. Then a soft CTA pointing to /quotes/request, framed not as a sales push but as "when you're ready to find your version of this place." Paraphrase; don't reuse a prior post's wording.
-- Don't sound like an advertisement. Don't sound like SEO copy. This is a column. A reader should finish it and feel something — not check a box.
+- Title should be SEO-friendly (keyword-rich enough that Google understands the topic) but the body itself reads as a column with data woven in. Example: "How Much Does a Florida Wedding Cost in 2026?" is the title; the body still opens with a relatable scene before any numbers land.
+- Real data points required: at least 4-6 specific facts the reader couldn't get from a generic wedding blog (price bands like "$18-32k for a Naples ballroom of 200", capacity ranges, regional weather averages, named vendors, marriage-license fee specifics, etc.). Weave them into prose, never into bullets.
 
 Return JSON only — no commentary, no markdown fences:
 {"slug":"slug-friendly","title":"Final post title","description":"meta description ~150 chars","category":"Wedding Planning|Venues|Wedding Budget","body":"full markdown body, no h1, starts with the lede paragraph"}`,
@@ -512,7 +522,7 @@ async function generateMetadata(
     messages: [
       {
         role: 'user',
-        content: `Given this Florida wedding column draft, produce metadata. The post is written in our column-form voice — sharp, stylish, narrating a modern love story. Metadata should match that energy, not flatten it into utility-blog style.
+        content: `Given this Florida wedding blog post draft, produce metadata. The post blends a sharp, stylish columnist voice with real practical info (price bands, capacity, vendor names, etc.). Metadata should match — search-friendly enough to rank, warm enough to feel like part of the same voice.
 
 TITLE: ${draft.title}
 DESCRIPTION: ${draft.description}
@@ -522,17 +532,17 @@ ${draft.bodyMdx.slice(0, 4500)}${draft.bodyMdx.length > 4500 ? '\n[... continues
 
 Generate JSON:
 {
-  "pinterestTitleVariants": ["3 Pinterest-pin title variants — emotional hook first, evocative not SEO-stuffed, max 60 chars each. Think 'The moment you know it's the one' over 'Top 10 Florida wedding venues'."],
-  "metaDescription": "tightened ~155 char meta. Should hint at the column's emotional throughline, not summarize bullet points. Rewrite if the existing one is too long or weak.",
+  "pinterestTitleVariants": ["3 Pinterest-pin title variants. Each must be searchable (include 1-2 of the post's actual topic keywords) AND have a small editorial hook — warmer than pure SEO copy, more direct than pure essay. Examples of the blend: 'Florida Wedding Costs in 2026: What No One Tells You', 'The Real Math on a Naples Beach Wedding', 'Florida Wedding Venues by Region: A Field Guide'. Max 60 chars each."],
+  "metaDescription": "tightened ~155 char meta. Hooky opener, then makes the practical value of the post obvious so search-result clicks happen. Rewrite if the existing one is weak.",
   "relatedVenueSlugs": ["3 to 5 venue slugs from the catalog that genuinely fit this post"],
-  "readingTimeMin": 7,
-  "tags": ["3 to 5 tags — favor mood/theme tags ('engagement', 'choosing the venue', 'first looks') alongside utility tags"]
+  "readingTimeMin": 9,
+  "tags": ["3 to 5 tags. Mix utility tags (planning, budget, beach, vendors) with theme tags where they fit (engagement, choosing the venue) — both sides because the post itself is both."]
 }
 
 Rules:
-- relatedVenueSlugs: ONLY use slugs that the post body actually mentions, OR ones that clearly fit the emotional setting. Don't invent.
-- readingTimeMin: word count / 200, rounded up. Column-form posts are typically 7-9 min.
-- pinterestTitleVariants: pin titles should make a reader feel something at a glance. Avoid keyword stuffing. The Pinterest 2:3 image already carries the brand; the title carries the hook.
+- relatedVenueSlugs: ONLY use slugs that the post body actually mentions, OR ones that clearly fit the post's setting. Don't invent.
+- readingTimeMin: word count / 200, rounded up. Blended posts are typically 8-11 min.
+- pinterestTitleVariants: searchable + warm. Don't strip the keywords for emotional purity (we still need to rank); don't strip the warmth for keyword stuffing (we still need to read like the brand).
 - Return JSON only, no commentary, no markdown fences.`,
       },
     ],
