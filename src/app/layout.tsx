@@ -28,7 +28,15 @@ export default function RootLayout({
         
         {/* Theme Color */}
         <meta name="theme-color" content="#1e3a8a" />
-        
+
+        {/*
+          Pinterest domain verification.
+          Replace the placeholder with the value from
+          Pinterest Settings → Claim → Websites → Add HTML tag.
+          One-time domain claim; required to attribute pins to this site.
+        */}
+        <meta name="p:domain_verify" content="<NEEDS_VERIFICATION>" />
+
         {/* Hreflang tags for multilingual support */}
         <link rel="alternate" hrefLang="x-default" href="https://floridaweddingwonders.com" />
         <link rel="alternate" hrefLang="en" href="https://floridaweddingwonders.com" />

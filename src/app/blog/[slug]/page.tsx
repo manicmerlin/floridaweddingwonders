@@ -33,6 +33,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = getPostBySlug(params.slug);
   if (!post) return { title: 'Florida Wedding Wonders Blog' };
+  const pinUrl = `https://floridaweddingwonders.com/blog/${post.slug}/pin`;
   return {
     title: `${post.title} | Florida Wedding Wonders`,
     description: post.description,
@@ -47,6 +48,12 @@ export async function generateMetadata({
       modifiedTime: post.updatedAt || post.date,
       authors: [post.author],
       images: post.image ? [post.image] : undefined,
+    },
+    other: {
+      // Pinterest rich-pin + 2:3 share image (Phase 6).
+      'pinterest:image': pinUrl,
+      'pinterest:description': post.description,
+      'pinterest:rich-pin': 'true',
     },
   };
 }

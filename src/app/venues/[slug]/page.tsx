@@ -33,15 +33,29 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
   const venue = await getVenueBySlug(slug);
   if (!venue) return { title: 'Venue | Florida Wedding Wonders' };
+
+  const pinUrl = `https://floridaweddingwonders.com/venues/${venue.slug}/pin`;
+  const description =
+    venue.description ||
+    `${venue.name} — ${venue.venueType} wedding venue in ${venue.address.city}, Florida.`;
+
   return {
     title: `${venue.name} | Florida Wedding Wonders`,
-    description: venue.description,
+    description,
     alternates: { canonical: `https://floridaweddingwonders.com/venues/${venue.slug}` },
     openGraph: {
       title: venue.name,
-      description: venue.description,
+      description,
       url: `https://floridaweddingwonders.com/venues/${venue.slug}`,
       type: 'website',
+    },
+    other: {
+      // Pinterest rich-pin signals + 2:3 share image (Phase 6).
+      // Pinterest crawls the page, finds these tags, and uses the 2:3 image
+      // for the pin instead of the 1.91:1 og:image.
+      'pinterest:image': pinUrl,
+      'pinterest:description': description,
+      'pinterest:rich-pin': 'true',
     },
   };
 }

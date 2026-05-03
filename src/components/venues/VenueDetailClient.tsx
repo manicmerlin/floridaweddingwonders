@@ -100,6 +100,8 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
                   isPrimary: img.isPrimary || index === 0
                 }))}
                 venueName={venue.name}
+                venueSlug={venue.slug}
+                pinDescription={`${venue.name} — ${venue.venueType} wedding venue in ${venue.address.city}, FL`}
               />
             </div>
           </div>
