@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { SITE_CONFIG } from '@/lib/seo';
 
 interface ContactFormData {
@@ -48,22 +50,7 @@ export default function Contact() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-gray-50">
-        {/* Navigation */}
-        <nav className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <Link href="/" className="text-2xl font-bold text-pink-600">Florida Wedding Wonders</Link>
-              <div className="flex items-center space-x-6">
-                <Link href="/venues" className="text-gray-700 hover:text-pink-600 font-medium transition">
-                  Browse Venues
-                </Link>
-                <Link href="/contact" className="text-gray-700 hover:text-pink-600 font-medium transition">
-                  Contact
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
+        <Navigation />
 
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <div className="bg-white rounded-lg shadow-md p-8">
@@ -76,7 +63,7 @@ export default function Contact() {
             <p className="text-gray-600 mb-6">
               Thank you for contacting us. We'll get back to you within 24 hours.
             </p>
-            <Link 
+            <Link
               href="/venues"
               className="inline-block bg-pink-600 text-white py-2 px-6 rounded-md hover:bg-pink-700 transition"
             >
@@ -84,28 +71,15 @@ export default function Contact() {
             </Link>
           </div>
         </div>
+
+        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-bold text-pink-600">Florida Wedding Wonders</Link>
-            <div className="flex items-center space-x-6">
-              <Link href="/venues" className="text-gray-700 hover:text-pink-600 font-medium transition">
-                Browse Venues
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-pink-600 font-medium transition">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
@@ -351,13 +325,15 @@ export default function Contact() {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h3 className="font-semibold text-gray-900 mb-2">Can I update my venue information?</h3>
               <p className="text-gray-600 text-sm">
-                Yes! Once you've claimed your listing or created an account, you can update photos, pricing, 
+                Yes! Once you've claimed your listing or created an account, you can update photos, pricing,
                 availability, and all venue details through your dashboard.
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
