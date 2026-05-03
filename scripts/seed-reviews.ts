@@ -60,15 +60,79 @@ const TEMPLATES: string[] = [
   `Truly a special venue. The {detail} alone is worth the visit. Our coordinator went above and beyond — last-minute timeline shuffle, no problem. Highly recommend.`,
 ];
 
-const DETAIL_POOL = [
-  'sunset ceremony spot',
-  'cocktail hour layout',
-  'dance floor lighting',
-  'plated dinner service',
+// Per-venue-type detail pools. Each phrase is a noun phrase that fits the
+// templates' "the {detail}" / "for the {detail}" / "the {detail} was magical"
+// patterns. A 5-star Hialeah Park review should NOT mention "sunset terrace";
+// a beach venue review should NOT mention "restored woodwork". Picking from
+// the type-correct pool is what makes seed reviews read as plausibly real.
+const DETAILS_BY_TYPE: Record<string, string[]> = {
+  beach: [
+    'oceanfront ceremony spot',
+    'sand-aisle setup',
+    'sunset cocktail hour on the water',
+    'beachfront bar service',
+    'tiki-torch reception lighting',
+    'open-air pavilion overlooking the gulf',
+    'driftwood ceremony arch',
+    'shoreline cocktail terrace',
+  ],
+  garden: [
+    'mature-tree canopy over the ceremony',
+    'manicured lawn for the reception',
+    'orchid-filled greenhouse moment',
+    'fountain-side cocktail area',
+    'rose garden ceremony spot',
+    'open-air dinner under string lights',
+    'topiary-lined cocktail walk',
+    'garden pavilion reception',
+  ],
+  ballroom: [
+    'chandelier-lit reception',
+    'plated dinner service',
+    'dance floor lighting',
+    'grand staircase entrance',
+    'multi-room flow from cocktail to dinner',
+    'climate-controlled ballroom space',
+    'mezzanine cocktail layout',
+    'champagne toast under the chandeliers',
+  ],
+  historic: [
+    'original 1920s architecture',
+    'restored ballroom',
+    'period chandelier lighting',
+    'grand-staircase first-look photos',
+    'wraparound veranda for cocktail hour',
+    'museum-quality interior detail',
+    'gilded ceiling in the reception room',
+    'historic courtyard ceremony',
+  ],
+  modern: [
+    'floor-to-ceiling glass walls',
+    'rooftop city views',
+    'gallery-style cocktail space',
+    'minimalist concrete floors',
+    'open-loft reception layout',
+    'sculptural lighting in the main room',
+    'industrial-chic exposed beams',
+    'skyline backdrop for the first dance',
+  ],
+  rustic: [
+    'barn ceremony space',
+    'string-light canopy over the dance floor',
+    'farm-table family-style dinner',
+    'hay-bale ceremony seating',
+    'fire-pit cocktail hour',
+    'open-air pavilion under the oaks',
+    'horse-stable cocktail backdrop',
+    'reclaimed-wood reception bar',
+  ],
+};
+
+const FALLBACK_DETAILS = [
+  'reception layout',
+  'cocktail hour flow',
+  'dinner service',
   'getting-ready suites',
-  'outdoor cocktail terrace',
-  'first-dance moment under the lights',
-  'bar service and signature cocktails',
 ];
 
 const SEASONS = ['spring', 'summer', 'fall', 'winter'];
@@ -122,13 +186,21 @@ interface SeedReviewRow {
   status: 'pending';
 }
 
+function detailsForType(venueType: string | null | undefined): string[] {
+  if (venueType && DETAILS_BY_TYPE[venueType]) return DETAILS_BY_TYPE[venueType];
+  return FALLBACK_DETAILS;
+}
+
 function buildReviewsForVenue(venue: {
   id: string;
   name: string;
+  venueType: string | null;
 }): SeedReviewRow[] {
   const count = Math.floor(Math.random() * 6) + 5; // 5-10
   const out: SeedReviewRow[] = [];
   const templatesUsedThisVenue = new Set<number>();
+  const detailPool = detailsForType(venue.venueType);
+  const detailsUsedThisVenue = new Set<string>();
 
   for (let i = 0; i < count; i++) {
     // Avoid reusing the same template within one venue's seed batch.
@@ -140,12 +212,22 @@ function buildReviewsForVenue(venue: {
     }
     templatesUsedThisVenue.add(templateIdx);
 
+    // Same de-dupe for details — the small per-type pools mean repetition is
+    // visible to readers, so prefer a fresh phrase when the pool isn't tapped.
+    let detail = randomChoice(detailPool);
+    let detailAttempts = 0;
+    while (detailsUsedThisVenue.has(detail) && detailAttempts < 8) {
+      detail = randomChoice(detailPool);
+      detailAttempts++;
+    }
+    detailsUsedThisVenue.add(detail);
+
     const year = 2024 + Math.floor(Math.random() * 2);
     const guestCount = String(Math.floor(Math.random() * 150) + 60);
 
     const body = renderTemplate(TEMPLATES[templateIdx], {
       venueName: venue.name,
-      detail: randomChoice(DETAIL_POOL),
+      detail,
       season: randomChoice(SEASONS),
       year: String(year),
       guestCount,
@@ -168,10 +250,12 @@ function buildReviewsForVenue(venue: {
 async function main() {
   console.log(`seed-reviews running in ${COMMIT ? 'COMMIT' : 'DRY-RUN'} mode`);
 
-  // Top 20 venues by tier — same ordering as the public listing.
+  // Top 20 venues by tier — same ordering as the public listing. We fetch
+  // venue_type so per-type detail pools land plausibly (no "sunset terrace"
+  // for a historic ballroom).
   const { data: venues, error } = await supabase
     .from('venues')
-    .select('id, name, tier')
+    .select('id, name, tier, venue_type')
     .order('tier', { ascending: true })
     .order('name', { ascending: true })
     .limit(20);
@@ -183,9 +267,13 @@ async function main() {
 
   const allRows: SeedReviewRow[] = [];
   for (const v of venues) {
-    const rows = buildReviewsForVenue({ id: v.id, name: v.name });
+    const rows = buildReviewsForVenue({
+      id: v.id,
+      name: v.name,
+      venueType: v.venue_type,
+    });
     allRows.push(...rows);
-    console.log(`  ${v.name}: ${rows.length} reviews queued`);
+    console.log(`  ${v.name} [${v.venue_type ?? '?'}]: ${rows.length} reviews queued`);
   }
 
   console.log(`\nTotal rows to write: ${allRows.length}`);
