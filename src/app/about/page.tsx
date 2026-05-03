@@ -26,8 +26,11 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navigation />
 
-      {/* Hero Section */}
-      <div className="relative bg-blue-900 text-white py-20 overflow-hidden">
+      {/* Hero Section. min-h gives the container a stable shape across
+          viewports so object-cover produces a consistent crop instead of
+          a content-driven slice. Soft uniform overlay + drop-shadow on
+          the text keeps legibility without washing out the photo. */}
+      <div className="relative text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
         <Image
           src={PAGE_HERO_IMAGES.about}
           alt="A Florida wedding venue at golden hour"
@@ -35,14 +38,14 @@ export default function AboutPage() {
           priority
           quality={85}
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-blue-900/60"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
+        <div className="absolute inset-0 bg-blue-900/35"></div>
+        <div className="container mx-auto px-4 relative z-10 py-12 sm:py-16">
+          <h1 className="text-5xl md:text-6xl font-bold text-center mb-4 drop-shadow-lg">
             About Us
           </h1>
-          <p className="text-xl text-center text-blue-100 max-w-2xl mx-auto">
+          <p className="text-xl text-center text-blue-50 max-w-2xl mx-auto drop-shadow">
             Built by people who have lived the wedding world from every angle
           </p>
         </div>

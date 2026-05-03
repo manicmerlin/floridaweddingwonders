@@ -29,8 +29,12 @@ export default function BlogPage() {
       <div className="min-h-screen bg-gray-50">
         <Navigation />
         
-        {/* Hero Section */}
-        <section className="relative text-white py-20 overflow-hidden">
+        {/* Hero Section. Same shape as /about: stable min-h container so
+            object-cover doesn't crop oddly on portrait viewports, plus a
+            softer brand-color overlay (was 80-85% — washed out the photo
+            entirely; now ~30-40% so the wedding-planning scene reads
+            through the brand gradient). */}
+        <section className="relative text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
           <Image
             src={PAGE_HERO_IMAGES.blog}
             alt="A Florida wedding planning scene with notebook, flowers, and coffee"
@@ -38,15 +42,15 @@ export default function BlogPage() {
             priority
             quality={85}
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-600/85 via-purple-600/80 to-blue-600/85" />
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-600/35 via-purple-600/30 to-blue-600/40" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
             <div className="text-center">
-              <h1 className="text-4xl lg:text-5xl font-bold mb-6">
+              <h1 className="text-4xl lg:text-5xl font-bold mb-6 drop-shadow-lg">
                 Florida Wedding Planning Blog
               </h1>
-              <p className="text-xl lg:text-2xl text-pink-100 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl lg:text-2xl text-pink-50 max-w-3xl mx-auto leading-relaxed drop-shadow">
                 Expert tips, insider advice, and comprehensive guides to help you plan your dream Florida wedding.
               </p>
             </div>
