@@ -29,6 +29,8 @@ export default function Navigation() {
     { href: '/venues', label: 'Browse Venues' },
     { href: '/dress-shops', label: 'Dress Shops' },
     { href: '/vendors', label: 'Vendors' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/tools', label: 'Tools' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];

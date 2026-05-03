@@ -15,14 +15,23 @@ export default function Footer() {
               <Link href="/venues" className="block hover:text-white transition">
                 Browse Venues
               </Link>
+              <Link href="/quotes/request" className="block hover:text-white transition">
+                Get Multi-Quote
+              </Link>
+              <Link href="/tools/budget" className="block hover:text-white transition">
+                Budget Calculator
+              </Link>
+              <Link href="/tools/timeline" className="block hover:text-white transition">
+                Wedding Timeline
+              </Link>
+              <Link href="/blog" className="block hover:text-white transition">
+                Wedding Blog
+              </Link>
               <Link href="/dress-shops" className="block hover:text-white transition">
                 Wedding Dresses
               </Link>
               <Link href="/vendors" className="block hover:text-white transition">
                 Wedding Vendors
-              </Link>
-              <Link href="/contact" className="block hover:text-white transition">
-                Planning Tools
               </Link>
             </div>
           </div>
