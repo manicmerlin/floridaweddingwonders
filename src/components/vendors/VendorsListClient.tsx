@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Vendor } from '@/types';
 import VendorImagePlaceholder from '@/components/VendorImagePlaceholder';
+import { placeholderUrlForVendor } from '@/lib/placeholderImages';
 
 interface Props {
   vendors: Vendor[];
@@ -171,26 +172,13 @@ export default function VendorsListClient({ vendors }: Props) {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredVendors.map((vendor) => {
-                  const primaryImage = vendor.images?.find((i) => i.isPrimary) ?? vendor.images?.[0];
-                  return (
+                {filteredVendors.map((vendor) => (
                     <div
                       key={vendor.id}
                       className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden"
                     >
                       <div className="relative w-full h-48">
-                        {primaryImage ? (
-                          <Image
-                            src={primaryImage.url}
-                            alt={vendor.name}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <VendorImagePlaceholder name={vendor.name} category={vendor.category} />
-                        )}
+                        <VendorCardImage vendor={vendor} />
                       </div>
 
                       <div className="p-6">
@@ -267,8 +255,7 @@ export default function VendorsListClient({ vendors }: Props) {
                         )}
                       </div>
                     </div>
-                  );
-                })}
+                ))}
               </div>
             </>
           )}
@@ -276,4 +263,39 @@ export default function VendorsListClient({ vendors }: Props) {
       </section>
     </>
   );
+}
+
+/**
+ * Image fallback chain for a vendor card (mirrors DressShopCard's pattern):
+ *   1. Watercolor placeholder at placeholders/vendors/<slug>.png
+ *   2. Existing emoji+gradient VendorImagePlaceholder if (1) 404s
+ *
+ * No `vendor_ownerships` table exists yet, so by definition no vendor is
+ * "claimed" — every card uses the watercolor until that table lands. When
+ * it does, gate on `vendor.isClaimed === true` here the same way
+ * VenueCard does and add a real-photo branch above the placeholder.
+ */
+function VendorCardImage({ vendor }: { vendor: Vendor }) {
+  const [placeholderFailed, setPlaceholderFailed] = useState(false);
+  const placeholderUrl = vendor.slug ? placeholderUrlForVendor(vendor.slug) : null;
+  if (placeholderUrl && !placeholderFailed) {
+    return (
+      <Image
+        src={placeholderUrl}
+        alt={`${vendor.name} — watercolor illustration`}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        loading="lazy"
+        quality={85}
+        onError={() => {
+          if (typeof console !== 'undefined') {
+            console.warn(`[VendorCardImage] placeholder missing for ${vendor.slug}`);
+          }
+          setPlaceholderFailed(true);
+        }}
+      />
+    );
+  }
+  return <VendorImagePlaceholder name={vendor.name} category={vendor.category} />;
 }

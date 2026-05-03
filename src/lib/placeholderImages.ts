@@ -23,3 +23,7 @@ export function placeholderUrlForVenue(slug: string): string {
 export function placeholderUrlForDressShop(slug: string): string {
   return `${SUPABASE_PUBLIC_BASE}/dress-shops/${slug}.png`;
 }
+
+export function placeholderUrlForVendor(slug: string): string {
+  return `${SUPABASE_PUBLIC_BASE}/vendors/${slug}.png`;
+}
