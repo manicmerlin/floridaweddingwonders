@@ -262,7 +262,51 @@ function PostDrawer({
           </div>
         )}
 
-        <div className="flex-1 overflow-y-auto p-5">
+        <div className="flex-1 overflow-y-auto p-5 space-y-5">
+          {/* Phase 7B: AI-generated images render inline so visual approval
+              doesn't require copy-pasting the public URL into a new tab.
+              Hidden when no images have been generated yet (older drafts). */}
+          {(post.imageUrl || post.pinterestImageUrl) && (
+            <section className="grid sm:grid-cols-3 gap-3">
+              {post.imageUrl && (
+                <div className="sm:col-span-2">
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                    Hero (16:9)
+                  </p>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={post.imageUrl}
+                    alt={`${post.title} — hero`}
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
+              )}
+              {post.pinterestImageUrl && (
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                    Pinterest (9:16)
+                  </p>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={post.pinterestImageUrl}
+                    alt={`${post.title} — Pinterest pin`}
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
+              )}
+            </section>
+          )}
+          {post.imagePrompt && (
+            <details className="text-xs">
+              <summary className="cursor-pointer text-gray-500 hover:text-gray-700">
+                Image prompt {post.imageCostCents != null && `· $${(post.imageCostCents / 100).toFixed(2)}`}
+              </summary>
+              <p className="mt-2 text-gray-600 italic bg-gray-50 p-3 rounded">
+                {post.imagePrompt}
+              </p>
+            </details>
+          )}
+
           {editing ? (
             <textarea
               value={body}
