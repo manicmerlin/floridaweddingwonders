@@ -7,10 +7,22 @@ export interface BlogPost {
   title: string;
   description: string;
   date: string;
+  /** ISO date when the post was last updated; falls back to `date` for posts
+   *  authored before this field was introduced. Surfaced in JSON-LD as
+   *  dateModified. */
+  updatedAt?: string;
   author: string;
+  /** Short author bio shown in the post footer. One sentence. Optional. */
+  authorBio?: string;
   image?: string;
   keywords?: string[];
   category?: string;
+  /** Tag array for filter pages (Phase 5). Distinct from `keywords` (which
+   *  feeds the meta keywords tag). */
+  tags?: string[];
+  /** Slugs of venues from the catalog that auto-link in the "Related Florida
+   *  venues" section under the article body. Optional. */
+  relatedVenues?: string[];
   content: string;
   excerpt?: string;
 }
@@ -54,10 +66,14 @@ export function getPostBySlug(slug: string): BlogPost | null {
       title: data.title || '',
       description: data.description || '',
       date: data.date || '',
+      updatedAt: data.updatedAt,
       author: data.author || 'Florida Wedding Wonders',
+      authorBio: data.authorBio,
       image: data.image,
       keywords: data.keywords || [],
       category: data.category || 'Wedding Planning',
+      tags: Array.isArray(data.tags) ? data.tags : [],
+      relatedVenues: Array.isArray(data.relatedVenues) ? data.relatedVenues : [],
       content,
       excerpt: data.excerpt || content.substring(0, 200) + '...',
     };
