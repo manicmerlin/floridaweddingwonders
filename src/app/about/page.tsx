@@ -23,17 +23,20 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 overflow-x-clip">
+    <>
       <Navigation />
 
-      {/* Hero Section. Negative-margin breakout (mx-[calc(50%-50vw)]
-          w-screen) forces edge-to-edge regardless of any parent
-          constraint — when the parent is already full-width the math
-          evaluates to mx-0/100vw (a no-op), but on iOS Safari with any
-          implicit constraint the hero still bleeds full-bleed. Parent
-          gets overflow-x-clip to absorb any 1-pixel scrollbar drift
-          from w-screen vs scrollbar width on desktop. */}
-      <div className="relative mx-[calc(50%-50vw)] w-screen text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
+      {/* Hero Section. Hoisted OUT of the gradient page-wrapper so no
+          inherited padding/margin/overflow can clamp its width — it's a
+          direct child of the page's top-level Fragment, rendering as a
+          sibling of <Navigation /> directly under <body>. inline style
+          width:'100vw' is set explicitly so the value comes from a literal
+          CSS string (not a Tailwind arbitrary value that some Safari
+          versions could miscompute). */}
+      <div
+        style={{ width: '100vw' }}
+        className="relative text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]"
+      >
         <Image
           src={PAGE_HERO_IMAGES.about}
           alt="A Florida wedding venue at golden hour"
@@ -53,6 +56,8 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
+
+      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
 
       {/* English Content */}
       <div className="container mx-auto px-4 py-16 max-w-4xl">
@@ -190,7 +195,9 @@ export default function AboutPage() {
         </div>
       </div>
 
+      </div>
+
       <Footer />
-    </div>
+    </>
   );
 }

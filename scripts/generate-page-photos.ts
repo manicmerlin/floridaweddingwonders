@@ -26,6 +26,16 @@ import { createSupabaseAdminClient } from '../src/lib/supabaseServer';
 const STORAGE_BUCKET = 'blog-images';
 const DALLE_MODEL = 'dall-e-3';
 const DRY_RUN = process.argv.includes('--dry-run');
+// --only=<slug> regenerates a single page (overwriting the existing
+// hero.png, since upload uses upsert:true). Useful when one image's
+// composition needs a redo without re-spending on the other four.
+const ONLY_SLUG = (() => {
+  const arg = process.argv.find((a) => a.startsWith('--only='));
+  return arg ? arg.slice('--only='.length) : null;
+})();
+// --force overrides the idempotency check and regenerates even when
+// hero.png already exists in storage.
+const FORCE = process.argv.includes('--force');
 
 // Same anchor used by imageGen.ts so brand look stays consistent across
 // post heroes and page heroes.
@@ -51,11 +61,11 @@ const PAGES: PageSpec[] = [
     slug: 'about',
     route: '/about',
     rationale:
-      'Brand-story page currently uses a flat blue hero block — a real photo humanizes the founders\' pitch and is the first stop after fixing the missing header.',
+      'Brand-story hero — needs a banner-friendly composition with strong negative space for headline overlay; the original was too busy across left/center/right thirds.',
     scene:
-      'A warm Florida wedding venue scene at golden hour — empty ceremony chairs facing a soft horizon, palm fronds in the foreground, atmosphere of anticipation and welcome',
+      'Wide editorial photograph of an empty Florida wedding ceremony arch at golden hour, viewed from a respectful distance. The arch sits in the lower-left third of the frame, draped with subtle white florals; the right two-thirds open to the Atlantic horizon and a vast warm sunset sky. Soft shadows from empty white chairs in the foreground curve toward the arch along a sand aisle. Strong negative space on the right for editorial-style headline overlay. Cinematic, painterly, magazine-cover quality',
     context:
-      'A bilingual (English/Spanish) brand-story page about Miami natives who built a venue directory after living the wedding world from every angle. The image should feel personal, inviting, and uniquely Florida.',
+      'A bilingual (English/Spanish) brand-story page about Miami natives who built a venue directory after living the wedding world from every angle. The image should feel intimate, considered, and uniquely Florida — not stock wedding photography. Banner-friendly composition: subject anchored to one side, the other side open for text overlay.',
   },
   {
     slug: 'venues',
@@ -108,8 +118,14 @@ async function main() {
     }
   }
 
-  console.log(`generate-page-photos running in ${DRY_RUN ? 'DRY-RUN' : 'COMMIT'} mode\n`);
-  console.log(`Generating ${PAGES.length} hero images at 1792×1024 ($0.08 each → $${(PAGES.length * 8 / 100).toFixed(2)} max)\n`);
+  const targets = ONLY_SLUG ? PAGES.filter((p) => p.slug === ONLY_SLUG) : PAGES;
+  if (ONLY_SLUG && targets.length === 0) {
+    console.error(`--only=${ONLY_SLUG} matched no page (slugs: ${PAGES.map((p) => p.slug).join(', ')})`);
+    process.exit(1);
+  }
+
+  console.log(`generate-page-photos running in ${DRY_RUN ? 'DRY-RUN' : 'COMMIT'} mode${ONLY_SLUG ? ` (only ${ONLY_SLUG})` : ''}${FORCE ? ' [FORCE]' : ''}\n`);
+  console.log(`Generating ${targets.length} hero image${targets.length === 1 ? '' : 's'} at 1792×1024 ($0.08 each → $${(targets.length * 8 / 100).toFixed(2)} max)\n`);
 
   const openai = DRY_RUN ? null : new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const admin = DRY_RUN ? null : createSupabaseAdminClient();
@@ -125,7 +141,7 @@ async function main() {
 
   let totalCostCents = 0;
 
-  for (const page of PAGES) {
+  for (const page of targets) {
     const prompt = imagePromptFromPage(page);
     console.log(`▶  ${page.route}`);
     console.log(`   prompt: ${prompt.slice(0, 140)}…`);
@@ -135,19 +151,23 @@ async function main() {
       continue;
     }
 
-    // Idempotency: if the file already exists in storage, skip.
+    // Idempotency: if the file already exists in storage, skip — unless
+    // --force was passed (a regen). Storage upload uses upsert:true, so
+    // forcing simply overwrites at the same path.
     const path = `pages/${page.slug}/hero.png`;
-    const existing = await checkExists(admin!, path);
-    if (existing) {
-      console.log(`·  ${page.route}: hero.png already in storage — skip`);
-      results.push({
-        slug: page.slug,
-        route: page.route,
-        rationale: page.rationale,
-        publicUrl: existing,
-        skipped: 'already exists',
-      });
-      continue;
+    if (!FORCE) {
+      const existing = await checkExists(admin!, path);
+      if (existing) {
+        console.log(`·  ${page.route}: hero.png already in storage — skip (use --force to regen)`);
+        results.push({
+          slug: page.slug,
+          route: page.route,
+          rationale: page.rationale,
+          publicUrl: existing,
+          skipped: 'already exists',
+        });
+        continue;
+      }
     }
 
     try {
