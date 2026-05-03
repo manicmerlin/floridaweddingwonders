@@ -347,6 +347,49 @@ export interface VenueFilters {
   search?: string;
 }
 
+/**
+ * Returns the set of venue UUIDs that have an active ownership record.
+ * "Claimed" = at least one row in venue_ownerships joined with an active
+ * venue_owner. The owner_id FK is to venue_owners (which has a status
+ * column); the join is permissive — if we can't read venue_owners due to
+ * RLS or a missing FK, we still treat the existence of the ownership row
+ * as a claim, since RLS is defense-in-depth and a stale ownership row
+ * implies a real claim happened.
+ */
+export async function getClaimedVenueIds(): Promise<Set<string>> {
+  const supabase = createSupabasePublicClient();
+  const { data, error } = await supabase
+    .from('venue_ownerships')
+    .select('venue_id, venue_owners(status)');
+  if (error) {
+    // Don't fail the page on this — log and degrade to "no claims yet,"
+    // which means everyone shows watercolor (the safe default for the
+    // "show until claimed" rule).
+    console.error('getClaimedVenueIds error:', error.message);
+    return new Set();
+  }
+  const claimed = new Set<string>();
+  for (const row of data ?? []) {
+    const ownerStatus = (row as { venue_owners?: { status?: string } | null }).venue_owners?.status;
+    // status undefined when join fails; treat as active per the comment above.
+    if (ownerStatus === undefined || ownerStatus === 'active') {
+      const vid = (row as { venue_id?: string }).venue_id;
+      if (vid) claimed.add(vid);
+    }
+  }
+  return claimed;
+}
+
+/**
+ * Annotate a list of venues with `isClaimed`. Pass-through helper called
+ * from page.tsx so the listing query stays in catalog.ts and pages don't
+ * need to know about the venue_ownerships table.
+ */
+export async function decorateVenuesWithClaims(venues: Venue[]): Promise<Venue[]> {
+  const claimedIds = await getClaimedVenueIds();
+  return venues.map((v) => ({ ...v, isClaimed: v.uuid ? claimedIds.has(v.uuid) : false }));
+}
+
 export async function getVenues(opts: {
   filters?: VenueFilters;
   limit?: number;

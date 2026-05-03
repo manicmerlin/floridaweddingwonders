@@ -3,7 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import VenuesListClient from '@/components/venues/VenuesListClient';
-import { getVenues } from '@/lib/catalog';
+import { getVenues, decorateVenuesWithClaims } from '@/lib/catalog';
 import { decorateVenuesWithRatings } from '@/lib/reviews';
 import { generateBreadcrumbSchema } from '@/lib/seo';
 import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
@@ -19,7 +19,11 @@ import {
 export const dynamic = 'force-dynamic';
 
 export default async function VenuesPage() {
-  const venues = await decorateVenuesWithRatings(await getVenues());
+  // decorateVenuesWithClaims runs ONE query for all venue ownerships,
+  // not per-card — keeps the listing fast even at 129 cards.
+  const venues = await decorateVenuesWithClaims(
+    await decorateVenuesWithRatings(await getVenues())
+  );
 
   return (
     <>

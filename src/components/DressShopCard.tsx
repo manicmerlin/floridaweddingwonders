@@ -60,29 +60,20 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
     setIsFavorite(!isFavorite);
   };
   
-  // Image fallback chain (in order):
-  //   1. Real photo from dress_shops.images JSONB (primary, then first)
-  //   2. Watercolor placeholder at placeholders/dress-shops/<slug>.png
-  //   3. Gradient + emoji card if (2) 404s — handled via onError
-  const primaryImage = shop.images?.find(img => img.isPrimary) || shop.images?.[0];
+  // "Show watercolor until claimed" rule. Dress shops have no ownership
+  // table yet (no dress_shop_ownerships in Postgres), so by definition no
+  // dress shop is "claimed" — every card uses the watercolor placeholder
+  // until that table lands. The real-photo branch is intentionally gone.
+  // (When a dress_shop_ownerships table is added later, gate it here on
+  // shop.isClaimed === true the same way VenueCard does.)
   const placeholderUrl = shop.slug ? placeholderUrlForDressShop(shop.slug) : null;
-  const showPlaceholder = !primaryImage && placeholderUrl && !placeholderFailed;
-  const hasImage = !!primaryImage || !!showPlaceholder;
+  const showPlaceholder = !!placeholderUrl && !placeholderFailed;
+  const hasImage = showPlaceholder;
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <div className="relative h-48 overflow-hidden">
-        {primaryImage ? (
-          <Image
-            src={primaryImage.url}
-            alt={`${shop.name} - ${shop.shopType} bridal shop in Florida`}
-            fill
-            className="object-cover hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            loading="lazy"
-            quality={85}
-          />
-        ) : showPlaceholder ? (
+        {showPlaceholder ? (
           <Image
             src={placeholderUrl!}
             alt={`${shop.name} - watercolor illustration`}

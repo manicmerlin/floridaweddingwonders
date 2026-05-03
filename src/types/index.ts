@@ -47,6 +47,11 @@ export interface Venue {
   // listing sort, and per-tier feature flags (see src/lib/tierFeatures.ts).
   tier?: 'starter' | 'growth' | 'scale';
   tierExpiresAt?: string | null;
+  // True iff there's an active row in venue_ownerships for this venue.
+  // Drives the "show watercolor placeholder until claimed" rule on cards
+  // and detail-page hero. Set by decorateVenuesWithClaims() in catalog.ts;
+  // undefined when the caller didn't decorate (treat as unclaimed/safe).
+  isClaimed?: boolean;
   images?: VenueImage[]; // Legacy field for images only
   media?: VenueMedia[]; // New field for mixed media (images + videos)
   contact: {
