@@ -9,13 +9,18 @@
 //   1. Open an agent_runs row (status='started')
 //   2. Pick a topic — highest priority pending row in blog_topic_queue,
 //      or AI-generate 5 new ones if the queue is empty
-//   3. Draft the post via Claude with the existing 10 posts as voice
-//      few-shot. Two calls: (a) full MDX draft, (b) metadata (Pinterest
+//   3. Draft the post via Claude using the Voice Charter as the primary
+//      spec. Two calls: (a) full MDX draft, (b) metadata (Pinterest
 //      titles, related venues, reading time)
 //   4. Insert pending_posts row, mark agent_run success, send admin email
 //
 // All Claude calls accumulate token usage so the agent_runs row records
 // model + tokens_in + tokens_out + cost_cents for cost-tracking.
+//
+// Voice version: bumped each time the Voice Charter materially changes.
+// agent_runs.metadata.voice_version records which voice produced each
+// post — useful when iterating on tone or comparing engagement across
+// charter versions. Bump VOICE_VERSION in lockstep with VOICE_CHARTER.
 
 import Anthropic from '@anthropic-ai/sdk';
 import { Resend } from 'resend';
@@ -26,6 +31,44 @@ import { Venue } from '@/types';
 
 const AGENT_NAME = 'weekly-blog-draft';
 const MODEL = 'claude-opus-4-7';
+const VOICE_VERSION = 'v2-narrative-column';
+
+// VOICE CHARTER — the single primary spec for the agent. Replaces the
+// utility/list-heavy Phase 7A v1 voice (which used the existing 10 posts
+// as few-shot examples). Edit this block + bump VOICE_VERSION above when
+// the charter changes; future runs are tagged with the new version.
+const VOICE_CHARTER = `VOICE CHARTER — sharp, stylish relationship columnist narrating a modern love story.
+
+Tone:
+- Playful, witty, and effortlessly charming
+- Observational, with clever insights about love, dating, and commitment
+- Lightly sarcastic in a warm, self-aware way (never negative or cynical)
+- Confident and emotionally intelligent
+- Romantic, but grounded in real-life moments and relatable experiences
+
+Writing style:
+- Read like a personal column or narrated inner monologue
+- Include rhetorical questions and thought-provoking reflections
+- Use short, punchy lines mixed with slightly longer, flowing sentences
+- Feel conversational, like you're letting the reader in on a secret
+- Blend humor with sincerity — make the reader smile and feel something
+
+Narrative approach:
+- Open with a relatable observation about relationships, dating, or weddings
+- Build into a mini story or scenario (a moment of doubt, excitement, realization, etc.)
+- Transition into the idea of finding "the one" — and mirror that with finding the perfect venue
+- Introduce the venue naturally as the place where everything clicks
+- Describe the venue through sensory, emotional storytelling (not listing features)
+- Close with a memorable, reflective line about love, timing, or meaningful choices
+
+Guidelines:
+- Speak directly to the reader as if offering insider perspective
+- Keep it engaging, never overly formal or corporate
+- Avoid clichés unless they are cleverly reimagined
+- AVOID bullet points or list formatting entirely
+- Do NOT sound like an advertisement — this should feel like a story that just happens to feature a venue
+
+Include 2-3 short, quotable lines that could double as social captions.`;
 
 // Per-million pricing (cents) for Opus 4.7 — used to estimate cost_cents.
 // Prices recompute easily; this is rough but useful.
@@ -146,14 +189,13 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
     .update({ status: 'in_use', used_by_run: agentRunId, used_at: new Date().toISOString() })
     .eq('id', topic.id);
 
-  // 3) Pull voice few-shot examples + venue catalog for the prompt
-  const [examplePosts, venues] = await Promise.all([
-    Promise.resolve(pickFewShotExamples()),
-    getVenues(),
-  ]);
+  // 3) Pull venue catalog for the prompt. Voice charter (top of file) is
+  //    the single voice spec — no few-shot examples since the existing 10
+  //    posts are utility-style and would drag the model toward list-form.
+  const venues = await getVenues();
 
   // 4) Draft the post
-  const draft = await draftPost(anthropic, topic, examplePosts, venues);
+  const draft = await draftPost(anthropic, topic, venues);
   totalTokensIn += draft.tokensIn;
   totalTokensOut += draft.tokensOut;
 
@@ -209,6 +251,9 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
         topic: topic.topic,
         post_id: postRow.id,
         post_slug: postRow.slug,
+      },
+      metadata: {
+        voice_version: VOICE_VERSION,
       },
     })
     .eq('id', agentRunId);
@@ -308,26 +353,34 @@ async function generateTopicIdeas(
     messages: [
       {
         role: 'user',
-        content: `You're the editorial director for Florida Wedding Wonders, a Florida wedding venue catalog.
+        content: `You're the editorial director for Florida Wedding Wonders. We're launching a new column-form voice — sharp, stylish, narrating modern love stories. Each post is a personal essay that happens to feature a Florida wedding venue, not a utility article.
 
-We have these blog posts already published:
+We have these blog posts already published (utility/list-form, the OLD voice — don't duplicate or rewrite them):
 
 ${existingTitles}
 
-Generate 5 NEW blog post topics for our queue. Requirements:
-- Florida-specific, not generic wedding advice
-- Should not duplicate or overlap meaningfully with the existing posts
-- Practical, opinionated, useful — not SEO filler
-- Mix of seasonal (some winter/summer-specific) and evergreen
-- Range across different topics: vendors, planning, design, guests, logistics
+Generate 5 NEW topics that lend themselves to the column voice. Examples of the angles we want:
+- "The moment a couple knows the venue is the one"
+- "The hidden tax of compromise in wedding planning"
+- "Why the engagement period feels weirdly long and weirdly short"
+- "What walking a venue together actually feels like"
+- "On the small panic of choosing the date"
+- "Falling in love with a place before you fall in love with a wedding"
+- "The conversations couples have on the drive home from venue tours"
 
-Return JSON only — no commentary, no markdown fences. Format:
+Notes:
+- These are essay topics, not how-to guides. The post will use the topic to explore an emotional truth, then naturally land on a Florida venue as the place where that truth becomes specific.
+- Florida-flavored is good (the light, the seasons, the destination-wedding feel) but not all of them have to be Florida-specific in the topic itself — Florida shows up in the venues and details.
+- Avoid topics that beg for bullet lists (timelines, checklists, vendor lists). The column voice cannot sustain that format.
+- A range of moods: some witty, some tender, some quietly observational. Not all wedding-day; some pre-engagement, some post-engagement, some about the relationship itself.
+
+Return JSON only — no commentary, no markdown fences:
 {"topics":[
-  {"topic":"slug-friendly-topic","workingTitle":"Working Title","description":"1-2 sentence brief","priority":7,"season":"any|spring|summer|fall|winter","tags":["tag1","tag2"]},
+  {"topic":"slug-friendly-topic","workingTitle":"Evocative working title","description":"1-2 sentence brief about the angle","priority":7,"season":"any|spring|summer|fall|winter","tags":["tag1","tag2"]},
   ...4 more
 ]}
 
-Priority: 1-10, higher = more time-sensitive or higher value.`,
+Priority: 1-10, higher = stronger angle.`,
       },
     ],
   });
@@ -362,32 +415,9 @@ Priority: 1-10, higher = more time-sensitive or higher value.`,
 // Draft generation
 // ---------------------------------------------------------------------------
 
-function pickFewShotExamples(): { title: string; body: string }[] {
-  // Two best-fit examples for voice transfer. Picked to span style: one
-  // numbered/list-heavy ("Florida Wedding Planning Timeline"), one
-  // narrative/sectioned ("Wedding Season in Florida").
-  const all = getAllPosts();
-  const want = ['florida-wedding-planning-timeline', 'wedding-season-florida-weather-guide'];
-  const examples: { title: string; body: string }[] = [];
-  for (const slug of want) {
-    const found = all.find((p) => p.slug === slug);
-    if (found) {
-      // Truncate the body to keep prompt size reasonable. ~3000 chars is
-      // enough to lock voice without blowing the context.
-      const truncated = found.content.slice(0, 3000);
-      examples.push({
-        title: found.title,
-        body: truncated + '\n\n[... post continues ...]',
-      });
-    }
-  }
-  return examples;
-}
-
 async function draftPost(
   anthropic: Anthropic,
   topic: TopicRow,
-  fewShot: { title: string; body: string }[],
   venues: Venue[]
 ): Promise<DraftResult> {
   // Surface a small subset of venues for the prompt so Claude can name-drop
@@ -397,12 +427,7 @@ async function draftPost(
     name: v.name,
     city: v.address.city,
     type: v.venueType,
-    capacity: `${v.capacity.min}-${v.capacity.max}`,
   }));
-
-  const exampleBlocks = fewShot
-    .map((e) => `### Example: ${e.title}\n\n${e.body}`)
-    .join('\n\n---\n\n');
 
   const response = await anthropic.messages.create({
     model: MODEL,
@@ -410,39 +435,37 @@ async function draftPost(
     messages: [
       {
         role: 'user',
-        content: `You're the lead writer for Florida Wedding Wonders. Write a new blog post in our voice.
+        content: `You're a writer for Florida Wedding Wonders. The Voice Charter below is the single most important spec for this piece — read it twice before drafting.
 
-VOICE GUIDE (read carefully — match the cadence, opinionated tone, and Florida-first specificity):
-
-${exampleBlocks}
+${VOICE_CHARTER}
 
 ---
 
 TOPIC FOR THIS POST:
 - Topic: ${topic.topic}
-- Working title: ${topic.working_title ?? '(none — pick a strong one)'}
+- Working title: ${topic.working_title ?? '(none — pick something evocative)'}
 - Brief: ${topic.description ?? '(none)'}
 - Season: ${topic.season ?? 'any'}
 - Tags: ${(topic.tags ?? []).join(', ')}
 
-REAL VENUES YOU CAN REFERENCE (link by slug as /venues/[slug]):
+REAL FLORIDA VENUES YOU CAN WEAVE IN (link by slug as /venues/[slug]):
 
-${venueSample.map((v) => `- ${v.name} (${v.city}, ${v.type}, ${v.capacity} guests, slug: ${v.slug})`).join('\n')}
+${venueSample.map((v) => `- ${v.name} — ${v.type} venue in ${v.city} (slug: ${v.slug})`).join('\n')}
 
-Plus 100+ more venues in the catalog. Don't fabricate venue names — only use ones from the list above or generic mentions ("most resort venues in the Keys", etc.).
+Plus 100+ more in the catalog. Don't fabricate venue names — only use ones from the list above. Reference them through sensory, emotional storytelling — the way the light falls on the courtyard, the moment a couple knows this is the place — never as a feature list.
 
-REQUIREMENTS:
-- 1500-2200 words of substantive Florida-specific content
-- Markdown body only — NO frontmatter (frontmatter is added separately)
-- Open with a strong, opinionated lede that frames why generic advice fails for Florida
-- Use H2 (##) and H3 (###) headers, real numbered/bulleted lists, occasional tables when the format helps
-- Reference 2-4 real venues from the catalog using inline markdown links: [Venue Name](/venues/slug)
-- Real data where possible: capacity ranges, regional weather patterns, price bands ($15k-$30k for X tier, etc.)
-- End with a CTA that points to /quotes/request (the multi-quote form) — paraphrase, don't copy any prior post's CTA verbatim
-- Avoid generic SEO filler. Avoid bulleted lists of obvious truisms. Be specific.
+STRUCTURAL REQUIREMENTS (hold the line on these):
+- Length: 1500-1800 words. Column-form is dense; lean shorter rather than longer.
+- Markdown body only — NO frontmatter (frontmatter is added separately).
+- Use H2 (##) sparingly to mark narrative beats — never as utility headers like "What to know" or "Step 1". A piece can have 0-3 H2s total. Many won't need any.
+- NO bulleted lists. NO numbered lists. NO tables. Flowing prose with section breaks where natural.
+- Weave in 2-4 real venue references using inline markdown links: [Venue Name](/venues/slug). Don't introduce them as menu items — let them appear inside the story.
+- Include 2-3 short, quotable lines (each under 140 characters) that could stand alone as social captions. Mark each with the comment \`<!-- caption -->\` immediately after the line, on its own line. The captions stay in the post; we'll extract them programmatically later.
+- Close with a memorable, reflective line first — something about love, timing, or meaningful choices. Then a soft CTA pointing to /quotes/request, framed not as a sales push but as "when you're ready to find your version of this place." Paraphrase; don't reuse a prior post's wording.
+- Don't sound like an advertisement. Don't sound like SEO copy. This is a column. A reader should finish it and feel something — not check a box.
 
 Return JSON only — no commentary, no markdown fences:
-{"slug":"slug-friendly","title":"Final post title","description":"meta description ~150 chars","category":"Wedding Planning|Venues|Wedding Budget","body":"# H1\\n\\nfull markdown..."}`,
+{"slug":"slug-friendly","title":"Final post title","description":"meta description ~150 chars","category":"Wedding Planning|Venues|Wedding Budget","body":"full markdown body, no h1, starts with the lede paragraph"}`,
       },
     ],
   });
@@ -489,7 +512,7 @@ async function generateMetadata(
     messages: [
       {
         role: 'user',
-        content: `Given this Florida wedding blog post draft, produce metadata.
+        content: `Given this Florida wedding column draft, produce metadata. The post is written in our column-form voice — sharp, stylish, narrating a modern love story. Metadata should match that energy, not flatten it into utility-blog style.
 
 TITLE: ${draft.title}
 DESCRIPTION: ${draft.description}
@@ -499,18 +522,18 @@ ${draft.bodyMdx.slice(0, 4500)}${draft.bodyMdx.length > 4500 ? '\n[... continues
 
 Generate JSON:
 {
-  "pinterestTitleVariants": ["3 Pinterest-pin title variants (keyword-rich, hook-first, max 60 chars each)"],
-  "metaDescription": "tightened ~155 char meta (rewrite if existing one is too long or weak)",
+  "pinterestTitleVariants": ["3 Pinterest-pin title variants — emotional hook first, evocative not SEO-stuffed, max 60 chars each. Think 'The moment you know it's the one' over 'Top 10 Florida wedding venues'."],
+  "metaDescription": "tightened ~155 char meta. Should hint at the column's emotional throughline, not summarize bullet points. Rewrite if the existing one is too long or weak.",
   "relatedVenueSlugs": ["3 to 5 venue slugs from the catalog that genuinely fit this post"],
-  "readingTimeMin": 9,
-  "tags": ["3 to 5 tags (planning, vendors, beach, design, etc.)"]
+  "readingTimeMin": 7,
+  "tags": ["3 to 5 tags — favor mood/theme tags ('engagement', 'choosing the venue', 'first looks') alongside utility tags"]
 }
 
 Rules:
-- relatedVenueSlugs: ONLY use slugs that match venues already mentioned in the post body, OR clearly fit the topic. Don't invent.
-- readingTimeMin: word count / 200, rounded up
-- pinterestTitleVariants: pin titles, not duplicates of the article title; should make sense at glance
-- Return JSON only, no commentary`,
+- relatedVenueSlugs: ONLY use slugs that the post body actually mentions, OR ones that clearly fit the emotional setting. Don't invent.
+- readingTimeMin: word count / 200, rounded up. Column-form posts are typically 7-9 min.
+- pinterestTitleVariants: pin titles should make a reader feel something at a glance. Avoid keyword stuffing. The Pinterest 2:3 image already carries the brand; the title carries the hook.
+- Return JSON only, no commentary, no markdown fences.`,
       },
     ],
   });
