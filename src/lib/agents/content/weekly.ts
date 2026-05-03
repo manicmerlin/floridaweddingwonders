@@ -84,6 +84,7 @@ The voice is how you write. The utility is what you write about. Both required.
 - YES use lists ONLY when the content genuinely demands enumeration (e.g., "Five things to ask your photographer") and frame even those with a witty intro line per item, not just bullet text
 - NO tables — restructure as flowing prose
 - NO bare data dumps — every fact gets a reason to be in the sentence
+- WEATHER as experienced (a hot afternoon, the kind of muggy that ruins blowouts, golden hour stretching) is fine and welcome. Weather as measured (latitude, UV index, dew point, sun angle) is not. Same rule for any technical specifics: keep the lived consequence, drop the meteorological coordinates.
 - END every post with a memorable, reflective line about love/timing/meaningful choices, then a soft CTA to /quotes/request
 - INCLUDE 2-3 short quotable lines (<140 chars each) marked with <!-- caption --> immediately after on its own line — these double as social captions`;
 
