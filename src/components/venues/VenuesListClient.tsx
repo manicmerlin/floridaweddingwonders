@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
+import Pagination from '@/components/Pagination';
 import { compareByTier } from '@/lib/tierFeatures';
 
 const ITEMS_PER_PAGE = 12;
@@ -197,37 +198,11 @@ export default function VenuesListClient({ venues }: { venues: Venue[] }) {
                 ))}
               </div>
 
-              {totalPages > 1 && (
-                <div className="mt-12 flex justify-center items-center space-x-2">
-                  <button
-                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                    disabled={currentPage === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                  >
-                    Previous
-                  </button>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                    <button
-                      key={p}
-                      onClick={() => setCurrentPage(p)}
-                      className={`px-4 py-2 border rounded-lg ${
-                        currentPage === p
-                          ? 'bg-pink-600 text-white border-pink-600'
-                          : 'border-gray-300 hover:bg-gray-50'
-                      }`}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                    disabled={currentPage === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                  >
-                    Next
-                  </button>
-                </div>
-              )}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
             </>
           )}
         </div>
