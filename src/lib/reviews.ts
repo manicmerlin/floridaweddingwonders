@@ -149,18 +149,22 @@ export interface ModerationReview extends PublicReview {
   venueName: string;
   venueSlug: string;
   reviewerEmail: string | null;
+  /** Phase 6: true for rows produced by scripts/seed-reviews.ts. The
+   *  admin moderation queue has a "Bulk approve seeded" button that acts
+   *  on this flag. */
+  isSeeded: boolean;
 }
 
 /**
  * All pending reviews across all venues, newest first. Service-role read.
  * Caller must verify the user is super_admin before calling.
  */
-export async function getPendingReviews(limit = 100): Promise<ModerationReview[]> {
+export async function getPendingReviews(limit = 200): Promise<ModerationReview[]> {
   const admin = createSupabaseAdminClient();
   const { data, error } = await admin
     .from('venue_reviews')
     .select(
-      'id, venue_id, reviewer_name, reviewer_email, rating, title, body, wedding_date, status, submitted_at, venues:venue_id(name, slug)'
+      'id, venue_id, reviewer_name, reviewer_email, rating, title, body, wedding_date, status, submitted_at, is_seeded, venues:venue_id(name, slug)'
     )
     .eq('status', 'pending')
     .order('submitted_at', { ascending: false })
@@ -179,5 +183,6 @@ export async function getPendingReviews(limit = 100): Promise<ModerationReview[]
     venueId: r.venue_id,
     venueName: r.venues?.name ?? '(unknown)',
     venueSlug: r.venues?.slug ?? '',
+    isSeeded: !!r.is_seeded,
   }));
 }
