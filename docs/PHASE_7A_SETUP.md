@@ -36,13 +36,34 @@ required, metadata required).
 **Estimated cost per run (Opus 4.7):**
 
 - Topic generation (rare, only when queue is empty): ~$0.10
-- Draft (~6k output tokens, ~3k input): ~$0.50
-- Metadata (~1k output, ~3k input): ~$0.10
-- **Per-run total: ~$0.60-0.80**
-- **Monthly cost (4 runs): ~$2.50-3.00**
+- Draft (~6k output tokens, ~3k input): ~$0.40
+- Metadata + image prompt (~1.5k output, ~3k input): ~$0.10
+- **Anthropic per-run total: ~$0.50-0.60**
 
-The agent records every run's cost in `agent_runs.cost_cents` for
-auditing.
+The agent records Anthropic cost per run in `agent_runs.cost_cents`.
+
+### `OPENAI_API_KEY` — required for Phase 7B image generation
+
+DALL-E 3 generates the hero (16:9) and Pinterest pin (9:16) images for
+each post. Without this key, posts ship with the gradient placeholder.
+
+**Get one:**
+
+1. https://platform.openai.com/api-keys
+2. Create a new key, give it a memorable name
+3. Paste into Vercel as `OPENAI_API_KEY`
+4. Confirm the OpenAI account has billing credits / a card on file —
+   DALL-E charges per image, no free tier
+
+**Cost per run (DALL-E 3 standard quality, 2026 pricing):**
+
+- Hero 1792×1024: $0.080
+- Pinterest 1024×1792: $0.080
+- **Per-run total: $0.16**
+- Recorded separately in `pending_posts.image_cost_cents`
+
+**Combined Anthropic + DALL-E per-run cost: ~$0.65-0.75. Monthly at
+weekly cadence: ~$3.00.**
 
 ### `GITHUB_PUBLISH_TOKEN` — required
 

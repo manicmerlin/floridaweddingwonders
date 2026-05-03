@@ -18,6 +18,11 @@ export interface PendingPostSummary {
   agentRunId: string | null;
   githubCommitSha: string | null;
   rejectionReason: string | null;
+  /** Phase 7B — AI-generated image URLs from the blog-images bucket */
+  imageUrl: string | null;
+  pinterestImageUrl: string | null;
+  imagePrompt: string | null;
+  imageCostCents: number | null;
   /** Full MDX body — included on the detail view, omitted from list to
    *  keep payloads small. */
   bodyMdx?: string;
@@ -64,7 +69,7 @@ export async function listPendingPosts(): Promise<PendingPostSummary[]> {
   const { data } = await admin
     .from('pending_posts')
     .select(
-      'id, slug, title, description, category, status, generated_at, reviewed_at, published_at, topic_id, agent_run_id, github_commit_sha, rejection_reason'
+      'id, slug, title, description, category, status, generated_at, reviewed_at, published_at, topic_id, agent_run_id, github_commit_sha, rejection_reason, image_url, pinterest_image_url, image_prompt, image_cost_cents'
     )
     .order('generated_at', { ascending: false })
     .limit(100);
@@ -101,6 +106,10 @@ function rowToPendingPost(r: any): PendingPostSummary {
     agentRunId: r.agent_run_id,
     githubCommitSha: r.github_commit_sha,
     rejectionReason: r.rejection_reason,
+    imageUrl: r.image_url ?? null,
+    pinterestImageUrl: r.pinterest_image_url ?? null,
+    imagePrompt: r.image_prompt ?? null,
+    imageCostCents: r.image_cost_cents ?? null,
   };
 }
 
