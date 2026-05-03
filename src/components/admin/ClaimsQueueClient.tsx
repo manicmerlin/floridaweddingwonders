@@ -16,6 +16,15 @@ export interface ClaimRow {
   intendedTier: 'starter' | 'growth' | 'scale' | null;
   hasSubscription: boolean;
   createdAt: string;
+  /** Phase 6: venue traffic + lead context shown inline so the admin can
+   *  judge a claim's value without a separate dashboard trip. */
+  venueStats: {
+    views30d: number;
+    uniqueViews30d: number;
+    inquiries90d: number;
+    photoCount: number;
+    contactEmailReal: boolean;
+  };
 }
 
 export default function ClaimsQueueClient({ claims }: { claims: ClaimRow[] }) {
@@ -117,6 +126,18 @@ export default function ClaimsQueueClient({ claims }: { claims: ClaimRow[] }) {
                 </span>
               </div>
 
+              {/* Phase 6 — inline venue stats panel so admin can judge claim
+                  value without leaving the queue. */}
+              <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 rounded-md p-3 text-xs">
+                <StatPill label="Views (30d)" value={c.venueStats.views30d.toLocaleString()} />
+                <StatPill label="Unique (30d)" value={c.venueStats.uniqueViews30d.toLocaleString()} />
+                <StatPill label="Inquiries (90d)" value={c.venueStats.inquiries90d.toLocaleString()} />
+                <StatPill
+                  label="Photos · Email"
+                  value={`${c.venueStats.photoCount} · ${c.venueStats.contactEmailReal ? 'verified' : 'auto'}`}
+                />
+              </div>
+
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-4 text-sm">
                 <Row label="Requester">{c.requesterName}</Row>
                 <Row label="Email">
@@ -213,6 +234,15 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
     <div>
       <dt className="text-gray-500 text-xs uppercase tracking-wide">{label}</dt>
       <dd className="mt-0.5 text-gray-900">{children}</dd>
+    </div>
+  );
+}
+
+function StatPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-white rounded p-2 border border-gray-200">
+      <p className="text-gray-500 uppercase tracking-wide text-[10px]">{label}</p>
+      <p className="font-bold text-gray-900 mt-0.5">{value}</p>
     </div>
   );
 }

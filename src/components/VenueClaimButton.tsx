@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/components/AuthProvider';
 import { Venue } from '@/types';
 
@@ -34,6 +34,7 @@ const EMPTY_FORM: FormState = {
 export default function VenueClaimButton({ venue }: Props) {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +43,23 @@ export default function VenueClaimButton({ venue }: Props) {
     paymentsConfigured: boolean;
   } | null>(null);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
+
+  // ?claim=1 in the URL auto-opens the claim modal. Used by the personalized
+  // /claim/[slug] cold-outreach landing pages (Phase 6) — couples land on a
+  // splash, click "Claim this listing," and arrive on the venue page with
+  // the modal already open.
+  useEffect(() => {
+    if (authLoading) return;
+    const wantsClaim = searchParams?.get('claim') === '1';
+    if (wantsClaim && isAuthenticated && !open && !success) {
+      setForm({
+        ...EMPTY_FORM,
+        name: (user?.user_metadata?.full_name as string) || '',
+        email: user?.email || '',
+      });
+      setOpen(true);
+    }
+  }, [searchParams, isAuthenticated, authLoading, user, open, success]);
 
   const handleClaimClick = () => {
     if (!isAuthenticated) {

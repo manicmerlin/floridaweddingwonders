@@ -184,6 +184,11 @@ interface SeedReviewRow {
   body: string;
   wedding_date: string;
   status: 'pending';
+  /** Phase 6: is_seeded flag so admin moderation can bulk-approve in one
+   *  click via /api/admin/reviews/bulk-approve-seeded. The 147 existing
+   *  rows from the Phase 4 seed run were backfilled to is_seeded=true via
+   *  database/reviews-seed-marker-schema.sql. */
+  is_seeded: true;
 }
 
 function detailsForType(venueType: string | null | undefined): string[] {
@@ -242,6 +247,7 @@ function buildReviewsForVenue(venue: {
       body,
       wedding_date: randomWeddingDate(),
       status: 'pending',
+      is_seeded: true,
     });
   }
   return out;
