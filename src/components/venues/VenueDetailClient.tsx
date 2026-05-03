@@ -13,6 +13,7 @@ import SaveVenueButton from '@/components/SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
 import { tierFeatures } from '@/lib/tierFeatures';
+import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 import { Venue } from '@/types';
 
 // REMOVED: localStorage `deleted-venues` redirect.
@@ -89,7 +90,10 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
             </div>
           );
         })()}
-        {venue.images && venue.images.length > 0 ? (
+        {/* "Show watercolor until claimed" rule — same gate as the listing
+            cards. Real PhotoGallery only renders when the venue is claimed
+            AND has photos. Otherwise show the watercolor placeholder hero. */}
+        {venue.isClaimed && venue.images && venue.images.length > 0 ? (
           <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-8 lg:pb-20">
             <div className="max-w-7xl mx-auto">
               <PhotoGallery
@@ -105,6 +109,22 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
               />
             </div>
           </div>
+        ) : venue.slug ? (
+          <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-8 lg:pb-20">
+            <div className="max-w-7xl mx-auto">
+              <div className="relative aspect-[3/2] sm:aspect-[16/9] w-full overflow-hidden rounded-xl bg-gray-100">
+                <Image
+                  src={placeholderUrlForVenue(venue.slug)}
+                  alt={`${venue.name} — watercolor illustration`}
+                  fill
+                  priority
+                  quality={90}
+                  sizes="(max-width: 1024px) 100vw, 1280px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
         ) : (
           <div className="h-96 bg-gray-100 flex items-center justify-center">
             <div className="text-center text-gray-600">
@@ -118,8 +138,10 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
         )}
       </section>
 
-      {/* Venue Title Section - Completely Separate */}
-      {venue.images && venue.images.length > 0 && (
+      {/* Venue Title Section - shows whenever the hero rendered (real
+          gallery OR watercolor placeholder); only suppressed for the
+          slugless emoji-fallback path. */}
+      {((venue.isClaimed && venue.images && venue.images.length > 0) || venue.slug) && (
         <section className="bg-white border-t border-gray-200 relative z-10 clear-both">
           <div className="px-4 sm:px-6 lg:px-8 py-8 lg:pt-16">
             <div className="max-w-7xl mx-auto">
@@ -752,7 +774,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
               .map((relatedVenue) => (
                 <Link key={relatedVenue.id} href={`/venues/${relatedVenue.slug || relatedVenue.id}`} className="block group">
                   <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                    {relatedVenue.images && relatedVenue.images.length > 0 ? (
+                    {relatedVenue.isClaimed && relatedVenue.images && relatedVenue.images.length > 0 ? (
                       <div className="aspect-w-16 aspect-h-10">
                         <Image
                           src={relatedVenue.images[0].url}
@@ -760,6 +782,16 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
                           width={400}
                           height={250}
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    ) : relatedVenue.slug ? (
+                      <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
+                        <Image
+                          src={placeholderUrlForVenue(relatedVenue.slug)}
+                          alt={`${relatedVenue.name} — watercolor illustration`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     ) : (

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import VenueDetailClient from '@/components/venues/VenueDetailClient';
 import {
+  getClaimedVenueIds,
   getVenueByLegacyId,
   getVenueBySlug,
   getVenues,
@@ -87,16 +88,25 @@ export default async function VenueSlugPage({ params }: Params) {
   // (see rowToVenue in src/lib/catalog.ts) — the optional Venue.uuid in
   // src/types is a legacy artifact from when ids were string slugs.
   const venueUuid = venue.uuid ?? venue.id;
-  const [reviews, aggregate] = await Promise.all([
+  const [reviews, aggregate, claimedIds] = await Promise.all([
     getApprovedReviewsForVenue(venueUuid),
     getAggregateRatingForVenue(venueUuid),
+    getClaimedVenueIds(),
   ]);
+  // Decorate with both the rating aggregate AND the isClaimed flag — the
+  // detail-page hero gates real photos on isClaimed (same rule as cards).
+  const isClaimed = venue.uuid ? claimedIds.has(venue.uuid) : false;
   const venueWithRating = aggregate
     ? {
         ...venue,
+        isClaimed,
         reviews: { rating: aggregate.average, count: aggregate.count, reviews: [] },
       }
-    : venue;
+    : { ...venue, isClaimed };
+  const decoratedRelated = relatedVenues.map((v) => ({
+    ...v,
+    isClaimed: v.uuid ? claimedIds.has(v.uuid) : false,
+  }));
 
   return (
     <>
@@ -118,7 +128,7 @@ export default async function VenueSlugPage({ params }: Params) {
           ),
         }}
       />
-      <VenueDetailClient venue={venueWithRating} relatedVenues={relatedVenues} />
+      <VenueDetailClient venue={venueWithRating} relatedVenues={decoratedRelated} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-12">
         <VenueReviewsSection
           venueUuid={venueUuid}

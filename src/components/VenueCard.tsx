@@ -38,8 +38,20 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
   // card to the emoji fallback rather than rendering a broken <img>.
   const [placeholderFailed, setPlaceholderFailed] = useState(false);
   
-  // Load photos from Supabase database
+  // "Show watercolor until claimed" rule. Real photos only render when the
+  // venue has an active venue_ownerships row (set by decorateVenuesWithClaims
+  // in the page-level loader). When isClaimed is undefined (caller didn't
+  // decorate) we treat the venue as unclaimed for safety — no real photos.
+  const useRealPhoto = venueWithPhotos.isClaimed === true;
+
+  // Only load real photos from Supabase when the venue is actually claimed.
+  // Skipping this useEffect on unclaimed venues avoids a wasted round-trip
+  // per card on the listing.
   useEffect(() => {
+    if (!useRealPhoto) {
+      setIsLoadingPhotos(false);
+      return;
+    }
     const loadPhotos = async () => {
       try {
         const photos = await loadVenuePhotosFromStorage(venue.id);
@@ -58,13 +70,15 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
     };
 
     loadPhotos();
-  }, [venue.id]);
+  }, [venue.id, useRealPhoto]);
 
   // Image fallback chain (in order):
-  //   1. Real photo from venues.images JSONB (primary, then first)
+  //   1. (Claimed only) real photo from venues.images JSONB
   //   2. Watercolor placeholder PNG at placeholders/venues/<slug>.png
   //   3. Emoji card if (2) 404s — handled via onError on the <Image>
-  const primaryImage = venueWithPhotos.images?.find(img => img.isPrimary) || venueWithPhotos.images?.[0];
+  const primaryImage = useRealPhoto
+    ? (venueWithPhotos.images?.find(img => img.isPrimary) || venueWithPhotos.images?.[0])
+    : null;
   const placeholderUrl = venueWithPhotos.slug ? placeholderUrlForVenue(venueWithPhotos.slug) : null;
   const showPlaceholder = !primaryImage && placeholderUrl && !placeholderFailed;
 
