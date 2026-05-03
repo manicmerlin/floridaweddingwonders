@@ -23,14 +23,17 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 overflow-x-clip">
       <Navigation />
 
-      {/* Hero Section. Full-bleed (no max-width on the wrapper); min-h
-          gives a stable container shape so object-cover crops consistently
-          across viewports. Black-based overlay (instead of blue) preserves
-          the photo's warm golden-hour tones — a blue tint would mud them. */}
-      <div className="relative w-full text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
+      {/* Hero Section. Negative-margin breakout (mx-[calc(50%-50vw)]
+          w-screen) forces edge-to-edge regardless of any parent
+          constraint — when the parent is already full-width the math
+          evaluates to mx-0/100vw (a no-op), but on iOS Safari with any
+          implicit constraint the hero still bleeds full-bleed. Parent
+          gets overflow-x-clip to absorb any 1-pixel scrollbar drift
+          from w-screen vs scrollbar width on desktop. */}
+      <div className="relative mx-[calc(50%-50vw)] w-screen text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
         <Image
           src={PAGE_HERO_IMAGES.about}
           alt="A Florida wedding venue at golden hour"

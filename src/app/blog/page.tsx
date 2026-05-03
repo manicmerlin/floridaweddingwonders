@@ -26,14 +26,13 @@ export default function BlogPage() {
         ]}
       />
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 overflow-x-clip">
         <Navigation />
-        
-        {/* Hero Section. Full-bleed; stable min-h container so object-cover
-            crops consistently. Black-based overlay (instead of brand
-            pink/purple/blue) preserves the photo's neutral table-top
-            scene — heavy color tinting was washing it out entirely. */}
-        <section className="relative w-full text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
+
+        {/* Hero Section. Negative-margin breakout for guaranteed full-bleed
+            on iOS Safari (where parent constraints can clamp w-full). Parent
+            has overflow-x-clip to absorb any scrollbar-width drift. */}
+        <section className="relative mx-[calc(50%-50vw)] w-screen text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
           <Image
             src={PAGE_HERO_IMAGES.blog}
             alt="A Florida wedding planning scene with notebook, flowers, and coffee"
