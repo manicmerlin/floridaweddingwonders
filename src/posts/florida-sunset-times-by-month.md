@@ -6,7 +6,8 @@ updatedAt: "2026-04-30"
 author: "Florida Wedding Wonders Team"
 authorBio: "We schedule ceremonies around real sun-position math, not generic 'about an hour before sunset' advice."
 category: "Wedding Planning"
-image: "/images/blog/florida-sunset.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-sunset-times-by-month/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-sunset-times-by-month/pinterest.png"
 keywords:
   - "Florida sunset times wedding"
   - "wedding ceremony time Florida"
@@ -23,6 +24,12 @@ relatedVenues:
 excerpt: "Real sunset data for Miami, Naples, and Key West by month. Use it to time your ceremony for golden hour, nail the photo lighting, and avoid the most common mistake in Florida weddings."
 ---
 
+
+<!-- imagePrompt: A Florida wedding ceremony scene precisely at golden hour, low warm sun, long soft shadows.
+
+Article context: Real sunset data for Miami, Naples, and Key West by month. Use it to time your ceremony for golden hour, nail the photo lighting, and avoid the most common mistake in Florida weddings.
+
+Lede excerpt for tone:  Sunset Times in Florida by Month: Plan Your Ceremony Right -->
 # Sunset Times in Florida by Month: Plan Your Ceremony Right
 
 The single most common mistake in outdoor Florida weddings: scheduling the ceremony at "5pm" because that's traditional, then realizing in October the sun was setting at 6:45pm and golden hour was happening during your reception. Or scheduling at "6pm" in June when the sun doesn't set until 8:25pm and the ceremony was a sweltering 87°F under direct sun.

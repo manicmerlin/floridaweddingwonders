@@ -6,7 +6,8 @@ updatedAt: "2026-05-04"
 author: "Florida Wedding Wonders Team"
 authorBio: "We don't sell insurance. The information below is what we tell couples directly — verify quotes and policy details with the actual carrier."
 category: "Wedding Planning"
-image: "/images/blog/wedding-insurance.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-insurance/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-insurance/pinterest.png"
 keywords:
   - "Florida wedding insurance"
   - "wedding liability insurance"
@@ -21,6 +22,12 @@ relatedVenues: []
 excerpt: "Two policies, what each covers, real Florida 2026 prices, and how to actually buy them. Plus when wedding insurance is genuinely worth it vs. when it's an upsell."
 ---
 
+
+<!-- imagePrompt: A serene Florida wedding venue exterior or ceremony space at twilight — calm, considered, well-prepared, no people prominently in frame.
+
+Article context: Two policies, what each covers, real Florida 2026 prices, and how to actually buy them. Plus when wedding insurance is genuinely worth it vs. when it's an upsell.
+
+Lede excerpt for tone:  Florida Wedding Insurance: What Couples Actually Need to Know -->
 # Florida Wedding Insurance: What Couples Actually Need to Know
 
 Wedding insurance is two things, marketed as one. Couples often buy the wrong policy or skip the right one because the categories aren't clear.

@@ -6,7 +6,8 @@ updatedAt: "2026-05-12"
 author: "Florida Wedding Wonders Team"
 authorBio: "We coordinate with parks departments and beach-access offices across the state. The permit details below are what we reference for couples — verify the specific number with your county before signing anything."
 category: "Wedding Planning"
-image: "/images/blog/beach-wedding-permits.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-beach-wedding-permits-by-county/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-beach-wedding-permits-by-county/pinterest.png"
 keywords:
   - "Florida beach wedding permit"
   - "Miami Beach wedding permit"
@@ -25,6 +26,12 @@ relatedVenues:
 excerpt: "What you actually need to know to legally hold a beach wedding in Florida — by county. Permit costs, lead times, contacts, and the rules nobody tells you about chairs, arches, and rice."
 ---
 
+
+<!-- imagePrompt: A serene Florida wedding venue exterior or ceremony space at twilight — calm, considered, well-prepared, no people prominently in frame.
+
+Article context: What you actually need to know to legally hold a beach wedding in Florida — by county. Permit costs, lead times, contacts, and the rules nobody tells you about chairs, arches, and rice.
+
+Lede excerpt for tone:  Florida Beach Wedding Permits: Complete Guide by County -->
 # Florida Beach Wedding Permits: Complete Guide by County
 
 A beach wedding in Florida sounds simple. Find a beach. Show up. Get married. The reality involves permits, certificates of insurance, refundable deposits, and a checklist of items you can't bring (rice, balloons, sometimes flower petals) — and the rules vary by every county and many cities within them.

@@ -6,7 +6,8 @@ updatedAt: "2026-04-22"
 author: "Florida Wedding Wonders Team"
 authorBio: "We track weather patterns for our venues every year. Here's what the data actually says."
 category: "Wedding Planning"
-image: "/images/blog/florida-weather.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/wedding-season-florida-weather-guide/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/wedding-season-florida-weather-guide/pinterest.png"
 keywords:
   - "best month for Florida wedding"
   - "Florida wedding weather"
@@ -24,6 +25,12 @@ relatedVenues:
 excerpt: "When to get married in Florida if weather matters: the best months, the riskiest weeks, hurricane-season strategy, and how the climate differs by region."
 ---
 
+
+<!-- imagePrompt: A Florida wedding scene that suggests anticipation and arrival — venue ready, guests beginning to gather, soft late-afternoon light.
+
+Article context: Month-by-month Florida wedding weather guide. The best months, the riskiest weeks, hurricane season strategy, and how to read the climate for your specific region.
+
+Lede excerpt for tone:  Wedding Season in Florida: When to Get Married for Perfect Weather -->
 # Wedding Season in Florida: When to Get Married for Perfect Weather
 
 "What month should we pick?" is the question most Florida couples ask first, and the answer is more nuanced than "winter." The state spans 450 miles top to bottom and three different climate zones — the Keys, South Florida proper, and the Gulf coast each have their own optimal windows.

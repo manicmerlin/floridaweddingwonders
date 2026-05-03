@@ -6,7 +6,8 @@ updatedAt: "2026-04-08"
 author: "Florida Wedding Wonders Team"
 authorBio: "We track average venue + vendor pricing across our catalog. The numbers below come from real 2025–2026 contracts, not industry surveys."
 category: "Wedding Budget"
-image: "/images/blog/wedding-budget.jpg"
+image: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-costs-budget-guide/featured.png"
+pinterestImage: "https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/posts/florida-wedding-costs-budget-guide/pinterest.png"
 keywords:
   - "Florida wedding cost"
   - "wedding budget Florida"
@@ -25,6 +26,12 @@ relatedVenues:
 excerpt: "Real 2026 pricing for Florida weddings — venues, catering, photography, flowers, and more. Plus the savings strategies that actually move the needle without trashing the day."
 ---
 
+
+<!-- imagePrompt: A tasteful Florida wedding reception scene that suggests careful planning and craft, table details and decor in the foreground.
+
+Article context: Real 2026 pricing for Florida weddings — venues, catering, photography, flowers, and more. Plus the savings strategies that actually move the needle without trashing the day.
+
+Lede excerpt for tone:  Florida Wedding Costs 2025: Complete Budget Breakdown -->
 # Florida Wedding Costs 2025: Complete Budget Breakdown
 
 Planning a wedding in Florida? One of the first questions couples ask is: **"How much will this actually cost?"** The answer varies widely based on location, guest count, and your priorities—but this comprehensive guide will give you realistic 2025 pricing and proven money-saving strategies.
