@@ -26,11 +26,11 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navigation />
 
-      {/* Hero Section. min-h gives the container a stable shape across
-          viewports so object-cover produces a consistent crop instead of
-          a content-driven slice. Soft uniform overlay + drop-shadow on
-          the text keeps legibility without washing out the photo. */}
-      <div className="relative text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
+      {/* Hero Section. Full-bleed (no max-width on the wrapper); min-h
+          gives a stable container shape so object-cover crops consistently
+          across viewports. Black-based overlay (instead of blue) preserves
+          the photo's warm golden-hour tones — a blue tint would mud them. */}
+      <div className="relative w-full text-white overflow-hidden flex items-center justify-center min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]">
         <Image
           src={PAGE_HERO_IMAGES.about}
           alt="A Florida wedding venue at golden hour"
@@ -40,8 +40,8 @@ export default function AboutPage() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-blue-900/35"></div>
-        <div className="container mx-auto px-4 relative z-10 py-12 sm:py-16">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 py-12 sm:py-16">
           <h1 className="text-5xl md:text-6xl font-bold text-center mb-4 drop-shadow-lg">
             About Us
           </h1>
