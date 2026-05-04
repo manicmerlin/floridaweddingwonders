@@ -273,6 +273,34 @@ export function collectionPageLD(args: {
   };
 }
 
+/** Same as collectionPageLD but emits /vendors/<slug> URLs. */
+export function vendorCollectionPageLD(args: {
+  name: string;
+  description: string;
+  path: string;
+  vendors: Vendor[];
+  maxItems?: number;
+}) {
+  const max = args.maxItems ?? 50;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: args.name,
+    description: args.description,
+    url: `${SITE}${args.path}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: args.vendors.length,
+      itemListElement: args.vendors.slice(0, max).map((v, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: `${SITE}/vendors/${v.slug || v.id}`,
+        name: v.name,
+      })),
+    },
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Render helper — one place to safely serialize and inject
 // ---------------------------------------------------------------------------

@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { SITE_CONFIG } from '@/lib/seo';
 import {
   getVenues,
+  getVendors,
   getAllVendorSlugs,
   getAllDressShopSlugs,
 } from '@/lib/catalog';
@@ -12,6 +13,12 @@ import {
   filterVenuesByRegion,
   filterVenuesByType,
 } from '@/lib/hyperlocal';
+import {
+  VENDOR_CATEGORIES,
+  filterVendorsByRegion,
+  filterVendorsByCategory,
+  filterVendorsByRegionAndCategory,
+} from '@/lib/hyperlocalVendors';
 import { getAllPosts } from '@/lib/blog';
 
 export const dynamic = 'force-dynamic';
@@ -47,10 +54,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Pull venues with their tier so we can priority-rank by paid-status.
   // getAll*Slugs would return only slug+updated_at — we need tier here.
-  const [venues, vendors, dressShops] = await Promise.all([
+  // Also pull full vendors (not just slugs) so the hyperlocal vendor pages
+  // below can run filterVendorsByRegion / filterVendorsByCategory.
+  const [venues, vendors, dressShops, vendorsFull] = await Promise.all([
     getVenues(),
     getAllVendorSlugs(),
     getAllDressShopSlugs(),
+    getVendors(),
   ]);
 
   const venuePriorityFor = (tier: string | undefined) => {
@@ -108,6 +118,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   );
 
+  // Vendor hyperlocal landing pages — same priority structure as venues,
+  // skipping empty-result combos. Empty pages still render at runtime
+  // (with cross-link suggestions) but don't earn a sitemap entry until
+  // they have content.
+  const vendorCategoryPages: MetadataRoute.Sitemap = VENDOR_CATEGORIES
+    .filter((c) => filterVendorsByCategory(vendorsFull, c).length > 0)
+    .map((c) => ({
+      url: `${baseUrl}/vendors/category/${c.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+  const vendorRegionPages: MetadataRoute.Sitemap = REGIONS
+    .filter((r) => filterVendorsByRegion(vendorsFull, r).length > 0)
+    .map((r) => ({
+      url: `${baseUrl}/vendors/in/${r.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+  const vendorComboPages: MetadataRoute.Sitemap = [];
+  for (const r of REGIONS) {
+    for (const c of VENDOR_CATEGORIES) {
+      const count = filterVendorsByRegionAndCategory(vendorsFull, r, c).length;
+      if (count > 0) {
+        vendorComboPages.push({
+          url: `${baseUrl}/vendors/in/${r.slug}/${c.slug}`,
+          lastModified: now,
+          changeFrequency: 'weekly' as const,
+          priority: 0.65,
+        });
+      }
+    }
+  }
+
   // Blog posts — pulled at request time so newly added MDX files appear
   // without a redeploy of the sitemap. Priority 0.65 (above generic static
   // pages, below venue detail).
@@ -126,6 +171,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...regionPages,
     ...typePages,
     ...comboPages,
+    ...vendorCategoryPages,
+    ...vendorRegionPages,
+    ...vendorComboPages,
     ...blogPages,
   ];
 }
