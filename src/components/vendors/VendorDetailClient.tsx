@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import VendorCardImage from '@/components/vendors/VendorCardImage';
 import { Vendor } from '@/types';
 
 interface Props {
@@ -396,23 +397,16 @@ export default function VendorDetailClient({ vendor, relatedVendors }: Props) {
             <div className="grid md:grid-cols-3 gap-8">
               {relatedVendors.map((relatedVendor) => (
                 <Link key={relatedVendor.id} href={`/vendors/${relatedVendor.slug || relatedVendor.id}`} className="block group">
-                  <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow p-6">
-                    <div className="text-center mb-4">
-                      <div className="text-4xl mb-2">
-                        {relatedVendor.category === 'photographer' && '📷'}
-                        {relatedVendor.category === 'caterer' && '🍽️'}
-                        {relatedVendor.category === 'florist' && '💐'}
-                        {(relatedVendor.category === 'dj' || relatedVendor.category === 'band') && '🎵'}
-                        {relatedVendor.category === 'planner' && '📋'}
-                        {relatedVendor.category === 'transportation' && '🚗'}
-                        {!['photographer', 'caterer', 'florist', 'dj', 'band', 'planner', 'transportation'].includes(relatedVendor.category) && '💼'}
-                      </div>
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                    <div className="relative w-full h-48">
+                      <VendorCardImage vendor={relatedVendor} />
                     </div>
-                    
-                    <div className="text-center">
+                    <div className="p-6">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">{relatedVendor.name}</h3>
                       <p className="text-gray-600 text-sm mb-2">📍 {relatedVendor.address.city}, {relatedVendor.address.state}</p>
-                      <p className="text-pink-600 font-medium">{relatedVendor.subcategory}</p>
+                      {relatedVendor.subcategory && (
+                        <p className="text-pink-600 font-medium capitalize">{relatedVendor.subcategory}</p>
+                      )}
                     </div>
                   </div>
                 </Link>

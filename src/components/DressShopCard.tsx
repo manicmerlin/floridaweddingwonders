@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { placeholderUrlForDressShop } from '@/lib/placeholderImages';
+import { isListingComplete } from '@/lib/listingCompleteness';
 
 interface DressShopCardProps {
   shop: DressShop;
@@ -131,11 +132,20 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
           </button>
         )}
         
-        {shop.owner?.isPremium && (
-          <div className="absolute top-2 right-2 bg-pink-600 text-white px-2 py-1 rounded text-xs font-semibold shadow-sm">
-            PREMIUM
-          </div>
-        )}
+        {/* PREMIUM badge gated on listing completeness — owner.isPremium
+            currently defaults true on every shop, which made the badge
+            meaningless. Until the dress-shop tier model lands, only show
+            it on shops that have real contact info AND content. */}
+        {shop.owner?.isPremium &&
+          isListingComplete({
+            hasContact: !!(shop.contact.phone || shop.contact.email || shop.contact.website),
+            description: shop.description,
+            imagesCount: shop.images?.length ?? 0,
+          }) && (
+            <div className="absolute top-2 right-2 bg-pink-600 text-white px-2 py-1 rounded text-xs font-semibold shadow-sm">
+              PREMIUM
+            </div>
+          )}
       </div>
       
       <div className="p-6">
@@ -146,9 +156,13 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
           <span className="text-sm text-gray-500">
             {shop.address.city}, {shop.address.state}
           </span>
-          <span className="text-lg font-bold text-pink-600">
-            ${shop.priceRange.min.toLocaleString()}-${shop.priceRange.max.toLocaleString()}
-          </span>
+          {/* Hide price when the catalog has no real values — "$0-$0" was
+              showing on most shops and reading as broken. */}
+          {(shop.priceRange.min > 0 || shop.priceRange.max > 0) && (
+            <span className="text-lg font-bold text-pink-600">
+              ${shop.priceRange.min.toLocaleString()}-${shop.priceRange.max.toLocaleString()}
+            </span>
+          )}
         </div>
         
         <div className="flex justify-between items-center mb-4">

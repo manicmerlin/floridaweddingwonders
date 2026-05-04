@@ -521,16 +521,26 @@ function SuccessPanel({
       <div className="text-6xl">🎉</div>
       <h2 className="text-3xl font-bold text-gray-900">Quotes requested!</h2>
       <p className="text-gray-600 max-w-md mx-auto">
-        Your wedding details are now in front of {venues.length} venues. Each one knows
-        you're considering several options, so expect prompt replies — most respond
-        within 24-48 hours.
+        Thanks! Your inquiry is on its way to {venues.length}{' '}
+        {venues.length === 1 ? 'venue' : 'venues'}. They&apos;ll respond directly within
+        24 business hours, and you&apos;ll see follow-ups in the email you provided.
       </p>
+      {venues.length > 0 && (
+        <div className="bg-pink-50 rounded-lg p-4 max-w-md mx-auto text-left">
+          <h3 className="font-semibold text-pink-900 mb-2">Your inquiry was sent to</h3>
+          <ul className="text-sm text-pink-800 space-y-1">
+            {venues.map((v) => (
+              <li key={v.id}>• {v.name} ({v.city})</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="bg-blue-50 rounded-lg p-4 max-w-md mx-auto text-left">
         <h3 className="font-semibold text-blue-900 mb-2">What happens next</h3>
         <ul className="text-sm text-blue-800 space-y-1">
           <li>• Each venue receives your full inquiry</li>
-          <li>• You'll get one confirmation email summarizing all 5</li>
-          <li>• Replies will come directly to your inbox</li>
+          <li>• You&apos;ll get one confirmation email summarizing them all</li>
+          <li>• Replies come directly to your inbox</li>
         </ul>
       </div>
       <button

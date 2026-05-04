@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import PhotoGallery from '@/components/PhotoGallery';
 import VenueClaimButton from '@/components/VenueClaimButton';
 import VenueContactForm from '@/components/VenueContactForm';
@@ -13,6 +12,7 @@ import SaveVenueButton from '@/components/SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
 import { tierFeatures } from '@/lib/tierFeatures';
+import { isListingComplete } from '@/lib/listingCompleteness';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 import { Venue } from '@/types';
 
@@ -71,10 +71,19 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
       {/* Photo Gallery Section - Standalone */}
       <section className="bg-white relative z-0">
         {/* Tier hero overlay — top-right corner of the gallery section.
-            Scale gets a gold ribbon, growth gets a purple "Featured" tag. */}
+            Scale gets a gold ribbon, growth gets a purple "Featured" tag.
+            Gated on listing completeness — see VenueCard for the same
+            rule: empty Founding Partner listings shouldn't flaunt the
+            badge. */}
         {(() => {
           const tf = tierFeatures(venue.tier);
           if (!tf.badgeLabel) return null;
+          const complete = isListingComplete({
+            hasContact: !!(venue.contact.phone || venue.contact.website),
+            description: venue.description,
+            imagesCount: venue.images?.length ?? 0,
+          });
+          if (!complete) return null;
           const isScale = tf.showFoundingPartnerBadge;
           return (
             <div
@@ -176,7 +185,11 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
       {/* Mobile Stats Cards / Desktop Quick Info Bar */}
       <section className="bg-gray-50 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Mobile: Cards in 2x2 grid */}
+          {/* The duplicate "Location" card was removed in favour of a
+              starting-price slot — when price_min is populated we show it,
+              otherwise we surface a Google reviews score, otherwise a
+              "New listing" empty-state. The city already appears in the
+              title section above so it doesn't need a stat tile too. */}
           <div className="grid grid-cols-2 gap-4 lg:hidden">
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
@@ -184,7 +197,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               {venue.externalReviews?.google ? (
-                <div 
+                <div
                   className="cursor-pointer flex flex-col items-center justify-center h-full"
                   onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
                 >
@@ -207,8 +220,22 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
               )}
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
-              <div className="text-lg font-bold text-pink-600">{venue.address.city}</div>
-              <div className="text-gray-600 text-sm">Location</div>
+              {venue.pricing.startingPrice > 0 ? (
+                <>
+                  <div className="text-lg font-bold text-pink-600">From ${venue.pricing.startingPrice.toLocaleString()}</div>
+                  <div className="text-gray-600 text-sm">Starting Price</div>
+                </>
+              ) : venue.reviews.count > 0 ? (
+                <>
+                  <div className="text-lg font-bold text-amber-600">★ {venue.reviews.rating.toFixed(1)}</div>
+                  <div className="text-gray-600 text-sm">{venue.reviews.count} reviews</div>
+                </>
+              ) : (
+                <>
+                  <div className="text-lg font-bold text-gray-400">—</div>
+                  <div className="text-gray-600 text-sm">New listing</div>
+                </>
+              )}
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <div className="text-lg font-bold text-pink-600">
@@ -224,8 +251,22 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
               <div className="text-gray-600">Capacity</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-pink-600">{venue.address.city}</div>
-              <div className="text-gray-600">Location</div>
+              {venue.pricing.startingPrice > 0 ? (
+                <>
+                  <div className="text-2xl font-bold text-pink-600">From ${venue.pricing.startingPrice.toLocaleString()}</div>
+                  <div className="text-gray-600">Starting Price</div>
+                </>
+              ) : venue.reviews.count > 0 ? (
+                <>
+                  <div className="text-2xl font-bold text-amber-600">★ {venue.reviews.rating.toFixed(1)}</div>
+                  <div className="text-gray-600">{venue.reviews.count} reviews</div>
+                </>
+              ) : (
+                <>
+                  <div className="text-2xl font-bold text-gray-400">—</div>
+                  <div className="text-gray-600">New listing</div>
+                </>
+              )}
             </div>
             <div>
               <div className="text-2xl font-bold text-pink-600">
@@ -235,7 +276,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
             </div>
             <div>
               {venue.externalReviews?.google ? (
-                <div 
+                <div
                   className="cursor-pointer flex flex-col items-center justify-center"
                   onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
                 >
@@ -821,13 +862,11 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
         </div>
       </section>
 
-      <Footer />
-      
       {/* Contact Form Modal */}
       {showContactForm && (
-        <VenueContactForm 
-          venue={venue} 
-          onClose={() => setShowContactForm(false)} 
+        <VenueContactForm
+          venue={venue}
+          onClose={() => setShowContactForm(false)}
         />
       )}
     </div>

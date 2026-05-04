@@ -1,13 +1,17 @@
-'use client';
-
 import Image from 'next/image';
 import SEO from '@/components/SEO';
 import FAQ from '@/components/FAQ';
 import { generateWebsiteSchema, generateOrganizationSchema, SITE_CONFIG } from '@/lib/seo';
-import { getSiteStats } from '@/lib/siteStats';
+import { getSiteStatsLive } from '@/lib/catalog';
 
-export default function HomePage() {
-  const stats = getSiteStats();
+// Stats query hits Postgres on each request. Hourly revalidation is plenty
+// — the catalog doesn't churn that fast and we'd rather show fresh counts
+// than risk the homepage drifting from reality (the 30-vs-86 vendor gap
+// the audit caught was a build-time JSON snapshot from a different era).
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  const stats = await getSiteStatsLive();
   return (
     <>
       <SEO

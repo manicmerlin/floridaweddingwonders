@@ -1,11 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Vendor } from '@/types';
-import VendorImagePlaceholder from '@/components/VendorImagePlaceholder';
-import { placeholderUrlForVendor } from '@/lib/placeholderImages';
+import VendorCardImage from '@/components/vendors/VendorCardImage';
 
 interface Props {
   vendors: Vendor[];
@@ -43,41 +41,37 @@ export default function VendorsListClient({ vendors }: Props) {
     });
   }, [vendors, activeTab, selectedCategory, searchTerm]);
 
-  // Tabs: only categories with non-zero vendor counts (Phase 1 step 7).
-  const tabOptions = useMemo(
-    () =>
-      [
-        { id: 'all', label: 'All Vendors', count: vendors.length },
-        {
-          id: 'photographer',
-          label: 'Photography',
-          count: vendors.filter((v) => v.category.toLowerCase().includes('photo')).length,
-        },
-        {
-          id: 'caterer',
-          label: 'Catering',
-          count: vendors.filter((v) => v.category.toLowerCase().includes('cater')).length,
-        },
-        {
-          id: 'florist',
-          label: 'Florals',
-          count: vendors.filter((v) => v.category.toLowerCase().includes('flor')).length,
-        },
-        {
-          id: 'music',
-          label: 'Music & DJ',
-          count: vendors.filter(
-            (v) => v.category.toLowerCase().includes('music') || v.category.toLowerCase().includes('dj')
-          ).length,
-        },
-        {
-          id: 'planner',
-          label: 'Planning',
-          count: vendors.filter((v) => v.category.toLowerCase().includes('plan')).length,
-        },
-      ].filter((t) => t.id === 'all' || t.count > 0),
-    [vendors]
-  );
+  // All 14 vendor categories the catalog supports. Each tab counts vendors
+  // whose `category` matches the id, then we drop empty ones — so the tab
+  // bar grows naturally as new categories get populated.
+  // The `id` here is matched against `category.toLowerCase().includes(id)`
+  // in the filter above, so "music" must match both 'dj' and 'band' rows.
+  const tabOptions = useMemo(() => {
+    const count = (predicate: (cat: string) => boolean) =>
+      vendors.filter((v) => predicate(v.category.toLowerCase())).length;
+    return [
+      { id: 'all', label: 'All Vendors', count: vendors.length },
+      { id: 'photo', label: 'Photography', count: count((c) => c.includes('photo')) },
+      { id: 'video', label: 'Videography', count: count((c) => c.includes('video')) },
+      { id: 'flor', label: 'Florals', count: count((c) => c.includes('flor')) },
+      {
+        id: 'music',
+        label: 'Music & DJ',
+        count: count((c) => c.includes('dj') || c.includes('band') || c.includes('music')),
+      },
+      { id: 'cater', label: 'Catering', count: count((c) => c.includes('cater')) },
+      { id: 'baker', label: 'Cakes & Bakers', count: count((c) => c.includes('baker') || c.includes('cake')) },
+      { id: 'plan', label: 'Planning', count: count((c) => c.includes('plan')) },
+      { id: 'rental', label: 'Rentals', count: count((c) => c.includes('rental') || c.includes('decor')) },
+      { id: 'transport', label: 'Transportation', count: count((c) => c.includes('transport')) },
+      { id: 'offici', label: 'Officiants', count: count((c) => c.includes('offici')) },
+      { id: 'hair', label: 'Hair & Makeup', count: count((c) => c.includes('hair') || c.includes('makeup')) },
+      { id: 'entertain', label: 'Entertainment', count: count((c) => c.includes('entertain')) },
+      { id: 'lighting', label: 'Lighting', count: count((c) => c.includes('light')) },
+      { id: 'station', label: 'Stationery', count: count((c) => c.includes('station')) },
+      { id: 'jewel', label: 'Jewelry', count: count((c) => c.includes('jewel')) },
+    ].filter((t) => t.id === 'all' || t.count > 0);
+  }, [vendors]);
 
   return (
     <>
@@ -265,37 +259,3 @@ export default function VendorsListClient({ vendors }: Props) {
   );
 }
 
-/**
- * Image fallback chain for a vendor card (mirrors DressShopCard's pattern):
- *   1. Watercolor placeholder at placeholders/vendors/<slug>.png
- *   2. Existing emoji+gradient VendorImagePlaceholder if (1) 404s
- *
- * No `vendor_ownerships` table exists yet, so by definition no vendor is
- * "claimed" — every card uses the watercolor until that table lands. When
- * it does, gate on `vendor.isClaimed === true` here the same way
- * VenueCard does and add a real-photo branch above the placeholder.
- */
-function VendorCardImage({ vendor }: { vendor: Vendor }) {
-  const [placeholderFailed, setPlaceholderFailed] = useState(false);
-  const placeholderUrl = vendor.slug ? placeholderUrlForVendor(vendor.slug) : null;
-  if (placeholderUrl && !placeholderFailed) {
-    return (
-      <Image
-        src={placeholderUrl}
-        alt={`${vendor.name} — watercolor illustration`}
-        fill
-        className="object-cover"
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        loading="lazy"
-        quality={85}
-        onError={() => {
-          if (typeof console !== 'undefined') {
-            console.warn(`[VendorCardImage] placeholder missing for ${vendor.slug}`);
-          }
-          setPlaceholderFailed(true);
-        }}
-      />
-    );
-  }
-  return <VendorImagePlaceholder name={vendor.name} category={vendor.category} />;
-}
