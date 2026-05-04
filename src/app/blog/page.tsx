@@ -64,22 +64,27 @@ export default function BlogPage() {
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post) => (
+                {posts.map((post, idx) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
                     className="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100"
                   >
-                    {/* Featured Image */}
+                    {/* Featured Image — first 3 cards eager-load (above the
+                        fold on desktop 3-col grid). The rest lazy-load when
+                        the card scrolls near the viewport. Audit caught a
+                        perception bug where cards looked blank during a cold
+                        CDN visit; eager-loading the first row fixes it. */}
                     {post.image ? (
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden bg-gray-100">
                         <Image
                           src={post.image}
                           alt={post.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          loading="lazy"
+                          priority={idx < 3}
+                          loading={idx < 3 ? 'eager' : 'lazy'}
                           quality={85}
                         />
                       </div>

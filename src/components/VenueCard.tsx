@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { isSuperAdmin } from '@/lib/auth';
 import { tierFeatures } from '@/lib/tierFeatures';
+import { isListingComplete } from '@/lib/listingCompleteness';
 import SaveVenueButton from './SaveVenueButton';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
@@ -123,10 +124,19 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
           </div>
         )}
         
-        {/* Tier badge — top-left, leaves the save button on the right alone */}
+        {/* Tier badge — top-left, leaves the save button on the right alone.
+            Gated on listing completeness: an empty Founding Partner listing
+            (no phone, no real photos) hides the badge so the paid tier
+            doesn't look like a placeholder. */}
         {(() => {
           const tf = tierFeatures(venueWithPhotos.tier);
           if (!tf.badgeLabel) return null;
+          const complete = isListingComplete({
+            hasContact: !!(venueWithPhotos.contact.phone || venueWithPhotos.contact.website),
+            description: venueWithPhotos.description,
+            imagesCount: venueWithPhotos.images?.length ?? 0,
+          });
+          if (!complete) return null;
           const isScale = tf.showFoundingPartnerBadge;
           return (
             <div
@@ -176,7 +186,15 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
             {venueWithPhotos.venueType}
           </span>
         </div>
-        
+
+        {/* Starting price — shown only when the catalog has a real price_min.
+            Couples filter by budget; surfacing it on the card cuts a click. */}
+        {venueWithPhotos.pricing.startingPrice > 0 && (
+          <div className="mb-3 text-sm font-semibold text-pink-700">
+            From ${venueWithPhotos.pricing.startingPrice.toLocaleString()}
+          </div>
+        )}
+
         {/* Button */}
         <Link href={`/venues/${venueWithPhotos.slug || venueWithPhotos.id}`} className="block w-full">
           <button className="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-200 text-sm">

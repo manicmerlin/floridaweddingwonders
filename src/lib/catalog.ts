@@ -566,6 +566,28 @@ export async function getDressShopByLegacyId(legacyId: string): Promise<DressSho
 }
 
 /**
+ * Live row counts for homepage stat block. `head: true` skips returning
+ * rows; only the count comes back. Three queries run in parallel.
+ */
+export async function getSiteStatsLive(): Promise<{
+  venues: number;
+  vendors: number;
+  dressShops: number;
+}> {
+  const supabase = createSupabasePublicClient();
+  const [venues, vendors, dressShops] = await Promise.all([
+    supabase.from('venues').select('*', { count: 'exact', head: true }),
+    supabase.from('vendors').select('*', { count: 'exact', head: true }),
+    supabase.from('dress_shops').select('*', { count: 'exact', head: true }),
+  ]);
+  return {
+    venues: venues.count ?? 0,
+    vendors: vendors.count ?? 0,
+    dressShops: dressShops.count ?? 0,
+  };
+}
+
+/**
  * Lightweight slug list for sitemap / static-params generation. Avoids
  * pulling full row payloads.
  */

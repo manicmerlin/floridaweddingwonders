@@ -44,7 +44,10 @@ export default function DressShopsListClient({ shops }: Props) {
     });
   }, [shops, activeTab, selectedType, searchTerm, priceFilter]);
 
-  // Tabs: only show shop-type tabs that have at least one shop.
+  // Tabs cover every shop_type the catalog supports. Empty ones drop off
+  // via the count > 0 filter, so the bar grows as new types get populated.
+  // Labels are pluralised; keep ids matching the DB enum exactly so the
+  // filter above (`shop.shopType !== activeTab`) hits.
   const tabOptions = useMemo(() => {
     const counts = new Map<string, number>();
     shops.forEach((s) => counts.set(s.shopType, (counts.get(s.shopType) ?? 0) + 1));
@@ -54,7 +57,11 @@ export default function DressShopsListClient({ shops }: Props) {
       { id: 'designer', label: 'Designer', count: counts.get('designer') ?? 0 },
       { id: 'department', label: 'Department Stores', count: counts.get('department') ?? 0 },
       { id: 'salon', label: 'Salons', count: counts.get('salon') ?? 0 },
+      { id: 'showroom', label: 'Showrooms', count: counts.get('showroom') ?? 0 },
+      { id: 'mega-store', label: 'Mega-Stores', count: counts.get('mega-store') ?? 0 },
+      { id: 'mobile service', label: 'Mobile Service', count: counts.get('mobile service') ?? 0 },
       { id: 'consignment', label: 'Consignment', count: counts.get('consignment') ?? 0 },
+      { id: 'vintage', label: 'Vintage', count: counts.get('vintage') ?? 0 },
       { id: 'plus-size', label: 'Plus Size', count: counts.get('plus-size') ?? 0 },
     ].filter((t) => t.id === 'all' || t.count > 0);
   }, [shops]);

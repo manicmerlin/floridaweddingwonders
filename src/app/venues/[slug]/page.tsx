@@ -17,6 +17,7 @@ import {
   getAggregateRatingForVenue,
 } from '@/lib/reviews';
 import VenueReviewsSection from '@/components/reviews/VenueReviewsSection';
+import Footer from '@/components/Footer';
 
 interface Params {
   params: { slug: string };
@@ -137,6 +138,7 @@ export default async function VenueSlugPage({ params }: Params) {
           aggregate={aggregate}
         />
       </div>
+      <Footer />
     </>
   );
 }
