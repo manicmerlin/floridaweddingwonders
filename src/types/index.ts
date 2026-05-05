@@ -98,6 +98,18 @@ export interface Venue {
   /** ISO timestamp from venues.updated_at. Surfaced as a "Last updated"
    *  trust signal on venue detail. Populated by rowToVenue in catalog.ts. */
   updatedAt?: string;
+  /** Track 2 — sub-neighborhood label (e.g. "South Beach", "Hyde Park").
+   *  Free-form text — the dropdown derives options from the live data set
+   *  scoped by the selected city/region. Optional; many venues stay null
+   *  where assignment isn't confident. */
+  neighborhood?: string;
+  /** Track 2 — Florida-Ready preparedness fields. All optional. The
+   *  detail-page panel renders only when ≥1 is populated. Owners self-
+   *  populate via the dashboard (Phase 4); seeded data leaves these null. */
+  generatorBackup?: boolean;
+  acTentAvailable?: boolean;
+  indoorFallbackCapacity?: number;
+  stormPolicyText?: string;
   claimStatus: 'unclaimed' | 'pending' | 'claimed' | 'rejected';
   claimedBy?: {
     userId: string;

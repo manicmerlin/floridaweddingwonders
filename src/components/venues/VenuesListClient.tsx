@@ -32,6 +32,7 @@ export default function VenuesListClient({
 }) {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +68,9 @@ export default function VenuesListClient({
         v.address.city.toLowerCase().includes(selectedRegion.toLowerCase())
       );
     }
+    if (selectedNeighborhood) {
+      out = out.filter((v) => v.neighborhood === selectedNeighborhood);
+    }
     if (selectedType) {
       out = out.filter((v) => v.venueType === selectedType);
     }
@@ -83,12 +87,19 @@ export default function VenuesListClient({
     // in the catalog mapper, so the sort collapsed to pure alphabetical and
     // sent paid scale-tier venues several pages deep.
     return out.slice().sort(compareByTier);
-  }, [visible, searchTerm, selectedRegion, selectedType, selectedCapacity]);
+  }, [visible, searchTerm, selectedRegion, selectedNeighborhood, selectedType, selectedCapacity]);
 
   // Reset to page 1 whenever filters change.
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedRegion, selectedType, selectedCapacity]);
+  }, [searchTerm, selectedRegion, selectedNeighborhood, selectedType, selectedCapacity]);
+
+  // Reset neighborhood when the region changes — neighborhoods are scoped
+  // to a city, so a neighborhood from the previous region wouldn't match
+  // any rows in the new one.
+  useEffect(() => {
+    setSelectedNeighborhood('');
+  }, [selectedRegion]);
 
   const totalPages = Math.max(1, Math.ceil(filteredVenues.length / ITEMS_PER_PAGE));
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -102,10 +113,26 @@ export default function VenuesListClient({
     () => Array.from(new Set(visible.map((v) => v.venueType))).sort(),
     [visible]
   );
+  // Neighborhood options are derived from the current region selection so
+  // the dropdown is empty (or hidden) until the user picks a region. Only
+  // include the sub-set of venues that has a neighborhood populated — most
+  // venues have NULL until owners self-tag.
+  const neighborhoodsForRegion = useMemo(() => {
+    if (!selectedRegion) return [] as string[];
+    return Array.from(
+      new Set(
+        visible
+          .filter((v) => v.address.city.toLowerCase().includes(selectedRegion.toLowerCase()))
+          .map((v) => v.neighborhood)
+          .filter((n): n is string => !!n)
+      )
+    ).sort();
+  }, [visible, selectedRegion]);
 
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedRegion('');
+    setSelectedNeighborhood('');
     setSelectedType('');
     setSelectedCapacity('');
   };
@@ -163,6 +190,25 @@ export default function VenuesListClient({
                 </option>
               ))}
             </select>
+            {/* Neighborhood — chained after region. Hidden when no region is
+                selected, or when the picked region has no tagged venues
+                (the spec is to leave NULL when uncertain, so most regions
+                will have an empty list). */}
+            {neighborhoodsForRegion.length > 0 && (
+              <select
+                value={selectedNeighborhood}
+                onChange={(e) => setSelectedNeighborhood(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                aria-label="Neighborhood"
+              >
+                <option value="">All Neighborhoods</option>
+                {neighborhoodsForRegion.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+            )}
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
