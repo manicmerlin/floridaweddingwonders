@@ -60,6 +60,21 @@ export default async function DressShopsPage() {
 
       <DressShopsListClient shops={shops} />
 
+      {/* Venue-owner cross-link — subtle, sits between the listing and the
+          editorial sections so venue owners browsing dress shops have a
+          clear path to the package page. */}
+      <section className="py-6 bg-gray-900/40 backdrop-blur-sm border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-300">
+          Own a venue?{' '}
+          <Link
+            href="/venue-packages"
+            className="text-pink-300 hover:text-pink-200 underline font-medium"
+          >
+            See our partnership tiers for venues →
+          </Link>
+        </div>
+      </section>
+
       {/* Featured Services */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

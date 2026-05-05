@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
+import Link from 'next/link';
 import VendorsListClient from '@/components/vendors/VendorsListClient';
 import { getVendors } from '@/lib/catalog';
 import { generateBreadcrumbSchema } from '@/lib/seo';
@@ -70,6 +71,21 @@ export default async function VendorsPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
         </section>
         <VendorsListClient vendors={vendors} />
+
+        {/* Venue-owner cross-link — subtle, distinct from the vendor-owner
+            CTA below. Aimed at venue owners who land here while shopping
+            vendors and didn't realize there's a separate partnership path. */}
+        <section className="py-6 bg-gray-900/40 backdrop-blur-sm border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-300">
+            Own a venue?{' '}
+            <Link
+              href="/venue-packages"
+              className="text-pink-300 hover:text-pink-200 underline font-medium"
+            >
+              See our partnership tiers for venues →
+            </Link>
+          </div>
+        </section>
 
         {/* CTA */}
         <section className="bg-gradient-to-r from-purple-600 to-pink-600 py-16">

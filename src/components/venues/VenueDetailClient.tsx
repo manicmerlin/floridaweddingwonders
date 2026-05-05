@@ -13,6 +13,7 @@ import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
 import { tierFeatures } from '@/lib/tierFeatures';
 import { isListingComplete } from '@/lib/listingCompleteness';
+import FeaturedBadgeInfo from '@/components/FeaturedBadgeInfo';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 import { Venue } from '@/types';
 
@@ -87,7 +88,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
           const isScale = tf.showFoundingPartnerBadge;
           return (
             <div
-              className={`absolute top-4 right-4 z-20 px-4 py-2 rounded-full text-sm font-bold shadow-xl ${
+              className={`absolute top-4 right-4 z-20 inline-flex items-center px-4 py-2 rounded-full text-sm font-bold shadow-xl ${
                 isScale
                   ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-amber-950'
                   : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
@@ -96,6 +97,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
             >
               {isScale ? '★ ' : ''}
               {tf.badgeLabel}
+              <FeaturedBadgeInfo tierLabel={tf.badgeLabel as 'Featured' | 'Founding Partner'} />
             </div>
           );
         })()}

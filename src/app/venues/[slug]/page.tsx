@@ -18,6 +18,7 @@ import {
 } from '@/lib/reviews';
 import VenueReviewsSection from '@/components/reviews/VenueReviewsSection';
 import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 interface Params {
   params: { slug: string };
@@ -138,6 +139,23 @@ export default async function VenueSlugPage({ params }: Params) {
           aggregate={aggregate}
         />
       </div>
+      {/* Small "Own this venue?" cross-link — separate from the desktop-only
+          VenueClaimButton inside VenueDetailClient. Mobile users miss that
+          one entirely; this surfaces the package page on every screen. Only
+          renders for unclaimed listings. */}
+      {!isClaimed && (
+        <div className="bg-gray-50 border-t border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-700">
+            Own this venue?{' '}
+            <Link
+              href={`/venue-packages?venue=${venue.slug}`}
+              className="text-pink-700 hover:text-pink-800 underline font-medium"
+            >
+              Claim and manage your listing →
+            </Link>
+          </div>
+        </div>
+      )}
       <Footer />
     </>
   );

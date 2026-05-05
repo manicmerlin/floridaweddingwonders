@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import VenuesListClient from '@/components/venues/VenuesListClient';
+import LeadMagnetCapture from '@/components/LeadMagnetCapture';
 import { getVenues, decorateVenuesWithClaims } from '@/lib/catalog';
 import { decorateVenuesWithRatings } from '@/lib/reviews';
 import { generateBreadcrumbSchema } from '@/lib/seo';
@@ -80,6 +81,9 @@ export default async function VenuesPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
         </section>
         <VenuesListClient venues={venues} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LeadMagnetCapture source="venues" />
+        </div>
         <Footer />
       </div>
     </>
