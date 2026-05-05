@@ -59,86 +59,48 @@ interface RawEntry {
 }
 
 // Each entry: aliases (normalized) → suggested covered regions + rationale.
-// Tampa Bay, Sarasota–Bradenton, and Southwest Florida (Naples/Marco/Fort
-// Myers/Sanibel/Captiva) are now first-class regions with real venues, so
-// they DON'T appear here — those queries hit live results. This map only
-// covers genuinely off-coverage Florida (Central/Northeast/Panhandle).
+// As of Tier 1 expansion, the directory covers South Florida + West Florida
+// + Northeast Florida + Central Florida + the Panhandle. This map now only
+// catches the remaining off-coverage gaps: Daytona, Tallahassee, Gainesville,
+// Ocala, The Villages.
 const RAW_ENTRIES: RawEntry[] = [
-  {
-    displayName: 'Orlando',
-    aliases: ['orlando', 'orlando fl', 'lake buena vista', 'kissimmee', 'disney', 'walt disney world'],
-    regionSlugs: ['palm-beach', 'fort-lauderdale', 'tampa-bay'],
-    rationale: {
-      'palm-beach': 'Closest covered area on the east coast — about 2.5 hours south.',
-      'fort-lauderdale': 'Slightly further south but a deeper venue catalog.',
-      'tampa-bay': 'Closest covered area on the Gulf side — about 90 minutes west.',
-    },
-    note: "We focus on Florida's coasts — we don't cover Central Florida or theme-park weddings yet.",
-  },
-  {
-    displayName: 'Jacksonville',
-    aliases: ['jacksonville', 'jacksonville fl', 'jax'],
-    regionSlugs: ['palm-beach'],
-    rationale: {
-      'palm-beach': 'Closest covered area — but still ~4 hours south.',
-    },
-    note: "Jacksonville is well outside our coverage today.",
-  },
-  {
-    displayName: 'St. Augustine',
-    aliases: ['st augustine', 'saint augustine'],
-    regionSlugs: ['palm-beach'],
-    rationale: {
-      'palm-beach': 'Closest covered area — about 3 hours south.',
-    },
-    note: "St. Augustine is outside our coverage today.",
-  },
   {
     displayName: 'Daytona Beach',
     aliases: ['daytona', 'daytona beach', 'new smyrna beach'],
-    regionSlugs: ['palm-beach'],
+    regionSlugs: ['northeast-florida', 'central-florida'],
     rationale: {
-      'palm-beach': 'Closest covered area on the east coast.',
+      'northeast-florida': 'Closest covered area — St. Augustine is about 1 hour north.',
+      'central-florida': 'Orlando area is about 1 hour west.',
     },
-    note: "We don't cover the Daytona area yet.",
-  },
-  {
-    displayName: 'Pensacola',
-    aliases: ['pensacola', 'destin', 'panama city', 'panama city beach', 'fort walton beach', '30a'],
-    regionSlugs: ['tampa-bay', 'southwest-florida'],
-    rationale: {
-      'tampa-bay': 'Closest covered area on the Gulf — but still a long drive from the Panhandle.',
-      'southwest-florida': 'Also Gulf-side, further south.',
-    },
-    note: "The Panhandle is well outside our coverage.",
+    note: "We don't cover Daytona directly yet — these are the closest areas we do cover.",
   },
   {
     displayName: 'Tallahassee',
     aliases: ['tallahassee'],
-    regionSlugs: ['tampa-bay', 'palm-beach'],
+    regionSlugs: ['panhandle', 'tampa-bay'],
     rationale: {
-      'tampa-bay': 'Closest covered area on the Gulf side.',
-      'palm-beach': 'Closest on the east coast.',
+      panhandle: 'Closest covered area — about 1.5 hours west to Apalachicola.',
+      'tampa-bay': 'About 4 hours south on the Gulf side.',
     },
-    note: "Tallahassee is well outside our coverage today.",
+    note: "We don't cover Tallahassee directly yet.",
   },
   {
     displayName: 'Gainesville',
     aliases: ['gainesville'],
-    regionSlugs: ['tampa-bay', 'palm-beach'],
+    regionSlugs: ['northeast-florida', 'central-florida'],
     rationale: {
-      'tampa-bay': 'Closest covered area on the Gulf side.',
-      'palm-beach': 'Closest east-coast area we cover.',
+      'northeast-florida': 'Closest covered area — about 1.5 hours east to St. Augustine.',
+      'central-florida': 'About 2 hours south to Orlando area.',
     },
-    note: "Gainesville is well outside our coverage today.",
+    note: "Gainesville isn't a covered region yet.",
   },
   {
     displayName: 'Ocala / The Villages',
     aliases: ['ocala', 'the villages', 'leesburg'],
-    regionSlugs: ['tampa-bay', 'palm-beach'],
+    regionSlugs: ['central-florida', 'tampa-bay'],
     rationale: {
-      'tampa-bay': 'Closest covered area on the Gulf side.',
-      'palm-beach': 'Closest east-coast area we cover.',
+      'central-florida': 'Closest covered area — Mount Dora is about 30-45 minutes south.',
+      'tampa-bay': 'About 1.5 hours southwest.',
     },
     note: "We don't cover north-central Florida directly yet.",
   },
