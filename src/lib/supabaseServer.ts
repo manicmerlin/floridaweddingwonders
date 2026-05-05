@@ -51,10 +51,29 @@ export function createSupabaseServerClient() {
  * Server-side client with no cookie binding, backed by the anon key.
  * For RSC reads of public-RLS tables (catalog, etc.) where there's no
  * per-user state. Reusable from sitemap.ts, route handlers, anywhere.
+ *
+ * Wraps fetch with `cache: 'no-store'` so Next.js's data-cache layer
+ * doesn't pin stale responses from an earlier build. We saw this in
+ * production after the Tier 1 venue + Tier 2 vendor inserts — the
+ * `/venues` page kept returning the pre-insert 129-venue snapshot
+ * despite `dynamic = 'force-dynamic'` on the route, because supabase-js
+ * fetch calls were hitting the Next.js data cache (force-dynamic on the
+ * route turns out not to propagate down to fetches issued by supabase-js).
+ * Filtered `/venues/in/<region>` pages had different cache keys per
+ * filter so they cycled fresh; the bare query was the stuck one.
  */
 export function createSupabasePublicClient() {
   return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      // `next: { revalidate: 0 }` (not `cache: 'no-store'`) — the latter
+      // forces dynamic-server-usage and breaks the homepage ISR build,
+      // which legitimately wants to fetch the catalog at build time.
+      // revalidate:0 disables the data-cache pin without escalating the
+      // route to fully dynamic.
+      fetch: (input: any, init?: any) =>
+        fetch(input, { ...(init ?? {}), next: { revalidate: 0 } }),
+    },
   });
 }
 
