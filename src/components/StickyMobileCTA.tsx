@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 /**
  * Mobile-only sticky CTA bar that points couples at the multi-quote form.
@@ -20,6 +21,7 @@ import { usePathname } from 'next/navigation';
  * duplicated per page. Gating happens here via usePathname.
  */
 export default function StickyMobileCTA() {
+  const t = useTranslations('MultiQuoteCTA');
   const pathname = usePathname() ?? '';
 
   // Show on /venues and /venues/<slug> only. /venues/in/<region>, manage,
@@ -47,7 +49,7 @@ export default function StickyMobileCTA() {
         href="/quotes/request"
         className="flex items-center justify-center px-4 py-3 text-white font-semibold text-sm"
       >
-        Get Quotes from up to 5 Venues
+        {t('stickyCta')}
         <span aria-hidden="true" className="ml-2">→</span>
       </Link>
     </div>

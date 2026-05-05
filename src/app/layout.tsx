@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import './globals.css'
 import { generateHomeMetadata, SITE_CONFIG } from '@/lib/seo'
 import AuthProvider from '@/components/AuthProvider'
@@ -13,13 +15,19 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Locale comes from the NEXT_LOCALE cookie (or Accept-Language fallback)
+  // resolved in src/i18n/request.ts. The <html lang> attribute flips with
+  // it so a Spanish session reports lang="es" to assistive tech and to
+  // search engines.
+  const locale = await getLocale()
+  const messages = await getMessages()
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -101,8 +109,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <AuthProvider>{children}</AuthProvider>
-        <StickyMobileCTA />
+        <NextIntlClientProvider messages={messages}>
+          <AuthProvider>{children}</AuthProvider>
+          <StickyMobileCTA />
+        </NextIntlClientProvider>
       </body>
     </html>
   )

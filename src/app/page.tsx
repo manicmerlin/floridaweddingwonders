@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import SEO from '@/components/SEO';
 import FAQ from '@/components/FAQ';
 import HomeHeroMosaic from '@/components/HomeHeroMosaic';
@@ -13,9 +14,10 @@ import { getSiteStatsLive, getHomeHeroPicks } from '@/lib/catalog';
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const [stats, heroPicks] = await Promise.all([
+  const [stats, heroPicks, t] = await Promise.all([
     getSiteStatsLive(),
     getHomeHeroPicks(),
+    getTranslations('Hero'),
   ]);
   return (
     <>
@@ -65,10 +67,10 @@ export default async function HomePage() {
               real iPhone widths (390px). break-words lets long brand
               names wrap if a future rename lands. */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-6 break-words">
-            Florida Wedding Wonders
+            {t('siteName')}
           </h1>
           <p className="text-base sm:text-lg lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
-            Discover stunning wedding venues, trusted vendors, and beautiful bridal shops across the Sunshine State.
+            {t('subhead')}
           </p>
 
           {/* Search bar — single input + Search button. Posts to
@@ -91,26 +93,26 @@ export default async function HomePage() {
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               <div className="text-5xl mb-4">🏛️</div>
-              <div className="text-2xl mb-3 group-hover:text-purple-200 transition-colors">Wedding Venues</div>
-              <div className="text-sm text-gray-300 leading-relaxed">From beachfront ceremonies to elegant ballrooms, discover Florida's most breathtaking wedding venues.</div>
+              <div className="text-2xl mb-3 group-hover:text-purple-200 transition-colors">{t('weddingVenues')}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">{t('weddingVenuesBlurb')}</div>
             </a>
-            
-            <a 
-              href="/vendors" 
+
+            <a
+              href="/vendors"
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               <div className="text-5xl mb-4">🎯</div>
-              <div className="text-2xl mb-3 group-hover:text-pink-200 transition-colors">Wedding Vendors</div>
-              <div className="text-sm text-gray-300 leading-relaxed">Connect with trusted photographers, caterers, florists, and all the professionals you need for your perfect day.</div>
+              <div className="text-2xl mb-3 group-hover:text-pink-200 transition-colors">{t('weddingVendors')}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">{t('weddingVendorsBlurb')}</div>
             </a>
-            
-            <a 
-              href="/dress-shops" 
+
+            <a
+              href="/dress-shops"
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               <div className="text-5xl mb-4">👗</div>
-              <div className="text-2xl mb-3 group-hover:text-rose-200 transition-colors">Bridal Shops</div>
-              <div className="text-sm text-gray-300 leading-relaxed">Browse stunning bridal collections from Florida's premier dress shops and find your dream gown.</div>
+              <div className="text-2xl mb-3 group-hover:text-rose-200 transition-colors">{t('bridalShops')}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">{t('bridalShopsBlurb')}</div>
             </a>
           </div>
 
@@ -119,15 +121,15 @@ export default async function HomePage() {
             <div className="grid grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.venues}</div>
-                <div className="text-gray-300 font-medium">Wedding Venues</div>
+                <div className="text-gray-300 font-medium">{t('statVenues')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.vendors}</div>
-                <div className="text-gray-300 font-medium">Wedding Vendors</div>
+                <div className="text-gray-300 font-medium">{t('statVendors')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.dressShops}</div>
-                <div className="text-gray-300 font-medium">Bridal Shops</div>
+                <div className="text-gray-300 font-medium">{t('statShops')}</div>
               </div>
             </div>
           </div>

@@ -23,6 +23,7 @@
     "dotenv": "^17.2.2",
     "gray-matter": "^4.0.3",
     "next": "14.2.35",
+    "next-intl": "^4.11.0",
     "node-fetch": "^3.3.2",
     "openai": "^6.35.0",
     "postcss": "^8",
