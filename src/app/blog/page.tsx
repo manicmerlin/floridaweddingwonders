@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { getAllPosts, formatDate, calculateReadingTime } from '@/lib/blog';
 import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
+import LeadMagnetCapture from '@/components/LeadMagnetCapture';
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -63,6 +64,7 @@ export default function BlogPage() {
         {/* Blog Posts Grid */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <LeadMagnetCapture source="blog" variant="inline" />
             {posts.length === 0 ? (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-6xl mb-4">📝</div>
@@ -158,6 +160,18 @@ export default function BlogPage() {
                 View FAQs
               </a>
             </div>
+            {/* Phase A — venue-owner cross-link. Subtle, separate from the
+                couples CTA above, so venue-owners reading the blog have a
+                clear path to the package page. */}
+            <p className="mt-8 text-sm text-gray-400">
+              Are you a venue owner?{' '}
+              <Link
+                href="/venue-packages"
+                className="text-pink-300 hover:text-pink-200 underline font-medium"
+              >
+                See our partnership tiers →
+              </Link>
+            </p>
           </div>
         </section>
 

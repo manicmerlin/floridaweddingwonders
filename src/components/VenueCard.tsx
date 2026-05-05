@@ -8,6 +8,7 @@ import { isSuperAdmin } from '@/lib/auth';
 import { tierFeatures } from '@/lib/tierFeatures';
 import { isListingComplete } from '@/lib/listingCompleteness';
 import SaveVenueButton from './SaveVenueButton';
+import FeaturedBadgeInfo from './FeaturedBadgeInfo';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 
@@ -140,7 +141,7 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
           const isScale = tf.showFoundingPartnerBadge;
           return (
             <div
-              className={`absolute top-3 left-3 z-10 px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-lg ${
+              className={`absolute top-3 left-3 z-10 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-lg ${
                 isScale
                   ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-amber-950'
                   : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
@@ -149,6 +150,7 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
             >
               {isScale ? '★ ' : ''}
               {tf.badgeLabel}
+              <FeaturedBadgeInfo tierLabel={tf.badgeLabel as 'Featured' | 'Founding Partner'} />
             </div>
           );
         })()}
@@ -193,6 +195,21 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
           <div className="mb-3 text-sm font-semibold text-pink-700">
             From ${venueWithPhotos.pricing.startingPrice.toLocaleString()}
           </div>
+        )}
+
+        {/* "Are you the owner?" pill — only on unclaimed listings, links to
+            the package page pre-filled with this venue's slug. Subtle by
+            design: it's a sales surface for venue owners browsing the
+            directory, not a couple-facing CTA. */}
+        {venueWithPhotos.claimStatus === 'unclaimed' && (
+          <Link
+            href={`/venue-packages?venue=${venueWithPhotos.slug || venueWithPhotos.id}`}
+            className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-pink-600 hover:underline mb-3"
+            aria-label={`Claim ${venueWithPhotos.name} listing`}
+          >
+            <span aria-hidden>ⓘ</span>
+            <span>Are you the owner?</span>
+          </Link>
         )}
 
         {/* Button */}
