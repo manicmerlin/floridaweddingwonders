@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import SEO from '@/components/SEO';
 import FAQ from '@/components/FAQ';
+import HomeHeroMosaic from '@/components/HomeHeroMosaic';
+import HomeSearchBar from '@/components/HomeSearchBar';
 import { generateWebsiteSchema, generateOrganizationSchema, SITE_CONFIG } from '@/lib/seo';
-import { getSiteStatsLive } from '@/lib/catalog';
+import { getSiteStatsLive, getHomeHeroPicks } from '@/lib/catalog';
 
 // Stats query hits Postgres on each request. Hourly revalidation is plenty
 // — the catalog doesn't churn that fast and we'd rather show fresh counts
@@ -11,7 +13,10 @@ import { getSiteStatsLive } from '@/lib/catalog';
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const stats = await getSiteStatsLive();
+  const [stats, heroPicks] = await Promise.all([
+    getSiteStatsLive(),
+    getHomeHeroPicks(),
+  ]);
   return (
     <>
       <SEO
@@ -52,13 +57,26 @@ export default async function HomePage() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-8">
+          <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-6">
             Florida Wedding Wonders
           </h1>
-          <p className="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
+          <p className="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
             Discover stunning wedding venues, trusted vendors, and beautiful bridal shops across the Sunshine State.
           </p>
-          
+
+          {/* Search bar — single input + Search button. Posts to
+              /venues?q=<value>; VenuesListClient picks up the param. */}
+          <div className="mb-10">
+            <HomeSearchBar />
+          </div>
+
+          {/* Hero mosaic — 6 watercolors (3 venues + 2 vendors + 1 shop).
+              Picks are deterministic by tier-then-alphabetical order so the
+              same six render across every visit until the catalog changes. */}
+          <div className="mb-12">
+            <HomeHeroMosaic picks={heroPicks} />
+          </div>
+
           {/* Main Navigation Cards */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <a 

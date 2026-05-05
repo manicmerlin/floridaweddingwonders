@@ -224,7 +224,7 @@ export const mockVenues: Venue[] = sortedVenueData
       },
       availability: [],
       createdAt: new Date(2024, 0, index + 1),
-      updatedAt: new Date(2024, 0, index + 1),
+      updatedAt: new Date(2024, 0, index + 1).toISOString(),
       reviews: {
         rating: Number((4.0 + Math.random() * 1.0).toFixed(1)), // 4.0 - 5.0
         count: Math.floor(Math.random() * 50) + 10, // 10-60 reviews

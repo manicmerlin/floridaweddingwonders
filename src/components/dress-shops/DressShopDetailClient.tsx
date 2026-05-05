@@ -5,6 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import VerifiedChip from '@/components/VerifiedChip';
+import ListingRatingStrip from '@/components/ListingRatingStrip';
+import ListingReviewsStub from '@/components/ListingReviewsStub';
+import { isListingComplete } from '@/lib/listingCompleteness';
 import { DressShop } from '@/types';
 
 interface Props {
@@ -32,9 +36,32 @@ export default function DressShopDetailClient({ dressShop, relatedShops }: Props
         
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
+            <div className="mb-3 flex justify-center">
+              <VerifiedChip
+                verified={isListingComplete({
+                  hasContact: !!(dressShop.contact.phone || dressShop.contact.email || dressShop.contact.website),
+                  description: dressShop.description,
+                  imagesCount: dressShop.images?.length ?? 0,
+                })}
+                updatedAt={dressShop.updatedAt}
+              />
+            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">{dressShop.name}</h1>
             <p className="text-xl md:text-2xl mb-2">📍 {dressShop.address.city}, {dressShop.address.state}</p>
-            <p className="text-lg opacity-90">{dressShop.shopType}</p>
+            <p className="text-lg opacity-90 mb-3 capitalize">{dressShop.shopType}</p>
+            {/* Reviews strip — dress shops don't have a review backend yet,
+                so this always shows the empty "be the first" state. */}
+            <div className="flex justify-center">
+              <span className="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <ListingRatingStrip
+                  rating={null}
+                  count={0}
+                  slug={dressShop.slug || dressShop.id}
+                  kind="dress-shops"
+                  className="!text-white"
+                />
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -412,6 +439,11 @@ export default function DressShopDetailClient({ dressShop, relatedShops }: Props
           )}
         </div>
       </section>
+
+      {/* Reviews stub — mirrors the venue reviews section. */}
+      <div className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-12">
+        <ListingReviewsStub kind="dress-shop" name={dressShop.name} />
+      </div>
 
       {/* Related Shops */}
       {relatedShops.length > 0 && (

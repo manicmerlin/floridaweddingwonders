@@ -20,8 +20,15 @@ const ITEMS_PER_PAGE = 12;
 // it with a DB-backed deleted_at column. Until then the safe behaviour is
 // to render every catalog row; the localStorage writes from
 // VenueManagement become no-ops on read paths.
-export default function VenuesListClient({ venues }: { venues: Venue[] }) {
-  const [searchTerm, setSearchTerm] = useState('');
+export default function VenuesListClient({
+  venues,
+  initialSearch = '',
+}: {
+  venues: Venue[];
+  /** Pre-fill from /venues?q=<value> when the homepage search form posts here. */
+  initialSearch?: string;
+}) {
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
