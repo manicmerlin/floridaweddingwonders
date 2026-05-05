@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Pagination from '@/components/Pagination';
@@ -25,14 +25,22 @@ const ITEMS_PER_PAGE = 12;
 export default function VenuesListClient({
   venues,
   initialSearch = '',
+  initialRegion = '',
+  initialNeighborhood = '',
 }: {
   venues: Venue[];
   /** Pre-fill from /venues?q=<value> when the homepage search form posts here. */
   initialSearch?: string;
+  /** Pre-select the region dropdown (city-string match). Used by the search
+   *  shorthand resolver when a query like "broward" lands here. */
+  initialRegion?: string;
+  /** Pre-select the neighborhood dropdown. Used by the search shorthand
+   *  resolver when a query like "sobe" / "the grove" lands here. */
+  initialNeighborhood?: string;
 }) {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
-  const [selectedRegion, setSelectedRegion] = useState('');
-  const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState(initialRegion);
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState(initialNeighborhood);
   const [selectedType, setSelectedType] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,8 +104,14 @@ export default function VenuesListClient({
 
   // Reset neighborhood when the region changes — neighborhoods are scoped
   // to a city, so a neighborhood from the previous region wouldn't match
-  // any rows in the new one.
+  // any rows in the new one. Skip the first run so the search-shorthand
+  // initialNeighborhood prop survives initial mount.
+  const skipFirstNeighborhoodReset = useRef(true);
   useEffect(() => {
+    if (skipFirstNeighborhoodReset.current) {
+      skipFirstNeighborhoodReset.current = false;
+      return;
+    }
     setSelectedNeighborhood('');
   }, [selectedRegion]);
 
