@@ -17,6 +17,8 @@ import FeaturedBadgeInfo from '@/components/FeaturedBadgeInfo';
 import VerifiedChip from '@/components/VerifiedChip';
 import ListingRatingStrip from '@/components/ListingRatingStrip';
 import VendorListingCard from '@/components/vendors/VendorListingCard';
+import FloridaReadyPanel from '@/components/venues/FloridaReadyPanel';
+import VenuePinItButton from '@/components/venues/VenuePinItButton';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 import { Venue } from '@/types';
 
@@ -194,12 +196,12 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                     kind="venues"
                   />
                 </div>
-                <div className="flex items-center justify-start lg:justify-center text-gray-500 mb-6">
+                <div className="flex items-center flex-wrap gap-3 justify-start lg:justify-center text-gray-500 mb-6">
                   <span className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium capitalize">{venue.venueType}</span>
                   {venue.externalReviews?.google && (
                     <button
                       onClick={() => window.open(venue.externalReviews?.google?.url, '_blank')}
-                      className="ml-3 flex items-center text-sm text-blue-600 hover:text-blue-700"
+                      className="flex items-center text-sm text-blue-600 hover:text-blue-700"
                     >
                       <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -207,6 +209,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                       Reviews
                     </button>
                   )}
+                  <VenuePinItButton venue={venue} />
                 </div>
               </div>
             </div>
@@ -334,8 +337,16 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
         </div>
       </section>
 
-      {/* Mobile Action Buttons */}
-      <section className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 sticky bottom-0 z-10 shadow-lg">
+      {/* Mobile Action Buttons — venue-specific (Contact / Save / Call).
+          Lifted above the global StickyMobileCTA (mounted in root layout)
+          via bottom-[48px] so both sticky bars stack instead of overlapping
+          on mobile. The 48px offset matches the global CTA's rendered
+          height (py-3 + text-sm + border). The +safe-area-inset-bottom
+          term respects the iPhone home-indicator gutter. */}
+      <section
+        className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 sticky z-10 shadow-lg"
+        style={{ bottom: 'calc(env(safe-area-inset-bottom) + 48px)' }}
+      >
         <div className="flex gap-3">
           <button
             onClick={() => setShowContactForm(true)}
@@ -467,6 +478,10 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
               </div>
             )}
 
+            {/* Florida-Ready (mobile) — renders only when ≥1 hurricane field
+                is populated; otherwise the component returns null. */}
+            <FloridaReadyPanel venue={venue} />
+
             {/* Contact Card */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
@@ -554,6 +569,11 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                         </div>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Florida-Ready (desktop) — null when no fields populated. */}
+                  <div className="mb-8">
+                    <FloridaReadyPanel venue={venue} />
                   </div>
 
                   <div>

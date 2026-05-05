@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import { generateHomeMetadata, SITE_CONFIG } from '@/lib/seo'
 import AuthProvider from '@/components/AuthProvider'
+import StickyMobileCTA from '@/components/StickyMobileCTA'
 
 export const metadata: Metadata = {
   ...generateHomeMetadata(),
@@ -101,6 +102,7 @@ export default function RootLayout({
       </head>
       <body>
         <AuthProvider>{children}</AuthProvider>
+        <StickyMobileCTA />
       </body>
     </html>
   )

@@ -114,6 +114,14 @@ interface VenueRow {
   last_image_update: string | null;
   created_at: string;
   updated_at: string;
+  // Track 2 — optional. Read with defensive `?? null` since the columns
+  // may not exist on the row before the migration runs in production
+  // (PostgREST returns rows even when SELECT * misses a column we typed).
+  neighborhood?: string | null;
+  generator_backup?: boolean | null;
+  ac_tent_available?: boolean | null;
+  indoor_fallback_capacity?: number | null;
+  storm_policy_text?: string | null;
 }
 
 function rowToVenue(row: VenueRow): Venue {
@@ -180,6 +188,11 @@ function rowToVenue(row: VenueRow): Venue {
     reviews: { rating: 0, count: 0, reviews: [] },
     externalReviews,
     updatedAt: row.updated_at,
+    neighborhood: row.neighborhood ?? undefined,
+    generatorBackup: row.generator_backup ?? undefined,
+    acTentAvailable: row.ac_tent_available ?? undefined,
+    indoorFallbackCapacity: row.indoor_fallback_capacity ?? undefined,
+    stormPolicyText: row.storm_policy_text ?? undefined,
     claimStatus: 'unclaimed',
   } satisfies Venue;
 }
