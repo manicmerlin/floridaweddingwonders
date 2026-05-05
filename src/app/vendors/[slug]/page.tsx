@@ -5,7 +5,9 @@ import {
   getVendorByLegacyId,
   getVendorBySlug,
   getVendors,
+  getVenues,
 } from '@/lib/catalog';
+import { venuesInCity, diversifyByKey } from '@/lib/crossLinking';
 import {
   breadcrumbLD,
   jsonLdScript,
@@ -57,6 +59,16 @@ export default async function VendorSlugPage({ params }: Params) {
   const cohort = await getVendors({ category: vendor.category });
   const relatedVendors = cohort.filter((v) => v.id !== vendor.id).slice(0, 3);
 
+  // "Venues this <category> could serve" — pull venues in the vendor's
+  // home city, diversify by venue type so the cross-link section mixes
+  // beach/garden/ballroom rather than dumping six of one type.
+  const allVenues = await getVenues();
+  const cityVenues = diversifyByKey(
+    venuesInCity(allVenues, vendor.address.city || ''),
+    (v) => v.venueType,
+    6
+  );
+
   return (
     <>
       <script
@@ -77,7 +89,11 @@ export default async function VendorSlugPage({ params }: Params) {
           ),
         }}
       />
-      <VendorDetailClient vendor={vendor} relatedVendors={relatedVendors} />
+      <VendorDetailClient
+        vendor={vendor}
+        relatedVendors={relatedVendors}
+        cityVenues={cityVenues}
+      />
     </>
   );
 }

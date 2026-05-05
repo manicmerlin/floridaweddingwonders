@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import SEO from '@/components/SEO';
 import FAQ from '@/components/FAQ';
+import HomeHeroMosaic from '@/components/HomeHeroMosaic';
+import HomeSearchBar from '@/components/HomeSearchBar';
 import { generateWebsiteSchema, generateOrganizationSchema, SITE_CONFIG } from '@/lib/seo';
-import { getSiteStatsLive } from '@/lib/catalog';
+import { getSiteStatsLive, getHomeHeroPicks } from '@/lib/catalog';
 
 // Stats query hits Postgres on each request. Hourly revalidation is plenty
 // — the catalog doesn't churn that fast and we'd rather show fresh counts
@@ -11,7 +13,10 @@ import { getSiteStatsLive } from '@/lib/catalog';
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const stats = await getSiteStatsLive();
+  const [stats, heroPicks] = await Promise.all([
+    getSiteStatsLive(),
+    getHomeHeroPicks(),
+  ]);
   return (
     <>
       <SEO
@@ -32,10 +37,14 @@ export default async function HomePage() {
         ]}
         jsonLd={[generateWebsiteSchema(), generateOrganizationSchema()]}
       />
-      <div className="min-h-screen bg-gray-900">
-      {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center px-6">
-        <div className="relative z-10 text-center max-w-6xl mx-auto">
+      <div className="min-h-screen bg-gray-900 overflow-x-hidden">
+      {/* Hero Section. overflow-x-hidden on the parent is a safety net —
+          if any nested element sneaks past the viewport (mosaic, etc.)
+          this prevents horizontal page scroll. The mosaic now uses a
+          proper grid instead of a horizontal-scroll flex, so this should
+          never be the primary fix — it's belt-and-suspenders. */}
+      <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6">
+        <div className="relative z-10 text-center max-w-6xl mx-auto w-full">
           {/* Logo */}
           <div className="mb-12">
             <div className="flex justify-center mb-8">
@@ -51,14 +60,30 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-8">
+          {/* Main Heading. Responsive scale: 36px mobile → 48px sm → 60px md
+              → 72px lg. The previous text-4xl baseline was overflowing on
+              real iPhone widths (390px). break-words lets long brand
+              names wrap if a future rename lands. */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-6 break-words">
             Florida Wedding Wonders
           </h1>
-          <p className="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
+          <p className="text-base sm:text-lg lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
             Discover stunning wedding venues, trusted vendors, and beautiful bridal shops across the Sunshine State.
           </p>
-          
+
+          {/* Search bar — single input + Search button. Posts to
+              /venues?q=<value>; VenuesListClient picks up the param. */}
+          <div className="mb-10">
+            <HomeSearchBar />
+          </div>
+
+          {/* Hero mosaic — 6 watercolors (3 venues + 2 vendors + 1 shop).
+              Picks are deterministic by tier-then-alphabetical order so the
+              same six render across every visit until the catalog changes. */}
+          <div className="mb-12">
+            <HomeHeroMosaic picks={heroPicks} />
+          </div>
+
           {/* Main Navigation Cards */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <a 

@@ -95,6 +95,9 @@ export interface Venue {
     email: string;
     isPremium: boolean;
   };
+  /** ISO timestamp from venues.updated_at. Surfaced as a "Last updated"
+   *  trust signal on venue detail. Populated by rowToVenue in catalog.ts. */
+  updatedAt?: string;
   claimStatus: 'unclaimed' | 'pending' | 'claimed' | 'rejected';
   claimedBy?: {
     userId: string;

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { placeholderUrlForDressShop } from '@/lib/placeholderImages';
 import { isListingComplete } from '@/lib/listingCompleteness';
+import ListingRatingStrip from './ListingRatingStrip';
 
 interface DressShopCardProps {
   shop: DressShop;
@@ -150,8 +151,19 @@ export default function DressShopCard({ shop, showFavorites = false }: DressShop
       
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{shop.name}</h3>
+        {/* Reviews UX placeholder. Dress shops don't have a review backend
+            yet — this strip always renders the empty "be the first" state
+            until we add `dress_shop_reviews`. Component shape matches the
+            venue path so the upgrade is data-only. */}
+        <ListingRatingStrip
+          rating={null}
+          count={0}
+          slug={shop.slug || shop.id}
+          kind="dress-shops"
+          className="mb-2"
+        />
         <p className="text-gray-600 mb-3 line-clamp-2">{shop.description}</p>
-        
+
         <div className="flex justify-between items-center mb-3">
           <span className="text-sm text-gray-500">
             {shop.address.city}, {shop.address.state}

@@ -179,6 +179,7 @@ function rowToVenue(row: VenueRow): Venue {
     availability: [],
     reviews: { rating: 0, count: 0, reviews: [] },
     externalReviews,
+    updatedAt: row.updated_at,
     claimStatus: 'unclaimed',
   } satisfies Venue;
 }
@@ -563,6 +564,68 @@ export async function getDressShopByLegacyId(legacyId: string): Promise<DressSho
     return null;
   }
   return data ? rowToDressShop(data as DressShopRow) : null;
+}
+
+/**
+ * Picks for the homepage hero mosaic — 3 venues + 2 vendors + 1 dress shop.
+ * Deterministic by tier-then-name for venues (so paid tiers anchor the
+ * mosaic), then alphabetical by name for vendors and shops. Returns the
+ * minimum data shape the mosaic component needs (slug, name, kind).
+ */
+export interface HeroPick {
+  kind: 'venue' | 'vendor' | 'dress-shop';
+  slug: string;
+  name: string;
+  city: string;
+  /** Display label below the watercolor — venue type, vendor category, etc. */
+  subtitle: string;
+}
+
+export async function getHomeHeroPicks(): Promise<HeroPick[]> {
+  const [venues, vendors, shops] = await Promise.all([
+    getVenues(),
+    getVendors(),
+    getDressShops(),
+  ]);
+  // Venues: prefer Scale → Growth → Starter via the existing comparator,
+  // then take the first 3. Filter out venues with no slug (won't have a
+  // watercolor to render).
+  const venuePicks = venues
+    .filter((v) => !!v.slug)
+    .sort(compareByTier)
+    .slice(0, 3)
+    .map<HeroPick>((v) => ({
+      kind: 'venue',
+      slug: v.slug,
+      name: v.name,
+      city: v.address.city,
+      subtitle: v.venueType,
+    }));
+  // Vendors: alphabetical by slug for determinism, top 2.
+  const vendorPicks = vendors
+    .filter((v) => !!v.slug)
+    .sort((a, b) => a.slug.localeCompare(b.slug))
+    .slice(0, 2)
+    .map<HeroPick>((v) => ({
+      kind: 'vendor',
+      slug: v.slug,
+      name: v.name,
+      city: v.address.city,
+      subtitle: v.category,
+    }));
+  // Dress shop: top 1 alphabetical.
+  const shopPicks = shops
+    .filter((s) => !!s.slug)
+    .sort((a, b) => a.slug.localeCompare(b.slug))
+    .slice(0, 1)
+    .map<HeroPick>((s) => ({
+      kind: 'dress-shop',
+      slug: s.slug,
+      name: s.name,
+      city: s.address.city,
+      subtitle: s.shopType,
+    }));
+  return [...venuePicks, ...vendorPicks, ...shopPicks];
 }
 
 /**

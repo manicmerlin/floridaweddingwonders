@@ -14,6 +14,9 @@ import { useVenueAnalytics } from '@/hooks/useVenueAnalytics';
 import { tierFeatures } from '@/lib/tierFeatures';
 import { isListingComplete } from '@/lib/listingCompleteness';
 import FeaturedBadgeInfo from '@/components/FeaturedBadgeInfo';
+import VerifiedChip from '@/components/VerifiedChip';
+import ListingRatingStrip from '@/components/ListingRatingStrip';
+import VendorListingCard from '@/components/vendors/VendorListingCard';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 import { Venue } from '@/types';
 
@@ -27,9 +30,12 @@ import { Venue } from '@/types';
 interface Props {
   venue: Venue;
   relatedVenues: Venue[];
+  /** Vendors serving this venue's city — already diversified by category
+   *  upstream. Optional so existing call sites compile during the rollout. */
+  cityVendors?: import('@/types').Vendor[];
 }
 
-export default function VenueDetailClient({ venue: serverVenue, relatedVenues }: Props) {
+export default function VenueDetailClient({ venue: serverVenue, relatedVenues, cityVendors = [] }: Props) {
   const [activeTab, setActiveTab] = useState('overview');
   const [showContactForm, setShowContactForm] = useState(false);
   // Start with the server-rendered venue. The effect below replaces images
@@ -157,12 +163,36 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
           <div className="px-4 sm:px-6 lg:px-8 py-8 lg:pt-16">
             <div className="max-w-7xl mx-auto">
               <div className="lg:text-center">
+                {/* Trust chip — Verified + Updated <Mon Year>. Sits above
+                    the H1 so it's the first thing a couple sees beneath
+                    the hero. */}
+                <div className="mb-3 flex justify-start lg:justify-center">
+                  <VerifiedChip
+                    verified={isListingComplete({
+                      hasContact: !!(venue.contact.phone || venue.contact.website),
+                      description: venue.description,
+                      imagesCount: venue.images?.length ?? 0,
+                    })}
+                    updatedAt={venue.updatedAt}
+                  />
+                </div>
                 <h1 className="text-2xl lg:text-4xl xl:text-6xl font-bold text-gray-900 mb-2">{venue.name}</h1>
-                <div className="flex items-center justify-start lg:justify-center text-gray-600 mb-4">
+                <div className="flex items-center justify-start lg:justify-center text-gray-600 mb-3">
                   <svg className="w-5 h-5 mr-2 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-lg lg:text-xl">{venue.address.city}, {venue.address.state}</span>
+                </div>
+                {/* Above-the-fold ratings strip + write-a-review anchor.
+                    Always renders — empty state primes review submissions
+                    on listings with no reviews yet. */}
+                <div className="mb-4 flex justify-start lg:justify-center">
+                  <ListingRatingStrip
+                    rating={venue.reviews?.count ? venue.reviews.rating : null}
+                    count={venue.reviews?.count ?? 0}
+                    slug={venue.slug || venue.id}
+                    kind="venues"
+                  />
                 </div>
                 <div className="flex items-center justify-start lg:justify-center text-gray-500 mb-6">
                   <span className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium capitalize">{venue.venueType}</span>
@@ -803,6 +833,32 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues }:
           <VenueClaimButton venue={venue} />
         </div>
       </section>
+
+      {/* Wedding pros who serve this city — venue↔vendor cross-link. Sits
+          above the related-venues block. Hidden when there's nothing to
+          show; unique to this directory. */}
+      {cityVendors.length > 0 && (
+        <section className="bg-gray-50 py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between flex-wrap gap-3 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                Wedding pros who serve {venue.address.city}
+              </h2>
+              <Link
+                href={`/vendors/in/${(venue.address.city || '').toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-pink-600 hover:text-pink-700 text-sm font-medium"
+              >
+                See all →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cityVendors.map((v) => (
+                <VendorListingCard key={v.id} vendor={v} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Related Venues */}
       <section className="bg-white py-16">

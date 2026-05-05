@@ -3,6 +3,7 @@ import { SITE_CONFIG } from '@/lib/seo';
 import {
   getVenues,
   getVendors,
+  getDressShops,
   getAllVendorSlugs,
   getAllDressShopSlugs,
 } from '@/lib/catalog';
@@ -19,6 +20,7 @@ import {
   filterVendorsByCategory,
   filterVendorsByRegionAndCategory,
 } from '@/lib/hyperlocalVendors';
+import { venueInRegion } from '@/lib/hyperlocal';
 import { getAllPosts } from '@/lib/blog';
 
 export const dynamic = 'force-dynamic';
@@ -56,11 +58,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // getAll*Slugs would return only slug+updated_at — we need tier here.
   // Also pull full vendors (not just slugs) so the hyperlocal vendor pages
   // below can run filterVendorsByRegion / filterVendorsByCategory.
-  const [venues, vendors, dressShops, vendorsFull] = await Promise.all([
+  const [venues, vendors, dressShops, vendorsFull, dressShopsFull] = await Promise.all([
     getVenues(),
     getAllVendorSlugs(),
     getAllDressShopSlugs(),
     getVendors(),
+    getDressShops(),
   ]);
 
   const venuePriorityFor = (tier: string | undefined) => {
@@ -163,6 +166,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
+  // Dress-shop region landing pages — only emit pages with at least one
+  // shop, mirroring the venue + vendor sitemap rules. Empty regions still
+  // render (they show the empty-state cross-link panel) but stay out of
+  // sitemap.xml until populated.
+  const dressShopRegionPages: MetadataRoute.Sitemap = REGIONS
+    .filter((r) =>
+      dressShopsFull.some((s) =>
+        venueInRegion(s as unknown as Parameters<typeof venueInRegion>[0], r)
+      )
+    )
+    .map((r) => ({
+      url: `${baseUrl}/dress-shops/in/${r.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+
   return [
     ...staticPages,
     ...venuePages,
@@ -174,6 +194,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...vendorCategoryPages,
     ...vendorRegionPages,
     ...vendorComboPages,
+    ...dressShopRegionPages,
     ...blogPages,
   ];
 }

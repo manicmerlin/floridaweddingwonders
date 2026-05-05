@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Vendor } from '@/types';
 import VendorCardImage from '@/components/vendors/VendorCardImage';
+import ListingRatingStrip from '@/components/ListingRatingStrip';
 
 interface Props {
   vendor: Vendor;
@@ -29,6 +30,14 @@ export default function VendorListingCard({ vendor }: Props) {
             <p className="text-pink-600 font-medium capitalize">{vendor.category}</p>
           </div>
         </div>
+
+        <ListingRatingStrip
+          rating={vendor.reviews && vendor.reviews.totalReviews > 0 ? vendor.reviews.averageRating : null}
+          count={vendor.reviews?.totalReviews ?? 0}
+          slug={vendor.slug || vendor.id}
+          kind="vendors"
+          className="mb-2"
+        />
 
         <div className="flex justify-between items-center mb-3">
           <span className="text-gray-600 text-sm">📍 {vendor.address.city}</span>

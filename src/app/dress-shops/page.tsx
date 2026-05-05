@@ -20,8 +20,13 @@ export const metadata = {
   alternates: { canonical: 'https://floridaweddingwonders.com/dress-shops' },
 };
 
-export default async function DressShopsPage() {
+export default async function DressShopsPage({
+  searchParams,
+}: {
+  searchParams?: { q?: string };
+}) {
   const shops = await getDressShops();
+  const initialSearch = searchParams?.q?.trim() ?? '';
 
   return (
     <>
@@ -58,7 +63,7 @@ export default async function DressShopsPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
       </section>
 
-      <DressShopsListClient shops={shops} />
+      <DressShopsListClient shops={shops} initialSearch={initialSearch} />
 
       {/* Venue-owner cross-link — subtle, sits between the listing and the
           editorial sections so venue owners browsing dress shops have a

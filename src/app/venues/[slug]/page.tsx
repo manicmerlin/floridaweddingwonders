@@ -3,10 +3,12 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import VenueDetailClient from '@/components/venues/VenueDetailClient';
 import {
   getClaimedVenueIds,
+  getVendors,
   getVenueByLegacyId,
   getVenueBySlug,
   getVenues,
 } from '@/lib/catalog';
+import { vendorsServingCity, diversifyByKey } from '@/lib/crossLinking';
 import {
   breadcrumbLD,
   jsonLdScript,
@@ -110,6 +112,16 @@ export default async function VenueSlugPage({ params }: Params) {
     isClaimed: v.uuid ? claimedIds.has(v.uuid) : false,
   }));
 
+  // "Wedding pros who serve <city>" — pull all vendors, filter to those
+  // serving this venue's city, then mix categories so the section shows
+  // a photographer + florist + caterer rather than six photographers.
+  const allVendors = await getVendors();
+  const cityVendors = diversifyByKey(
+    vendorsServingCity(allVendors, venue.address.city || ''),
+    (v) => v.category,
+    6
+  );
+
   return (
     <>
       <script
@@ -130,7 +142,11 @@ export default async function VenueSlugPage({ params }: Params) {
           ),
         }}
       />
-      <VenueDetailClient venue={venueWithRating} relatedVenues={decoratedRelated} />
+      <VenueDetailClient
+        venue={venueWithRating}
+        relatedVenues={decoratedRelated}
+        cityVendors={cityVendors}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 pb-12">
         <VenueReviewsSection
           venueUuid={venueUuid}

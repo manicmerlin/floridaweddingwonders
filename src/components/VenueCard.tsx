@@ -9,6 +9,7 @@ import { tierFeatures } from '@/lib/tierFeatures';
 import { isListingComplete } from '@/lib/listingCompleteness';
 import SaveVenueButton from './SaveVenueButton';
 import FeaturedBadgeInfo from './FeaturedBadgeInfo';
+import ListingRatingStrip from './ListingRatingStrip';
 import { loadVenuePhotosFromStorage } from '@/lib/photoStorage';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 
@@ -165,19 +166,22 @@ export default function VenueCard({ venue, showFavorites = false }: VenueCardPro
         <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-1">{venueWithPhotos.name}</h3>
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">{venueWithPhotos.description}</p>
 
+        {/* Ratings strip — replaces the previous single-line rating that
+            only rendered when reviews existed. Now always renders: live
+            rating when count > 0, "be the first to review" empty state
+            otherwise. Drives reviews UX adoption across the directory. */}
+        <ListingRatingStrip
+          rating={venueWithPhotos.reviews?.count ? venueWithPhotos.reviews.rating : null}
+          count={venueWithPhotos.reviews?.count ?? 0}
+          slug={venueWithPhotos.slug || venueWithPhotos.id}
+          kind="venues"
+          className="mb-2"
+        />
+
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm text-gray-500">
             {venueWithPhotos.address.city}, {venueWithPhotos.address.state}
           </span>
-          {venueWithPhotos.reviews?.count && venueWithPhotos.reviews.count > 0 ? (
-            <span
-              className="text-xs text-amber-600 font-medium"
-              aria-label={`${venueWithPhotos.reviews.rating.toFixed(1)} of 5 stars from ${venueWithPhotos.reviews.count} reviews`}
-            >
-              ★ {venueWithPhotos.reviews.rating.toFixed(1)}
-              <span className="text-gray-500 font-normal"> ({venueWithPhotos.reviews.count})</span>
-            </span>
-          ) : null}
         </div>
         
         <div className="flex justify-between items-center mb-3">

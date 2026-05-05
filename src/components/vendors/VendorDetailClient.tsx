@@ -6,14 +6,22 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import VendorCardImage from '@/components/vendors/VendorCardImage';
+import VerifiedChip from '@/components/VerifiedChip';
+import ListingRatingStrip from '@/components/ListingRatingStrip';
+import ListingReviewsStub from '@/components/ListingReviewsStub';
+import VenueCard from '@/components/VenueCard';
+import { isListingComplete } from '@/lib/listingCompleteness';
 import { Vendor } from '@/types';
 
 interface Props {
   vendor: Vendor;
   relatedVendors: Vendor[];
+  /** Venues in this vendor's city — already diversified by venueType
+   *  upstream. Optional so existing call sites compile. */
+  cityVenues?: import('@/types').Venue[];
 }
 
-export default function VendorDetailClient({ vendor, relatedVendors }: Props) {
+export default function VendorDetailClient({ vendor, relatedVendors, cityVenues = [] }: Props) {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
@@ -33,9 +41,36 @@ export default function VendorDetailClient({ vendor, relatedVendors }: Props) {
         
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
+            {/* Trust chip — sits above the H1 so it's the first thing
+                visible beneath the hero, same pattern as venue detail. */}
+            <div className="mb-3 flex justify-center">
+              <VerifiedChip
+                verified={isListingComplete({
+                  hasContact: !!(vendor.contact.phone || vendor.contact.email || vendor.contact.website),
+                  description: vendor.description,
+                  imagesCount: vendor.images?.length ?? 0,
+                })}
+                updatedAt={vendor.updatedAt}
+              />
+            </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4">{vendor.name}</h1>
             <p className="text-xl md:text-2xl mb-2">📍 {vendor.address.city}, {vendor.address.state}</p>
-            <p className="text-lg opacity-90">{vendor.category}</p>
+            <p className="text-lg opacity-90 mb-3 capitalize">{vendor.category}</p>
+            {/* Reviews strip — vendors don't have a review backend yet,
+                so this always shows the empty "be the first" state. The
+                CTA href deep-links to the same #reviews anchor pattern
+                so the upgrade is data-only when reviews land. */}
+            <div className="flex justify-center">
+              <span className="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <ListingRatingStrip
+                  rating={vendor.reviews && vendor.reviews.totalReviews > 0 ? vendor.reviews.averageRating : null}
+                  count={vendor.reviews?.totalReviews ?? 0}
+                  slug={vendor.slug || vendor.id}
+                  kind="vendors"
+                  className="!text-white"
+                />
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -385,6 +420,36 @@ export default function VendorDetailClient({ vendor, relatedVendors }: Props) {
           )}
         </div>
       </section>
+
+      {/* Reviews stub — mirrors the venue reviews section so the upgrade
+          is data-only when we add a vendor reviews table. */}
+      <div className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-12">
+        <ListingReviewsStub kind="vendor" name={vendor.name} />
+      </div>
+
+      {/* Venues this vendor could serve — vendor↔venue cross-link. */}
+      {cityVenues.length > 0 && (
+        <section className="bg-white py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between flex-wrap gap-3 mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                Venues this {vendor.category} could serve
+              </h2>
+              <Link
+                href={`/venues?city=${encodeURIComponent(vendor.address.city)}`}
+                className="text-pink-600 hover:text-pink-700 text-sm font-medium"
+              >
+                See all in {vendor.address.city} →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cityVenues.map((v) => (
+                <VenueCard key={v.id} venue={v} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Related Vendors */}
       {relatedVendors.length > 0 && (

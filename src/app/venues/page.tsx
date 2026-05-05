@@ -19,12 +19,17 @@ import {
 // effectively read-only and Vercel cache will dedupe identical requests.
 export const dynamic = 'force-dynamic';
 
-export default async function VenuesPage() {
+export default async function VenuesPage({
+  searchParams,
+}: {
+  searchParams?: { q?: string };
+}) {
   // decorateVenuesWithClaims runs ONE query for all venue ownerships,
   // not per-card — keeps the listing fast even at 129 cards.
   const venues = await decorateVenuesWithClaims(
     await decorateVenuesWithRatings(await getVenues())
   );
+  const initialSearch = searchParams?.q?.trim() ?? '';
 
   return (
     <>
@@ -80,7 +85,7 @@ export default async function VenuesPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
         </section>
-        <VenuesListClient venues={venues} />
+        <VenuesListClient venues={venues} initialSearch={initialSearch} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <LeadMagnetCapture source="venues" />
         </div>
