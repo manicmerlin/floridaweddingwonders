@@ -12,19 +12,18 @@ import type { HeroPick } from '@/lib/catalog';
  * via getHomeHeroPicks() — 3 venues + 2 vendors + 1 dress shop, sorted
  * tier-first then alphabetical so it's deterministic across rebuilds.
  *
- * Layout: 3-col × 2-row on desktop, single horizontal scroll on mobile.
- * Each card is the watercolor + a small caption with name + city +
- * subtitle, links straight to the detail page.
+ * Layout: 2 cols on mobile (3 rows), 3 cols on sm+ (2 rows). Plain CSS
+ * grid — no horizontal scroll, no min-w-max. The previous flex+scroll
+ * version was leaking content past the viewport on real iPhones at 390px,
+ * which made the WHOLE page horizontally scrollable and clipped the H1.
  */
 export default function HomeHeroMosaic({ picks }: { picks: HeroPick[] }) {
   if (picks.length === 0) return null;
   return (
-    <div className="overflow-x-auto sm:overflow-visible -mx-4 sm:mx-0 px-4 sm:px-0">
-      <div className="flex sm:grid sm:grid-cols-3 gap-4 sm:gap-5 min-w-max sm:min-w-0">
-        {picks.map((pick) => (
-          <MosaicCard key={`${pick.kind}-${pick.slug}`} pick={pick} />
-        ))}
-      </div>
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5 max-w-full">
+      {picks.map((pick) => (
+        <MosaicCard key={`${pick.kind}-${pick.slug}`} pick={pick} />
+      ))}
     </div>
   );
 }
@@ -37,7 +36,7 @@ function MosaicCard({ pick }: { pick: HeroPick }) {
   return (
     <Link
       href={href}
-      className="group relative w-56 sm:w-auto block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
+      className="group relative block bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow min-w-0"
       aria-label={`${pick.name}, ${kindLabel} in ${pick.city}`}
     >
       <div className="relative aspect-[4/3] bg-gray-100">
@@ -45,7 +44,7 @@ function MosaicCard({ pick }: { pick: HeroPick }) {
           src={imageUrl}
           alt={`${pick.name} — watercolor illustration`}
           fill
-          sizes="(max-width: 640px) 224px, 33vw"
+          sizes="(max-width: 640px) 50vw, 33vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           quality={85}
           priority
@@ -54,7 +53,7 @@ function MosaicCard({ pick }: { pick: HeroPick }) {
           {kindLabel}
         </div>
       </div>
-      <div className="p-3">
+      <div className="p-3 text-left">
         <h3 className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-pink-700">
           {pick.name}
         </h3>
