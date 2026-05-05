@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -7,6 +8,7 @@ import VendorsListClient from '@/components/vendors/VendorsListClient';
 import { getVendors } from '@/lib/catalog';
 import { generateBreadcrumbSchema } from '@/lib/seo';
 import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
+import { resolveShorthand } from '@/lib/searchShorthand';
 import {
   breadcrumbLD,
   jsonLdScript,
@@ -20,8 +22,27 @@ export default async function VendorsPage({
 }: {
   searchParams?: { q?: string };
 }) {
+  // Search-shorthand: region matches redirect to /vendors/in/<region>; city
+  // and neighborhood matches feed the canonical string into the listing
+  // client so the existing fuzzy filter takes over from there.
+  let initialSearch = searchParams?.q?.trim() ?? '';
+  if (initialSearch) {
+    const resolved = resolveShorthand(initialSearch);
+    if (resolved?.type === 'region') {
+      redirect(`/vendors/in/${resolved.region}`);
+    }
+    if (resolved?.type === 'city') {
+      initialSearch = resolved.city;
+    }
+    if (resolved?.type === 'neighborhood') {
+      // Vendors listing has no neighborhood dropdown — best we can do is
+      // hand the canonical string to the search input and let the existing
+      // fuzzy match against vendor service-area / city.
+      initialSearch = resolved.neighborhood;
+    }
+  }
+
   const vendors = await getVendors();
-  const initialSearch = searchParams?.q?.trim() ?? '';
 
   return (
     <>

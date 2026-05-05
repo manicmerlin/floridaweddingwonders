@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -8,6 +9,8 @@ import { getVenues, decorateVenuesWithClaims } from '@/lib/catalog';
 import { decorateVenuesWithRatings } from '@/lib/reviews';
 import { generateBreadcrumbSchema } from '@/lib/seo';
 import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
+import { resolveShorthand } from '@/lib/searchShorthand';
+import { getRegionBySlug } from '@/lib/hyperlocal';
 import {
   breadcrumbLD,
   jsonLdScript,
@@ -24,12 +27,44 @@ export default async function VenuesPage({
 }: {
   searchParams?: { q?: string };
 }) {
+  // Search-shorthand: turn casual variants ("fll", "panhandle", "30a") into
+  // navigation intent BEFORE we touch the catalog. Region matches redirect
+  // to /venues/in/<region>; city/neighborhood matches feed the canonical
+  // string into the listing client so the existing fuzzy filter takes
+  // over from there.
+  let initialSearch = searchParams?.q?.trim() ?? '';
+  let initialRegion: string | undefined;
+  let initialNeighborhood: string | undefined;
+  if (initialSearch) {
+    const resolved = resolveShorthand(initialSearch);
+    if (resolved?.type === 'region') {
+      redirect(`/venues/in/${resolved.region}`);
+    }
+    if (resolved?.type === 'city') {
+      initialSearch = resolved.city;
+    }
+    if (resolved?.type === 'neighborhood') {
+      // Pre-select the region + neighborhood dropdowns; clear the free-
+      // text search so the chained filters do the work cleanly.
+      const region = resolved.region ? getRegionBySlug(resolved.region) : undefined;
+      // Region-dropdown values are city strings (the dropdown is built from
+      // unique city names), so we can't pre-select on slug. Instead, fall
+      // back to using the neighborhood string as the search term — the
+      // listing client filters by neighborhood= when the dropdown picks it,
+      // but the search text alone is enough for the fuzzy match across
+      // name/description/city.
+      void region;
+      initialRegion = undefined;
+      initialNeighborhood = resolved.neighborhood;
+      initialSearch = '';
+    }
+  }
+
   // decorateVenuesWithClaims runs ONE query for all venue ownerships,
   // not per-card — keeps the listing fast even at 129 cards.
   const venues = await decorateVenuesWithClaims(
     await decorateVenuesWithRatings(await getVenues())
   );
-  const initialSearch = searchParams?.q?.trim() ?? '';
 
   return (
     <>
@@ -85,7 +120,12 @@ export default async function VenuesPage({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
         </section>
-        <VenuesListClient venues={venues} initialSearch={initialSearch} />
+        <VenuesListClient
+          venues={venues}
+          initialSearch={initialSearch}
+          initialRegion={initialRegion}
+          initialNeighborhood={initialNeighborhood}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <LeadMagnetCapture source="venues" />
         </div>

@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import DressShopsListClient from '@/components/dress-shops/DressShopsListClient';
 import { getDressShops } from '@/lib/catalog';
 import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
+import { resolveShorthand } from '@/lib/searchShorthand';
 import {
   breadcrumbLD,
   dressShopListLD,
@@ -25,8 +27,23 @@ export default async function DressShopsPage({
 }: {
   searchParams?: { q?: string };
 }) {
+  // Search-shorthand: region matches redirect to /dress-shops/in/<region>;
+  // city/neighborhood matches feed the canonical string into the listing.
+  let initialSearch = searchParams?.q?.trim() ?? '';
+  if (initialSearch) {
+    const resolved = resolveShorthand(initialSearch);
+    if (resolved?.type === 'region') {
+      redirect(`/dress-shops/in/${resolved.region}`);
+    }
+    if (resolved?.type === 'city') {
+      initialSearch = resolved.city;
+    }
+    if (resolved?.type === 'neighborhood') {
+      initialSearch = resolved.neighborhood;
+    }
+  }
+
   const shops = await getDressShops();
-  const initialSearch = searchParams?.q?.trim() ?? '';
 
   return (
     <>
