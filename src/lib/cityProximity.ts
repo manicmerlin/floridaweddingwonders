@@ -59,68 +59,21 @@ interface RawEntry {
 }
 
 // Each entry: aliases (normalized) → suggested covered regions + rationale.
-// Naples + Marco + Fort Myers are within our footprint already, so we route
-// Gulf-coast queries to those rather than to Miami.
+// Tampa Bay, Sarasota–Bradenton, and Southwest Florida (Naples/Marco/Fort
+// Myers/Sanibel/Captiva) are now first-class regions with real venues, so
+// they DON'T appear here — those queries hit live results. This map only
+// covers genuinely off-coverage Florida (Central/Northeast/Panhandle).
 const RAW_ENTRIES: RawEntry[] = [
-  {
-    displayName: 'St. Petersburg',
-    aliases: ['st petersburg', 'st pete', 'st pete fl', 'saint petersburg', 'st petersberg'],
-    regionSlugs: ['naples', 'fort-myers'],
-    rationale: {
-      naples: 'Closest covered area on the Gulf side — about 2 hours south.',
-      'fort-myers': 'Also Gulf-side, slightly closer than Naples.',
-    },
-    note: "We focus on South Florida — we don't have venues in the Tampa Bay area yet.",
-  },
-  {
-    displayName: 'Tampa',
-    aliases: ['tampa', 'tampa bay', 'tampa fl'],
-    regionSlugs: ['naples', 'fort-myers'],
-    rationale: {
-      naples: 'Closest covered area on the Gulf side — about 2 hours south.',
-      'fort-myers': 'Also Gulf-side, slightly closer than Naples.',
-    },
-    note: "We focus on South Florida — we don't have venues in the Tampa Bay area yet.",
-  },
-  {
-    displayName: 'Clearwater',
-    aliases: ['clearwater', 'clearwater beach'],
-    regionSlugs: ['naples', 'fort-myers'],
-    rationale: {
-      naples: 'Closest covered area on the Gulf side — about 2.5 hours south.',
-      'fort-myers': 'Also Gulf-side, slightly closer than Naples.',
-    },
-    note: "We focus on South Florida — Clearwater is outside our coverage today.",
-  },
-  {
-    displayName: 'Sarasota',
-    aliases: ['sarasota', 'siesta key'],
-    regionSlugs: ['naples', 'fort-myers'],
-    rationale: {
-      naples: 'Closest covered area on the Gulf side — about 90 minutes south.',
-      'fort-myers': 'Also Gulf-side, similar drive.',
-    },
-    note: "We don't cover Sarasota directly yet — these Gulf-coast areas are nearest.",
-  },
-  {
-    displayName: 'Bradenton',
-    aliases: ['bradenton', 'anna maria island'],
-    regionSlugs: ['naples', 'fort-myers'],
-    rationale: {
-      naples: 'Closest covered area on the Gulf side.',
-      'fort-myers': 'Also Gulf-side.',
-    },
-    note: "We don't cover Bradenton directly yet — these Gulf-coast areas are nearest.",
-  },
   {
     displayName: 'Orlando',
     aliases: ['orlando', 'orlando fl', 'lake buena vista', 'kissimmee', 'disney', 'walt disney world'],
-    regionSlugs: ['palm-beach', 'fort-lauderdale'],
+    regionSlugs: ['palm-beach', 'fort-lauderdale', 'tampa-bay'],
     rationale: {
       'palm-beach': 'Closest covered area on the east coast — about 2.5 hours south.',
       'fort-lauderdale': 'Slightly further south but a deeper venue catalog.',
+      'tampa-bay': 'Closest covered area on the Gulf side — about 90 minutes west.',
     },
-    note: "We focus on South Florida — we don't cover Central Florida or theme-park weddings yet.",
+    note: "We focus on Florida's coasts — we don't cover Central Florida or theme-park weddings yet.",
   },
   {
     displayName: 'Jacksonville',
@@ -129,7 +82,7 @@ const RAW_ENTRIES: RawEntry[] = [
     rationale: {
       'palm-beach': 'Closest covered area — but still ~4 hours south.',
     },
-    note: "We focus on South Florida — Jacksonville is well outside our coverage.",
+    note: "Jacksonville is well outside our coverage today.",
   },
   {
     displayName: 'St. Augustine',
@@ -138,7 +91,7 @@ const RAW_ENTRIES: RawEntry[] = [
     rationale: {
       'palm-beach': 'Closest covered area — about 3 hours south.',
     },
-    note: "We focus on South Florida — St. Augustine is outside our coverage today.",
+    note: "St. Augustine is outside our coverage today.",
   },
   {
     displayName: 'Daytona Beach',
@@ -152,31 +105,42 @@ const RAW_ENTRIES: RawEntry[] = [
   {
     displayName: 'Pensacola',
     aliases: ['pensacola', 'destin', 'panama city', 'panama city beach', 'fort walton beach', '30a'],
-    regionSlugs: ['naples'],
+    regionSlugs: ['tampa-bay', 'southwest-florida'],
     rationale: {
-      naples: 'Closest covered area on the Gulf — but still a long drive from the Panhandle.',
+      'tampa-bay': 'Closest covered area on the Gulf — but still a long drive from the Panhandle.',
+      'southwest-florida': 'Also Gulf-side, further south.',
     },
-    note: "We focus on South Florida — the Panhandle is well outside our coverage.",
+    note: "The Panhandle is well outside our coverage.",
   },
   {
     displayName: 'Tallahassee',
     aliases: ['tallahassee'],
-    regionSlugs: ['naples', 'palm-beach'],
+    regionSlugs: ['tampa-bay', 'palm-beach'],
     rationale: {
-      naples: 'Closest covered area on the Gulf side.',
+      'tampa-bay': 'Closest covered area on the Gulf side.',
       'palm-beach': 'Closest on the east coast.',
     },
-    note: "We focus on South Florida — Tallahassee is well outside our coverage.",
+    note: "Tallahassee is well outside our coverage today.",
   },
   {
     displayName: 'Gainesville',
     aliases: ['gainesville'],
-    regionSlugs: ['palm-beach', 'naples'],
+    regionSlugs: ['tampa-bay', 'palm-beach'],
     rationale: {
+      'tampa-bay': 'Closest covered area on the Gulf side.',
       'palm-beach': 'Closest east-coast area we cover.',
-      naples: 'Closest Gulf-side area we cover.',
     },
-    note: "We focus on South Florida — Gainesville is well outside our coverage.",
+    note: "Gainesville is well outside our coverage today.",
+  },
+  {
+    displayName: 'Ocala / The Villages',
+    aliases: ['ocala', 'the villages', 'leesburg'],
+    regionSlugs: ['tampa-bay', 'palm-beach'],
+    rationale: {
+      'tampa-bay': 'Closest covered area on the Gulf side.',
+      'palm-beach': 'Closest east-coast area we cover.',
+    },
+    note: "We don't cover north-central Florida directly yet.",
   },
 ];
 
