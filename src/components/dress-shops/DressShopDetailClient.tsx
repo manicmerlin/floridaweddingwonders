@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { placeholderUrlForDressShop } from '@/lib/placeholderImages';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -452,19 +453,36 @@ export default function DressShopDetailClient({ dressShop, relatedShops }: Props
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
               More {dressShop.shopType} Shops
             </h2>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {relatedShops.map((relatedShop) => (
                 <Link key={relatedShop.id} href={`/dress-shops/${relatedShop.slug || relatedShop.id}`} className="block group">
-                  <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow p-6">
-                    <div className="text-center mb-4">
-                      <div className="text-4xl mb-2">👗</div>
-                    </div>
-                    
-                    <div className="text-center">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                    {relatedShop.slug ? (
+                      <div className="relative h-48 w-full bg-gray-100 overflow-hidden">
+                        <Image
+                          src={placeholderUrlForDressShop(relatedShop.slug)}
+                          alt={`${relatedShop.name} — watercolor illustration`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                          quality={85}
+                        />
+                      </div>
+                    ) : (
+                      <div className="h-48 bg-gradient-to-br from-pink-300 to-purple-400 flex items-center justify-center text-5xl">
+                        👗
+                      </div>
+                    )}
+                    <div className="p-5 text-center">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">{relatedShop.name}</h3>
                       <p className="text-gray-600 text-sm mb-2">📍 {relatedShop.address.city}, {relatedShop.address.state}</p>
-                      <p className="text-pink-600 font-medium">${relatedShop.priceRange.min}-${relatedShop.priceRange.max}</p>
+                      {(relatedShop.priceRange.min > 0 || relatedShop.priceRange.max > 0) && (
+                        <p className="text-pink-600 font-medium">
+                          ${relatedShop.priceRange.min.toLocaleString()}-${relatedShop.priceRange.max.toLocaleString()}
+                        </p>
+                      )}
                       <p className="text-gray-500 text-sm mt-1">{relatedShop.brands.length} brands</p>
                     </div>
                   </div>
