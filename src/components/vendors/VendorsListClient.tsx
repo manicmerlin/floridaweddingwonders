@@ -3,14 +3,18 @@
 import { useMemo, useState } from 'react';
 import { Vendor } from '@/types';
 import VendorListingCard from '@/components/vendors/VendorListingCard';
+import EmptySearchFallback from '@/components/EmptySearchFallback';
+import { fuzzyMatchesCity, normalizeQuery } from '@/lib/cityProximity';
 
 interface Props {
   vendors: Vendor[];
+  /** Pre-fill from /vendors?q=<value>. */
+  initialSearch?: string;
 }
 
-export default function VendorsListClient({ vendors }: Props) {
+export default function VendorsListClient({ vendors, initialSearch = '' }: Props) {
   const [activeTab, setActiveTab] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const categories = useMemo(
@@ -34,11 +38,21 @@ export default function VendorsListClient({ vendors }: Props) {
           .filter(Boolean)
           .join(' ')
           .toLowerCase();
-        if (!haystack.includes(q)) return false;
+        if (haystack.includes(q)) return true;
+        // Fuzzy alias match — "st pete" → "st. petersburg" etc.
+        const normQ = normalizeQuery(searchTerm);
+        if (normQ.length >= 2 && fuzzyMatchesCity(searchTerm, v.address.city)) return true;
+        return false;
       }
       return true;
     });
   }, [vendors, activeTab, selectedCategory, searchTerm]);
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('');
+    setActiveTab('all');
+  };
 
   // All 14 vendor categories the catalog supports. Each tab counts vendors
   // whose `category` matches the id, then we drop empty ones — so the tab
@@ -135,21 +149,27 @@ export default function VendorsListClient({ vendors }: Props) {
       <section className="py-12 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredVendors.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-gray-400 text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold text-white mb-2">No vendors found</h3>
-              <p className="text-gray-300 mb-6">Try adjusting your search or filters</p>
-              <button
-                onClick={() => {
-                  setSearchTerm('');
-                  setSelectedCategory('');
-                  setActiveTab('all');
-                }}
-                className="text-pink-300 hover:text-pink-200 font-medium"
-              >
-                Clear all filters
-              </button>
-            </div>
+            searchTerm ? (
+              <EmptySearchFallback
+                query={searchTerm}
+                kind="vendors"
+                totalCount={vendors.length}
+                noun="vendor"
+                onClear={clearFilters}
+              />
+            ) : (
+              <div className="text-center py-12">
+                <div className="text-gray-400 text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-semibold text-white mb-2">No vendors found</h3>
+                <p className="text-gray-300 mb-6">Try adjusting your filters</p>
+                <button
+                  onClick={clearFilters}
+                  className="text-pink-300 hover:text-pink-200 font-medium"
+                >
+                  Clear all filters
+                </button>
+              </div>
+            )
           ) : (
             <>
               <div className="flex justify-between items-center mb-8">

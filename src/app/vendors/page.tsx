@@ -15,8 +15,13 @@ import {
 
 export const dynamic = 'force-dynamic';
 
-export default async function VendorsPage() {
+export default async function VendorsPage({
+  searchParams,
+}: {
+  searchParams?: { q?: string };
+}) {
   const vendors = await getVendors();
+  const initialSearch = searchParams?.q?.trim() ?? '';
 
   return (
     <>
@@ -70,7 +75,7 @@ export default async function VendorsPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-purple-900/80" />
         </section>
-        <VendorsListClient vendors={vendors} />
+        <VendorsListClient vendors={vendors} initialSearch={initialSearch} />
 
         {/* Venue-owner cross-link — subtle, distinct from the vendor-owner
             CTA below. Aimed at venue owners who land here while shopping

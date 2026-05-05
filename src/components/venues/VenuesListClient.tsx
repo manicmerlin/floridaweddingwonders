@@ -4,7 +4,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Pagination from '@/components/Pagination';
+import EmptySearchFallback from '@/components/EmptySearchFallback';
 import { compareByTier } from '@/lib/tierFeatures';
+import { fuzzyMatchesCity, normalizeQuery } from '@/lib/cityProximity';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -42,12 +44,23 @@ export default function VenuesListClient({
     let out = visible;
     if (searchTerm) {
       const q = searchTerm.toLowerCase();
-      out = out.filter(
-        (v) =>
+      const normQ = normalizeQuery(searchTerm);
+      out = out.filter((v) => {
+        // Substring match on name / description / city — works for the
+        // bulk of queries.
+        if (
           v.name.toLowerCase().includes(q) ||
           v.description.toLowerCase().includes(q) ||
           v.address.city.toLowerCase().includes(q)
-      );
+        ) {
+          return true;
+        }
+        // Fuzzy alias match — "st pete" → "st. petersburg", "ft laud"
+        // → "fort lauderdale". Catches the casual short forms users
+        // actually type. Falls back to substring above so legit name
+        // matches still hit even if normalize would drop characters.
+        return normQ.length >= 2 && fuzzyMatchesCity(searchTerm, v.address.city);
+      });
     }
     if (selectedRegion) {
       out = out.filter((v) =>
@@ -186,17 +199,29 @@ export default function VenuesListClient({
       <section className="py-12 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredVenues.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-semibold text-white mb-2">No venues found</h3>
-              <p className="text-gray-300 mb-6">Try adjusting your search criteria or filters</p>
-              <button
-                onClick={clearFilters}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                Clear All Filters
-              </button>
-            </div>
+            searchTerm ? (
+              // Search-driven empty state — try to convert "St. Pete →
+              // Naples" rather than dropping the user on a sad-face wall.
+              <EmptySearchFallback
+                query={searchTerm}
+                kind="venues"
+                totalCount={visible.length}
+                noun="venue"
+                onClear={clearFilters}
+              />
+            ) : (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-semibold text-white mb-2">No venues found</h3>
+                <p className="text-gray-300 mb-6">Try adjusting your filters</p>
+                <button
+                  onClick={clearFilters}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            )
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
