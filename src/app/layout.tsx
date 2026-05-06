@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import './globals.css'
 import { generateHomeMetadata, SITE_CONFIG } from '@/lib/seo'
 import AuthProvider from '@/components/AuthProvider'
@@ -13,13 +15,19 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Locale comes from the NEXT_LOCALE cookie (or Accept-Language fallback)
+  // resolved in src/i18n/request.ts. The <html lang> attribute flips with
+  // it so a Spanish session reports lang="es" to assistive tech and to
+  // search engines.
+  const locale = await getLocale()
+  const messages = await getMessages()
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -38,10 +46,17 @@ export default function RootLayout({
         */}
         <meta name="p:domain_verify" content="<NEEDS_VERIFICATION>" />
 
-        {/* Hreflang tags for multilingual support */}
+        {/* Hreflang — bilingual UX (T3-1). URLs don't change with locale
+            (cookie-driven), so en + es + x-default all point at the same
+            canonical. Telling Google "this URL is also available in
+            Spanish" without forking the URL keeps SEO authority in one
+            place. og:locale + og:locale:alternate do the same job for
+            Facebook/Twitter rendering. */}
         <link rel="alternate" hrefLang="x-default" href="https://floridaweddingwonders.com" />
         <link rel="alternate" hrefLang="en" href="https://floridaweddingwonders.com" />
-        <link rel="alternate" hrefLang="es" href="https://floridaweddingwonders.com/es" />
+        <link rel="alternate" hrefLang="es" href="https://floridaweddingwonders.com" />
+        <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+        <meta property="og:locale:alternate" content={locale === 'es' ? 'en_US' : 'es_ES'} />
         
         {/* Google Analytics */}
         <Script
@@ -101,8 +116,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <AuthProvider>{children}</AuthProvider>
-        <StickyMobileCTA />
+        <NextIntlClientProvider messages={messages}>
+          <AuthProvider>{children}</AuthProvider>
+          <StickyMobileCTA />
+        </NextIntlClientProvider>
       </body>
     </html>
   )

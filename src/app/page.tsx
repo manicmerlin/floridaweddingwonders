@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import SEO from '@/components/SEO';
 import FAQ from '@/components/FAQ';
 import HomeHeroMosaic from '@/components/HomeHeroMosaic';
@@ -13,9 +14,11 @@ import { getSiteStatsLive, getHomeHeroPicks } from '@/lib/catalog';
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const [stats, heroPicks] = await Promise.all([
+  const [stats, heroPicks, t, tFooter] = await Promise.all([
     getSiteStatsLive(),
     getHomeHeroPicks(),
+    getTranslations('Hero'),
+    getTranslations('Footer'),
   ]);
   return (
     <>
@@ -65,10 +68,10 @@ export default async function HomePage() {
               real iPhone widths (390px). break-words lets long brand
               names wrap if a future rename lands. */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-6 break-words">
-            Florida Wedding Wonders
+            {t('siteName')}
           </h1>
           <p className="text-base sm:text-lg lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
-            Discover stunning wedding venues, trusted vendors, and beautiful bridal shops across the Sunshine State.
+            {t('subhead')}
           </p>
 
           {/* Search bar — single input + Search button. Posts to
@@ -91,26 +94,26 @@ export default async function HomePage() {
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               <div className="text-5xl mb-4">🏛️</div>
-              <div className="text-2xl mb-3 group-hover:text-purple-200 transition-colors">Wedding Venues</div>
-              <div className="text-sm text-gray-300 leading-relaxed">From beachfront ceremonies to elegant ballrooms, discover Florida's most breathtaking wedding venues.</div>
+              <div className="text-2xl mb-3 group-hover:text-purple-200 transition-colors">{t('weddingVenues')}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">{t('weddingVenuesBlurb')}</div>
             </a>
-            
-            <a 
-              href="/vendors" 
+
+            <a
+              href="/vendors"
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               <div className="text-5xl mb-4">🎯</div>
-              <div className="text-2xl mb-3 group-hover:text-pink-200 transition-colors">Wedding Vendors</div>
-              <div className="text-sm text-gray-300 leading-relaxed">Connect with trusted photographers, caterers, florists, and all the professionals you need for your perfect day.</div>
+              <div className="text-2xl mb-3 group-hover:text-pink-200 transition-colors">{t('weddingVendors')}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">{t('weddingVendorsBlurb')}</div>
             </a>
-            
-            <a 
-              href="/dress-shops" 
+
+            <a
+              href="/dress-shops"
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white p-8 rounded-2xl font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               <div className="text-5xl mb-4">👗</div>
-              <div className="text-2xl mb-3 group-hover:text-rose-200 transition-colors">Bridal Shops</div>
-              <div className="text-sm text-gray-300 leading-relaxed">Browse stunning bridal collections from Florida's premier dress shops and find your dream gown.</div>
+              <div className="text-2xl mb-3 group-hover:text-rose-200 transition-colors">{t('bridalShops')}</div>
+              <div className="text-sm text-gray-300 leading-relaxed">{t('bridalShopsBlurb')}</div>
             </a>
           </div>
 
@@ -119,41 +122,41 @@ export default async function HomePage() {
             <div className="grid grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.venues}</div>
-                <div className="text-gray-300 font-medium">Wedding Venues</div>
+                <div className="text-gray-300 font-medium">{t('statVenues')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.vendors}</div>
-                <div className="text-gray-300 font-medium">Wedding Vendors</div>
+                <div className="text-gray-300 font-medium">{t('statVendors')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stats.dressShops}</div>
-                <div className="text-gray-300 font-medium">Bridal Shops</div>
+                <div className="text-gray-300 font-medium">{t('statShops')}</div>
               </div>
             </div>
           </div>
 
           {/* CTA Section */}
           <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-400/30 rounded-2xl p-8 mb-16">
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Plan Your Dream Wedding?</h3>
-            <p className="text-gray-300 mb-6">Start exploring Florida's most beautiful venues and connect with trusted wedding professionals.</p>
+            <h3 className="text-2xl font-bold text-white mb-4">{t('ctaTitle')}</h3>
+            <p className="text-gray-300 mb-6">{t('ctaBlurb')}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/venues"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                Explore Venues 🏛️
+                {t('ctaExploreVenues')} 🏛️
               </a>
               <a
                 href="/quotes/request"
                 className="bg-gradient-to-r from-amber-500 to-rose-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                Get Quotes from 5 Venues ⚡
+                {t('ctaGetQuotes')} ⚡
               </a>
               <a
                 href="/venue-packages"
                 className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                List Your Venue 💼
+                {t('ctaListYourVenue')} 💼
               </a>
             </div>
           </div>
@@ -165,10 +168,10 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Common Questions About Florida Weddings
+              {t('faqTitle')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get expert answers to the most frequently asked questions about planning your perfect Florida wedding.
+              {t('faqSubtitle')}
             </p>
           </div>
           
@@ -182,7 +185,7 @@ export default async function HomePage() {
               href="/faq"
               className="inline-block px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg transition-colors"
             >
-              View All FAQs →
+              {t('faqViewAll')} →
             </a>
           </div>
         </div>
@@ -204,36 +207,36 @@ export default async function HomePage() {
                 <span className="text-xl font-bold">Florida Wedding Wonders</span>
               </div>
               <p className="text-gray-400">
-                Creating unforgettable moments in the Sunshine State.
+                {tFooter('tagline2')}
               </p>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-lg font-semibold mb-4">{tFooter('quickLinks')}</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="/venues" className="hover:text-white transition-colors">Wedding Venues</a></li>
-                <li><a href="/vendors" className="hover:text-white transition-colors">Wedding Vendors</a></li>
-                <li><a href="/dress-shops" className="hover:text-white transition-colors">Bridal Shops</a></li>
-                <li><a href="/blog" className="hover:text-white transition-colors">Wedding Blog</a></li>
-                <li><a href="/faq" className="hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="/venue-packages" className="hover:text-white transition-colors">List Your Venue</a></li>
+                <li><a href="/venues" className="hover:text-white transition-colors">{tFooter('weddingVenues')}</a></li>
+                <li><a href="/vendors" className="hover:text-white transition-colors">{tFooter('weddingVendors')}</a></li>
+                <li><a href="/dress-shops" className="hover:text-white transition-colors">{tFooter('bridalShops')}</a></li>
+                <li><a href="/blog" className="hover:text-white transition-colors">{tFooter('weddingBlog')}</a></li>
+                <li><a href="/faq" className="hover:text-white transition-colors">{tFooter('faqs')}</a></li>
+                <li><a href="/venue-packages" className="hover:text-white transition-colors">{tFooter('listYourVenue')}</a></li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
+              <h4 className="text-lg font-semibold mb-4">{tFooter('contactInfo')}</h4>
               <div className="space-y-2 text-gray-400">
                 <p>📧 <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-white transition-colors">{SITE_CONFIG.email}</a></p>
                 {SITE_CONFIG.phone && (
                   <p>📱 <a href={`tel:${SITE_CONFIG.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white transition-colors">{SITE_CONFIG.phone}</a></p>
                 )}
-                <p>📍 South Florida</p>
+                <p>📍 {tFooter('southFlorida')}</p>
               </div>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2025 Florida Wedding Wonders. All rights reserved.</p>
+            <p>{tFooter('copyright')}</p>
           </div>
         </div>
       </footer>

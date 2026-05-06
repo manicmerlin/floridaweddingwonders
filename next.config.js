@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 
+// next-intl plugin — wires src/i18n/request.ts into the build so server
+// components can call getTranslations(). We use the "without i18n routing"
+// setup (cookie-driven locale, no [locale] segment in URLs).
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
 // Security headers to protect against common vulnerabilities
 const securityHeaders = [
   {
@@ -103,4 +109,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)

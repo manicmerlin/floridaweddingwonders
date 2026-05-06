@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   /**
@@ -23,6 +24,7 @@ interface ApiResponse {
 }
 
 export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
+  const t = useTranslations('LeadMagnet');
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<ApiResponse | null>(null);
@@ -41,7 +43,7 @@ export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
       });
       const data: ApiResponse = await res.json();
       if (!res.ok || !data.success || !data.pdfUrl) {
-        setError('Something went wrong. Try again?');
+        setError(t('errorBody'));
         return;
       }
       setSuccess(data);
@@ -55,7 +57,7 @@ export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
       a.click();
       a.remove();
     } catch {
-      setError('Network error. Try again?');
+      setError(t('errorBody'));
     } finally {
       setSubmitting(false);
     }
@@ -72,14 +74,14 @@ export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
         }
       >
         <p className="text-gray-800 mb-2">
-          {success.message ?? 'Thanks! Your checklist is downloading.'}
+          {success.message ?? t('successBody')}
         </p>
         <a
           href={success.pdfUrl}
           download
           className="text-pink-700 font-semibold underline hover:text-pink-800"
         >
-          Download didn&apos;t start? Click here.
+          {t('successTitle')}
         </a>
       </div>
     );
@@ -95,26 +97,26 @@ export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
         <div className="flex items-center gap-3 flex-1 text-sm text-gray-800">
           <span aria-hidden className="text-2xl">📋</span>
           <span>
-            <strong className="text-gray-900">Free South Florida wedding planning checklist (PDF).</strong>{' '}
-            <span className="text-gray-600">Enter your email and we&apos;ll send it.</span>
+            <strong className="text-gray-900">{t('title')}</strong>{' '}
+            <span className="text-gray-600">{t('subtitle')}</span>
           </span>
         </div>
         <input
           type="email"
           required
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder={t('emailPlaceholder')}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="flex-1 sm:flex-none sm:w-64 border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-          aria-label="Email address"
+          aria-label={t('emailLabel')}
         />
         <button
           type="submit"
           disabled={submitting || !email}
           className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md text-sm font-medium disabled:bg-pink-300"
         >
-          {submitting ? 'Sending...' : 'Send checklist'}
+          {submitting ? t('submitting') : t('submitButton')}
         </button>
         {error && <span className="text-red-600 text-sm">{error}</span>}
       </form>
@@ -131,10 +133,10 @@ export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
         <span aria-hidden className="text-3xl shrink-0">📋</span>
         <div>
           <h3 className="text-base font-semibold text-gray-900 mb-0.5">
-            Get our free South Florida wedding planning checklist
+            {t('title')}
           </h3>
           <p className="text-sm text-gray-600">
-            One page. Real timelines. Built from couples we&apos;ve worked with.
+            {t('subtitle')}
           </p>
         </div>
       </div>
@@ -143,18 +145,18 @@ export default function LeadMagnetCapture({ source, variant = 'card' }: Props) {
           type="email"
           required
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder={t('emailPlaceholder')}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full sm:w-56 border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-          aria-label="Email address"
+          aria-label={t('emailLabel')}
         />
         <button
           type="submit"
           disabled={submitting || !email}
           className="bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-md text-sm font-semibold disabled:bg-pink-300"
         >
-          {submitting ? 'Sending...' : 'Get the PDF'}
+          {submitting ? t('submitting') : t('submitButton')}
         </button>
       </div>
       {error && (

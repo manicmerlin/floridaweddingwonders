@@ -3,11 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { signOut } from '@/lib/auth';
 import { useAuth } from '@/components/AuthProvider';
 import Logo from '@/components/Logo';
+import LanguageToggle from '@/components/LanguageToggle';
 
 export default function Navigation() {
+  const t = useTranslations('Nav');
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, isSuperAdmin: isSuper } = useAuth();
@@ -26,13 +29,13 @@ export default function Navigation() {
   };
 
   const navLinks = [
-    { href: '/venues', label: 'Browse Venues' },
-    { href: '/dress-shops', label: 'Dress Shops' },
-    { href: '/vendors', label: 'Vendors' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/tools', label: 'Tools' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/venues', label: t('browseVenues') },
+    { href: '/dress-shops', label: t('dressShops') },
+    { href: '/vendors', label: t('vendors') },
+    { href: '/blog', label: t('blog') },
+    { href: '/tools', label: t('tools') },
+    { href: '/about', label: t('about') },
+    { href: '/contact', label: t('contact') },
   ];
 
   return (
@@ -70,7 +73,7 @@ export default function Navigation() {
                   href="/favorites"
                   className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-md font-medium transition"
                 >
-                  View Saved
+                  {t('viewSaved')}
                 </Link>
                 {isSuper && (
                   <Link
@@ -81,14 +84,14 @@ export default function Navigation() {
                         : 'text-gray-700 hover:text-blue-600'
                     }`}
                   >
-                    Admin
+                    {t('admin')}
                   </Link>
                 )}
                 <button
                   onClick={handleLogout}
                   className="font-medium text-gray-700 hover:text-blue-600 transition"
                 >
-                  Logout
+                  {t('logout')}
                 </button>
               </>
             ) : (
@@ -101,16 +104,17 @@ export default function Navigation() {
                       : 'text-gray-700 hover:text-blue-600'
                   }`}
                 >
-                  Login
+                  {t('login')}
                 </Link>
                 <Link
                   href="/register"
                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition"
                 >
-                  Sign Up
+                  {t('signUp')}
                 </Link>
               </>
             )}
+            <LanguageToggle />
           </div>
 
           {/* Mobile menu button */}
@@ -155,7 +159,7 @@ export default function Navigation() {
                     className="block px-3 py-2 mx-3 mt-2 bg-pink-600 hover:bg-pink-700 text-white rounded-md text-base font-medium text-center transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    View Saved
+                    {t('viewSaved')}
                   </Link>
                   {isSuper && (
                     <Link
@@ -167,7 +171,7 @@ export default function Navigation() {
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Admin
+                      {t('admin')}
                     </Link>
                   )}
                   <button
@@ -177,7 +181,7 @@ export default function Navigation() {
                     }}
                     className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition"
                   >
-                    Logout
+                    {t('logout')}
                   </button>
                 </>
               ) : (
@@ -191,17 +195,20 @@ export default function Navigation() {
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Login
+                    {t('login')}
                   </Link>
                   <Link
                     href="/register"
                     className="block px-3 py-2 mx-3 mt-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-base font-medium text-center transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Sign Up
+                    {t('signUp')}
                   </Link>
                 </>
               )}
+              <div className="px-3 py-2">
+                <LanguageToggle />
+              </div>
             </div>
           </div>
         )}

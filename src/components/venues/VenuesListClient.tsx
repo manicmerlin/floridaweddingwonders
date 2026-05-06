@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Pagination from '@/components/Pagination';
@@ -38,6 +39,8 @@ export default function VenuesListClient({
    *  resolver when a query like "sobe" / "the grove" lands here. */
   initialNeighborhood?: string;
 }) {
+  const t = useTranslations('VenuesList');
+  const tCta = useTranslations('MultiQuoteCTA');
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedRegion, setSelectedRegion] = useState(initialRegion);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState(initialNeighborhood);
@@ -158,17 +161,17 @@ export default function VenuesListClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div>
             <p className="text-white font-semibold">
-              ⚡ Compare quotes from up to 5 venues at once
+              ⚡ {tCta('compareTitle')}
             </p>
             <p className="text-pink-100 text-sm">
-              One form. Pre-qualified leads. Faster responses than reaching out individually.
+              {tCta('compareSubtitle')}
             </p>
           </div>
           <a
             href="/quotes/request"
             className="bg-white text-pink-700 font-semibold px-5 py-2 rounded-lg hover:bg-pink-50 whitespace-nowrap"
           >
-            Get matching quotes →
+            {tCta('ctaButton')} →
           </a>
         </div>
       </section>
@@ -178,7 +181,7 @@ export default function VenuesListClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6">
             <p className="text-lg text-gray-300">
-              Discover stunning wedding venues across the Sunshine State from beachfront ceremonies to elegant ballrooms
+              {t('introCopy')}
             </p>
           </div>
 
@@ -186,7 +189,7 @@ export default function VenuesListClient({
             <div className="lg:col-span-2">
               <input
                 type="text"
-                placeholder="Search venues, locations, or features..."
+                placeholder={t('searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-2 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
@@ -197,7 +200,7 @@ export default function VenuesListClient({
               onChange={(e) => setSelectedRegion(e.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
             >
-              <option value="">All Regions</option>
+              <option value="">{t('allRegions')}</option>
               {regions.map((r) => (
                 <option key={r} value={r}>
                   {r}
@@ -213,9 +216,9 @@ export default function VenuesListClient({
                 value={selectedNeighborhood}
                 onChange={(e) => setSelectedNeighborhood(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                aria-label="Neighborhood"
+                aria-label={t('neighborhoodLabel')}
               >
-                <option value="">All Neighborhoods</option>
+                <option value="">{t('allNeighborhoods')}</option>
                 {neighborhoodsForRegion.map((n) => (
                   <option key={n} value={n}>
                     {n}
@@ -228,10 +231,10 @@ export default function VenuesListClient({
               onChange={(e) => setSelectedType(e.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
             >
-              <option value="">All Types</option>
-              {venueTypes.map((t) => (
-                <option key={t} value={t} className="capitalize">
-                  {t}
+              <option value="">{t('allTypes')}</option>
+              {venueTypes.map((vt) => (
+                <option key={vt} value={vt} className="capitalize">
+                  {vt}
                 </option>
               ))}
             </select>
@@ -240,17 +243,17 @@ export default function VenuesListClient({
               onChange={(e) => setSelectedCapacity(e.target.value)}
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
             >
-              <option value="">Any Size</option>
-              <option value="0-100">Intimate (Up to 100)</option>
-              <option value="100-200">Medium (100-200)</option>
-              <option value="200-400">Large (200-400)</option>
-              <option value="400">Grand (400+)</option>
+              <option value="">{t('anySize')}</option>
+              <option value="0-100">{t('capacityIntimate')}</option>
+              <option value="100-200">{t('capacityMedium')}</option>
+              <option value="200-400">{t('capacityLarge')}</option>
+              <option value="400">{t('capacityGrand')}</option>
             </select>
           </div>
 
           <div className="mt-4 text-gray-300">
-            Showing {paginatedVenues.length} of {filteredVenues.length} venues
-            {searchTerm && ` for "${searchTerm}"`}
+            {t('showing')} {paginatedVenues.length} {t('of')} {filteredVenues.length} {t('venuesPlural')}
+            {searchTerm && ` ${t('for')} "${searchTerm}"`}
           </div>
         </div>
       </section>
@@ -272,13 +275,13 @@ export default function VenuesListClient({
             ) : (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-semibold text-white mb-2">No venues found</h3>
-                <p className="text-gray-300 mb-6">Try adjusting your filters</p>
+                <h3 className="text-2xl font-semibold text-white mb-2">{t('noResultsTitle')}</h3>
+                <p className="text-gray-300 mb-6">{t('noResultsSubtitle')}</p>
                 <button
                   onClick={clearFilters}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
-                  Clear All Filters
+                  {t('clearFilters')}
                 </button>
               </div>
             )

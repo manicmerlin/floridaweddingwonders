@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import DressShopCard from '@/components/DressShopCard';
 import EmptySearchFallback from '@/components/EmptySearchFallback';
 import { fuzzyMatchesCity, normalizeQuery } from '@/lib/cityProximity';
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function DressShopsListClient({ shops, initialSearch = '' }: Props) {
+  const t = useTranslations('DressShopsList');
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedType, setSelectedType] = useState('');
@@ -62,19 +64,19 @@ export default function DressShopsListClient({ shops, initialSearch = '' }: Prop
     const counts = new Map<string, number>();
     shops.forEach((s) => counts.set(s.shopType, (counts.get(s.shopType) ?? 0) + 1));
     return [
-      { id: 'all', label: 'All Shops', count: shops.length },
-      { id: 'boutique', label: 'Boutiques', count: counts.get('boutique') ?? 0 },
-      { id: 'designer', label: 'Designer', count: counts.get('designer') ?? 0 },
-      { id: 'department', label: 'Department Stores', count: counts.get('department') ?? 0 },
-      { id: 'salon', label: 'Salons', count: counts.get('salon') ?? 0 },
-      { id: 'showroom', label: 'Showrooms', count: counts.get('showroom') ?? 0 },
-      { id: 'mega-store', label: 'Mega-Stores', count: counts.get('mega-store') ?? 0 },
-      { id: 'mobile service', label: 'Mobile Service', count: counts.get('mobile service') ?? 0 },
-      { id: 'consignment', label: 'Consignment', count: counts.get('consignment') ?? 0 },
-      { id: 'vintage', label: 'Vintage', count: counts.get('vintage') ?? 0 },
-      { id: 'plus-size', label: 'Plus Size', count: counts.get('plus-size') ?? 0 },
-    ].filter((t) => t.id === 'all' || t.count > 0);
-  }, [shops]);
+      { id: 'all', label: t('tabAll'), count: shops.length },
+      { id: 'boutique', label: t('tabBoutique'), count: counts.get('boutique') ?? 0 },
+      { id: 'designer', label: t('tabDesigner'), count: counts.get('designer') ?? 0 },
+      { id: 'department', label: t('tabDepartment'), count: counts.get('department') ?? 0 },
+      { id: 'salon', label: t('tabSalon'), count: counts.get('salon') ?? 0 },
+      { id: 'showroom', label: t('tabShowroom'), count: counts.get('showroom') ?? 0 },
+      { id: 'mega-store', label: t('tabMegaStore'), count: counts.get('mega-store') ?? 0 },
+      { id: 'mobile service', label: t('tabMobile'), count: counts.get('mobile service') ?? 0 },
+      { id: 'consignment', label: t('tabConsignment'), count: counts.get('consignment') ?? 0 },
+      { id: 'vintage', label: t('tabVintage'), count: counts.get('vintage') ?? 0 },
+      { id: 'plus-size', label: t('tabPlusSize'), count: counts.get('plus-size') ?? 0 },
+    ].filter((tab) => tab.id === 'all' || tab.count > 0);
+  }, [shops, t]);
 
   return (
     <>
@@ -82,26 +84,26 @@ export default function DressShopsListClient({ shops, initialSearch = '' }: Prop
       <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 text-center">
-            Bridal Shops in Florida
+            {t('title')}
           </h1>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="md:col-span-2">
               <input
                 type="text"
-                placeholder="Search by shop name, designer, or location..."
+                placeholder={t('searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
               />
             </div>
-            
+
             <div>
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
               >
-                <option value="">All Shop Types</option>
+                <option value="">{t('allShopTypes')}</option>
                 {shopTypes.map(type => (
                   <option key={type} value={type}>
                     {type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ')}
@@ -109,17 +111,17 @@ export default function DressShopsListClient({ shops, initialSearch = '' }: Prop
                 ))}
               </select>
             </div>
-            
+
             <div>
               <select
                 value={priceFilter}
                 onChange={(e) => setPriceFilter(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
               >
-                <option value="">All Price Ranges</option>
-                <option value="budget">Budget-Friendly (Under $1,000)</option>
-                <option value="mid">Mid-Range ($1,000-$3,000)</option>
-                <option value="luxury">Luxury ($3,000+)</option>
+                <option value="">{t('allPriceRanges')}</option>
+                <option value="budget">{t('priceBudget')}</option>
+                <option value="mid">{t('priceMid')}</option>
+                <option value="luxury">{t('priceLuxury')}</option>
               </select>
             </div>
           </div>
@@ -172,8 +174,8 @@ export default function DressShopsListClient({ shops, initialSearch = '' }: Prop
             ) : (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-6xl mb-4">👗</div>
-                <h3 className="text-xl font-semibold text-white mb-2">No dress shops found</h3>
-                <p className="text-gray-300 mb-6">Try adjusting your filters</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{t('noResultsTitle')}</h3>
+                <p className="text-gray-300 mb-6">{t('noResultsSubtitle')}</p>
                 <button
                   onClick={() => {
                     setSelectedType('');
@@ -182,7 +184,7 @@ export default function DressShopsListClient({ shops, initialSearch = '' }: Prop
                   }}
                   className="text-pink-300 hover:text-pink-200 font-medium"
                 >
-                  Clear all filters
+                  {t('clearFilters')}
                 </button>
               </div>
             )
@@ -190,10 +192,11 @@ export default function DressShopsListClient({ shops, initialSearch = '' }: Prop
             <>
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  {filteredShops.length} Dress Shop{filteredShops.length !== 1 ? 's' : ''} Found
+                  {filteredShops.length}{' '}
+                  {filteredShops.length === 1 ? t('shopsFoundOne') : t('shopsFoundMany')}
                 </h2>
                 <div className="text-sm text-gray-600">
-                  Showing {activeTab === 'all' ? 'all shop types' : tabOptions.find(t => t.id === activeTab)?.label}
+                  {t('showing')} {activeTab === 'all' ? t('showingAll') : tabOptions.find((tab) => tab.id === activeTab)?.label}
                 </div>
               </div>
 
