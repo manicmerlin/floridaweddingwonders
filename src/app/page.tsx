@@ -14,10 +14,11 @@ import { getSiteStatsLive, getHomeHeroPicks } from '@/lib/catalog';
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const [stats, heroPicks, t] = await Promise.all([
+  const [stats, heroPicks, t, tFooter] = await Promise.all([
     getSiteStatsLive(),
     getHomeHeroPicks(),
     getTranslations('Hero'),
+    getTranslations('Footer'),
   ]);
   return (
     <>
@@ -136,26 +137,26 @@ export default async function HomePage() {
 
           {/* CTA Section */}
           <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-400/30 rounded-2xl p-8 mb-16">
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Plan Your Dream Wedding?</h3>
-            <p className="text-gray-300 mb-6">Start exploring Florida's most beautiful venues and connect with trusted wedding professionals.</p>
+            <h3 className="text-2xl font-bold text-white mb-4">{t('ctaTitle')}</h3>
+            <p className="text-gray-300 mb-6">{t('ctaBlurb')}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/venues"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                Explore Venues 🏛️
+                {t('ctaExploreVenues')} 🏛️
               </a>
               <a
                 href="/quotes/request"
                 className="bg-gradient-to-r from-amber-500 to-rose-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                Get Quotes from 5 Venues ⚡
+                {t('ctaGetQuotes')} ⚡
               </a>
               <a
                 href="/venue-packages"
                 className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                List Your Venue 💼
+                {t('ctaListYourVenue')} 💼
               </a>
             </div>
           </div>
@@ -167,10 +168,10 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Common Questions About Florida Weddings
+              {t('faqTitle')}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get expert answers to the most frequently asked questions about planning your perfect Florida wedding.
+              {t('faqSubtitle')}
             </p>
           </div>
           
@@ -184,7 +185,7 @@ export default async function HomePage() {
               href="/faq"
               className="inline-block px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg transition-colors"
             >
-              View All FAQs →
+              {t('faqViewAll')} →
             </a>
           </div>
         </div>
@@ -206,36 +207,36 @@ export default async function HomePage() {
                 <span className="text-xl font-bold">Florida Wedding Wonders</span>
               </div>
               <p className="text-gray-400">
-                Creating unforgettable moments in the Sunshine State.
+                {tFooter('tagline2')}
               </p>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-lg font-semibold mb-4">{tFooter('quickLinks')}</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="/venues" className="hover:text-white transition-colors">Wedding Venues</a></li>
-                <li><a href="/vendors" className="hover:text-white transition-colors">Wedding Vendors</a></li>
-                <li><a href="/dress-shops" className="hover:text-white transition-colors">Bridal Shops</a></li>
-                <li><a href="/blog" className="hover:text-white transition-colors">Wedding Blog</a></li>
-                <li><a href="/faq" className="hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="/venue-packages" className="hover:text-white transition-colors">List Your Venue</a></li>
+                <li><a href="/venues" className="hover:text-white transition-colors">{tFooter('weddingVenues')}</a></li>
+                <li><a href="/vendors" className="hover:text-white transition-colors">{tFooter('weddingVendors')}</a></li>
+                <li><a href="/dress-shops" className="hover:text-white transition-colors">{tFooter('bridalShops')}</a></li>
+                <li><a href="/blog" className="hover:text-white transition-colors">{tFooter('weddingBlog')}</a></li>
+                <li><a href="/faq" className="hover:text-white transition-colors">{tFooter('faqs')}</a></li>
+                <li><a href="/venue-packages" className="hover:text-white transition-colors">{tFooter('listYourVenue')}</a></li>
               </ul>
             </div>
-            
+
             <div>
-              <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
+              <h4 className="text-lg font-semibold mb-4">{tFooter('contactInfo')}</h4>
               <div className="space-y-2 text-gray-400">
                 <p>📧 <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-white transition-colors">{SITE_CONFIG.email}</a></p>
                 {SITE_CONFIG.phone && (
                   <p>📱 <a href={`tel:${SITE_CONFIG.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white transition-colors">{SITE_CONFIG.phone}</a></p>
                 )}
-                <p>📍 South Florida</p>
+                <p>📍 {tFooter('southFlorida')}</p>
               </div>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2025 Florida Wedding Wonders. All rights reserved.</p>
+            <p>{tFooter('copyright')}</p>
           </div>
         </div>
       </footer>

@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import type { Venue } from '@/types';
 
 interface Props {
@@ -11,12 +14,9 @@ interface Props {
  * Florida-Ready panel — surfaces the four hurricane / rain-plan signals
  * that differentiate Florida-experienced venues. Renders nothing when no
  * field is populated (most rows until owners self-tag via the dashboard).
- *
- * Why a panel and not chips: storm policies are paragraphs of context,
- * not single tags. A boxed panel reads as a deliberate "we've thought
- * about this" signal; chips would feel like checkboxes for SEO.
  */
 export default function FloridaReadyPanel({ venue }: Props) {
+  const t = useTranslations('FloridaReady');
   const hasAny =
     venue.generatorBackup === true ||
     venue.acTentAvailable === true ||
@@ -31,10 +31,8 @@ export default function FloridaReadyPanel({ venue }: Props) {
           🌀
         </span>
         <div>
-          <h3 className="text-lg font-bold text-gray-900">Florida-Ready</h3>
-          <p className="text-sm text-gray-500">
-            Practical preparation for hurricane season and afternoon storms.
-          </p>
+          <h3 className="text-lg font-bold text-gray-900">{t('title')}</h3>
+          <p className="text-sm text-gray-500">{t('subtitle')}</p>
         </div>
       </div>
 
@@ -42,33 +40,30 @@ export default function FloridaReadyPanel({ venue }: Props) {
         {venue.generatorBackup === true && (
           <li className="flex items-start text-sm">
             <span className="text-emerald-600 mr-2 mt-0.5">✓</span>
-            <span className="text-gray-700">
-              <strong className="text-gray-900">Generator backup</strong> on standby for outages.
-            </span>
+            <span className="text-gray-700">{t('generatorBackup')}</span>
           </li>
         )}
         {venue.acTentAvailable === true && (
           <li className="flex items-start text-sm">
             <span className="text-emerald-600 mr-2 mt-0.5">✓</span>
-            <span className="text-gray-700">
-              <strong className="text-gray-900">A/C tent available</strong> for outdoor events in summer heat.
-            </span>
+            <span className="text-gray-700">{t('acTent')}</span>
           </li>
         )}
         {typeof venue.indoorFallbackCapacity === 'number' && (
           <li className="flex items-start text-sm">
             <span className="text-emerald-600 mr-2 mt-0.5">✓</span>
             <span className="text-gray-700">
-              <strong className="text-gray-900">Indoor fallback</strong> seats up to{' '}
-              {venue.indoorFallbackCapacity.toLocaleString()} guests if weather forces a move.
+              {t('indoorFallback', { n: venue.indoorFallbackCapacity })}
             </span>
           </li>
         )}
       </ul>
 
+      {/* storm_policy_text is user-content (per spec) — render verbatim, no
+          translation. Heading is translated. */}
       {venue.stormPolicyText && (
         <div className="border-t border-emerald-100 pt-4">
-          <p className="text-sm font-semibold text-gray-900 mb-1">Storm / rain policy</p>
+          <p className="text-sm font-semibold text-gray-900 mb-1">{t('stormPolicyHeading')}</p>
           <p className="text-sm text-gray-700 whitespace-pre-line">{venue.stormPolicyText}</p>
         </div>
       )}

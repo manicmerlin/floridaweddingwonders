@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -7,8 +8,9 @@ import { getAllPosts, formatDate, calculateReadingTime } from '@/lib/blog';
 import { PAGE_HERO_IMAGES } from '@/lib/pageImages';
 import LeadMagnetCapture from '@/components/LeadMagnetCapture';
 
-export default function BlogPage() {
+export default async function BlogPage() {
   const posts = getAllPosts();
+  const t = await getTranslations('BlogIndex');
 
   return (
     <>
@@ -51,10 +53,10 @@ export default function BlogPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <div className="text-center">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 drop-shadow-lg">
-              Florida Wedding Planning Blog
+              {t('title')}
             </h1>
             <p className="text-xl lg:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow">
-              Expert tips, insider advice, and comprehensive guides to help you plan your dream Florida wedding.
+              {t('subtitle')}
             </p>
           </div>
         </div>
@@ -68,8 +70,8 @@ export default function BlogPage() {
             {posts.length === 0 ? (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-6xl mb-4">📝</div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">No blog posts yet</h2>
-                <p className="text-gray-600">Check back soon for wedding planning tips and guides!</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('noPostsTitle')}</h2>
+                <p className="text-gray-600">{t('noPostsBody')}</p>
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -127,7 +129,7 @@ export default function BlogPage() {
                       {/* Meta Info */}
                       <div className="flex items-center justify-between text-xs text-gray-500">
                         <span>{formatDate(post.date)}</span>
-                        <span>{calculateReadingTime(post.content)} min read</span>
+                        <span>{calculateReadingTime(post.content)} {t('minRead')}</span>
                       </div>
                     </div>
                   </Link>
@@ -141,35 +143,32 @@ export default function BlogPage() {
         <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Ready to Find Your Perfect Venue?
+              {t('ctaTitle')}
             </h2>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Browse 130+ stunning Florida wedding venues with transparent pricing and real reviews.
+              {t('ctaBody')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/venues"
                 className="px-8 py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg transition-colors"
               >
-                Browse Venues
+                {t('ctaBrowse')}
               </a>
               <a
                 href="/faq"
                 className="px-8 py-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-lg transition-colors"
               >
-                View FAQs
+                {t('ctaFaqs')}
               </a>
             </div>
-            {/* Phase A — venue-owner cross-link. Subtle, separate from the
-                couples CTA above, so venue-owners reading the blog have a
-                clear path to the package page. */}
             <p className="mt-8 text-sm text-gray-400">
-              Are you a venue owner?{' '}
+              {t('ownerHint')}{' '}
               <Link
                 href="/venue-packages"
                 className="text-pink-300 hover:text-pink-200 underline font-medium"
               >
-                See our partnership tiers →
+                {t('ownerHintLink')} →
               </Link>
             </p>
           </div>

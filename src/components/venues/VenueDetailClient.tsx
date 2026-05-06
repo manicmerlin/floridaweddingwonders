@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
@@ -38,6 +39,7 @@ interface Props {
 }
 
 export default function VenueDetailClient({ venue: serverVenue, relatedVenues, cityVendors = [] }: Props) {
+  const t = useTranslations('VenueDetail');
   const [activeTab, setActiveTab] = useState('overview');
   const [showContactForm, setShowContactForm] = useState(false);
   // Start with the server-rendered venue. The effect below replaces images
@@ -67,9 +69,9 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
   }, [serverVenue]);
 
   const tabs = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'details', label: 'Details' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'overview', label: t('tabOverview') },
+    { id: 'details', label: t('tabDetails') },
+    { id: 'contact', label: t('tabContact') }
   ];
 
   return (
@@ -228,7 +230,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
           <div className="grid grid-cols-2 gap-4 lg:hidden">
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <div className="text-2xl font-bold text-pink-600">{venue.capacity.min}-{venue.capacity.max}</div>
-              <div className="text-gray-600 text-sm">Guest Capacity</div>
+              <div className="text-gray-600 text-sm">{t('guestsCapacity')}</div>
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               {venue.externalReviews?.google ? (
@@ -245,12 +247,12 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                       className="w-full h-full"
                     />
                   </div>
-                  <div className="text-gray-600 text-xs text-center">View on Maps</div>
+                  <div className="text-gray-600 text-xs text-center">{t('viewOnMaps')}</div>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="text-lg text-gray-400">📍</div>
-                  <div className="text-gray-600 text-xs">Location</div>
+                  <div className="text-gray-600 text-xs">{t('location')}</div>
                 </div>
               )}
             </div>
@@ -258,17 +260,17 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
               {venue.pricing.startingPrice > 0 ? (
                 <>
                   <div className="text-lg font-bold text-pink-600">From ${venue.pricing.startingPrice.toLocaleString()}</div>
-                  <div className="text-gray-600 text-sm">Starting Price</div>
+                  <div className="text-gray-600 text-sm">{t('startingPrice')}</div>
                 </>
               ) : venue.reviews.count > 0 ? (
                 <>
                   <div className="text-lg font-bold text-amber-600">★ {venue.reviews.rating.toFixed(1)}</div>
-                  <div className="text-gray-600 text-sm">{venue.reviews.count} reviews</div>
+                  <div className="text-gray-600 text-sm">{venue.reviews.count} {t('reviews')}</div>
                 </>
               ) : (
                 <>
                   <div className="text-lg font-bold text-gray-400">—</div>
-                  <div className="text-gray-600 text-sm">New listing</div>
+                  <div className="text-gray-600 text-sm">{t('newListing')}</div>
                 </>
               )}
             </div>
@@ -276,7 +278,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
               <div className="text-lg font-bold text-pink-600">
                 {venue.capacity.max >= 150 ? 'Large' : venue.capacity.max >= 100 ? 'Medium' : 'Intimate'}
               </div>
-              <div className="text-gray-600 text-sm">Event Size</div>
+              <div className="text-gray-600 text-sm">{t('eventSize')}</div>
             </div>
           </div>
 
@@ -289,17 +291,17 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
               {venue.pricing.startingPrice > 0 ? (
                 <>
                   <div className="text-2xl font-bold text-pink-600">From ${venue.pricing.startingPrice.toLocaleString()}</div>
-                  <div className="text-gray-600">Starting Price</div>
+                  <div className="text-gray-600">{t('startingPrice')}</div>
                 </>
               ) : venue.reviews.count > 0 ? (
                 <>
                   <div className="text-2xl font-bold text-amber-600">★ {venue.reviews.rating.toFixed(1)}</div>
-                  <div className="text-gray-600">{venue.reviews.count} reviews</div>
+                  <div className="text-gray-600">{venue.reviews.count} {t('reviews')}</div>
                 </>
               ) : (
                 <>
                   <div className="text-2xl font-bold text-gray-400">—</div>
-                  <div className="text-gray-600">New listing</div>
+                  <div className="text-gray-600">{t('newListing')}</div>
                 </>
               )}
             </div>
@@ -307,7 +309,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
               <div className="text-2xl font-bold text-pink-600">
                 {venue.capacity.max >= 150 ? 'Large' : venue.capacity.max >= 100 ? 'Medium' : 'Intimate'}
               </div>
-              <div className="text-gray-600">Event Size</div>
+              <div className="text-gray-600">{t('eventSize')}</div>
             </div>
             <div>
               {venue.externalReviews?.google ? (
@@ -324,12 +326,12 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                       className="w-full h-full"
                     />
                   </div>
-                  <div className="text-gray-600">View on Maps</div>
+                  <div className="text-gray-600">{t('viewOnMaps')}</div>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center">
                   <div className="text-2xl text-gray-400">📍</div>
-                  <div className="text-gray-600">Location</div>
+                  <div className="text-gray-600">{t('location')}</div>
                 </div>
               )}
             </div>
@@ -352,7 +354,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
             onClick={() => setShowContactForm(true)}
             className="flex-1 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-all"
           >
-            💌 Contact
+            💌 {t('contactVenue')}
           </button>
           <SaveVenueButton 
             venue={venue} 
@@ -373,14 +375,14 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
       <section className="hidden lg:block bg-white py-8 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Interested in This Venue?</h2>
-            <p className="text-gray-600 mb-6">Get personalized pricing and availability for your special day</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('interestedTitle')}</h2>
+            <p className="text-gray-600 mb-6">{t('interestedSubtitle')}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
                 onClick={() => setShowContactForm(true)}
                 className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg"
               >
-                💌 Request Information
+                💌 {t('requestInfo')}
               </button>
               <SaveVenueButton venue={venue} size="lg" showText={true} className="bg-white border-2 border-pink-300 text-pink-600 hover:bg-pink-50 px-6 py-3 rounded-lg font-semibold text-lg shadow-lg" />
               <div className="flex items-center space-x-4">
@@ -409,7 +411,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
           <div className="lg:hidden space-y-6">
             {/* Description Card */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">About {venue.name}</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">{t('aboutVenue')} {venue.name}</h2>
               <p className="text-gray-600 leading-relaxed">
                 {venue.description}
               </p>
@@ -420,15 +422,15 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Details</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Venue Type</span>
+                  <span className="text-gray-600">{t('venueType')}</span>
                   <span className="font-medium text-gray-900 capitalize">{venue.venueType}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Capacity</span>
-                  <span className="font-medium text-gray-900">{venue.capacity.min}-{venue.capacity.max} guests</span>
+                  <span className="text-gray-600">{t('capacityLabel')}</span>
+                  <span className="font-medium text-gray-900">{venue.capacity.min}-{venue.capacity.max} {t('guests')}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Google Maps</span>
+                  <span className="text-gray-600">{t('googleMaps')}</span>
                   {venue.externalReviews?.google ? (
                     <a 
                       href={venue.externalReviews.google.url} 
@@ -443,14 +445,14 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                         height={20}
                         className="mr-2"
                       />
-                      View Location
+                      {t('viewLocation')}
                     </a>
                   ) : (
-                    <span className="font-medium text-gray-400">Not Available</span>
+                    <span className="font-medium text-gray-400">{t('notAvailable')}</span>
                   )}
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Location</span>
+                  <span className="text-gray-600">{t('location')}</span>
                   <span className="font-medium text-gray-900">{venue.address.city}</span>
                 </div>
               </div>
@@ -459,7 +461,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
             {/* Amenities Card */}
             {venue.amenities && venue.amenities.length > 0 && (
               <div className="bg-white rounded-lg p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Amenities & Services</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('amenitiesServices')}</h3>
                 <div className="grid grid-cols-1 gap-3">
                   {venue.amenities.slice(0, 6).map((amenity, index) => (
                     <div key={index} className="flex items-center">
@@ -471,7 +473,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                   ))}
                   {venue.amenities.length > 6 && (
                     <button className="text-left text-pink-600 text-sm font-medium mt-2">
-                      View all {venue.amenities.length} amenities
+                      {t('viewAllAmenities')} ({venue.amenities.length})
                     </button>
                   )}
                 </div>
@@ -484,7 +486,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
 
             {/* Contact Card */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('contactInfo')}</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <svg className="w-5 h-5 text-pink-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -509,7 +511,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                       <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.148.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.029 11H4.083a6.004 6.004 0 002.783 4.118z" clipRule="evenodd" />
                     </svg>
                     <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-600">
-                      Visit Website
+                      {t('visitWebsite')}
                     </a>
                   </div>
                 )}
@@ -518,7 +520,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
 
             {/* Address Card */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Address</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('address')}</h3>
               <div className="flex items-start">
                 <svg className="w-5 h-5 text-pink-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -554,13 +556,13 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
             {activeTab === 'overview' && (
               <div className="grid lg:grid-cols-3 gap-12">
                 <div className="lg:col-span-2">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-6">About {venue.name}</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6">{t('aboutVenue')} {venue.name}</h2>
                   <p className="text-gray-600 text-lg leading-relaxed mb-8">
                     {venue.description}
                   </p>
 
                   <div className="mb-8">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Amenities & Services</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('amenitiesServices')}</h3>
                     <div className="grid md:grid-cols-2 gap-4">
                       {venue.amenities && venue.amenities.map((amenity, index) => (
                         <div key={index} className="flex items-center">
@@ -577,23 +579,23 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Facts</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('quickFacts')}</h3>
                     <div className="bg-gray-50 rounded-lg p-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
-                          <span className="font-medium text-gray-900">Venue Type:</span>
+                          <span className="font-medium text-gray-900">{t('venueType')}:</span>
                           <span className="ml-2 text-gray-600">{venue.venueType}</span>
                         </div>
                         <div>
-                          <span className="font-medium text-gray-900">City:</span>
+                          <span className="font-medium text-gray-900">{t('city')}:</span>
                           <span className="ml-2 text-gray-600">{venue.address.city}</span>
                         </div>
                         <div>
-                          <span className="font-medium text-gray-900">Capacity:</span>
-                          <span className="ml-2 text-gray-600">{venue.capacity.min}-{venue.capacity.max} guests</span>
+                          <span className="font-medium text-gray-900">{t('capacityLabel')}:</span>
+                          <span className="ml-2 text-gray-600">{venue.capacity.min}-{venue.capacity.max} {t('guests')}</span>
                         </div>
                         <div>
-                          <span className="font-medium text-gray-900">Google Maps:</span>
+                          <span className="font-medium text-gray-900">{t('googleMaps')}:</span>
                           {venue.externalReviews?.google ? (
                             <a 
                               href={venue.externalReviews.google.url} 
@@ -608,10 +610,10 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                                 height={16}
                                 className="mr-1"
                               />
-                              View Location
+                              {t('viewLocation')}
                             </a>
                           ) : (
-                            <span className="ml-2 text-gray-400">Not Available</span>
+                            <span className="ml-2 text-gray-400">{t('notAvailable')}</span>
                           )}
                         </div>
                       </div>
@@ -640,7 +642,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                         <div>
                           <span className="text-gray-600">🌐 Website:</span>
                           <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="block text-pink-600 hover:text-pink-700">
-                            Visit Website
+                            {t('visitWebsite')}
                           </a>
                         </div>
                       )}
@@ -651,13 +653,13 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                         href={`mailto:${venue.contact.email}?subject=Wedding Inquiry for ${venue.name}`}
                         className="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-semibold text-center block transition"
                       >
-                        Send Inquiry
+                        {t('sendInquiry')}
                       </a>
                       <a
                         href={`tel:${venue.contact.phone}`}
                         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-semibold text-center block transition"
                       >
-                        Call Now
+                        {t('callNow')}
                       </a>
                     </div>
                   </div>
@@ -668,11 +670,11 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
             {activeTab === 'details' && (
               <div className="grid lg:grid-cols-2 gap-12">
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-6">Venue Details</h2>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6">{t('tabDetails')}</h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Address</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('address')}</h3>
                       <div className="bg-gray-50 rounded-lg p-4">
                         <p className="text-gray-700">{venue.address.street}</p>
                         <p className="text-gray-700">{venue.address.city}, {venue.address.state} {venue.address.zipCode}</p>
@@ -680,11 +682,11 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Capacity Details</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('capacityDetails')}</h3>
                       <div className="bg-gray-50 rounded-lg p-4">
-                        <p className="text-gray-700">Guest Capacity: {venue.capacity.min}-{venue.capacity.max} guests</p>
+                        <p className="text-gray-700">{t('guestsCapacity')}: {venue.capacity.min}-{venue.capacity.max} {t('guests')}</p>
                         <p className="text-gray-700 text-sm mt-1">
-                          Perfect for {venue.capacity.max >= 150 ? 'large' : venue.capacity.max >= 100 ? 'medium' : 'intimate'} celebrations
+                          {t('capacityNote', { size: venue.capacity.max >= 150 ? t('sizeLarge') : venue.capacity.max >= 100 ? t('sizeMedium') : t('sizeIntimate') })}
                         </p>
                       </div>
                     </div>
@@ -732,11 +734,11 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
 
             {activeTab === 'contact' && (
               <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Get In Touch</h2>
-                
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">{t('tabContact')}</h2>
+
                 <div className="grid lg:grid-cols-2 gap-12">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-6">{t('contactInfo')}</h3>
                     
                     <div className="space-y-6">
                       <div className="flex items-start">
@@ -776,7 +778,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
                           <div>
                             <h4 className="font-medium text-gray-900">Website</h4>
                             <a href={venue.contact.website} target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700">
-                              Visit Website
+                              {t('visitWebsite')}
                             </a>
                           </div>
                         </div>
@@ -862,7 +864,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between flex-wrap gap-3 mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                Wedding pros who serve {venue.address.city}
+                {t('morePros')} {venue.address.city}
               </h2>
               <Link
                 href={`/vendors/in/${(venue.address.city || '').toLowerCase().replace(/\s+/g, '-')}`}
@@ -884,7 +886,7 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            More Venues near {venue.address.city}
+            {t('moreVenues')} {venue.address.city}
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">

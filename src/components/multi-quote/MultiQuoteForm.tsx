@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export interface VenueCandidate {
   id: string;
@@ -39,6 +40,7 @@ const VENUE_TYPES = ['beach', 'garden', 'ballroom', 'historic', 'modern', 'rusti
 
 export default function MultiQuoteForm({ candidates }: Props) {
   const router = useRouter();
+  const t = useTranslations('MultiQuoteForm');
   const [step, setStep] = useState<Step>(1);
 
   const [s1, setS1] = useState<Step1State>({
@@ -154,7 +156,7 @@ export default function MultiQuoteForm({ candidates }: Props) {
               {n}
             </div>
             <span className={step >= n ? 'text-gray-800 font-medium' : 'text-gray-500'}>
-              {n === 1 ? 'Wedding details' : n === 2 ? 'Pick venues' : 'Send'}
+              {n === 1 ? t('stepWeddingDetails') : n === 2 ? t('stepPickVenues') : t('stepSend')}
             </span>
             {n < 3 && <span className="mx-2 text-gray-400">→</span>}
           </div>
@@ -224,12 +226,13 @@ function Step1({
   onContinue: () => void;
   canContinue: boolean;
 }) {
+  const t = useTranslations('MultiQuoteForm');
   return (
     <div className="space-y-5">
-      <h2 className="text-2xl font-semibold text-gray-900">Tell us about your wedding</h2>
+      <h2 className="text-2xl font-semibold text-gray-900">{t('step1Title')}</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Preferred date">
+        <Field label={t('fieldPreferredDate')}>
           <input
             type="date"
             value={state.preferredDate}
@@ -237,29 +240,29 @@ function Step1({
             className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-pink-500"
           />
         </Field>
-        <Field label="Date flexibility">
+        <Field label={t('fieldDateFlexibility')}>
           <select
             value={state.dateFlexibility}
             onChange={(e) => onChange({ ...state, dateFlexibility: e.target.value })}
             className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-pink-500"
           >
-            <option value="firm">Firm date</option>
-            <option value="flexible">Flexible (±2 weeks)</option>
-            <option value="very-flexible">Very flexible (any month)</option>
+            <option value="firm">{t('flexibilityFirm')}</option>
+            <option value="flexible">{t('flexibilityFlexible')}</option>
+            <option value="very-flexible">{t('flexibilityVeryFlexible')}</option>
           </select>
         </Field>
-        <Field label="Guest count">
+        <Field label={t('fieldGuestCount')}>
           <input
             type="number"
             min={1}
             max={2000}
             value={state.guestCount}
             onChange={(e) => onChange({ ...state, guestCount: e.target.value })}
-            placeholder="e.g. 120"
+            placeholder={t('guestCountPlaceholder')}
             className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-pink-500"
           />
         </Field>
-        <Field label="Venue budget">
+        <Field label={t('fieldBudget')}>
           <select
             value={state.venuebudget}
             onChange={(e) => onChange({ ...state, venuebudget: e.target.value })}
@@ -281,7 +284,7 @@ function Step1({
           disabled={!canContinue}
           className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-6 py-2.5 rounded-lg disabled:bg-pink-300"
         >
-          Continue → Pick venues
+          {t('continueToVenues')}
         </button>
       </div>
     </div>
@@ -315,12 +318,13 @@ function Step2({
   onContinue: () => void;
   canContinue: boolean;
 }) {
+  const t = useTranslations('MultiQuoteForm');
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold text-gray-900">Pick up to 5 venues</h2>
+        <h2 className="text-2xl font-semibold text-gray-900">{t('step2Title')}</h2>
         <span className="text-sm text-gray-500">
-          Selected: <strong>{selectedIds.length}/5</strong>
+          {t('selectedLabel')} <strong>{selectedIds.length}/5</strong>
         </span>
       </div>
 
@@ -330,7 +334,7 @@ function Step2({
           onChange={(e) => setFilterCity(e.target.value)}
           className="border border-gray-300 rounded-md px-3 py-2 text-sm"
         >
-          <option value="">All cities</option>
+          <option value="">{t('allCities')}</option>
           {cityOptions.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -342,15 +346,15 @@ function Step2({
           onChange={(e) => setFilterType(e.target.value)}
           className="border border-gray-300 rounded-md px-3 py-2 text-sm capitalize"
         >
-          <option value="">All types</option>
-          {VENUE_TYPES.map((t) => (
-            <option key={t} value={t}>
-              {t}
+          <option value="">{t('allTypes')}</option>
+          {VENUE_TYPES.map((vt) => (
+            <option key={vt} value={vt}>
+              {vt}
             </option>
           ))}
         </select>
         <span className="text-sm text-gray-500 self-center">
-          Showing {candidates.length} of {allCount} (capacity-filtered)
+          {t('showingFiltered', { n: candidates.length, total: allCount })}
         </span>
       </div>
 
@@ -380,14 +384,14 @@ function Step2({
                 />
               ) : (
                 <div className="h-32 bg-gray-100 flex items-center justify-center text-gray-400">
-                  No photo
+                  {t('noPhoto')}
                 </div>
               )}
               <div className="p-3">
                 <h3 className="font-semibold text-gray-900 line-clamp-1">{c.name}</h3>
                 <p className="text-xs text-gray-500 mb-1">{c.city}</p>
                 <p className="text-xs text-gray-600">
-                  Capacity: {c.capacityMin}-{c.capacityMax} ·{' '}
+                  {t('capacityShort')} {c.capacityMin}-{c.capacityMax} ·{' '}
                   <span className="capitalize">{c.venueType}</span>
                 </p>
               </div>
@@ -398,14 +402,16 @@ function Step2({
 
       <div className="flex justify-between pt-2">
         <button onClick={onBack} className="text-gray-600 hover:text-gray-900 font-medium">
-          ← Back
+          {t('back')}
         </button>
         <button
           onClick={onContinue}
           disabled={!canContinue}
           className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-6 py-2.5 rounded-lg disabled:bg-pink-300"
         >
-          Continue → Send to {selectedIds.length} {selectedIds.length === 1 ? 'venue' : 'venues'}
+          {selectedIds.length === 1
+            ? t('continueToSendOne', { n: selectedIds.length })
+            : t('continueToSendMany', { n: selectedIds.length })}
         </button>
       </div>
     </div>
@@ -431,13 +437,14 @@ function Step3({
   submitting: boolean;
   submitError: string | null;
 }) {
+  const t = useTranslations('MultiQuoteForm');
   return (
     <div className="space-y-5">
-      <h2 className="text-2xl font-semibold text-gray-900">Almost there</h2>
+      <h2 className="text-2xl font-semibold text-gray-900">{t('step3Title')}</h2>
 
       <div className="bg-pink-50 rounded-lg p-4 mb-4">
         <p className="text-pink-900 font-medium mb-2">
-          Sending your inquiry to {selectedVenues.length} venues:
+          {t('sendingTo', { n: selectedVenues.length })}
         </p>
         <ul className="text-pink-800 text-sm space-y-1">
           {selectedVenues.map((v) => (
@@ -447,7 +454,7 @@ function Step3({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Full name">
+        <Field label={t('fieldFullName')}>
           <input
             type="text"
             value={state.fullName}
@@ -456,7 +463,7 @@ function Step3({
             required
           />
         </Field>
-        <Field label="Email">
+        <Field label={t('fieldEmail')}>
           <input
             type="email"
             value={state.email}
@@ -465,7 +472,7 @@ function Step3({
             required
           />
         </Field>
-        <Field label="Phone (optional)">
+        <Field label={t('fieldPhone')}>
           <input
             type="tel"
             value={state.phone}
@@ -475,14 +482,14 @@ function Step3({
         </Field>
       </div>
 
-      <Field label="Message to all venues">
+      <Field label={t('fieldMessage')}>
         <textarea
           value={state.message}
           onChange={(e) => onChange({ ...state, message: e.target.value })}
           rows={5}
           minLength={10}
           maxLength={4000}
-          placeholder="Share your wedding vision, key dates, must-haves..."
+          placeholder={t('messagePlaceholder')}
           className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-pink-500"
         />
       </Field>
@@ -495,14 +502,18 @@ function Step3({
 
       <div className="flex justify-between pt-2">
         <button onClick={onBack} className="text-gray-600 hover:text-gray-900 font-medium">
-          ← Back
+          {t('back')}
         </button>
         <button
           onClick={onSubmit}
           disabled={!canSubmit || submitting}
           className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-6 py-2.5 rounded-lg disabled:bg-pink-300"
         >
-          {submitting ? 'Sending...' : `Send to ${selectedVenues.length} venues`}
+          {submitting
+            ? t('submitting')
+            : selectedVenues.length === 1
+            ? t('submitOne', { n: selectedVenues.length })
+            : t('submitMany', { n: selectedVenues.length })}
         </button>
       </div>
     </div>
@@ -516,18 +527,19 @@ function SuccessPanel({
   venues: VenueCandidate[];
   onReset: () => void;
 }) {
+  const t = useTranslations('MultiQuoteForm');
   return (
     <div className="text-center py-10 space-y-5">
       <div className="text-6xl">🎉</div>
-      <h2 className="text-3xl font-bold text-gray-900">Quotes requested!</h2>
+      <h2 className="text-3xl font-bold text-gray-900">{t('successTitle')}</h2>
       <p className="text-gray-600 max-w-md mx-auto">
-        Thanks! Your inquiry is on its way to {venues.length}{' '}
-        {venues.length === 1 ? 'venue' : 'venues'}. They&apos;ll respond directly within
-        24 business hours, and you&apos;ll see follow-ups in the email you provided.
+        {venues.length === 1
+          ? t('successBodyOne', { n: venues.length })
+          : t('successBodyMany', { n: venues.length })}
       </p>
       {venues.length > 0 && (
         <div className="bg-pink-50 rounded-lg p-4 max-w-md mx-auto text-left">
-          <h3 className="font-semibold text-pink-900 mb-2">Your inquiry was sent to</h3>
+          <h3 className="font-semibold text-pink-900 mb-2">{t('sentToHeading')}</h3>
           <ul className="text-sm text-pink-800 space-y-1">
             {venues.map((v) => (
               <li key={v.id}>• {v.name} ({v.city})</li>
@@ -536,18 +548,18 @@ function SuccessPanel({
         </div>
       )}
       <div className="bg-blue-50 rounded-lg p-4 max-w-md mx-auto text-left">
-        <h3 className="font-semibold text-blue-900 mb-2">What happens next</h3>
+        <h3 className="font-semibold text-blue-900 mb-2">{t('whatNextHeading')}</h3>
         <ul className="text-sm text-blue-800 space-y-1">
-          <li>• Each venue receives your full inquiry</li>
-          <li>• You&apos;ll get one confirmation email summarizing them all</li>
-          <li>• Replies come directly to your inbox</li>
+          <li>• {t('whatNext1')}</li>
+          <li>• {t('whatNext2')}</li>
+          <li>• {t('whatNext3')}</li>
         </ul>
       </div>
       <button
         onClick={onReset}
         className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-6 py-2.5 rounded-lg"
       >
-        Browse more venues
+        {t('browseMore')}
       </button>
     </div>
   );

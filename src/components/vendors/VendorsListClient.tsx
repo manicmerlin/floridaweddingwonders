@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Vendor } from '@/types';
 import VendorListingCard from '@/components/vendors/VendorListingCard';
 import EmptySearchFallback from '@/components/EmptySearchFallback';
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function VendorsListClient({ vendors, initialSearch = '' }: Props) {
+  const t = useTranslations('VendorsList');
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -63,41 +65,41 @@ export default function VendorsListClient({ vendors, initialSearch = '' }: Props
     const count = (predicate: (cat: string) => boolean) =>
       vendors.filter((v) => predicate(v.category.toLowerCase())).length;
     return [
-      { id: 'all', label: 'All Vendors', count: vendors.length },
-      { id: 'photo', label: 'Photography', count: count((c) => c.includes('photo')) },
-      { id: 'video', label: 'Videography', count: count((c) => c.includes('video')) },
-      { id: 'flor', label: 'Florals', count: count((c) => c.includes('flor')) },
+      { id: 'all', label: t('tabAll'), count: vendors.length },
+      { id: 'photo', label: t('tabPhoto'), count: count((c) => c.includes('photo')) },
+      { id: 'video', label: t('tabVideo'), count: count((c) => c.includes('video')) },
+      { id: 'flor', label: t('tabFlor'), count: count((c) => c.includes('flor')) },
       {
         id: 'music',
-        label: 'Music & DJ',
+        label: t('tabMusic'),
         count: count((c) => c.includes('dj') || c.includes('band') || c.includes('music')),
       },
-      { id: 'cater', label: 'Catering', count: count((c) => c.includes('cater')) },
-      { id: 'baker', label: 'Cakes & Bakers', count: count((c) => c.includes('baker') || c.includes('cake')) },
-      { id: 'plan', label: 'Planning', count: count((c) => c.includes('plan')) },
-      { id: 'rental', label: 'Rentals', count: count((c) => c.includes('rental') || c.includes('decor')) },
-      { id: 'transport', label: 'Transportation', count: count((c) => c.includes('transport')) },
-      { id: 'offici', label: 'Officiants', count: count((c) => c.includes('offici')) },
-      { id: 'hair', label: 'Hair & Makeup', count: count((c) => c.includes('hair') || c.includes('makeup')) },
-      { id: 'entertain', label: 'Entertainment', count: count((c) => c.includes('entertain')) },
-      { id: 'lighting', label: 'Lighting', count: count((c) => c.includes('light')) },
-      { id: 'station', label: 'Stationery', count: count((c) => c.includes('station')) },
-      { id: 'jewel', label: 'Jewelry', count: count((c) => c.includes('jewel')) },
-    ].filter((t) => t.id === 'all' || t.count > 0);
-  }, [vendors]);
+      { id: 'cater', label: t('tabCater'), count: count((c) => c.includes('cater')) },
+      { id: 'baker', label: t('tabBaker'), count: count((c) => c.includes('baker') || c.includes('cake')) },
+      { id: 'plan', label: t('tabPlan'), count: count((c) => c.includes('plan')) },
+      { id: 'rental', label: t('tabRental'), count: count((c) => c.includes('rental') || c.includes('decor')) },
+      { id: 'transport', label: t('tabTransport'), count: count((c) => c.includes('transport')) },
+      { id: 'offici', label: t('tabOffici'), count: count((c) => c.includes('offici')) },
+      { id: 'hair', label: t('tabHair'), count: count((c) => c.includes('hair') || c.includes('makeup')) },
+      { id: 'entertain', label: t('tabEntertain'), count: count((c) => c.includes('entertain')) },
+      { id: 'lighting', label: t('tabLighting'), count: count((c) => c.includes('light')) },
+      { id: 'station', label: t('tabStation'), count: count((c) => c.includes('station')) },
+      { id: 'jewel', label: t('tabJewel'), count: count((c) => c.includes('jewel')) },
+    ].filter((tab) => tab.id === 'all' || tab.count > 0);
+  }, [vendors, t]);
 
   return (
     <>
       <section className="py-8 bg-gray-900/30 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 text-center">
-            Wedding Vendors in Florida
+            {t('title')}
           </h1>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2">
               <input
                 type="text"
-                placeholder="Search vendors by name, location, or service..."
+                placeholder={t('searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
@@ -109,7 +111,7 @@ export default function VendorsListClient({ vendors, initialSearch = '' }: Props
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full px-4 py-3 bg-white/90 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent text-gray-900"
               >
-                <option value="">All Categories</option>
+                <option value="">{t('allCategories')}</option>
                 {categories.map((c) => (
                   <option key={c} value={c}>
                     {c}
@@ -160,13 +162,13 @@ export default function VendorsListClient({ vendors, initialSearch = '' }: Props
             ) : (
               <div className="text-center py-12">
                 <div className="text-gray-400 text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-white mb-2">No vendors found</h3>
-                <p className="text-gray-300 mb-6">Try adjusting your filters</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{t('noResultsTitle')}</h3>
+                <p className="text-gray-300 mb-6">{t('noResultsSubtitle')}</p>
                 <button
                   onClick={clearFilters}
                   className="text-pink-300 hover:text-pink-200 font-medium"
                 >
-                  Clear all filters
+                  {t('clearFilters')}
                 </button>
               </div>
             )
@@ -174,13 +176,14 @@ export default function VendorsListClient({ vendors, initialSearch = '' }: Props
             <>
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-white">
-                  {filteredVendors.length} Vendor{filteredVendors.length !== 1 ? 's' : ''} Found
+                  {filteredVendors.length}{' '}
+                  {filteredVendors.length === 1 ? t('vendorsFoundOne') : t('vendorsFoundMany')}
                 </h2>
                 <div className="text-sm text-gray-300">
-                  Showing{' '}
+                  {t('showing')}{' '}
                   {activeTab === 'all'
-                    ? 'all categories'
-                    : tabOptions.find((t) => t.id === activeTab)?.label}
+                    ? t('showingAll')
+                    : tabOptions.find((tab) => tab.id === activeTab)?.label}
                 </div>
               </div>
 

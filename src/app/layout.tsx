@@ -46,10 +46,17 @@ export default async function RootLayout({
         */}
         <meta name="p:domain_verify" content="<NEEDS_VERIFICATION>" />
 
-        {/* Hreflang tags for multilingual support */}
+        {/* Hreflang — bilingual UX (T3-1). URLs don't change with locale
+            (cookie-driven), so en + es + x-default all point at the same
+            canonical. Telling Google "this URL is also available in
+            Spanish" without forking the URL keeps SEO authority in one
+            place. og:locale + og:locale:alternate do the same job for
+            Facebook/Twitter rendering. */}
         <link rel="alternate" hrefLang="x-default" href="https://floridaweddingwonders.com" />
         <link rel="alternate" hrefLang="en" href="https://floridaweddingwonders.com" />
-        <link rel="alternate" hrefLang="es" href="https://floridaweddingwonders.com/es" />
+        <link rel="alternate" hrefLang="es" href="https://floridaweddingwonders.com" />
+        <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+        <meta property="og:locale:alternate" content={locale === 'es' ? 'en_US' : 'es_ES'} />
         
         {/* Google Analytics */}
         <Script

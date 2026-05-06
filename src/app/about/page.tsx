@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { SITE_CONFIG } from '@/lib/seo';
@@ -21,7 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const t = await getTranslations('AboutPage');
   return (
     <>
       <Navigation />
@@ -49,10 +51,10 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/50"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 py-12 sm:py-16">
           <h1 className="text-5xl md:text-6xl font-bold text-center mb-4 drop-shadow-lg">
-            About Us
+            {t('heroTitle')}
           </h1>
           <p className="text-xl text-center text-blue-50 max-w-2xl mx-auto drop-shadow">
-            Built by people who have lived the wedding world from every angle
+            {t('heroSubtitle')}
           </p>
         </div>
       </div>
@@ -174,22 +176,22 @@ export default function AboutPage() {
       {/* Call to Action */}
       <div className="bg-blue-900 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-3xl font-bold mb-4">Ready to Share Your Story?</h3>
+          <h3 className="text-3xl font-bold mb-4">{t('ctaTitle')}</h3>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Whether you're a venue, vendor, or couple planning your perfect day, we'd love to hear from you.
+            {t('ctaBody')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/venues"
               className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
             >
-              Explore Venues
+              {t('ctaExplore')}
             </a>
             <a
               href="/venue-packages"
               className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors border-2 border-white"
             >
-              List Your Venue
+              {t('ctaList')}
             </a>
           </div>
         </div>

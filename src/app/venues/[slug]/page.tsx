@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import VenueDetailClient from '@/components/venues/VenueDetailClient';
 import {
   getClaimedVenueIds,
@@ -159,20 +160,25 @@ export default async function VenueSlugPage({ params }: Params) {
           VenueClaimButton inside VenueDetailClient. Mobile users miss that
           one entirely; this surfaces the package page on every screen. Only
           renders for unclaimed listings. */}
-      {!isClaimed && (
-        <div className="bg-gray-50 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-700">
-            Own this venue?{' '}
-            <Link
-              href={`/venue-packages?venue=${venue.slug}`}
-              className="text-pink-700 hover:text-pink-800 underline font-medium"
-            >
-              Claim and manage your listing →
-            </Link>
-          </div>
-        </div>
-      )}
+      {!isClaimed && <ClaimCallout slug={venue.slug} />}
       <Footer />
     </>
+  );
+}
+
+async function ClaimCallout({ slug }: { slug: string }) {
+  const t = await getTranslations('VenueDetail');
+  return (
+    <div className="bg-gray-50 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-gray-700">
+        {t('ownThisVenue')}{' '}
+        <Link
+          href={`/venue-packages?venue=${slug}`}
+          className="text-pink-700 hover:text-pink-800 underline font-medium"
+        >
+          {t('claimAndManage')} →
+        </Link>
+      </div>
+    </div>
   );
 }
