@@ -16,8 +16,10 @@ import type {
   Venue,
   Vendor,
   DressShop,
+  SuitShop,
   VenueImage,
   DressShopImage,
+  SuitShopImage,
   VendorImage,
 } from '../types';
 
@@ -57,6 +59,18 @@ function mapVenueImages(images: unknown): VenueImage[] {
 }
 
 function mapDressShopImages(images: unknown): DressShopImage[] {
+  if (!Array.isArray(images)) return [];
+  return images
+    .filter((x): x is Record<string, unknown> => !!x && typeof x === 'object')
+    .map((img, i) => ({
+      id: String(img.id ?? `img-${i}`),
+      url: String(img.url ?? ''),
+      alt: String(img.alt ?? ''),
+      isPrimary: Boolean(img.isPrimary ?? i === 0),
+    }));
+}
+
+function mapSuitShopImages(images: unknown): SuitShopImage[] {
   if (!Array.isArray(images)) return [];
   return images
     .filter((x): x is Record<string, unknown> => !!x && typeof x === 'object')
@@ -577,6 +591,161 @@ export async function getDressShopByLegacyId(legacyId: string): Promise<DressSho
     return null;
   }
   return data ? rowToDressShop(data as DressShopRow) : null;
+}
+
+// ---------------------------------------------------------------------------
+// Suit Shops — sibling to dress_shops with the same shape, different
+// shop_type vocabulary. Lives in its own table (suit_shops).
+// ---------------------------------------------------------------------------
+
+interface SuitShopRow {
+  id: string;
+  legacy_id: string | null;
+  slug: string;
+  name: string;
+  description: string | null;
+  shop_type: string | null;
+  city: string | null;
+  state: string;
+  address_street: string | null;
+  address_zip: string | null;
+  coordinates: { lat?: number; lng?: number } | null;
+  price_min: number | null;
+  price_max: number | null;
+  specialties: unknown;
+  tags: unknown;
+  images: unknown;
+  brands: unknown;
+  services: unknown;
+  hours: unknown;
+  contact_phone: string | null;
+  contact_email: string | null;
+  contact_email_real: boolean;
+  contact_website: string | null;
+  is_premium: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+function rowToSuitShop(row: SuitShopRow): SuitShop {
+  const specialties = Array.isArray(row.specialties) ? (row.specialties as string[]) : [];
+  const tags = Array.isArray(row.tags) ? (row.tags as string[]) : [];
+  const brands = Array.isArray(row.brands) ? (row.brands as string[]) : [];
+  const services = Array.isArray(row.services) ? (row.services as string[]) : [];
+  const hours =
+    row.hours && typeof row.hours === 'object'
+      ? (row.hours as Record<string, string>)
+      : {};
+
+  return {
+    id: row.legacy_id ?? row.id,
+    slug: row.slug,
+    uuid: row.id,
+    name: row.name,
+    description: row.description ?? '',
+    address: {
+      street: row.address_street ?? '',
+      city: row.city ?? '',
+      state: row.state || 'FL',
+      zipCode: row.address_zip ?? '',
+      coordinates:
+        row.coordinates &&
+        typeof row.coordinates.lat === 'number' &&
+        typeof row.coordinates.lng === 'number'
+          ? { lat: row.coordinates.lat, lng: row.coordinates.lng }
+          : undefined,
+    },
+    priceRange: {
+      min: row.price_min ?? 0,
+      max: row.price_max ?? 0,
+    },
+    shopType: (row.shop_type as SuitShop['shopType']) || 'suit-boutique',
+    specialties,
+    tags,
+    images: mapSuitShopImages(row.images),
+    contact: {
+      email: row.contact_email ?? '',
+      phone: row.contact_phone ?? '',
+      website: row.contact_website ?? undefined,
+    },
+    owner: {
+      id: `owner-${row.legacy_id ?? row.id}`,
+      name: '',
+      isPremium: row.is_premium,
+    },
+    hours,
+    services,
+    brands,
+    createdAt: new Date(row.created_at),
+    updatedAt: new Date(row.updated_at),
+  } satisfies SuitShop;
+}
+
+const SUIT_SHOP_SELECT = '*';
+
+export async function getSuitShops(opts: {
+  shopType?: string;
+  search?: string;
+  limit?: number;
+} = {}): Promise<SuitShop[]> {
+  const supabase = createSupabasePublicClient();
+  let q = supabase.from('suit_shops').select(SUIT_SHOP_SELECT).order('name', { ascending: true });
+  if (opts.shopType) q = q.eq('shop_type', opts.shopType);
+  if (opts.limit) q = q.limit(opts.limit);
+  const { data, error } = await q;
+  if (error) {
+    console.error('getSuitShops error:', error);
+    return [];
+  }
+  const rows = (data ?? []) as SuitShopRow[];
+  let shops = rows.map(rowToSuitShop);
+  if (opts.search) {
+    const q2 = opts.search.toLowerCase();
+    shops = shops.filter(
+      (s) =>
+        s.name.toLowerCase().includes(q2) ||
+        s.description.toLowerCase().includes(q2) ||
+        s.address.city.toLowerCase().includes(q2)
+    );
+  }
+  return shops;
+}
+
+export async function getSuitShopBySlug(slug: string): Promise<SuitShop | null> {
+  const supabase = createSupabasePublicClient();
+  const { data, error } = await supabase
+    .from('suit_shops')
+    .select(SUIT_SHOP_SELECT)
+    .eq('slug', slug)
+    .maybeSingle();
+  if (error) {
+    console.error('getSuitShopBySlug error:', error);
+    return null;
+  }
+  return data ? rowToSuitShop(data as SuitShopRow) : null;
+}
+
+export async function getSuitShopByLegacyId(legacyId: string): Promise<SuitShop | null> {
+  const supabase = createSupabasePublicClient();
+  const { data, error } = await supabase
+    .from('suit_shops')
+    .select(SUIT_SHOP_SELECT)
+    .eq('legacy_id', legacyId)
+    .maybeSingle();
+  if (error) {
+    console.error('getSuitShopByLegacyId error:', error);
+    return null;
+  }
+  return data ? rowToSuitShop(data as SuitShopRow) : null;
+}
+
+export async function getAllSuitShopSlugs(): Promise<{ slug: string; legacy_id: string | null; updated_at: string }[]> {
+  const supabase = createSupabasePublicClient();
+  const { data, error } = await supabase
+    .from('suit_shops')
+    .select('slug, legacy_id, updated_at');
+  if (error) return [];
+  return (data ?? []) as any;
 }
 
 /**

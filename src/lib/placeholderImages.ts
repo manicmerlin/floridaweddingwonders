@@ -27,3 +27,7 @@ export function placeholderUrlForDressShop(slug: string): string {
 export function placeholderUrlForVendor(slug: string): string {
   return `${SUPABASE_PUBLIC_BASE}/vendors/${slug}.png`;
 }
+
+export function placeholderUrlForSuitShop(slug: string): string {
+  return `${SUPABASE_PUBLIC_BASE}/suit-shops/${slug}.png`;
+}

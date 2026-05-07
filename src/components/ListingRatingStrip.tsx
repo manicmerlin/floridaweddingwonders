@@ -8,7 +8,7 @@ interface Props {
   /** Slug of the listing the user clicks to. */
   slug: string;
   /** URL kind — drives the deep-link target. */
-  kind: 'venues' | 'vendors' | 'dress-shops';
+  kind: 'venues' | 'vendors' | 'dress-shops' | 'suit-shops';
   /** Optional className override. */
   className?: string;
 }

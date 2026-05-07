@@ -235,6 +235,75 @@ export interface DressShopFilters {
   brands?: string[];
 }
 
+// ---------------------------------------------------------------------------
+// Suit Shops — sibling category to DressShop. Same shape, different shop_type
+// vocabulary (bespoke/tuxedo-rental/suit-boutique/made-to-measure/formalwear).
+// ---------------------------------------------------------------------------
+
+export interface SuitShopImage {
+  id: string;
+  url: string;
+  alt: string;
+  isPrimary?: boolean;
+}
+
+export interface SuitShop {
+  id: string;
+  slug: string;
+  uuid?: string;
+  name: string;
+  description: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    coordinates?: {
+      lat: number;
+      lng: number;
+    };
+  };
+  priceRange: {
+    min: number;
+    max: number;
+  };
+  shopType:
+    | 'bespoke-tailor'
+    | 'tuxedo-rental'
+    | 'suit-boutique'
+    | 'made-to-measure'
+    | 'formalwear';
+  specialties: string[];
+  tags?: string[];
+  images?: SuitShopImage[];
+  contact: {
+    email: string;
+    phone: string;
+    website?: string;
+  };
+  owner: {
+    id: string;
+    name: string;
+    isPremium: boolean;
+  };
+  hours: {
+    [key: string]: string;
+  };
+  services: string[];
+  brands: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SuitShopFilters {
+  location?: string;
+  shopType?: SuitShop['shopType'];
+  minPrice?: number;
+  maxPrice?: number;
+  specialties?: string[];
+  brands?: string[];
+}
+
 export interface VendorImage {
   id: string;
   url: string;
