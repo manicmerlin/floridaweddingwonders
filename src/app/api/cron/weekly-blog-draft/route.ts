@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { runWeeklyContentAgent } from '@/lib/agents/content/weekly';
+import { runWeeklyContentAgent, type RunOptions } from '@/lib/agents/content/weekly';
+import { isVoiceId } from '@/lib/agents/content/voices';
 
 // Phase 7A — Weekly content agent cron endpoint.
 //
@@ -36,7 +37,27 @@ async function handle(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const result = await runWeeklyContentAgent();
+  // Optional query params for manual test runs:
+  //   ?voice_id=storyteller&topic_id=<uuid>&agent_name=storyteller-test
+  //   &skip_notification=true
+  // The default cron call passes none of these so production behaviour is
+  // unchanged. The dedicated agent_name lets test runs coexist with the
+  // daily idempotency unique index.
+  const url = new URL(request.url);
+  const opts: RunOptions = {};
+  const voiceParam = url.searchParams.get('voice_id');
+  if (voiceParam === 'auto' || isVoiceId(voiceParam)) {
+    opts.voiceId = voiceParam as RunOptions['voiceId'];
+  }
+  const topicParam = url.searchParams.get('topic_id');
+  if (topicParam) opts.topicId = topicParam;
+  const agentNameParam = url.searchParams.get('agent_name');
+  if (agentNameParam) opts.agentName = agentNameParam;
+  if (url.searchParams.get('skip_notification') === 'true') {
+    opts.skipNotification = true;
+  }
+
+  const result = await runWeeklyContentAgent(opts);
 
   // Status code mapping:
   //   success / already-ran → 200 (Vercel Cron treats 2xx as success, won't retry)

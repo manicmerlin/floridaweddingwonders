@@ -136,6 +136,7 @@ interface VenueRow {
   ac_tent_available?: boolean | null;
   indoor_fallback_capacity?: number | null;
   storm_policy_text?: string | null;
+  geocode_quality?: 'exact' | 'city-centroid' | null;
 }
 
 function rowToVenue(row: VenueRow): Venue {
@@ -207,6 +208,7 @@ function rowToVenue(row: VenueRow): Venue {
     acTentAvailable: row.ac_tent_available ?? undefined,
     indoorFallbackCapacity: row.indoor_fallback_capacity ?? undefined,
     stormPolicyText: row.storm_policy_text ?? undefined,
+    geocodeQuality: row.geocode_quality ?? undefined,
     claimStatus: 'unclaimed',
   } satisfies Venue;
 }
