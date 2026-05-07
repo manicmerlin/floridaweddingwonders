@@ -91,6 +91,17 @@
     "ctaButton": "Recibir cotizaciones",
     "stickyCta": "Cotizaciones de hasta 5 Lugares"
   },
+  "Map": {
+    "viewList": "Lista",
+    "viewMap": "Mapa",
+    "loading": "Cargando mapa…",
+    "viewDetails": "Ver detalles",
+    "guests": "invitados",
+    "pinnedOf": "{pinned} de {total} fijados",
+    "locationHeading": "Ubicación",
+    "viewOnGoogleMaps": "Ver en Google Maps",
+    "cityAreaNote": "El mapa muestra el área de {city} — la ubicación exacta está disponible con el lugar"
+  },
   "VenuesList": {
     "introCopy": "Descubre lugares espectaculares para bodas en todo el Estado del Sol — desde ceremonias en la playa hasta salones elegantes.",
     "searchPlaceholder": "Busca lugares, ciudades o características...",

@@ -110,6 +110,15 @@ export interface Venue {
   acTentAvailable?: boolean;
   indoorFallbackCapacity?: number;
   stormPolicyText?: string;
+  /** T3-2 ext — Nominatim geocoding quality.
+   *  - 'exact': OSM had a record for the named landmark; pin is at the
+   *    venue itself.
+   *  - 'city-centroid': OSM didn't know the venue, fell back to the city
+   *    centroid. Map still useful for area context but not street-level
+   *    accurate; detail page surfaces a "Map shows the {city} area" note.
+   *  - undefined: no coordinates at all (shouldn't happen post-Phase A
+   *    backfill — every row has either 'exact' or 'city-centroid'). */
+  geocodeQuality?: 'exact' | 'city-centroid';
   claimStatus: 'unclaimed' | 'pending' | 'claimed' | 'rejected';
   claimedBy?: {
     userId: string;
