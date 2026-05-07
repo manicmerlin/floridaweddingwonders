@@ -233,8 +233,9 @@ async function executeRun(agentRunId: string, opts: RunOptions): Promise<AgentRu
     }
   }
 
-  // 7) Compose final MDX with frontmatter (now includes image URLs when present)
-  const finalMdx = composeMdx(draft, metadata, imageResult);
+  // 7) Compose final MDX with frontmatter (now includes image URLs when
+  //    present + the byline corresponding to the resolved voice).
+  const finalMdx = composeMdx(draft, metadata, imageResult, voice);
 
   // 8) Insert pending_posts row
   const { data: postRow, error: postErr } = await admin
@@ -690,20 +691,31 @@ function extractVenueSlugsFromBody(body: string): string[] {
 function composeMdx(
   draft: DraftResult,
   metadata: MetadataResult,
-  imageResult: ImageGenResult | null
+  imageResult: ImageGenResult | null,
+  voice: VoiceModule
 ): string {
   const today = new Date().toISOString().slice(0, 10);
   // Phase 7B: featured image URL falls back to the gradient placeholder so
   // the post still renders on the blog when image-gen is unconfigured/failed.
   const heroImage = imageResult?.imageUrl ?? '/images/blog/default-gradient.jpg';
+  // Per-voice author bios. Kept short — the post detail page renders the
+  // first-name byline; this longer line lands in the structured-data /
+  // sitemap surface where a one-sentence intro reads better than just a
+  // first name.
+  const authorBio =
+    voice.id === 'storyteller'
+      ? 'A modern editorial voice covering grooms, groomsmen, and the men involved in Florida weddings.'
+      : 'A relationship columnist writing for Florida brides — practical guidance wrapped in story.';
   const fm = [
     '---',
     `title: ${yamlString(draft.title)}`,
     `description: ${yamlString(metadata.metaDescription)}`,
     `date: "${today}"`,
     `updatedAt: "${today}"`,
-    'author: "Florida Wedding Wonders Team"',
-    'authorBio: "Drafted by our editorial agent and reviewed by the Florida Wedding Wonders team before publishing."',
+    `author: ${yamlString(voice.authorName)}`,
+    `authorBio: ${yamlString(authorBio)}`,
+    `voiceId: ${yamlString(voice.id)}`,
+    `targetAudience: ${yamlString(voice.targetAudience)}`,
     `category: ${yamlString(draft.category)}`,
     `image: ${yamlString(heroImage)}`,
     // Pinterest image only emitted when present — the consuming /pin OG

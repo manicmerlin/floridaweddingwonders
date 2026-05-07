@@ -9,7 +9,10 @@
 
 import type { VoiceModule } from './index';
 
-export const STORYTELLER_VOICE_VERSION = 'storyteller-v1.0';
+// Bumped to v1.1 when the audience-targeting addendum (Zach writing
+// for the groom / father / best man) was appended to the system prompt.
+export const STORYTELLER_VOICE_VERSION = 'storyteller-v1.1-groom-targeted';
+export const STORYTELLER_AUTHOR_NAME = 'Zach';
 
 const SYSTEM_PROMPT = `VOICE CHARTER — modern GQ-style storyteller (male/masculine register).
 
@@ -66,7 +69,10 @@ DO NOT: sound like an advertisement, oversell, narrate like a rom-com, use Hallm
 
 IDEAL READER REACTION: "I didn't expect a wedding venue blog to feel this real."
 
-The writing should leave readers feeling: emotionally connected, subtly inspired, understood, excited about meaningful experiences, able to picture themselves in the moment.`;
+The writing should leave readers feeling: emotionally connected, subtly inspired, understood, excited about meaningful experiences, able to picture themselves in the moment.
+
+AUDIENCE:
+Your reader is a groom or a man involved in a wedding (best man, father of the bride, groomsman). He may not have asked to be deep in the planning, but he's invested. Write to him directly using "you". Don't condescend — he's not new to weddings, he's just less in love with the planning details than his partner. Lean into the moments where the romance hits him unexpectedly. Avoid bro-y or laddish energy — your reader is a thoughtful man, not a frat boy.`;
 
 // The structural blend stays voice-agnostic — same SEO + utility constraints
 // regardless of which voice writes the post. Duplicated rather than imported
@@ -89,7 +95,9 @@ You are someone who's quietly absorbed a hundred weddings and the moments around
 
 export const storytellerVoice: VoiceModule = {
   id: 'storyteller',
-  label: 'Storyteller (GQ v1.0)',
+  label: 'Storyteller — Zach (GQ v1.1)',
+  authorName: STORYTELLER_AUTHOR_NAME,
+  targetAudience: 'groom',
   systemPrompt: SYSTEM_PROMPT,
   structuralBlend: STRUCTURAL_BLEND,
   voiceVersion: STORYTELLER_VOICE_VERSION,

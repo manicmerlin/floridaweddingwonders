@@ -14,6 +14,12 @@ export interface VoiceModule {
   id: VoiceId;
   /** Human label used in admin UIs / logs. */
   label: string;
+  /** Byline that lands in post frontmatter + the rendered detail page.
+   *  Treated as a proper noun — never translated. */
+  authorName: string;
+  /** Target reader for the voice — drives blog_topic_queue.target_audience
+   *  default and any future personalization (e.g. "More for grooms" strip). */
+  targetAudience: 'bride' | 'groom';
   /** Tonal lock — fed to the model as the voice charter. */
   systemPrompt: string;
   /** Structural rules that ride alongside the voice charter. Voice-agnostic

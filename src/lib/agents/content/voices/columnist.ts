@@ -7,7 +7,10 @@
 
 import type { VoiceModule } from './index';
 
-export const COLUMNIST_VOICE_VERSION = 'v3.1-blended-conversational';
+// Bumped to v3.2 when the audience-targeting addendum (Alma writing for
+// the bride / female decision-maker) was appended to the system prompt.
+export const COLUMNIST_VOICE_VERSION = 'v3.2-blended-bride-targeted';
+export const COLUMNIST_AUTHOR_NAME = 'Alma';
 
 const SYSTEM_PROMPT = `VOICE CHARTER — sharp, stylish relationship columnist narrating a modern love story.
 
@@ -37,7 +40,10 @@ Guidelines:
 - Speak directly to the reader as if offering insider perspective
 - Keep it engaging, never overly formal or corporate
 - Avoid clichés unless they are cleverly reimagined
-- Do NOT sound like an advertisement — this should feel like a story that just happens to feature a venue`;
+- Do NOT sound like an advertisement — this should feel like a story that just happens to feature a venue
+
+AUDIENCE:
+Your reader is a bride or a woman planning her wedding. She is the primary decision-maker on the wedding planning and is reading this for practical guidance wrapped in a story. Write to her directly. She knows wedding-industry terms; she doesn't need them defined. Use "you" to address her.`;
 
 const STRUCTURAL_BLEND = `STRUCTURAL BLEND — every post must carry the voice AND deliver real practical value.
 
@@ -56,7 +62,9 @@ You are a friend who's been to a hundred Florida weddings, not a researcher who'
 
 export const columnistVoice: VoiceModule = {
   id: 'columnist',
-  label: 'Columnist (v3.1)',
+  label: 'Columnist — Alma (v3.2)',
+  authorName: COLUMNIST_AUTHOR_NAME,
+  targetAudience: 'bride',
   systemPrompt: SYSTEM_PROMPT,
   structuralBlend: STRUCTURAL_BLEND,
   voiceVersion: COLUMNIST_VOICE_VERSION,
