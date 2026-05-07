@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import Navigation from '@/components/Navigation';
 import PhotoGallery from '@/components/PhotoGallery';
 import VenueClaimButton from '@/components/VenueClaimButton';
@@ -23,6 +24,17 @@ import VenuePinItButton from '@/components/venues/VenuePinItButton';
 import { placeholderUrlForVenue } from '@/lib/placeholderImages';
 import { Venue } from '@/types';
 
+// Detail map dynamic-imported with ssr:false — same reason as VenuesMap on
+// the listing page: Leaflet touches `window` at module load. Skipping
+// SSR also keeps the leaflet bundle out of every venue detail page's
+// initial JS until the user actually scrolls down to the map.
+const VenueDetailMap = dynamic(
+  () => import('@/components/venues/VenueDetailMap'),
+  { ssr: false, loading: () => (
+    <div className="w-full h-[250px] sm:h-[400px] rounded-lg border border-gray-200 bg-gray-100 animate-pulse" />
+  ) }
+);
+
 // REMOVED: localStorage `deleted-venues` redirect.
 //
 // Same fix as VenuesListClient — the per-device soft-delete flag was
@@ -40,6 +52,7 @@ interface Props {
 
 export default function VenueDetailClient({ venue: serverVenue, relatedVenues, cityVendors = [] }: Props) {
   const t = useTranslations('VenueDetail');
+  const tMap = useTranslations('Map');
   const [activeTab, setActiveTab] = useState('overview');
   const [showContactForm, setShowContactForm] = useState(false);
   // Start with the server-rendered venue. The effect below replaces images
@@ -848,6 +861,38 @@ export default function VenueDetailClient({ venue: serverVenue, relatedVenues, c
           </div>
         </div>
       </section>
+
+      {/* Detail-page map. Sits between the Quick Facts tabs and the
+          venue-pros/related strips. Hidden entirely when the venue has
+          no coordinates at all — defensive, since post-Phase A every
+          venue has either 'exact' or 'city-centroid' geocode_quality. */}
+      {venue.address.coordinates && (
+        <section className="bg-white py-8 border-t border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between flex-wrap gap-3 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900">
+                {tMap('locationHeading')}
+              </h2>
+              <a
+                href={
+                  `https://www.google.com/maps/dir/?api=1` +
+                  `&destination=${venue.address.coordinates.lat},${venue.address.coordinates.lng}` +
+                  `&destination_place_id=${encodeURIComponent(`${venue.name} ${venue.address.city} FL`)}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white text-sm font-semibold rounded-lg shadow transition"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+                {tMap('getDirections')}
+              </a>
+            </div>
+            <VenueDetailMap venue={venue} />
+          </div>
+        </section>
+      )}
 
       {/* Venue Claim Button - Desktop only */}
       <section className="hidden lg:block bg-gray-50 py-6">

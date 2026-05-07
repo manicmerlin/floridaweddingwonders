@@ -97,7 +97,10 @@
     "loading": "Cargando mapa…",
     "viewDetails": "Ver detalles",
     "guests": "invitados",
-    "pinnedOf": "{pinned} de {total} fijados"
+    "pinnedOf": "{pinned} de {total} fijados",
+    "locationHeading": "Ubicación",
+    "getDirections": "Cómo Llegar",
+    "cityAreaNote": "El mapa muestra el área de {city} — la ubicación exacta está disponible con el lugar"
   },
   "VenuesList": {
     "introCopy": "Descubre lugares espectaculares para bodas en todo el Estado del Sol — desde ceremonias en la playa hasta salones elegantes.",

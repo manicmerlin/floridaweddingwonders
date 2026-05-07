@@ -97,7 +97,10 @@
     "loading": "Loading map…",
     "viewDetails": "View details",
     "guests": "guests",
-    "pinnedOf": "{pinned} of {total} pinned"
+    "pinnedOf": "{pinned} of {total} pinned",
+    "locationHeading": "Location",
+    "getDirections": "Get Directions",
+    "cityAreaNote": "Map shows the {city} area — exact location available from the venue"
   },
   "VenuesList": {
     "introCopy": "Discover stunning wedding venues across the Sunshine State from beachfront ceremonies to elegant ballrooms",
