@@ -31,6 +31,7 @@ export default function Navigation() {
   const navLinks = [
     { href: '/venues', label: t('browseVenues') },
     { href: '/dress-shops', label: t('dressShops') },
+    { href: '/suit-shops', label: t('suitShops') },
     { href: '/vendors', label: t('vendors') },
     { href: '/blog', label: t('blog') },
     { href: '/tools', label: t('tools') },

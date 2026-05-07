@@ -9,7 +9,7 @@
 // Helpers strip null/undefined/empty fields so the emitted JSON only carries
 // what the catalog actually has.
 
-import type { Venue, Vendor, DressShop } from '../types';
+import type { Venue, Vendor, DressShop, SuitShop } from '../types';
 
 const SITE = 'https://floridaweddingwonders.com';
 
@@ -240,6 +240,58 @@ export function dressShopListLD(shops: DressShop[], maxItems = 50) {
       name: s.name,
     })),
   };
+}
+
+export function suitShopListLD(shops: SuitShop[], maxItems = 50) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Florida Suit & Tuxedo Shops',
+    url: `${SITE}/suit-shops`,
+    numberOfItems: shops.length,
+    itemListElement: shops.slice(0, maxItems).map((s, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      url: `${SITE}/suit-shops/${s.slug || s.id}`,
+      name: s.name,
+    })),
+  };
+}
+
+export function suitShopStoreLD(shop: SuitShop) {
+  const url = `${SITE}/suit-shops/${shop.slug || shop.id}`;
+  const images = (shop.images ?? [])
+    .map((img) => img.url)
+    .filter((u): u is string => typeof u === 'string' && u.length > 0);
+
+  return pruneEmpty({
+    '@context': 'https://schema.org',
+    '@type': 'ClothingStore',
+    '@id': url,
+    name: shop.name,
+    description: shop.description || undefined,
+    url,
+    image: images.length > 0 ? images : undefined,
+    telephone: shop.contact.phone || undefined,
+    email: shop.contact.email || undefined,
+    sameAs: shop.contact.website ? [shop.contact.website] : undefined,
+    priceRange: priceRangeBucket(shop.priceRange?.min),
+    address: pruneEmpty({
+      '@type': 'PostalAddress',
+      streetAddress: shop.address.street,
+      addressLocality: shop.address.city,
+      addressRegion: shop.address.state || 'FL',
+      postalCode: shop.address.zipCode,
+      addressCountry: 'US',
+    }),
+    geo: shop.address.coordinates
+      ? pruneEmpty({
+          '@type': 'GeoCoordinates',
+          latitude: shop.address.coordinates.lat,
+          longitude: shop.address.coordinates.lng,
+        })
+      : undefined,
+  });
 }
 
 // ---------------------------------------------------------------------------

@@ -11,6 +11,7 @@ export const PAGE_HERO_IMAGES = {
   venues: 'https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/pages/venues/hero.png',
   vendors: 'https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/pages/vendors/hero.png',
   'dress-shops': 'https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/pages/dress-shops/hero.png',
+  'suit-shops': 'https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/pages/suit-shops/hero.png',
   blog: 'https://aflrmpkolumpjhpaxblz.supabase.co/storage/v1/object/public/blog-images/pages/blog/hero.png',
 } as const;
 

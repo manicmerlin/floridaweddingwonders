@@ -12,7 +12,7 @@ interface Props {
    * 'venues' → /venues/in/<region>, 'vendors' → /vendors/in/<region>,
    * 'dress-shops' → /dress-shops (no region pages yet, link to index).
    */
-  kind: 'venues' | 'vendors' | 'dress-shops';
+  kind: 'venues' | 'vendors' | 'dress-shops' | 'suit-shops';
   /** Total catalog size for the "View all <N>" CTA. */
   totalCount: number;
   /** Singular noun for copy ("venue" / "vendor" / "bridal shop"). */
@@ -50,7 +50,7 @@ export default function EmptySearchFallback({ query, kind, totalCount, noun, onC
           {suggestion.suggestedRegions.map(({ region, why }) => (
             <Link
               key={region.slug}
-              href={kind === 'dress-shops' ? '/dress-shops' : `/${kind}/in/${region.slug}`}
+              href={kind === 'dress-shops' || kind === 'suit-shops' ? `/${kind}` : `/${kind}/in/${region.slug}`}
               className="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-xl text-left transition border border-white/10 max-w-xs"
               onClick={onClear}
             >

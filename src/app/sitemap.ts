@@ -4,8 +4,10 @@ import {
   getVenues,
   getVendors,
   getDressShops,
+  getSuitShops,
   getAllVendorSlugs,
   getAllDressShopSlugs,
+  getAllSuitShopSlugs,
 } from '@/lib/catalog';
 import {
   REGIONS,
@@ -41,6 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/venues`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
     { url: `${baseUrl}/vendors`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/dress-shops`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/suit-shops`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/venue-packages`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
@@ -58,12 +61,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // getAll*Slugs would return only slug+updated_at — we need tier here.
   // Also pull full vendors (not just slugs) so the hyperlocal vendor pages
   // below can run filterVendorsByRegion / filterVendorsByCategory.
-  const [venues, vendors, dressShops, vendorsFull, dressShopsFull] = await Promise.all([
+  const [venues, vendors, dressShops, suitShops, vendorsFull, dressShopsFull, suitShopsFull] = await Promise.all([
     getVenues(),
     getAllVendorSlugs(),
     getAllDressShopSlugs(),
+    getAllSuitShopSlugs(),
     getVendors(),
     getDressShops(),
+    getSuitShops(),
   ]);
 
   const venuePriorityFor = (tier: string | undefined) => {
@@ -88,6 +93,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
   const dressShopPages: MetadataRoute.Sitemap = dressShops.map((s) => ({
     url: `${baseUrl}/dress-shops/${s.slug}`,
+    lastModified: s.updated_at || now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+  const suitShopPages: MetadataRoute.Sitemap = suitShops.map((s) => ({
+    url: `${baseUrl}/suit-shops/${s.slug}`,
     lastModified: s.updated_at || now,
     changeFrequency: 'weekly' as const,
     priority: 0.7,
@@ -182,6 +193,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }));
+  const suitShopRegionPages: MetadataRoute.Sitemap = REGIONS
+    .filter((r) =>
+      suitShopsFull.some((s) =>
+        venueInRegion(s as unknown as Parameters<typeof venueInRegion>[0], r)
+      )
+    )
+    .map((r) => ({
+      url: `${baseUrl}/suit-shops/in/${r.slug}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
 
   return [
     ...staticPages,
@@ -195,6 +218,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...vendorRegionPages,
     ...vendorComboPages,
     ...dressShopRegionPages,
+    ...suitShopPages,
+    ...suitShopRegionPages,
     ...blogPages,
   ];
 }

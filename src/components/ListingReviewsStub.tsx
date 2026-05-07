@@ -1,6 +1,6 @@
 interface Props {
   /** What kind of listing — drives the noun in the empty-state copy. */
-  kind: 'vendor' | 'dress-shop';
+  kind: 'vendor' | 'dress-shop' | 'suit-shop';
   /** Display name of the listing. */
   name: string;
 }
@@ -15,7 +15,7 @@ interface Props {
  * intent to the editorial inbox until we have a real submission form.
  */
 export default function ListingReviewsStub({ kind, name }: Props) {
-  const noun = kind === 'vendor' ? 'vendor' : 'bridal shop';
+  const noun = kind === 'vendor' ? 'vendor' : kind === 'suit-shop' ? 'suit shop' : 'bridal shop';
   return (
     <section
       id="reviews"

@@ -2,6 +2,7 @@
   "Nav": {
     "browseVenues": "Ver Lugares",
     "dressShops": "Tiendas de Vestidos",
+    "suitShops": "Tiendas de Trajes",
     "vendors": "Proveedores",
     "blog": "Blog",
     "tools": "Herramientas",
@@ -181,6 +182,30 @@
     "tabConsignment": "Consignación",
     "tabVintage": "Vintage",
     "tabPlusSize": "Tallas Extendidas"
+  },
+  "SuitShopsList": {
+    "title": "Tiendas de Trajes y Esmoquin en Florida",
+    "searchPlaceholder": "Busca por nombre, marca o ciudad...",
+    "allShopTypes": "Todos los tipos",
+    "allRegions": "Todas las regiones",
+    "allPriceRanges": "Todos los precios",
+    "priceRental": "Alquiler de Esmoquin (Menos de $400)",
+    "priceRtw": "Listo para Usar ($300–$1,500)",
+    "priceBespoke": "A Medida ($1,500+)",
+    "noResultsTitle": "No se encontraron tiendas",
+    "noResultsSubtitle": "Intenta ajustar tus filtros",
+    "clearFilters": "Limpiar filtros",
+    "shopsPlural": "tiendas",
+    "showing": "Mostrando",
+    "showingAll": "todos los tipos",
+    "shopsFoundOne": "Tienda Encontrada",
+    "shopsFoundMany": "Tiendas Encontradas",
+    "tabAll": "Todas",
+    "tabBespoke": "Sastres a Medida",
+    "tabTuxedoRental": "Alquiler de Esmoquin",
+    "tabBoutique": "Boutiques de Trajes",
+    "tabMTM": "Hechos a Medida",
+    "tabFormalwear": "Ropa Formal"
   },
   "EmptyFallback": {
     "noResultsTitle": "No tenemos lugares que coincidan con",

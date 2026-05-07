@@ -2,6 +2,7 @@
   "Nav": {
     "browseVenues": "Browse Venues",
     "dressShops": "Dress Shops",
+    "suitShops": "Suit Shops",
     "vendors": "Vendors",
     "blog": "Blog",
     "tools": "Tools",
@@ -181,6 +182,30 @@
     "tabConsignment": "Consignment",
     "tabVintage": "Vintage",
     "tabPlusSize": "Plus Size"
+  },
+  "SuitShopsList": {
+    "title": "Suit & Tuxedo Shops in Florida",
+    "searchPlaceholder": "Search by shop name, brand, or city...",
+    "allShopTypes": "All Shop Types",
+    "allRegions": "All Regions",
+    "allPriceRanges": "All Price Ranges",
+    "priceRental": "Tuxedo Rental (Under $400)",
+    "priceRtw": "Ready-to-Wear ($300–$1,500)",
+    "priceBespoke": "Bespoke ($1,500+)",
+    "noResultsTitle": "No suit shops found",
+    "noResultsSubtitle": "Try adjusting your filters",
+    "clearFilters": "Clear all filters",
+    "shopsPlural": "shops",
+    "showing": "Showing",
+    "showingAll": "all shop types",
+    "shopsFoundOne": "Suit Shop Found",
+    "shopsFoundMany": "Suit Shops Found",
+    "tabAll": "All Shops",
+    "tabBespoke": "Bespoke Tailors",
+    "tabTuxedoRental": "Tuxedo Rentals",
+    "tabBoutique": "Suit Boutiques",
+    "tabMTM": "Made-to-Measure",
+    "tabFormalwear": "Formalwear"
   },
   "EmptyFallback": {
     "noResultsTitle": "We don't have venues matching",
