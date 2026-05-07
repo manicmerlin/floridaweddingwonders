@@ -99,7 +99,7 @@
     "guests": "guests",
     "pinnedOf": "{pinned} of {total} pinned",
     "locationHeading": "Location",
-    "getDirections": "Get Directions",
+    "viewOnGoogleMaps": "View on Google Maps",
     "cityAreaNote": "Map shows the {city} area — exact location available from the venue"
   },
   "VenuesList": {

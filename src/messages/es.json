@@ -99,7 +99,7 @@
     "guests": "invitados",
     "pinnedOf": "{pinned} de {total} fijados",
     "locationHeading": "Ubicación",
-    "getDirections": "Cómo Llegar",
+    "viewOnGoogleMaps": "Ver en Google Maps",
     "cityAreaNote": "El mapa muestra el área de {city} — la ubicación exacta está disponible con el lugar"
   },
   "VenuesList": {
