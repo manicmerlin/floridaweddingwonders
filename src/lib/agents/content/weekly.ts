@@ -29,78 +29,26 @@ import { getAllPosts } from '@/lib/blog';
 import { getVenues } from '@/lib/catalog';
 import { Venue } from '@/types';
 import { generateImagesForPost, isImageGenConfigured, type ImageGenResult } from './imageGen';
+import {
+  getVoice,
+  isVoiceId,
+  pickAlternatingVoice,
+  type VoiceId,
+  type VoiceModule,
+} from './voices';
 
-const AGENT_NAME = 'weekly-blog-draft';
+const DEFAULT_AGENT_NAME = 'weekly-blog-draft';
 const MODEL = 'claude-opus-4-7';
-const VOICE_VERSION = 'v3.1-blended-conversational';
 
 // Anchor "current year" in the prompt so drafts don't accidentally cite
 // 2025 prices (the v3 sample did, mid-2026). Bump in lockstep with the
 // calendar.
 const CURRENT_YEAR = 2026;
 
-// VOICE CHARTER — tonal lock for every post. The voice is HOW we write.
-// The blend instructions below cover WHAT we write about and how voice
-// + utility coexist. Both required. Bump VOICE_VERSION when either
-// block materially changes; future runs are tagged with the new version.
-//
-// v3 blend rationale: pure narrative-column posts (v2) would have built
-// brand love but ranked badly for transactional searches. Pure utility
-// posts (v1, the existing 10) read like SEO content. The blend gives us
-// both — voice carries the reading experience, the practical numbers
-// give Google something to index.
-const VOICE_CHARTER = `VOICE CHARTER — sharp, stylish relationship columnist narrating a modern love story.
-
-Tone:
-- Playful, witty, and effortlessly charming
-- Observational, with clever insights about love, dating, and commitment
-- Lightly sarcastic in a warm, self-aware way (never negative or cynical)
-- Confident and emotionally intelligent
-- Romantic, but grounded in real-life moments and relatable experiences
-
-Writing style:
-- Read like a personal column or narrated inner monologue
-- Include rhetorical questions and thought-provoking reflections
-- Use short, punchy lines mixed with slightly longer, flowing sentences
-- Feel conversational, like you're letting the reader in on a secret
-- Blend humor with sincerity — make the reader smile and feel something
-
-Narrative approach:
-- Open with a relatable observation about relationships, dating, or weddings
-- Build into a mini story or scenario (a moment of doubt, excitement, realization, etc.)
-- Transition into the idea of finding "the one" — and mirror that with finding the perfect venue
-- Introduce the venue naturally as the place where everything clicks
-- Describe the venue through sensory, emotional storytelling (not listing features)
-- Close with a memorable, reflective line about love, timing, or meaningful choices
-
-Guidelines:
-- Speak directly to the reader as if offering insider perspective
-- Keep it engaging, never overly formal or corporate
-- Avoid clichés unless they are cleverly reimagined
-- Do NOT sound like an advertisement — this should feel like a story that just happens to feature a venue`;
-
-// STRUCTURAL BLEND — the resolution of voice ↔ utility. This rides
-// alongside the voice charter in every draft prompt.
-//
-// v3.1 update: dropped the "4-6 data points" requirement — that pushed
-// drafts toward encyclopedia entries (latitude 25.7, UV index 10-11) that
-// broke the spell. People learn through story and relatability, not through
-// coordinates. Replaced with the friend-not-researcher framing + the
-// "would I say this number out loud?" self-test.
-const STRUCTURAL_BLEND = `STRUCTURAL BLEND — every post must carry the voice AND deliver real practical value.
-
-You are a friend who's been to a hundred Florida weddings, not a researcher who's read about them. The voice is how you write. The useful information is what you say about it. Both required.
-
-- YES include consequences, prices, capacity ranges, vendor truths — these are what readers actually need ("A Naples ballroom for 200 will run you $18-32k once you account for the linens line item nobody warned you about" — the number lands like real talk)
-- YES use occasional H2 headers as evocative narrative beats, not utility headers ("The night the bartender saved everything" not "Bar service tips")
-- YES name specific outcomes through story: "the bridesmaids glowed highlighter-yellow at noon" beats "UV index hits 10-11 by midday"; "eucalyptus wilts in forty-five minutes" beats "humidity averages 70-80%"
-- YES use lists ONLY when content genuinely demands enumeration, with a witty intro line per item — never as a bullet dump
-- NO tables — restructure as flowing prose
-- NO encyclopedia stats: latitudes, UV indexes, humidity percentages, climate categories. The result of those numbers makes it in via story; the numbers themselves do not.
-- WEATHER as experienced (a hot afternoon, the kind of muggy that ruins blowouts, golden hour stretching) is fine and welcome. Weather as measured (latitude, UV index, dew point, sun angle) is not. Same rule for any technical specifics: keep the lived consequence, drop the meteorological coordinates.
-- THE TEST: before you write any number, ask "would I say this out loud in a conversation with a friend over dinner?" If the answer is no (latitude, percentage, climate-zone label), replace it with the experience that number describes. If the answer is yes (price band, capacity, sunset time, fee), keep it.
-- END every post with a memorable, reflective line about love/timing/meaningful choices, then a soft CTA to /quotes/request
-- INCLUDE 2-3 short quotable lines (<140 chars each) marked with <!-- caption --> immediately after on its own line — these double as social captions`;
+// Voice charter + structural blend now live in voices/{columnist,storyteller}.ts.
+// Pick which voice to use per-run via runWeeklyContentAgent({ voiceId }) or
+// per-topic via blog_topic_queue.voice_id. Default behaviour preserves the
+// daily cron's existing 'columnist' shape.
 
 // Per-million pricing (cents) for Opus 4.7 — used to estimate cost_cents.
 // Prices recompute easily; this is rough but useful.
@@ -119,8 +67,26 @@ export interface AgentRunResult {
   pendingPostId?: string;
   topic?: string;
   title?: string;
+  /** The voice that actually drafted the post — useful in admin UIs and
+   *  test scripts where the caller passed `voiceId: 'auto'`. */
+  voiceId?: VoiceId;
   error?: string;
   costCents?: number;
+}
+
+export interface RunOptions {
+  /** Override voice rotation. `'auto'` → alternate based on the most recent
+   *  agent_runs.voice_id. Per-topic voice_id beats both. Default: `'auto'`. */
+  voiceId?: VoiceId | 'auto';
+  /** Pin a specific topic from blog_topic_queue (skip the priority pick).
+   *  Used by manual test scripts to validate a voice on a known topic. */
+  topicId?: string;
+  /** Override agent_runs.agent_name — bypasses the daily idempotency
+   *  unique index when running manual tests alongside the real cron. */
+  agentName?: string;
+  /** Skip the admin email notification — set true for manual tests so the
+   *  user's inbox doesn't fill up with draft-ready alerts. */
+  skipNotification?: boolean;
 }
 
 interface DraftResult {
@@ -151,19 +117,23 @@ interface MetadataResult {
 // Public entrypoint
 // ---------------------------------------------------------------------------
 
-export async function runWeeklyContentAgent(): Promise<AgentRunResult> {
+export async function runWeeklyContentAgent(
+  opts: RunOptions = {}
+): Promise<AgentRunResult> {
   if (!process.env.ANTHROPIC_API_KEY) {
     return { status: 'failed', error: 'ANTHROPIC_API_KEY not set' };
   }
 
   const admin = createSupabaseAdminClient();
+  const agentName = opts.agentName ?? DEFAULT_AGENT_NAME;
 
   // 1) Open the agent_runs row — fails on the unique partial index if
-  //    today's run already exists.
+  //    today's run already exists for THIS agent_name. Custom names skip
+  //    that conflict, which is how manual test runs coexist with the cron.
   const { data: runRow, error: insErr } = await admin
     .from('agent_runs')
     .insert({
-      agent_name: AGENT_NAME,
+      agent_name: agentName,
       status: 'started',
       model: MODEL,
     })
@@ -172,7 +142,6 @@ export async function runWeeklyContentAgent(): Promise<AgentRunResult> {
 
   if (insErr) {
     if (insErr.code === '23505') {
-      // Unique violation — today's run already exists.
       return { status: 'already-ran' };
     }
     console.error('agent_runs insert failed:', insErr);
@@ -181,7 +150,7 @@ export async function runWeeklyContentAgent(): Promise<AgentRunResult> {
   const agentRunId = runRow!.id as string;
 
   try {
-    const result = await executeRun(agentRunId);
+    const result = await executeRun(agentRunId, opts);
     return result;
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
@@ -202,7 +171,7 @@ export async function runWeeklyContentAgent(): Promise<AgentRunResult> {
 // Inner orchestration
 // ---------------------------------------------------------------------------
 
-async function executeRun(agentRunId: string): Promise<AgentRunResult> {
+async function executeRun(agentRunId: string, opts: RunOptions): Promise<AgentRunResult> {
   const admin = createSupabaseAdminClient();
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
@@ -210,8 +179,9 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
   let totalTokensIn = 0;
   let totalTokensOut = 0;
 
-  // 2) Pick a topic
-  const topic = await pickOrGenerateTopic(anthropic, (ti, to) => {
+  // 2) Pick a topic — pinned via opts.topicId for test runs, or
+  //    highest-priority pending from the queue.
+  const topic = await pickOrGenerateTopic(anthropic, opts.topicId, (ti, to) => {
     totalTokensIn += ti;
     totalTokensOut += to;
   });
@@ -219,19 +189,23 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
     throw new Error('No topic available and topic-generation failed');
   }
 
+  // 2b) Resolve which voice this run uses. Precedence:
+  //     opts.voiceId (explicit override, including 'auto') beats topic.voice_id.
+  //     'auto' or unspecified resolves to "opposite of the most recent run".
+  const voice = await resolveVoice(opts.voiceId, topic.voice_id);
+
   // Mark the topic as in_use so a parallel run wouldn't pick it up.
   await admin
     .from('blog_topic_queue')
     .update({ status: 'in_use', used_by_run: agentRunId, used_at: new Date().toISOString() })
     .eq('id', topic.id);
 
-  // 3) Pull venue catalog for the prompt. Voice charter (top of file) is
-  //    the single voice spec — no few-shot examples since the existing 10
-  //    posts are utility-style and would drag the model toward list-form.
+  // 3) Pull venue catalog for the prompt. Voice charter rides via the
+  //    `voice` resolution — no inline constants.
   const venues = await getVenues();
 
   // 4) Draft the post
-  const draft = await draftPost(anthropic, topic, venues);
+  const draft = await draftPost(anthropic, topic, venues, voice);
   totalTokensIn += draft.tokensIn;
   totalTokensOut += draft.tokensOut;
 
@@ -259,8 +233,9 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
     }
   }
 
-  // 7) Compose final MDX with frontmatter (now includes image URLs when present)
-  const finalMdx = composeMdx(draft, metadata, imageResult);
+  // 7) Compose final MDX with frontmatter (now includes image URLs when
+  //    present + the byline corresponding to the resolved voice).
+  const finalMdx = composeMdx(draft, metadata, imageResult, voice);
 
   // 8) Insert pending_posts row
   const { data: postRow, error: postErr } = await admin
@@ -318,22 +293,27 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
         image_cost_cents: imageResult?.costCents ?? 0,
         image_errors: imageResult?.errors ?? [],
       },
+      voice_id: voice.id,
       metadata: {
-        voice_version: VOICE_VERSION,
+        voice_version: voice.voiceVersion,
+        voice_label: voice.label,
       },
     })
     .eq('id', agentRunId);
 
-  // 9) Email admin (best-effort — don't fail the run if email send fails)
-  await sendAdminNotification({
-    postId: postRow.id,
-    title: postRow.title,
-    slug: postRow.slug,
-    topic: topic.topic,
-    costCents,
-  }).catch((e) => {
-    console.warn('admin notification email failed:', e);
-  });
+  // 9) Email admin (best-effort — don't fail the run if email send fails).
+  //    Skip when the caller asked for it (manual test runs).
+  if (!opts.skipNotification) {
+    await sendAdminNotification({
+      postId: postRow.id,
+      title: postRow.title,
+      slug: postRow.slug,
+      topic: topic.topic,
+      costCents,
+    }).catch((e) => {
+      console.warn('admin notification email failed:', e);
+    });
+  }
 
   return {
     status: 'success',
@@ -341,8 +321,39 @@ async function executeRun(agentRunId: string): Promise<AgentRunResult> {
     pendingPostId: postRow.id,
     topic: topic.topic,
     title: postRow.title,
+    voiceId: voice.id,
     costCents,
   };
+}
+
+/**
+ * Decide which voice runs this draft. Per-call override → per-topic
+ * voice_id → 'auto' rotation against the most recent agent_runs.voice_id.
+ */
+async function resolveVoice(
+  optsVoiceId: VoiceId | 'auto' | undefined,
+  topicVoiceId: VoiceId | 'auto' | null | undefined
+): Promise<VoiceModule> {
+  // Caller explicit pin (non-auto) wins everything.
+  if (optsVoiceId && optsVoiceId !== 'auto' && isVoiceId(optsVoiceId)) {
+    return getVoice(optsVoiceId);
+  }
+  // Topic explicit pin (non-auto) is next.
+  if (topicVoiceId && topicVoiceId !== 'auto' && isVoiceId(topicVoiceId)) {
+    return getVoice(topicVoiceId);
+  }
+  // Otherwise alternate based on the most-recent successful run's voice.
+  const admin = createSupabaseAdminClient();
+  const { data } = await admin
+    .from('agent_runs')
+    .select('voice_id')
+    .eq('status', 'success')
+    .not('voice_id', 'is', null)
+    .order('completed_at', { ascending: false })
+    .limit(1);
+  const previous = data && data.length > 0 ? (data[0].voice_id as string) : null;
+  const next = pickAlternatingVoice(isVoiceId(previous) ? previous : null);
+  return getVoice(next);
 }
 
 // ---------------------------------------------------------------------------
@@ -356,25 +367,39 @@ interface TopicRow {
   description: string | null;
   season: string | null;
   tags: string[] | null;
+  voice_id: VoiceId | 'auto' | null;
 }
+
+const TOPIC_SELECT = 'id, topic, working_title, description, season, tags, voice_id';
 
 async function pickOrGenerateTopic(
   anthropic: Anthropic,
+  pinnedTopicId: string | undefined,
   recordTokens: (ti: number, to: number) => void
 ): Promise<TopicRow | null> {
   const admin = createSupabaseAdminClient();
 
-  // Try the queue first — highest priority pending, oldest first as tiebreaker.
+  // 1) Pinned topic wins (manual test runs).
+  if (pinnedTopicId) {
+    const { data } = await admin
+      .from('blog_topic_queue')
+      .select(TOPIC_SELECT)
+      .eq('id', pinnedTopicId)
+      .maybeSingle();
+    return data ? (data as TopicRow) : null;
+  }
+
+  // 2) Highest-priority pending, oldest first as tiebreaker.
   const { data } = await admin
     .from('blog_topic_queue')
-    .select('id, topic, working_title, description, season, tags')
+    .select(TOPIC_SELECT)
     .eq('status', 'pending')
     .order('priority', { ascending: false })
     .order('created_at', { ascending: true })
     .limit(1);
   if (data && data.length > 0) return data[0] as TopicRow;
 
-  // Queue is empty — ask Claude for 5 new topic ideas and insert them.
+  // 3) Queue is empty — ask Claude for 5 new topic ideas and insert them.
   const generated = await generateTopicIdeas(anthropic, recordTokens);
   if (generated.length === 0) return null;
 
@@ -389,9 +414,13 @@ async function pickOrGenerateTopic(
         season: g.season ?? 'any',
         tags: g.tags,
         source: 'agent',
+        // New AI-generated topics default to 'auto' so the rotation handles
+        // them — operators can hand-edit voice_id later if a topic is
+        // clearly better in one voice than the other.
+        voice_id: 'auto',
       }))
     )
-    .select('id, topic, working_title, description, season, tags, priority')
+    .select(`${TOPIC_SELECT}, priority`)
     .order('priority', { ascending: false });
   if (inserted.error || !inserted.data) return null;
   return inserted.data[0] as TopicRow;
@@ -477,7 +506,8 @@ Priority: 1-10, higher = more time-sensitive or higher value.`,
 async function draftPost(
   anthropic: Anthropic,
   topic: TopicRow,
-  venues: Venue[]
+  venues: Venue[],
+  voice: VoiceModule
 ): Promise<DraftResult> {
   // Surface a small subset of venues for the prompt so Claude can name-drop
   // accurately without sending 130 venues. Pick a varied 24-venue sample.
@@ -496,11 +526,11 @@ async function draftPost(
         role: 'user',
         content: `You're a writer for Florida Wedding Wonders. Read the Voice Charter and the Structural Blend below in full before drafting — both are required, equally.
 
-${VOICE_CHARTER}
+${voice.systemPrompt}
 
 ---
 
-${STRUCTURAL_BLEND}
+${voice.structuralBlend}
 
 ---
 
@@ -661,20 +691,31 @@ function extractVenueSlugsFromBody(body: string): string[] {
 function composeMdx(
   draft: DraftResult,
   metadata: MetadataResult,
-  imageResult: ImageGenResult | null
+  imageResult: ImageGenResult | null,
+  voice: VoiceModule
 ): string {
   const today = new Date().toISOString().slice(0, 10);
   // Phase 7B: featured image URL falls back to the gradient placeholder so
   // the post still renders on the blog when image-gen is unconfigured/failed.
   const heroImage = imageResult?.imageUrl ?? '/images/blog/default-gradient.jpg';
+  // Per-voice author bios. Kept short — the post detail page renders the
+  // first-name byline; this longer line lands in the structured-data /
+  // sitemap surface where a one-sentence intro reads better than just a
+  // first name.
+  const authorBio =
+    voice.id === 'storyteller'
+      ? 'A modern editorial voice covering grooms, groomsmen, and the men involved in Florida weddings.'
+      : 'A relationship columnist writing for Florida brides — practical guidance wrapped in story.';
   const fm = [
     '---',
     `title: ${yamlString(draft.title)}`,
     `description: ${yamlString(metadata.metaDescription)}`,
     `date: "${today}"`,
     `updatedAt: "${today}"`,
-    'author: "Florida Wedding Wonders Team"',
-    'authorBio: "Drafted by our editorial agent and reviewed by the Florida Wedding Wonders team before publishing."',
+    `author: ${yamlString(voice.authorName)}`,
+    `authorBio: ${yamlString(authorBio)}`,
+    `voiceId: ${yamlString(voice.id)}`,
+    `targetAudience: ${yamlString(voice.targetAudience)}`,
     `category: ${yamlString(draft.category)}`,
     `image: ${yamlString(heroImage)}`,
     // Pinterest image only emitted when present — the consuming /pin OG

@@ -126,11 +126,13 @@ export default async function BlogPage() {
                         {post.excerpt}
                       </p>
 
-                      {/* Meta Info */}
+                      {/* Meta Info — byline first so the brand voice carries
+                          across the index too; date + read-time below. */}
                       <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>{formatDate(post.date)}</span>
+                        <span>By {post.author}</span>
                         <span>{calculateReadingTime(post.content)} {t('minRead')}</span>
                       </div>
+                      <div className="text-xs text-gray-400 mt-1">{formatDate(post.date)}</div>
                     </div>
                   </Link>
                 ))}
