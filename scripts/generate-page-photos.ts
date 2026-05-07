@@ -98,6 +98,16 @@ const PAGES: PageSpec[] = [
       'Directory page where Florida brides find bridal salons and dress designers. The image should feel calm, aspirational, and intimate — the kind of space a bride remembers.',
   },
   {
+    slug: 'suit-shops',
+    route: '/suit-shops',
+    rationale:
+      'Sibling catalog index for the new Suit Shops directory (T3-3) — needs a hero that reads as masculine formalwear so it pairs with /dress-shops without duplicating its bridal-boutique mood.',
+    scene:
+      'A refined men\'s formalwear boutique interior — a charcoal three-piece suit on a wooden mannequin in the foreground, a wall of folded fabric bolts in muted navy, taupe and forest green behind, soft window light from the right, a brass tape measure draped over an oak counter, no people in frame',
+    context:
+      'Directory page where Florida grooms find bespoke tailors, tuxedo rentals, and made-to-measure suit makers. The image should feel masculine, considered, and atelier-quiet — vintage editorial menswear, not a department store. Banner-friendly composition.',
+  },
+  {
     slug: 'blog',
     route: '/blog',
     rationale:
