@@ -2,12 +2,31 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import { Venue } from '@/types';
 import VenueCard from '@/components/VenueCard';
 import Pagination from '@/components/Pagination';
 import EmptySearchFallback from '@/components/EmptySearchFallback';
 import { compareByTier } from '@/lib/tierFeatures';
 import { fuzzyMatchesCity, normalizeQuery } from '@/lib/cityProximity';
+
+// Map is dynamically imported with ssr:false because Leaflet touches
+// `window` at module load time. This also keeps the entire ~200kb leaflet
+// bundle out of the listing page's initial JS — only paid when the user
+// actively toggles to the Map view. Loading placeholder shown for the
+// first ~500ms while the chunk fetches.
+const VenuesMap = dynamic(() => import('./VenuesMap'), {
+  ssr: false,
+  loading: () => <MapLoadingSkeleton />,
+});
+
+function MapLoadingSkeleton() {
+  return (
+    <div className="w-full h-[600px] rounded-lg border border-white/10 bg-gray-800/40 animate-pulse flex items-center justify-center">
+      <span className="text-gray-300 text-sm">Loading map…</span>
+    </div>
+  );
+}
 
 const ITEMS_PER_PAGE = 12;
 
@@ -41,6 +60,8 @@ export default function VenuesListClient({
 }) {
   const t = useTranslations('VenuesList');
   const tCta = useTranslations('MultiQuoteCTA');
+  const tMap = useTranslations('Map');
+  const [view, setView] = useState<'list' | 'map'>('list');
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedRegion, setSelectedRegion] = useState(initialRegion);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState(initialNeighborhood);
@@ -251,17 +272,53 @@ export default function VenuesListClient({
             </select>
           </div>
 
-          <div className="mt-4 text-gray-300">
-            {t('showing')} {paginatedVenues.length} {t('of')} {filteredVenues.length} {t('venuesPlural')}
-            {searchTerm && ` ${t('for')} "${searchTerm}"`}
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-gray-300">
+            <div>
+              {t('showing')} {view === 'list' ? paginatedVenues.length : filteredVenues.length} {t('of')} {filteredVenues.length} {t('venuesPlural')}
+              {searchTerm && ` ${t('for')} "${searchTerm}"`}
+            </div>
+            {/* List | Map toggle. ARIA grouped so keyboard users hear the
+                pair and can tab into them as a unit. */}
+            <div
+              role="group"
+              aria-label="View mode"
+              className="inline-flex rounded-md overflow-hidden border border-white/20 self-start sm:self-auto"
+            >
+              <button
+                type="button"
+                onClick={() => setView('list')}
+                aria-pressed={view === 'list'}
+                className={`px-4 py-1.5 text-sm font-medium transition ${
+                  view === 'list'
+                    ? 'bg-white text-gray-900'
+                    : 'bg-transparent text-gray-200 hover:bg-white/10'
+                }`}
+              >
+                {tMap('viewList')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setView('map')}
+                aria-pressed={view === 'map'}
+                className={`px-4 py-1.5 text-sm font-medium border-l border-white/20 transition ${
+                  view === 'map'
+                    ? 'bg-white text-gray-900'
+                    : 'bg-transparent text-gray-200 hover:bg-white/10'
+                }`}
+              >
+                {tMap('viewMap')}
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Grid */}
+      {/* Grid OR Map */}
       <section className="py-12 bg-gray-900/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredVenues.length === 0 ? (
+          {view === 'map' ? (
+            <VenuesMap venues={filteredVenues} />
+          ) : filteredVenues.length === 0 ? (
             searchTerm ? (
               // Search-driven empty state — try to convert "St. Pete →
               // Naples" rather than dropping the user on a sad-face wall.

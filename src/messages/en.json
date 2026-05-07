@@ -91,6 +91,14 @@
     "ctaButton": "Get matching quotes",
     "stickyCta": "Get Quotes from up to 5 Venues"
   },
+  "Map": {
+    "viewList": "List",
+    "viewMap": "Map",
+    "loading": "Loading map…",
+    "viewDetails": "View details",
+    "guests": "guests",
+    "pinnedOf": "{pinned} of {total} pinned"
+  },
   "VenuesList": {
     "introCopy": "Discover stunning wedding venues across the Sunshine State from beachfront ceremonies to elegant ballrooms",
     "searchPlaceholder": "Search venues, locations, or features...",
